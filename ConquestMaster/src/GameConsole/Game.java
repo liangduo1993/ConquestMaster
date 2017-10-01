@@ -6,7 +6,7 @@ public class Game {
 		System.out.println("SOEN6441");
 	
 		System.out.println("SOEN6441");
-		System.out.println("ly");
+		System.out.println("ly1");
 	}
 
 	
