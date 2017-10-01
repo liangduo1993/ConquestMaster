@@ -1,28 +1,20 @@
-package Window;
+package GameConsole.Window;
+
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import Player.Player;
-import World.Country;
+import GameConsole.Player.Player;
+import GameConsole.World.Country;
 
 public class CountryButton{
 	public String name;

@@ -1,8 +1,9 @@
-package Player;
+package GameConsole.Player;
 
 import java.util.ArrayList;
 
-import World.World;
+import GameConsole.World.World;
+
 
 public class Group {
 	private ArrayList<Player> players = new ArrayList<Player>();

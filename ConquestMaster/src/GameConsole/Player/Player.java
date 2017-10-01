@@ -1,26 +1,25 @@
-package Player;
+package GameConsole.Player;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Army.Infantry;
-import Army.Troop;
-import World.Card;
-import World.Continent;
-import World.Country;
-import World.GameState;
-import World.World;
+import GameConsole.Army.Infantry;
+import GameConsole.Army.Troop;
+import GameConsole.World.Card;
+import GameConsole.World.Continent;
+import GameConsole.World.Country;
+import GameConsole.World.GameState;
+import GameConsole.World.World;
+
 
 /*
  * This class represents all of the data and funcionality that a player would have.

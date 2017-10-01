@@ -1,7 +1,7 @@
-package Window;
+package GameConsole.Window;
+
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class driver extends JFrame{
 	

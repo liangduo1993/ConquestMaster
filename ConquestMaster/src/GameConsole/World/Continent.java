@@ -1,8 +1,8 @@
-package World;
+package GameConsole.World;
+
 
 import java.util.ArrayList;
-
-import Player.Player;
+		
 
 public class Continent {
 	private ArrayList<Country> countries;

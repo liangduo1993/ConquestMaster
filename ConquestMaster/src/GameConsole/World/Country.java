@@ -1,15 +1,18 @@
-package World;
+package GameConsole.World;
+
 
 import java.util.ArrayList;
 
-import Army.*;
-import Player.Player;
-import Window.CountryButton;
+import GameConsole.Army.Infantry;
+import GameConsole.Army.Troop;
+import GameConsole.Player.Player;
+import GameConsole.Window.CountryButton;
+
 
 public class Country {
 	private Continent continent;
 	private Player player;
-	private ArrayList<Troop> troops;//²¿¶Ó
+	private ArrayList<Troop> troops;//ï¿½ï¿½ï¿½ï¿½
 	private String name;
 	private int xLoc;
 	private int yLoc;
@@ -53,7 +56,7 @@ public class Country {
 	public void addTroop(Troop t){
 		troops.add(t);
 	}
-	public void addInfrantry(int numTroops) {//²½±ø
+	public void addInfrantry(int numTroops) {//ï¿½ï¿½ï¿½ï¿½
 		for(int i = 0; i < numTroops; i++) {
 			Infantry temp = new Infantry();
 			this.troops.add(temp);

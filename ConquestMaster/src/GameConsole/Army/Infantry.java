@@ -1,4 +1,5 @@
-package Army;
+package GameConsole.Army;
+
 
 public class Infantry extends Troop{
 	private int strength;

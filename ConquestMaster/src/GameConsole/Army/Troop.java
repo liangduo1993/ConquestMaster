@@ -1,7 +1,7 @@
-package Army;
+package GameConsole.Army;
 
-import Player.Player;
-import World.Country;
+import GameConsole.Player.Player;
+import GameConsole.World.Country;
 
 public abstract class Troop {
 	protected Player player;

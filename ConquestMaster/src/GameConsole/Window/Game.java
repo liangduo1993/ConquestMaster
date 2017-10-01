@@ -1,35 +1,17 @@
-package Window;
+package GameConsole.Window;
+
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import World.GameState;
-import World.World;
-
-import java.awt.Label;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import GameConsole.World.World;
 
 public class Game {
 

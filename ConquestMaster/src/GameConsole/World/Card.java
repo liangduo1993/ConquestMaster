@@ -1,5 +1,7 @@
-package World;
-import Player.Player;
+package GameConsole.World;
+
+import GameConsole.Player.Player;
+
 public class Card {
 	private Country country;
 	private int numStars;

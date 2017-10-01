@@ -1,4 +1,6 @@
-package World;
+package GameConsole.World;
+
+
 
 import java.io.File;
 import java.io.IOException;
@@ -8,10 +10,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JOptionPane;
 
-import Player.*;
-import Window.WindowMain;
+import GameConsole.Player.Group;
+import GameConsole.Player.Player;
+import GameConsole.Window.WindowMain;
+
 
 public class GameState {
 	private Player currPlayer;

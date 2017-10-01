@@ -1,4 +1,5 @@
-package Domain;
+package MapEditor.Domain;
+
 
 public class Continent {
   String name;
