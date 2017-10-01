@@ -20,6 +20,6 @@ public class Country {
 		Country c = new Country("alaska", 123,Color.BLACK);
 		System.out.println(c.name+" "+c.age);
 	}
-
+//liang
 	
 }
