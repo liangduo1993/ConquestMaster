@@ -1,5 +1,7 @@
 package Domain;
 
 public class Country {
-	public String nme;
+	public String name;
+	private int age;
+	
 }
