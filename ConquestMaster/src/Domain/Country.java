@@ -1,9 +1,11 @@
 package Domain;
 
+import java.awt.Color;
+
 public class Country {
 	public String name;
 	private int age;
-	private String colo;
+	private Color colo;
 
 	public Country(String name, int age) {
 		// TODO Auto-generated constructor stub
