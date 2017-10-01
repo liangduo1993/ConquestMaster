@@ -7,15 +7,16 @@ public class Country {
 	private int age;
 	private Color colo;
 
-	public Country(String name, int age) {
+	public Country(String name, int age,Color colo) {
 		// TODO Auto-generated constructor stub
 		this.name=name;
 		this.age=age;
+		this.colo=colo;
 		
 	}
 	
 	public static void main(String[] args) {
-		Country c = new Country("alaska", 123);
+		Country c = new Country("alaska", 123,Color.BLACK);
 		System.out.println(c.name+" "+c.age);
 	}
 	
