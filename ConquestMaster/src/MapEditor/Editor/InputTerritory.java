@@ -15,7 +15,7 @@ import javax.swing.UIManager;
 
 import MapEditor.Domain.Territory;
 
-public class InputTerritoryFrame extends JFrame implements ActionListener{
+public class InputTerritory extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JTextField tName, tLocX, tLocY, tContinent, tLinks;
 	private JLabel lName, lLocX, lLocY, lContinent, lLinks;
@@ -24,7 +24,7 @@ public class InputTerritoryFrame extends JFrame implements ActionListener{
 //	private ConquestMap map = MainFrame.map;
 //	private LogPanel log = MainFrame.lp;
 	
-	public InputTerritoryFrame(String name){
+	public InputTerritory(String name){
 		setTitle("Input Territory");
 		setBounds(0, 0, 1000, 1000);
 		JPanel panel = new JPanel();
@@ -68,7 +68,7 @@ public class InputTerritoryFrame extends JFrame implements ActionListener{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				UIManager.put("swing.boldMetal", Boolean.FALSE);
-				new InputTerritoryFrame(null);
+				new InputTerritory(null);
 			}
 		});
 	}
