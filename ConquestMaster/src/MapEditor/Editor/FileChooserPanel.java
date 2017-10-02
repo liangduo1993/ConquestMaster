@@ -1,24 +1,28 @@
 package MapEditor.Editor;
 
 import java.awt.BorderLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import MapEditor.Core.ConquestMap;
+import MapEditor.Core.MapDisplay;
 
 public class FileChooserPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	static private final String newline = "\n";
-	JButton openButton, saveButton;
-	
-	JFileChooser fc;
+	private JButton newButton, openButton, saveButton, saveAsButton;
+	private ConquestMap map = MainFrame.map;
+	private MapDisplay mapDisplay = MainFrame.mapDisplay;
+	private JTextArea jta = MainFrame.lp.log;
+	private JFileChooser fc;
 
 	public FileChooserPanel() {
 		super(new BorderLayout());
@@ -31,33 +35,58 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 		saveButton = new JButton("Save Map", null);
 		saveButton.addActionListener(this);
 
+		newButton = new JButton("New Map", null);
+		newButton.addActionListener(this);
+
+		saveAsButton = new JButton("Save As", null);
+		saveAsButton.addActionListener(this);
+
 		JPanel buttonPanel = new JPanel(); // use FlowLayout
 		buttonPanel.add(openButton);
+		buttonPanel.add(newButton);
 		buttonPanel.add(saveButton);
+		buttonPanel.add(saveAsButton);
 
 		add(buttonPanel, BorderLayout.PAGE_START);
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		JTextArea jta = MainFrame.lp.log;
 		if (e.getSource() == openButton) {
 			int returnVal = fc.showOpenDialog(FileChooserPanel.this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-
+				mapOpen();
 				jta.append("Opening: " + file.getName() + "." + newline);
 			} else {
 				jta.append("Open command cancelled by user." + newline);
 			}
 			jta.setCaretPosition(jta.getDocument().getLength());
 
-		} else if (e.getSource() == saveButton) {
+		} else if (e.getSource() == saveAsButton) {
 			int returnVal = fc.showSaveDialog(FileChooserPanel.this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-
+				mapSaveAs();
 				jta.append("Saving: " + file.getName() + "." + newline);
+			} else {
+				jta.append("Save command cancelled by user." + newline);
+			}
+			jta.setCaretPosition(jta.getDocument().getLength());
+
+		} else if (e.getSource() == newButton) {
+			int returnVal = fc.showSaveDialog(FileChooserPanel.this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				mapNew();
+			} else {
+				jta.append("Save command cancelled by user." + newline);
+			}
+			jta.setCaretPosition(jta.getDocument().getLength());
+
+		} else if (e.getSource() == saveButton) {
+			int returnVal = fc.showSaveDialog(FileChooserPanel.this);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				mapSave();
 			} else {
 				jta.append("Save command cancelled by user." + newline);
 			}
@@ -65,87 +94,49 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 		}
 	}
 
-	// public void mapNew() {
-	// if (!saveChangesCheck()) {
-	// return;
-	// }
-	// this.map.clear();
-	// setMapTitle();
-	// setMap(this.map);
-	// this.mapDisplay.repaint();
-	// }
-	//
-	// public void mapPromptAndLoad(String path) {
-	// try {
-	// if (!saveChangesCheck()) {
-	// return;
-	// }
-	// if (path == null) {
-	// JFileChooser fc = getMapFc();
-	// int returnVal = fc.showOpenDialog(this);
-	// if (returnVal == 0) {
-	// path = fc.getSelectedFile().getAbsolutePath();
-	// } else {
-	// return;
-	// }
-	// }
-	// try {
-	// mapLoad(path);
-	// } catch (FileNotFoundException e) {
-	// // errorMessage("Map file \"" + path + "\" was not found");
-	// }
-	// return;
-	// } catch (Exception e) {
-	// // errorMessage("An error occurred while loading the map: " + e);
-	// }
-	// }
-	//
-	// public boolean mapSave() {
-	// try {
-	// if (this.map.getMapFilePath() != null) {
-	// if (!saveImageCheck()) {
-	// return false;
-	// }
-	// this.map.save();
-	// return true;
-	// }
-	// if (!saveImageCheck()) {
-	// return false;
-	// }
-	// return mapSaveAs();
-	// } catch (Exception ex) {
-	// errorMessage("An error occurred while saving the map: " + ex);
-	// }
-	// return false;
-	// }
-	//
-	// public boolean mapSaveAs() {
-	// abortOperation(true);
-	// boolean saved = false;
-	// try {
-	// JFileChooser fc = getMapFc();
-	// if (this.map.getMapFilePath() != null) {
-	// fc.setSelectedFile(new File(this.map.getMapFilePath()));
-	// }
-	// int returnVal = fc.showSaveDialog(this);
-	// if ((returnVal == 0) && (saveImageCheck())) {
-	// File path = fc.getSelectedFile();
-	// File dirf = path.getParentFile();
-	// String dir = dirf.getAbsolutePath() + File.separator;
-	// String fn = path.getName();
-	// if (fn.indexOf('.') == -1) {
-	// fn = fn + ".map";
-	// }
-	// this.map.save(dir + fn);
-	// saved = true;
-	// }
-	// } catch (Exception ex) {
-	// errorMessage("An error occurred while saving the map: " + ex);
-	// }
-	// setMapTitle();
-	// return saved;
-	// }
-	//
+	public void mapNew() {
+		this.map.clear();
+
+		this.mapDisplay.repaint();
+	}
+
+	public void mapOpen() {
+
+		String path = fc.getSelectedFile().getAbsolutePath();
+
+	}
+
+	public void mapSave() {
+
+		if (this.map.getMapFilePath() != null) {
+			try {
+				this.map.save();
+			} catch (IOException e) {
+				jta.append("Save failed!" + newline);
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public void mapSaveAs() {
+
+		File path = fc.getSelectedFile();
+		File dirf = path.getParentFile();
+		String dir = dirf.getAbsolutePath() + File.separator;
+		String fn = path.getName();
+		if (fn.indexOf('.') == -1) {
+			fn = fn + ".map";
+		}
+		try {
+			this.map.save(dir + fn);
+		} catch (IOException e) {
+			jta.append("Save as failed!" + newline);
+			e.printStackTrace();
+		}
+
+	}
+
 	// public void mapSelectImage() {
 	// JFileChooser fc = getMapImageFc();
 	// int returnVal = fc.showOpenDialog(this);
@@ -223,5 +214,5 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 	// }
 	// return fc;
 	// }
-	
+
 }

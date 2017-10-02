@@ -14,7 +14,7 @@ import MapEditor.Core.MapDisplay;
 
 public class MainFrame extends JFrame {
 	public static ConquestMap map;
-	public MapDisplay mapDisplay;
+	public static MapDisplay mapDisplay;
 	public FileChooserPanel fcp;
 	public static LogPanel lp;
 
@@ -25,14 +25,15 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout(5, 5));
 		setBounds(100, 100, 900, 900);
 
-		fcp = new FileChooserPanel();
 		lp = new LogPanel();
-
+		fcp = new FileChooserPanel();
+		mapDisplay = new MapDisplay();
+		
 		getContentPane().add(fcp, "North");
 		getContentPane().add(new JButton("South"), "South");
 		getContentPane().add(lp, "West");
 		getContentPane().add(new JButton("East"), "East");
-		getContentPane().add(new JButton("Center"), "Center");
+		getContentPane().add(mapDisplay, "Center");
 
 		pack();
 		setVisible(true);
