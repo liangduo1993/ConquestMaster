@@ -25,6 +25,7 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout(5, 5));
 		setBounds(100, 100, 900, 900);
 
+		map = new ConquestMap();
 		lp = new LogPanel();
 		fcp = new FileChooserPanel();
 		mapDisplay = new MapDisplay();

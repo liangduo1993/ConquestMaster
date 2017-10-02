@@ -924,51 +924,51 @@ public class MapDisplay
     {
       super.paint(g);
     }
-    else
-    {
-      if (this.memImage != null)
-      {
-        clearDisplay(g, true);
-        if (this.pixImage != null) {
-          this.pixImage.clean();
-        }
-        g.drawImage(this.memImage, 0, 0, this);
-      }
-      else if (this.mapImage != null)
-      {
-        clearDisplay(g, true);
-        g.drawImage(this.mapImage, 0, 0, this);
-      }
-      else
-      {
-        clearDisplay(g, false);
-      }
-      if (this.map.territories != null)
-      {
-        Territory msel = getSingleSelectedTerritory();
-        if ((this.optionColorTerritories != TerritoryColorOptions.NONE) && 
-          (this.map.cmm.dragOp == ConquestMapMaker.DragOperation.DRAG_OFF) && 
-          (msel != null)) {
-          paintTerritoryEdge(g, msel, this.colorTerritoryEdge);
-        }
-        if (!this.generating) {
-          paintLinks(g, msel);
-        }
-        if ((!this.analyzing) && (!this.generating))
-        {
-          float x = 0.0F;
-          float y = 0.0F;
-          if ((this.map.cmm.dragOp == ConquestMapMaker.DragOperation.DRAG_RESIZE) && (this.map.cmm.dragVictim != null) && 
-            (this.map.cmm.lastDragMouseMoveEvent != null))
-          {
-            x = this.map.cmm.lastDragMouseMoveEvent.getX() / this.map.cmm.dragVictim.getCenterX();
-            y = this.map.cmm.lastDragMouseMoveEvent.getY() / this.map.cmm.dragVictim.getCenterY();
-          }
-          paintTerritoryIndicators(g, getSelectedTerritoryCount() == 0 ? null : 
-            getSelectedTerritories(), x, y);
-        }
-      }
-    }
+//    else
+//    {
+//      if (this.memImage != null)
+//      {
+//        clearDisplay(g, true);
+//        if (this.pixImage != null) {
+//          this.pixImage.clean();
+//        }
+//        g.drawImage(this.memImage, 0, 0, this);
+//      }
+//      else if (this.mapImage != null)
+//      {
+//        clearDisplay(g, true);
+//        g.drawImage(this.mapImage, 0, 0, this);
+//      }
+//      else
+//      {
+//        clearDisplay(g, false);
+//      }
+//      if (this.map.territories != null)
+//      {
+//        Territory msel = getSingleSelectedTerritory();
+//        if ((this.optionColorTerritories != TerritoryColorOptions.NONE) && 
+//          (this.map.cmm.dragOp == ConquestMapMaker.DragOperation.DRAG_OFF) && 
+//          (msel != null)) {
+//          paintTerritoryEdge(g, msel, this.colorTerritoryEdge);
+//        }
+//        if (!this.generating) {
+//          paintLinks(g, msel);
+//        }
+//        if ((!this.analyzing) && (!this.generating))
+//        {
+//          float x = 0.0F;
+//          float y = 0.0F;
+//          if ((this.map.cmm.dragOp == ConquestMapMaker.DragOperation.DRAG_RESIZE) && (this.map.cmm.dragVictim != null) && 
+//            (this.map.cmm.lastDragMouseMoveEvent != null))
+//          {
+//            x = this.map.cmm.lastDragMouseMoveEvent.getX() / this.map.cmm.dragVictim.getCenterX();
+//            y = this.map.cmm.lastDragMouseMoveEvent.getY() / this.map.cmm.dragVictim.getCenterY();
+//          }
+//          paintTerritoryIndicators(g, getSelectedTerritoryCount() == 0 ? null : 
+//            getSelectedTerritories(), x, y);
+//        }
+//      }
+//    }
   }
   
   private void paintLinks(Graphics g, Territory msel)
