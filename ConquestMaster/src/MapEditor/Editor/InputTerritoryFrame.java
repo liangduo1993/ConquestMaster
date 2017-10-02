@@ -45,6 +45,8 @@ public class InputTerritoryFrame extends JFrame implements ActionListener{
 		
 		
 		
+		
+		
 		panel.add(lName);
 		panel.add(confirm);
 		panel.add(cancel);
