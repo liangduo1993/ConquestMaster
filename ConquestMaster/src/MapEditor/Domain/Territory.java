@@ -13,12 +13,12 @@ import java.util.logging.Logger;
 public class Territory
 {
   private static Logger logger = Logger.getLogger(Territory.class.getName());
-  String name;
+  public String name;
   Continent cont;
   private float centerY;
   private float centerX;
   boolean isBridge;
-  ArrayList<Territory> links;
+  public ArrayList<Territory> links;
   transient ArrayList<String> linkNames;
   private transient ArrayList<Territory> recommendedLinks;
   private transient ArrayList<Territory> missingLinks;
@@ -289,4 +289,74 @@ public class Territory
   {
     return this.name;
   }
+
+public static Logger getLogger() {
+	return logger;
+}
+
+public static void setLogger(Logger logger) {
+	Territory.logger = logger;
+}
+
+public String getName() {
+	return name;
+}
+
+public void setName(String name) {
+	this.name = name;
+}
+
+public Continent getCont() {
+	return cont;
+}
+
+public void setCont(Continent cont) {
+	this.cont = cont;
+}
+
+public boolean isBridge() {
+	return isBridge;
+}
+
+public void setBridge(boolean isBridge) {
+	this.isBridge = isBridge;
+}
+
+public ArrayList<String> getLinkNames() {
+	return linkNames;
+}
+
+public void setLinkNames(ArrayList<String> linkNames) {
+	this.linkNames = linkNames;
+}
+
+public void setCenterY(float centerY) {
+	this.centerY = centerY;
+}
+
+public void setCenterX(float centerX) {
+	this.centerX = centerX;
+}
+
+public void setLinks(ArrayList<Territory> links) {
+	this.links = links;
+}
+
+public void setRecommendedLinks(ArrayList<Territory> recommendedLinks) {
+	this.recommendedLinks = recommendedLinks;
+}
+
+public void setMissingLinks(ArrayList<Territory> missingLinks) {
+	this.missingLinks = missingLinks;
+}
+
+public void setExtraLinks(ArrayList<Territory> extraLinks) {
+	this.extraLinks = extraLinks;
+}
+
+public void setBoundingBox(Rectangle boundingBox) {
+	this.boundingBox = boundingBox;
+}
+  
+  
 }
