@@ -4,6 +4,9 @@ public class Continent {
 	String name;
 	int bonus;
 
+	
+	public Continent() {
+	}
 	public Continent(String name, int bonus) {
 		this.name = name;
 		this.bonus = bonus;

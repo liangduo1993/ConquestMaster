@@ -40,8 +40,8 @@ public class mainFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		map = new ConquestMap();
 		lp = new LogPanel();
+		map = new ConquestMap();
 		
 		
 		frame = new JFrame();
@@ -69,6 +69,7 @@ public class mainFrame {
 				fcp = new FileChooser("load");
 			}
 		});
+		
 		
 		JMenuItem mntmSaveMap = new JMenuItem("save map");
 		mnFile.add(mntmSaveMap);
