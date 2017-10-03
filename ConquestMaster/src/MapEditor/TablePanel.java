@@ -14,7 +14,6 @@ public class TablePanel {
 
 	private JFrame frame;
 	private JTable table;
-	private JTable table_1;
 	/**
 	 * @wbp.nonvisual location=337,417
 	 */
@@ -118,63 +117,6 @@ public class TablePanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(183, 10, 163, 460);
 		panel.add(scrollPane_2);
-		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-			},
-			new String[] {
-				"Continent"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		scrollPane_2.setViewportView(table_1);
 		
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.setBounds(46, 480, 93, 23);

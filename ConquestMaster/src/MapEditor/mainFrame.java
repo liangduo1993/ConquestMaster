@@ -45,7 +45,8 @@ public class mainFrame {
 		map = new ConquestMap();
 
 		frame = new JFrame();
-		frame.setBounds(0, 0, 1089, 788);
+		frame.setBounds(400, 100, 1089, 788);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		menuBar = new JMenuBar();
