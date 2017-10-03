@@ -29,6 +29,7 @@ public class mainFrame {
 	public FileChooser fcp;
 	public static LogPanel lp;
 	private JTable table;
+
 	/**
 	 * Create the application.
 	 */
@@ -42,8 +43,7 @@ public class mainFrame {
 	private void initialize() {
 		lp = new LogPanel();
 		map = new ConquestMap();
-		
-		
+
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1089, 788);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +61,7 @@ public class mainFrame {
 				fcp = new FileChooser("new");
 			}
 		});
-		
+
 		JMenuItem mntmLoadMap = new JMenuItem("load map");
 		mnFile.add(mntmLoadMap);
 		mntmLoadMap.addActionListener(new ActionListener() {
@@ -69,8 +69,7 @@ public class mainFrame {
 				fcp = new FileChooser("load");
 			}
 		});
-		
-		
+
 		JMenuItem mntmSaveMap = new JMenuItem("save map");
 		mnFile.add(mntmSaveMap);
 		mntmSaveMap.addActionListener(new ActionListener() {
@@ -78,7 +77,7 @@ public class mainFrame {
 				fcp = new FileChooser("save");
 			}
 		});
-		
+
 		JMenuItem mntmSaveAsMap = new JMenuItem("save as");
 		mnFile.add(mntmSaveAsMap);
 		mntmSaveAsMap.addActionListener(new ActionListener() {
@@ -86,7 +85,7 @@ public class mainFrame {
 				fcp = new FileChooser("saveas");
 			}
 		});
-		
+
 		JMenuItem mntmExit = new JMenuItem("exit");
 		mnFile.add(mntmExit);
 		mntmExit.addActionListener(new ActionListener() {
@@ -94,74 +93,46 @@ public class mainFrame {
 				System.exit(0);
 			}
 		});
-		
+
 		frame.getContentPane().setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(820, 10, 251, 332);
 		frame.getContentPane().add(scrollPane);
-		
+
 		table = new JTable();
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"Territory", "Continent"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		table.setModel(
+				new DefaultTableModel(
+						new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+								{ null, null }, { null, null }, { null, null }, { null, null }, },
+						new String[] { "Territory", "Continent" }) {
+					boolean[] columnEditables = new boolean[] { false, false };
+
+					public boolean isCellEditable(int row, int column) {
+						return columnEditables[column];
+					}
+				});
 		scrollPane.setViewportView(table);
-		
+
 		JButton btnNewButton = new JButton("Add");
 		btnNewButton.setBounds(820, 352, 93, 23);
 		frame.getContentPane().add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Delete");
 		btnNewButton_1.setBounds(978, 352, 93, 23);
 		frame.getContentPane().add(btnNewButton_1);
 
 		lp.setBounds(0, 0, 250, 695);
 		frame.getContentPane().add(lp);
-		
-		
 
 	}
-	
-	
 
 	/**
 	 * Launch the application.
