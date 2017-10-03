@@ -64,6 +64,7 @@ public class mainFrame {
 			}
 		});
 		
+		
 		JMenuItem mntmSaveMap = new JMenuItem("save map");
 		mnFile.add(mntmSaveMap);
 		mntmSaveMap.addActionListener(new ActionListener() {
