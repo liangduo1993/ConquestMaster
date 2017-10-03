@@ -11,8 +11,8 @@ public class Territory {
 	private static Logger logger = Logger.getLogger(Territory.class.getName());
 	public String name;
 	Continent cont;
-	private float centerY = -1;
-	private float centerX = -1;
+	private int centerY = -1;
+	private int centerX = -1;
 	boolean isBridge;
 	public ArrayList<Territory> links = new ArrayList<>();
 	public ArrayList<String> linkNames = new ArrayList<>();
@@ -219,15 +219,18 @@ public class Territory {
 		}
 	}
 
-	public void setCenter(float x, float y) {
+//	public void setCenter(float x, float y) {
+//		this.centerX = x;
+//		this.centerY = y;
+//		clearEdges();
+//		this.originalColor = null;
+//	}
+
+	public void setCenter(int x, int y) {
 		this.centerX = x;
 		this.centerY = y;
 		clearEdges();
 		this.originalColor = null;
-	}
-
-	public void setCenter(int x, int y) {
-		setCenter((float) x, (float) y);
 	}
 
 	public void setContinent(Continent cont) {
@@ -289,11 +292,11 @@ public class Territory {
 		this.linkNames = linkNames;
 	}
 
-	public void setCenterY(float centerY) {
+	public void setCenterY(int centerY) {
 		this.centerY = centerY;
 	}
 
-	public void setCenterX(float centerX) {
+	public void setCenterX(int centerX) {
 		this.centerX = centerX;
 	}
 

@@ -329,15 +329,15 @@ public class ConquestMap implements Comparator<Object> {
 		return new File(this.mapFilePath).getName();
 	}
 
-	public int getNextUnusedNameNum(String prefix, int startNum) {
-		String name = null;
-		startNum--;
-		do {
-			startNum++;
-			name = prefix + startNum;
-		} while (findTerritory(name) != null);
-		return startNum;
-	}
+//	public int getNextUnusedNameNum(String prefix, int startNum) {
+//		String name = null;
+//		startNum--;
+//		do {
+//			startNum++;
+//			name = prefix + startNum;
+//		} while (findTerritory(name) != null);
+//		return startNum;
+//	}
 
 	public String getSaveImageFilePath() {
 		if (this.imageFilePath == null) {
@@ -530,42 +530,42 @@ public class ConquestMap implements Comparator<Object> {
 		}
 	}
 
-	public void renameTerritories() {
-		if (this.continents == null) {
-			return;
-		}
-		for (Continent cont : this.continents) {
-			renameTerritories(cont);
-		}
-	}
+//	public void renameTerritories() {
+//		if (this.continents == null) {
+//			return;
+//		}
+//		for (Continent cont : this.continents) {
+//			renameTerritories(cont);
+//		}
+//	}
 
-	public void renameTerritories(ArrayList<Territory> al, String prefix, int sequenceStart) {
-		if ((al == null) || (al.isEmpty())) {
-			return;
-		}
-		for (Territory ter : al) {
-			ter.name = ("T#" + rnd.nextLong());
-		}
-		int i = sequenceStart;
-		for (Territory ter : al) {
-			i = getNextUnusedNameNum(prefix, i);
-			ter.name = (prefix + i);
-			i++;
-		}
-	}
+//	public void renameTerritories(ArrayList<Territory> al, String prefix, int sequenceStart) {
+//		if ((al == null) || (al.isEmpty())) {
+//			return;
+//		}
+//		for (Territory ter : al) {
+//			ter.name = ("T#" + rnd.nextLong());
+//		}
+//		int i = sequenceStart;
+//		for (Territory ter : al) {
+//			i = getNextUnusedNameNum(prefix, i);
+//			ter.name = (prefix + i);
+//			i++;
+//		}
+//	}
 
-	public void renameTerritories(Continent cont) {
-		if ((this.territories == null) || (cont == null)) {
-			return;
-		}
-		ArrayList<Territory> ters = new ArrayList();
-		for (Territory ter : this.territories) {
-			if (ter.getContinent() == cont) {
-				ters.add(ter);
-			}
-		}
-		renameTerritories(ters, cont.getName() + " ", 1);
-	}
+//	public void renameTerritories(Continent cont) {
+//		if ((this.territories == null) || (cont == null)) {
+//			return;
+//		}
+//		ArrayList<Territory> ters = new ArrayList();
+//		for (Territory ter : this.territories) {
+//			if (ter.getContinent() == cont) {
+//				ters.add(ter);
+//			}
+//		}
+//		renameTerritories(ters, cont.getName() + " ", 1);
+//	}
 
 	public void save() throws IOException {
 		if (this.mapFilePath != null) {
@@ -638,12 +638,12 @@ public class ConquestMap implements Comparator<Object> {
 		// this.props.put("LastPath", new File(path).getParent());
 	}
 
-	public void scaleAllTerritories(float pctX, float pctY) {
-		for (Territory ter : this.territories) {
-			ter.setCenter(ter.getCenterXFloat() * pctX, ter.getCenterYFloat() * pctY);
-		}
-		this.dirty = true;
-	}
+//	public void scaleAllTerritories(float pctX, float pctY) {
+//		for (Territory ter : this.territories) {
+//			ter.setCenter(ter.getCenterXFloat() * pctX, ter.getCenterYFloat() * pctY);
+//		}
+//		this.dirty = true;
+//	}
 
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {

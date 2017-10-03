@@ -135,8 +135,8 @@ public class InputTerritoryFrame {
 				if (validateInput()) {
 					changed = new Territory();
 					String name = tName.getText().trim();
-					Float centerX = Float.parseFloat(tCenterX.getText().trim());
-					Float centerY = Float.parseFloat(tCenterY.getText().trim());
+					int centerX = Integer.parseInt(tCenterX.getText().trim());
+					int centerY = Integer.parseInt(tCenterY.getText().trim());
 					String[] linkNames = neighbourNames.getText().trim().split(",");
 					String continent = contList.get(list.getSelectedIndex()).getName();
 					if (linkNames.length > 0) {
@@ -184,8 +184,8 @@ public class InputTerritoryFrame {
 
 		if (unchanged != null) {
 			tName.setText(unchanged.getName());
-			tCenterX.setText(String.valueOf(unchanged.getCenterXFloat()));
-			tCenterY.setText(String.valueOf(unchanged.getCenterYFloat()));
+			tCenterX.setText(String.valueOf(unchanged.getCenterX()));
+			tCenterY.setText(String.valueOf(unchanged.getCenterY()));
 			if (unchanged.getLinkNames().size() > 0) {
 				StringBuilder sb = new StringBuilder(40);
 				for (String linkName : unchanged.getLinkNames()) {
@@ -220,7 +220,10 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please enter the number in (X, Y) location!");
 			return false;
 		}
-		
+		if(list.isSelectionEmpty()){
+			errMsg.setText("Please select a continent!");
+			return false;
+		}
 		
 		
 		
