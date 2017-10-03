@@ -133,6 +133,7 @@ public class InputTerritoryFrame {
 		confirmBtn.setBounds(60, 584, 93, 23);
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				errMsg.setText("");
 				if (validateInput()) {
 					changed = new Territory();
 					String name = tName.getText().trim();

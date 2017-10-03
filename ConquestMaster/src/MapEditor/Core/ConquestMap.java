@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import MapEditor.mainFrame;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
+import MapEditor.View.LogPanel;
 import MapEditor.template.util.ExtendedProperties;
 import MapEditor.template.util.StringUtil;
 
@@ -47,7 +48,8 @@ public class ConquestMap implements Comparator<Object> {
 	// public ExtendedProperties props;
 	public boolean dirty = false;
 	// public ConquestMapMaker cmm;
-	private JTextArea log = mainFrame.lp.log;
+	//private JTextArea log = mainFrame.lp.log;
+	private JTextArea log = new LogPanel().log;
 
 	public ConquestMap() {
 		this.continents = new ArrayList();
@@ -550,6 +552,11 @@ public class ConquestMap implements Comparator<Object> {
 	// renameTerritories(cont);
 	// }
 	// }
+	public void updateContinent(String oldName, String newName, int newBonus) {
+		Continent continent = findContinent(oldName);
+		continent.setName(newName);
+		continent.setBonus(newBonus);
+	}
 
 	// public void renameTerritories(ArrayList<Territory> al, String prefix, int
 	// sequenceStart) {
@@ -582,11 +589,11 @@ public class ConquestMap implements Comparator<Object> {
 
 	public void save() throws IOException {
 		if (validityCheck()) {
-		if (this.mapFilePath != null) {
-			save(this.mapFilePath);
-		} else {
-			throw new IOException("No path specified");
-		}
+			if (this.mapFilePath != null) {
+				save(this.mapFilePath);
+			} else {
+				throw new IOException("No path specified");
+			}
 		}
 	}
 
@@ -606,9 +613,9 @@ public class ConquestMap implements Comparator<Object> {
 		out.println("[Continents]");
 		if (this.continents != null) {
 			for (Continent cont : this.continents) {
-				if (countTerritories(cont) > 0) {
+				//if (countTerritories(cont) > 0) {
 					out.println(cont.getName() + "=" + cont.getBonus());
-				}
+			//	}
 			}
 		}
 		out.println();
@@ -765,11 +772,16 @@ public class ConquestMap implements Comparator<Object> {
 
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList();
-//		if ((this.territories == null) || (this.territories.isEmpty())) {
-//			probs.add("Map contains no territories");
-//		}
-//		if ((this.continents == null) || (this.continents.isEmpty())) {
-//			probs.add("Map contains no continents");
+		// if ((this.territories == null) || (this.territories.isEmpty())) {
+		// probs.add("Map contains no territories");
+		// }
+		// if ((this.continents == null) || (this.continents.isEmpty())) {
+		// probs.add("Map contains no continents");
+		// }
+//		for (Continent cont : this.continents) {
+//			if (countTerritories(cont) == 0) {
+//				probs.add(cont + "has not be allocated territories!");
+//			}
 //		}
 		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
 			probs.add("Map image is not specified");
