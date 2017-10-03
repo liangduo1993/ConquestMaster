@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import MapEditor.Core.ConquestMap;
+import MapEditor.Util.MyStringUtil;
 import MapEditor.template.core.MapDisplay;
 
 public class FileChooserPanel extends JPanel implements ActionListener {
@@ -95,22 +96,23 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 
 	public void mapNew() {
 		this.map.clear();
-
-		this.mapDisplay.repaint();
+		File path = fc.getSelectedFile();
+		this.map.setImageFilePath(MyStringUtil.getMapPath(path));
+		//this.mapDisplay.repaint();
 	}
 
 	public void mapOpen() {
 
 		File path = fc.getSelectedFile();
-		File dirf = path.getParentFile();
-		String dir = dirf.getAbsolutePath() + File.separator;
-		String fn = path.getName();
-		if (fn.indexOf('.') == -1) {
-			fn = fn + ".map";
-		}
-		System.out.println(dir + fn);
+//		File dirf = path.getParentFile();
+//		String dir = dirf.getAbsolutePath() + File.separator;
+//		String fn = path.getName();
+//		if (fn.indexOf('.') == -1) {
+//			fn = fn + ".map";
+//		}
+		System.out.println(MyStringUtil.getMapPath(path));
 		try {
-			this.map.load(dir + fn);
+			this.map.load(MyStringUtil.getMapPath(path));
 		} catch (IOException e) {
 			jta.append("Loading map failed!" + newline);
 			e.printStackTrace();
@@ -134,15 +136,15 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 	public void mapSaveAs() {
 
 		File path = fc.getSelectedFile();
-		File dirf = path.getParentFile();
-		String dir = dirf.getAbsolutePath() + File.separator;
-		String fn = path.getName();
-		if (fn.indexOf('.') == -1) {
-			fn = fn + ".map";
-		}
-		System.out.println(dir + fn);
+//		File dirf = path.getParentFile();
+//		String dir = dirf.getAbsolutePath() + File.separator;
+//		String fn = path.getName();
+//		if (fn.indexOf('.') == -1) {
+//			fn = fn + ".map";
+//		}
+		System.out.println(MyStringUtil.getMapPath(path));
 		try {
-			this.map.save(dir + fn);
+			this.map.save(MyStringUtil.getMapPath(path));
 		} catch (IOException e) {
 			jta.append("Save as failed!" + newline);
 			e.printStackTrace();

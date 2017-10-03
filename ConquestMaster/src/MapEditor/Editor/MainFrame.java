@@ -28,13 +28,13 @@ public class MainFrame extends JFrame {
 		map = new ConquestMap();
 		lp = new LogPanel();
 		fcp = new FileChooserPanel();
-		mapDisplay = new MapDisplay();
+		//mapDisplay = new MapDisplay();
 		
 		getContentPane().add(fcp, "North");
-		getContentPane().add(new JButton("South"), "South");
+	//	getContentPane().add(new JButton("South"), "South");
 		getContentPane().add(lp, "West");
 		getContentPane().add(new JButton("East"), "East");
-		getContentPane().add(mapDisplay, "Center");
+		//getContentPane().add(mapDisplay, "Center");
 
 		pack();
 		setVisible(true);
