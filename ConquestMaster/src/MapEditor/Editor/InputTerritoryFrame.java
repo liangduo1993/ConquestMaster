@@ -26,11 +26,11 @@ import MapEditor.Domain.Territory;
 public class InputTerritoryFrame {
 
 	private JFrame frmInputTerritory;
-	private JTextField textField;
-	private JTextArea textArea, textArea_1, textArea_2;
+	private JTextField neighbourNames;
+	private JTextArea tName, tCenterX, tCenterY;
 	private JLabel errMsg = new JLabel();
 	private JList<String> list;
-	private JButton btnNewButton, btnNewButton_1;
+	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
 	// private ConquestMap map = MainFrame.map;
@@ -66,18 +66,18 @@ public class InputTerritoryFrame {
 		lblName.setBounds(60, 90, 54, 15);
 		frmInputTerritory.getContentPane().add(lblName);
 
-		textArea = new JTextArea();
-		textArea.setBounds(193, 89, 114, 24);
-		frmInputTerritory.getContentPane().add(textArea);
+		tName = new JTextArea();
+		tName.setBounds(193, 89, 114, 24);
+		frmInputTerritory.getContentPane().add(tName);
 
 		JLabel lblLocation = new JLabel("location\uFF1A");
 		lblLocation.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocation.setBounds(38, 210, 94, 15);
 		frmInputTerritory.getContentPane().add(lblLocation);
 
-		textArea_1 = new JTextArea();
-		textArea_1.setBounds(193, 211, 54, 24);
-		frmInputTerritory.getContentPane().add(textArea_1);
+		tCenterX = new JTextArea();
+		tCenterX.setBounds(193, 211, 54, 24);
+		frmInputTerritory.getContentPane().add(tCenterX);
 
 		JLabel lblNewLabel = new JLabel("Continent:");
 		lblNewLabel.setBounds(53, 330, 61, 15);
@@ -110,9 +110,9 @@ public class InputTerritoryFrame {
 		lblNewLabel_1.setBounds(257, 220, 54, 15);
 		frmInputTerritory.getContentPane().add(lblNewLabel_1);
 
-		textArea_2 = new JTextArea();
-		textArea_2.setBounds(275, 211, 54, 24);
-		frmInputTerritory.getContentPane().add(textArea_2);
+		tCenterY = new JTextArea();
+		tCenterY.setBounds(275, 211, 54, 24);
+		frmInputTerritory.getContentPane().add(tCenterY);
 
 		JLabel lblNewLabel_2 = new JLabel("Neighbours(split with \",\"):");
 		lblNewLabel_2.setForeground(Color.RED);
@@ -121,22 +121,22 @@ public class InputTerritoryFrame {
 		lblNewLabel_2.setBounds(38, 417, 198, 48);
 		frmInputTerritory.getContentPane().add(lblNewLabel_2);
 
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setBounds(60, 475, 387, 74);
-		frmInputTerritory.getContentPane().add(textField);
-		textField.setColumns(10);
+		neighbourNames = new JTextField();
+		neighbourNames.setToolTipText("");
+		neighbourNames.setBounds(60, 475, 387, 74);
+		frmInputTerritory.getContentPane().add(neighbourNames);
+		neighbourNames.setColumns(10);
 
-		btnNewButton = new JButton("comfirm");
-		btnNewButton.setBounds(60, 584, 93, 23);
-		btnNewButton.addActionListener(new ActionListener() {
+		confirmBtn = new JButton("comfirm");
+		confirmBtn.setBounds(60, 584, 93, 23);
+		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (validateInput()) {
 					changed = new Territory();
-					String name = textArea.getText().trim();
-					Float centerX = Float.parseFloat(textArea_1.getText().trim());
-					Float centerY = Float.parseFloat(textArea_2.getText().trim());
-					String[] linkNames = textField.getText().trim().split(",");
+					String name = tName.getText().trim();
+					Float centerX = Float.parseFloat(tCenterX.getText().trim());
+					Float centerY = Float.parseFloat(tCenterY.getText().trim());
+					String[] linkNames = neighbourNames.getText().trim().split(",");
 					String continent = contList.get(list.getSelectedIndex()).getName();
 					if (linkNames.length > 0) {
 						for (String linkName : linkNames) {
@@ -161,37 +161,37 @@ public class InputTerritoryFrame {
 						e1.printStackTrace();
 					}
 					System.out.println(name);
-					System.out.println(textArea_1.getText().trim());
-					System.out.println(textArea_2.getText().trim());
+					System.out.println(tCenterX.getText().trim());
+					System.out.println(tCenterY.getText().trim());
 					System.out.println(list.getSelectedValue());
-					System.out.println(textField.getText().trim());
+					System.out.println(neighbourNames.getText().trim());
 				}
 			}
 
 		});
-		frmInputTerritory.getContentPane().add(btnNewButton);
+		frmInputTerritory.getContentPane().add(confirmBtn);
 
-		btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		cancelBtn = new JButton("Cancel");
+		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnNewButton_1.setBounds(354, 584, 93, 23);
+		cancelBtn.setBounds(354, 584, 93, 23);
 
-		frmInputTerritory.getContentPane().add(btnNewButton_1);
+		frmInputTerritory.getContentPane().add(cancelBtn);
 
 		if (unchanged != null) {
-			textArea.setText(unchanged.getName());
-			textArea_1.setText(String.valueOf(unchanged.getCenterXFloat()));
-			textArea_2.setText(String.valueOf(unchanged.getCenterYFloat()));
+			tName.setText(unchanged.getName());
+			tCenterX.setText(String.valueOf(unchanged.getCenterXFloat()));
+			tCenterY.setText(String.valueOf(unchanged.getCenterYFloat()));
 			if (unchanged.getLinkNames().size() > 0) {
 				StringBuilder sb = new StringBuilder(40);
 				for (String linkName : unchanged.getLinkNames()) {
 					sb.append(linkName).append(",");
 				}
 				sb.delete(sb.length() - 1, sb.length());
-				textField.setText(sb.toString());
+				neighbourNames.setText(sb.toString());
 			}
 		}
 
