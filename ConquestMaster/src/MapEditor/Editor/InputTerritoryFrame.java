@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import MapEditor.Core.ConquestMap;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
+import MapEditor.Util.MyStringUtil;
 
 public class InputTerritoryFrame {
 
@@ -58,7 +59,7 @@ public class InputTerritoryFrame {
 		frmInputTerritory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInputTerritory.getContentPane().setLayout(null);
 
-		errMsg.setBounds(60, 65, 200, 15);
+		errMsg.setBounds(60, 65, 400, 15);
 		errMsg.setForeground(Color.RED);
 		frmInputTerritory.getContentPane().add(errMsg);
 
@@ -215,7 +216,10 @@ public class InputTerritoryFrame {
 	}
 
 	private boolean validateInput() {
-		
+		if(!MyStringUtil.isNumeric(tCenterX.getText()) || !MyStringUtil.isNumeric(tCenterY.getText())){
+			errMsg.setText("Please enter the number in (X, Y) location!");
+			return false;
+		}
 		
 		
 		

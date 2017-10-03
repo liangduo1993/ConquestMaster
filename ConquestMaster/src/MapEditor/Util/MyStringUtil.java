@@ -1,6 +1,6 @@
 package MapEditor.Util;
 
-public class StringUtil {
+public class MyStringUtil {
 	public static boolean isNumeric(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			System.out.println(str.charAt(i));
