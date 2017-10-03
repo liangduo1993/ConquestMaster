@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 
 public class LogPanel extends JPanel {
 	private static final String newline = "\n";
-	public JTextArea log;
+	public JTextArea log = new JTextArea();
 
 	public LogPanel() {
 		super(new BorderLayout());

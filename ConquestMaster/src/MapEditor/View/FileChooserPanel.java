@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 import MapEditor.Core.ConquestMap;
 import MapEditor.Util.MyStringUtil;
+import MapEditor.template.MainFrame;
 import MapEditor.template.core.MapDisplay;
 
 public class FileChooserPanel extends JPanel implements ActionListener {

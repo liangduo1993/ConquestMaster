@@ -21,6 +21,9 @@ public class MyStringUtil {
 		String fn = path.getName();
 		if (fn.indexOf('.') == -1) {
 			fn = fn + ".map";
+		}else{
+			fn = fn.substring(0, fn.indexOf('.'));
+			fn += ".map";
 		}
 		return dir + fn;
 	}

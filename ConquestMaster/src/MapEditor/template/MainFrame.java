@@ -1,4 +1,4 @@
-package MapEditor.View;
+package MapEditor.template;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import MapEditor.Core.ConquestMap;
+import MapEditor.View.FileChooserPanel;
+import MapEditor.View.LogPanel;
 import MapEditor.template.core.MapDisplay;
 
 public class MainFrame extends JFrame {
