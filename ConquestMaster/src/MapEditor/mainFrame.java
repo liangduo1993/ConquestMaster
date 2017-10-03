@@ -34,8 +34,8 @@ public class mainFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		map = new ConquestMap();
 		lp = new LogPanel();
+		map = new ConquestMap();
 		
 		
 		frame = new JFrame();

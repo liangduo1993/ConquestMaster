@@ -16,6 +16,9 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import javax.swing.JTextArea;
+
+import MapEditor.mainFrame;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
 import MapEditor.template.util.ExtendedProperties;
@@ -26,6 +29,7 @@ public class ConquestMap implements Comparator<Object> {
 		HORIZONTAL, VERTICAL, NONE;
 	}
 
+	private final String newline = "\n";
 	private static Random rnd = new Random();
 	static final String NEWCONTINENTSTRING = "<new continent>";
 	static final String UNTITLEDMAPNAME = "Untitled Map";
@@ -43,6 +47,7 @@ public class ConquestMap implements Comparator<Object> {
 	// public ExtendedProperties props;
 	public boolean dirty = false;
 	// public ConquestMapMaker cmm;
+	private JTextArea log = mainFrame.lp.log;
 
 	public ConquestMap() {
 		this.continents = new ArrayList();
@@ -329,15 +334,15 @@ public class ConquestMap implements Comparator<Object> {
 		return new File(this.mapFilePath).getName();
 	}
 
-//	public int getNextUnusedNameNum(String prefix, int startNum) {
-//		String name = null;
-//		startNum--;
-//		do {
-//			startNum++;
-//			name = prefix + startNum;
-//		} while (findTerritory(name) != null);
-//		return startNum;
-//	}
+	// public int getNextUnusedNameNum(String prefix, int startNum) {
+	// String name = null;
+	// startNum--;
+	// do {
+	// startNum++;
+	// name = prefix + startNum;
+	// } while (findTerritory(name) != null);
+	// return startNum;
+	// }
 
 	public String getSaveImageFilePath() {
 		if (this.imageFilePath == null) {
@@ -358,6 +363,9 @@ public class ConquestMap implements Comparator<Object> {
 			if (ter.getLinks() != null) {
 				for (Territory ter2 : ter.getLinks()) {
 					if ((ter2.getLinks() == null) || (!ter2.getLinks().contains(ter))) {
+						log.append(ter2.getName() + " has no link with " + ter.getName()
+								+ ", please check your map file!" + newline);
+						System.out.println(ter.getName() + " has no link with " + ter2.getName());
 						return true;
 					}
 				}
@@ -395,6 +403,10 @@ public class ConquestMap implements Comparator<Object> {
 		loadContinents(in);
 		loadTerritories(in);
 		this.dirty = false;
+		if (!validityCheck()) {
+			clear();
+		}
+
 		// this.props.put("LastMap", mapFilePath);
 		// this.props.put("LastPath", new File(mapFilePath).getParent());
 	}
@@ -496,11 +508,11 @@ public class ConquestMap implements Comparator<Object> {
 					t.getLinks().add(link);
 				}
 				System.out.println(t.getName() + "'s link: =============");
-				for(Territory neighbour: t.getLinks()){
+				for (Territory neighbour : t.getLinks()) {
 					System.out.println(neighbour);
 				}
 				System.out.println("===================");
-				
+
 			}
 		}
 	}
@@ -530,48 +542,51 @@ public class ConquestMap implements Comparator<Object> {
 		}
 	}
 
-//	public void renameTerritories() {
-//		if (this.continents == null) {
-//			return;
-//		}
-//		for (Continent cont : this.continents) {
-//			renameTerritories(cont);
-//		}
-//	}
+	// public void renameTerritories() {
+	// if (this.continents == null) {
+	// return;
+	// }
+	// for (Continent cont : this.continents) {
+	// renameTerritories(cont);
+	// }
+	// }
 
-//	public void renameTerritories(ArrayList<Territory> al, String prefix, int sequenceStart) {
-//		if ((al == null) || (al.isEmpty())) {
-//			return;
-//		}
-//		for (Territory ter : al) {
-//			ter.name = ("T#" + rnd.nextLong());
-//		}
-//		int i = sequenceStart;
-//		for (Territory ter : al) {
-//			i = getNextUnusedNameNum(prefix, i);
-//			ter.name = (prefix + i);
-//			i++;
-//		}
-//	}
+	// public void renameTerritories(ArrayList<Territory> al, String prefix, int
+	// sequenceStart) {
+	// if ((al == null) || (al.isEmpty())) {
+	// return;
+	// }
+	// for (Territory ter : al) {
+	// ter.name = ("T#" + rnd.nextLong());
+	// }
+	// int i = sequenceStart;
+	// for (Territory ter : al) {
+	// i = getNextUnusedNameNum(prefix, i);
+	// ter.name = (prefix + i);
+	// i++;
+	// }
+	// }
 
-//	public void renameTerritories(Continent cont) {
-//		if ((this.territories == null) || (cont == null)) {
-//			return;
-//		}
-//		ArrayList<Territory> ters = new ArrayList();
-//		for (Territory ter : this.territories) {
-//			if (ter.getContinent() == cont) {
-//				ters.add(ter);
-//			}
-//		}
-//		renameTerritories(ters, cont.getName() + " ", 1);
-//	}
+	// public void renameTerritories(Continent cont) {
+	// if ((this.territories == null) || (cont == null)) {
+	// return;
+	// }
+	// ArrayList<Territory> ters = new ArrayList();
+	// for (Territory ter : this.territories) {
+	// if (ter.getContinent() == cont) {
+	// ters.add(ter);
+	// }
+	// }
+	// renameTerritories(ters, cont.getName() + " ", 1);
+	// }
 
 	public void save() throws IOException {
+		if (validityCheck()) {
 		if (this.mapFilePath != null) {
 			save(this.mapFilePath);
 		} else {
 			throw new IOException("No path specified");
+		}
 		}
 	}
 
@@ -624,26 +639,29 @@ public class ConquestMap implements Comparator<Object> {
 	}
 
 	public void save(String path) throws IOException {
-		this.mapFilePath = path;
+		if (validityCheck()) {
+			this.mapFilePath = path;
 
-		File f = new File(path);
-		FileOutputStream fos = new FileOutputStream(f);
-		PrintWriter out = new PrintWriter(fos);
-		save(out);
-		if (out.checkError()) {
-			throw new IOException("An error occurred while attempting to save the map file");
+			File f = new File(path);
+			FileOutputStream fos = new FileOutputStream(f);
+			PrintWriter out = new PrintWriter(fos);
+			save(out);
+			if (out.checkError()) {
+				throw new IOException("An error occurred while attempting to save the map file");
+			}
+			this.dirty = false;
+			// this.props.put("LastMap", path);
+			// this.props.put("LastPath", new File(path).getParent());
 		}
-		this.dirty = false;
-		// this.props.put("LastMap", path);
-		// this.props.put("LastPath", new File(path).getParent());
 	}
 
-//	public void scaleAllTerritories(float pctX, float pctY) {
-//		for (Territory ter : this.territories) {
-//			ter.setCenter(ter.getCenterXFloat() * pctX, ter.getCenterYFloat() * pctY);
-//		}
-//		this.dirty = true;
-//	}
+	// public void scaleAllTerritories(float pctX, float pctY) {
+	// for (Territory ter : this.territories) {
+	// ter.setCenter(ter.getCenterXFloat() * pctX, ter.getCenterYFloat() *
+	// pctY);
+	// }
+	// this.dirty = true;
+	// }
 
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {
@@ -745,14 +763,14 @@ public class ConquestMap implements Comparator<Object> {
 		}
 	}
 
-	public ArrayList<String> validityCheck() {
+	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList();
-		if ((this.territories == null) || (this.territories.isEmpty())) {
-			probs.add("Map contains no territories");
-		}
-		if ((this.continents == null) || (this.continents.isEmpty())) {
-			probs.add("Map contains no continents");
-		}
+//		if ((this.territories == null) || (this.territories.isEmpty())) {
+//			probs.add("Map contains no territories");
+//		}
+//		if ((this.continents == null) || (this.continents.isEmpty())) {
+//			probs.add("Map contains no continents");
+//		}
 		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
 			probs.add("Map image is not specified");
 		} else if (getMapDirectory() != null) {
@@ -760,16 +778,18 @@ public class ConquestMap implements Comparator<Object> {
 				probs.add("Map and image files are not located in the same directory");
 			}
 		}
-		// if (!allTerritiriesReachable()) {
-		// probs.add("Not all territories are reachable from each other");
-		// }
 		if ((this.warn) && (hasOneWayLinks())) {
-			probs.add("The map \"warn\" property should be disabled because map contains one-way territory links");
+			probs.add("");
 		}
 		if (probs.isEmpty()) {
-			return null;
+			return true;
 		}
-		return probs;
+
+		for (String string : probs) {
+			log.append(string + newline);
+		}
+
+		return false;
 	}
 
 	public static void main(String[] args) {

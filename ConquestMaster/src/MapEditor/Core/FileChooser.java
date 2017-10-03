@@ -10,7 +10,7 @@ import MapEditor.mainFrame;
 import MapEditor.Util.MyStringUtil;
 
 public class FileChooser{
-	static private final String newline = "\n";
+	private final String newline = "\n";
 	private ConquestMap map = mainFrame.map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
@@ -62,6 +62,7 @@ public class FileChooser{
 		File path = fc.getSelectedFile();
 		if (MyStringUtil.checkType(path)) {
 			this.map.setImageFilePath(MyStringUtil.getMapPath(path));
+			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
 			jta.append("New Map is successfully created!" + newline);
 		}else{
 			jta.append("Please choose a validate type of image!" + newline);
