@@ -245,7 +245,7 @@ public class Territory {
 
 	@Override
 	public String toString() {
-		return "Territory [name=" + name + ", centerY=" + centerY + ", centerX=" + centerX + ", linkes="
+		return "Territory [name=" + name + ", continnet="+ cont +", centerY=" + centerY + ", centerX=" + centerX + ", linkes="
 				+ linkNames + "]";
 	}
 
