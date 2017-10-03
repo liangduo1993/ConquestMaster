@@ -86,10 +86,9 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 			jta.setCaretPosition(jta.getDocument().getLength());
 
 		} else if (e.getSource() == saveButton) {
-		
-				mapSave();
-		
-				
+
+			mapSave();
+
 			jta.setCaretPosition(jta.getDocument().getLength());
 		}
 	}
@@ -97,19 +96,13 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 	public void mapNew() {
 		this.map.clear();
 		File path = fc.getSelectedFile();
-		this.map.setImageFilePath(MyStringUtil.getMapPath(path));
-		//this.mapDisplay.repaint();
+		if (MyStringUtil.checkType(path)) {
+			this.map.setImageFilePath(MyStringUtil.getMapPath(path));
+		}
 	}
 
 	public void mapOpen() {
-
 		File path = fc.getSelectedFile();
-//		File dirf = path.getParentFile();
-//		String dir = dirf.getAbsolutePath() + File.separator;
-//		String fn = path.getName();
-//		if (fn.indexOf('.') == -1) {
-//			fn = fn + ".map";
-//		}
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
@@ -121,7 +114,6 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 	}
 
 	public void mapSave() {
-
 		if (this.map.getMapFilePath() != null) {
 			try {
 				this.map.save();
@@ -134,14 +126,7 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 	}
 
 	public void mapSaveAs() {
-
 		File path = fc.getSelectedFile();
-//		File dirf = path.getParentFile();
-//		String dir = dirf.getAbsolutePath() + File.separator;
-//		String fn = path.getName();
-//		if (fn.indexOf('.') == -1) {
-//			fn = fn + ".map";
-//		}
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.save(MyStringUtil.getMapPath(path));
@@ -149,7 +134,6 @@ public class FileChooserPanel extends JPanel implements ActionListener {
 			jta.append("Save as failed!" + newline);
 			e.printStackTrace();
 		}
-
 	}
 
 	// public void mapSelectImage() {

@@ -3,6 +3,8 @@ package MapEditor.Util;
 import java.io.File;
 
 public class MyStringUtil {
+	private static final String[] TYPES= new String[]{".jpeg", ".png", "jpg", ".bmp"};
+
 	public static boolean isNumeric(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			System.out.println(str.charAt(i));
@@ -22,4 +24,14 @@ public class MyStringUtil {
 		}
 		return dir + fn;
 	}
+	
+	public static boolean checkType(File path){
+		for(String type: TYPES){
+			if(path.getName().contains(type))
+				return true;
+		}
+		return false;
+	}
+	
+	
 }
