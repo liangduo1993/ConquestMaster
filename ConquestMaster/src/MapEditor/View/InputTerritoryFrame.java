@@ -1,4 +1,4 @@
-package MapEditor.Editor;
+package MapEditor.View;
 
 import java.awt.Color;
 import java.awt.EventQueue;

@@ -1,4 +1,4 @@
-package MapEditor.Editor;
+package MapEditor.template;
 
 import java.awt.TextField;
 import java.awt.event.ActionEvent;

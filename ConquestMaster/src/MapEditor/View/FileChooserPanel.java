@@ -1,4 +1,4 @@
-package MapEditor.Editor;
+package MapEditor.View;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
