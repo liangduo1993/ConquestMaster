@@ -217,6 +217,12 @@ public class InputTerritoryFrame {
 	}
 
 	private boolean validateInput() {
+		if (!MyStringUtil.hasLength(tName.getText()) || !MyStringUtil.hasLength(tCenterX.getText())
+				|| !MyStringUtil.hasLength(tCenterY.getText())) {
+			errMsg.setText("Name and Location cannot be empty!");
+			return false;
+		}
+
 		if (!MyStringUtil.isNumeric(tCenterX.getText()) || !MyStringUtil.isNumeric(tCenterY.getText())) {
 			errMsg.setText("Please enter the number in (X, Y) location!");
 			return false;
@@ -225,16 +231,15 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please select a continent!");
 			return false;
 		}
-		List<String> neighbourList = Arrays.asList(neighbourNames.getText().split(","));
-		if (neighbourList.size() > 0) {
+		if (MyStringUtil.hasLength(neighbourNames.getText())) {
+			List<String> neighbourList = Arrays.asList(neighbourNames.getText().split(","));
 			for (String name : neighbourList) {
-				if(map.findTerritory(name) == null){
+				if (map.findTerritory(name) == null) {
 					errMsg.setText("Please enter the correct name of Linked Territory!");
 					return false;
 				}
 			}
 		}
-
 		return true;
 	}
 
@@ -268,7 +273,7 @@ public class InputTerritoryFrame {
 					// e.printStackTrace();
 					// }
 
-					InputTerritoryFrame window = new InputTerritoryFrame("Forgoth");
+					InputTerritoryFrame window = new InputTerritoryFrame("");
 
 				} catch (Exception e) {
 					e.printStackTrace();

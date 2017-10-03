@@ -36,5 +36,9 @@ public class MyStringUtil {
 		return false;
 	}
 	
+	public static boolean hasLength(String str){
+		return str != null && !"".equals(str.trim());
+	}
+	
 	
 }
