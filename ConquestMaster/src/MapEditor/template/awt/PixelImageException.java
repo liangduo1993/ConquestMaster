@@ -1,4 +1,4 @@
-package MapEditor.Awt;
+package MapEditor.template.awt;
 
 public class PixelImageException
 extends Exception

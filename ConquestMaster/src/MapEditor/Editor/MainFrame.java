@@ -10,7 +10,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import MapEditor.Core.ConquestMap;
-import MapEditor.Core.MapDisplay;
+import MapEditor.template.core.MapDisplay;
 
 public class MainFrame extends JFrame {
 	public static ConquestMap map;

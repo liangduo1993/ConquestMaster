@@ -1,4 +1,4 @@
-package MapEditor.Awt;
+package MapEditor.template.awt;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -7,7 +7,7 @@ import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
 import java.util.ArrayList;
 
-import MapEditor.Util.IntQueue;
+import MapEditor.template.util.IntQueue;
 
 public class PixelImage
 {

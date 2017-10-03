@@ -1,4 +1,4 @@
-package MapEditor.Core;
+package MapEditor.template.core;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -84,19 +84,20 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
+import MapEditor.Core.ConquestMap;
 import MapEditor.Domain.Continent;
-import MapEditor.Domain.ContinentTableModel;
 import MapEditor.Domain.Territory;
-import MapEditor.Domain.TerritoryTableModel;
-import MapEditor.Swing.DocumentViewerObject;
-import MapEditor.Swing.ListDocumentViewer;
-import MapEditor.Util.Calc;
-import MapEditor.Util.ComponentUtil;
-import MapEditor.Util.ExtendedProperties;
-import MapEditor.Util.FileUtil;
-import MapEditor.Util.MySemaphore;
-import MapEditor.Util.ResourceUtil;
-import MapEditor.Util.StringUtil;
+import MapEditor.template.domain.ContinentTableModel;
+import MapEditor.template.domain.TerritoryTableModel;
+import MapEditor.template.swing.DocumentViewerObject;
+import MapEditor.template.swing.ListDocumentViewer;
+import MapEditor.template.util.Calc;
+import MapEditor.template.util.ComponentUtil;
+import MapEditor.template.util.ExtendedProperties;
+import MapEditor.template.util.FileUtil;
+import MapEditor.template.util.MySemaphore;
+import MapEditor.template.util.ResourceUtil;
+import MapEditor.template.util.StringUtil;
 
 public class ConquestMapMaker extends JFrame implements WindowListener, MouseListener, MouseMotionListener,
 		ActionListener, ListSelectionListener, DropTargetListener, TableModelListener, KeyListener {

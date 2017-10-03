@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import MapEditor.Core.ConquestMap;
-import MapEditor.Core.MapDisplay;
+import MapEditor.template.core.MapDisplay;
 
 public class FileChooserPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;

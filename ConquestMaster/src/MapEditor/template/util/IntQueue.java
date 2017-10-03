@@ -1,4 +1,4 @@
-package MapEditor.Util;
+package MapEditor.template.util;
 
 
 import java.io.Serializable;

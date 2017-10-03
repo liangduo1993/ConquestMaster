@@ -1,4 +1,4 @@
-package MapEditor.Swing;
+package MapEditor.template.swing;
 
 
 import java.awt.Dimension;

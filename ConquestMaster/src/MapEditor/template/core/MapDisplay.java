@@ -1,4 +1,4 @@
-package MapEditor.Core;
+package MapEditor.template.core;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -26,12 +26,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import MapEditor.Awt.PixelImage;
-import MapEditor.Awt.PixelImageException;
+import MapEditor.Core.ConquestMap;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
-import MapEditor.Util.Calc;
-import MapEditor.Util.ExtendedProperties;
+import MapEditor.template.awt.PixelImage;
+import MapEditor.template.awt.PixelImageException;
+import MapEditor.template.util.Calc;
+import MapEditor.template.util.ExtendedProperties;
 
 public class MapDisplay
   extends JPanel

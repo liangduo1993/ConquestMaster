@@ -1,21 +1,30 @@
-package MapEditor.Domain;
-
+package MapEditor.template.domain;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
 import MapEditor.Core.ConquestMap;
+import MapEditor.Domain.Continent;
+import MapEditor.template.util.StringUtil;
 
-public class TerritoryTableModel
+public class ContinentTableModel
   extends AbstractTableModel
 {
-  private static final long serialVersionUID = -5870497948686297621L;
+  private static final long serialVersionUID = 1386722639912768470L;
+  static final int COL_NAME = 0;
+  static final int COL_BONUS = 1;
   static final int COLS = 2;
-  static final int COL_TER_NAME = 0;
-  static final int COL_CONT_NAME = 1;
-  static final String[] COL_NAMES = { "Territory", "Continent" };
+  static final String[] COL_NAMES = { "Continent", "Bonus" };
   ConquestMap map;
+  
+  private ArrayList<Continent> continents()
+  {
+    if (this.map == null) {
+      return null;
+    }
+    return this.map.continents;
+  }
   
   public void dataChanged()
   {
@@ -51,25 +60,25 @@ public class TerritoryTableModel
   
   public int getRowCount()
   {
-    if ((this.map == null) || (territories() == null)) {
+    if ((this.map == null) || (continents() == null)) {
       return 0;
     }
-    return territories().size();
+    return continents().size();
   }
   
   public Object getValueAt(int rowIndex, int columnIndex)
   {
-    if ((territories() == null) || (columnIndex < 0) || (columnIndex >= 2) || (rowIndex < 0) || 
-      (rowIndex >= territories().size())) {
+    if ((continents() == null) || (columnIndex < 0) || (columnIndex >= 2) || (rowIndex < 0) || 
+      (rowIndex >= continents().size())) {
       return null;
     }
-    Territory ter = (Territory)territories().get(rowIndex);
+    Continent cont = (Continent)continents().get(rowIndex);
     switch (columnIndex)
     {
     case 0: 
-      return ter.name;
+      return cont.name;
     case 1: 
-      return ter.getCont().getName();
+      return new Integer(cont.bonus);
     }
     return null;
   }
@@ -86,30 +95,27 @@ public class TerritoryTableModel
   
   public void setValueAt(Object aValue, int rowIndex, int columnIndex)
   {
-    if ((territories() == null) || (columnIndex < 0) || (columnIndex >= 2) || (rowIndex < 0) || 
-      (rowIndex > territories().size())) {
+    if ((continents() == null) || (columnIndex < 0) || (columnIndex >= 2) || (rowIndex < 0) || 
+      (rowIndex > continents().size())) {
       return;
     }
-    Territory ter = (Territory)territories().get(rowIndex);
-    if (ter != null) {
+    Continent cont = (Continent)continents().get(rowIndex);
+    if (cont != null) {
       switch (columnIndex)
       {
       case 0: 
-        this.map.setTerritoryName(ter, aValue.toString());
+        this.map.setContinentName(cont, aValue.toString());
         fireTableDataChanged();
         break;
       case 1: 
-        this.map.setTerritoryContinentName(ter, aValue.toString());
-        fireTableDataChanged();
+        int val = StringUtil.parseInt(aValue.toString(), -1);
+        if (val >= 0)
+        {
+          cont.bonus = val;
+          fireTableDataChanged();
+        }
+        break;
       }
     }
-  }
-  
-  private ArrayList<Territory> territories()
-  {
-    if (this.map == null) {
-      return null;
-    }
-    return this.map.territories;
   }
 }

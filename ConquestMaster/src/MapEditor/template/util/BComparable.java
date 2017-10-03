@@ -1,4 +1,4 @@
-package MapEditor.Util;
+package MapEditor.template.util;
 
 
 public abstract interface BComparable

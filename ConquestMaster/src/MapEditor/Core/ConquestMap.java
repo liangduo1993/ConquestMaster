@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
-import MapEditor.Util.ExtendedProperties;
-import MapEditor.Util.StringUtil;
+import MapEditor.template.util.ExtendedProperties;
+import MapEditor.template.util.StringUtil;
 
 public class ConquestMap implements Comparator<Object> {
 	public static enum ScrollOptions {

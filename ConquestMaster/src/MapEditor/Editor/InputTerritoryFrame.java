@@ -195,7 +195,6 @@ public class InputTerritoryFrame {
 			}
 		}
 
-		// String[] str_list = {"123","asd","ttg"};
 		frmInputTerritory.setVisible(true);
 	}
 
@@ -216,7 +215,13 @@ public class InputTerritoryFrame {
 	}
 
 	private boolean validateInput() {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
+		
 		return true;
 	}
 
