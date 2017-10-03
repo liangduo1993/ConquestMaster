@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -92,16 +93,16 @@ public class InputTerritoryFrame {
 		list = new JList<>();
 		list.setModel(new AbstractListModel<String>() {
 			private static final long serialVersionUID = 1L;
-			//String[] values = new String[] { "", "2", "3", "4", "5", "6", "7", "8" };
+			// String[] values = new String[] { "", "2", "3", "4", "5", "6",
+			// "7", "8" };
 			Object[] values = contList.toArray();
-			
-			
+
 			public int getSize() {
 				return values.length;
 			}
 
 			public String getElementAt(int index) {
-				return ((Continent)values[index]).getName();
+				return ((Continent) values[index]).getName();
 			}
 		});
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -147,15 +148,15 @@ public class InputTerritoryFrame {
 					changed.setName(name);
 					changed.setCenter(centerX, centerY);
 					changed.setContinent(map.findContinent(continent));
-					
+
 					map.deleteTerritory(unchanged);
 					map.addTerritory(changed);
 					map.buildTerritoryLinks(changed);
 					unchanged = changed;
-					for(Territory t: map.territories){
+					for (Territory t : map.territories) {
 						System.out.println(t);
 					}
-					
+
 					try {
 						map.save();
 					} catch (IOException e1) {
@@ -216,19 +217,24 @@ public class InputTerritoryFrame {
 	}
 
 	private boolean validateInput() {
-		if(!MyStringUtil.isNumeric(tCenterX.getText()) || !MyStringUtil.isNumeric(tCenterY.getText())){
+		if (!MyStringUtil.isNumeric(tCenterX.getText()) || !MyStringUtil.isNumeric(tCenterY.getText())) {
 			errMsg.setText("Please enter the number in (X, Y) location!");
 			return false;
 		}
-		if(list.isSelectionEmpty()){
+		if (list.isSelectionEmpty()) {
 			errMsg.setText("Please select a continent!");
 			return false;
 		}
-		
-		
-		
-		
-		
+		List<String> neighbourList = Arrays.asList(neighbourNames.getText().split(","));
+		if (neighbourList.size() > 0) {
+			for (String name : neighbourList) {
+				if(map.findTerritory(name) == null){
+					errMsg.setText("Please enter the correct name of Linked Territory!");
+					return false;
+				}
+			}
+		}
+
 		return true;
 	}
 
