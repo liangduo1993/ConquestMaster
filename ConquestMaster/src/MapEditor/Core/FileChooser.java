@@ -61,8 +61,9 @@ public class FileChooser{
 		this.map.clear();
 		File path = fc.getSelectedFile();
 		if (MyStringUtil.checkType(path)) {
-			this.map.setImageFilePath(MyStringUtil.getMapPath(path));
+			this.map.setImageFilePath(path.getAbsolutePath());
 			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
+			System.out.println(path.getAbsolutePath());
 			jta.append("New Map is successfully created!" + newline);
 		}else{
 			jta.append("Please choose a validate type of image!" + newline);

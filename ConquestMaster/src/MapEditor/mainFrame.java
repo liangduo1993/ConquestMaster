@@ -3,6 +3,7 @@ package MapEditor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import MapEditor.Core.ConquestMap;
 import MapEditor.Core.FileChooser;
 import MapEditor.View.LogPanel;
+import MapEditor.View.MapInfoPanel;
 import MapEditor.template.core.MapDisplay;
 
 public class mainFrame {
@@ -28,7 +30,7 @@ public class mainFrame {
 	public static MapDisplay mapDisplay;
 	public FileChooser fcp;
 	public static LogPanel lp;
-	private JTable table;
+	private MapInfoPanel table;
 
 	/**
 	 * Create the application.
@@ -101,37 +103,14 @@ public class mainFrame {
 		scrollPane.setBounds(820, 10, 251, 332);
 		frame.getContentPane().add(scrollPane);
 
-		table = new JTable();
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setModel(
-				new DefaultTableModel(
-						new Object[][] { { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-								{ null, null }, { null, null }, { null, null }, { null, null }, },
-						new String[] { "Territory", "Continent" }) {
-					boolean[] columnEditables = new boolean[] { false, false };
-
-					public boolean isCellEditable(int row, int column) {
-						return columnEditables[column];
-					}
-				});
-		scrollPane.setViewportView(table);
-
-		JButton btnNewButton = new JButton("Add");
-		btnNewButton.setBounds(820, 352, 93, 23);
-		frame.getContentPane().add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("Delete");
-		btnNewButton_1.setBounds(978, 352, 93, 23);
-		frame.getContentPane().add(btnNewButton_1);
+	
+		
+		//table = new JTable();
+		
 
 		lp.setBounds(0, 0, 250, 695);
 		frame.getContentPane().add(lp);
-
+		frame.setVisible(true);
 	}
 
 	/**
@@ -142,7 +121,6 @@ public class mainFrame {
 			public void run() {
 				try {
 					mainFrame window = new mainFrame();
-					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
