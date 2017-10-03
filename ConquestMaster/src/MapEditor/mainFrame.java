@@ -3,23 +3,16 @@ package MapEditor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.table.DefaultTableModel;
 
 import MapEditor.Core.ConquestMap;
 import MapEditor.Core.FileChooser;
 import MapEditor.View.LogPanel;
-import MapEditor.View.MapInfoPanel;
+import MapEditor.View.TablePanel;
 import MapEditor.template.core.MapDisplay;
 
 public class mainFrame {
@@ -30,8 +23,10 @@ public class mainFrame {
 	public static MapDisplay mapDisplay;
 	public FileChooser fcp;
 	public static LogPanel lp;
-	private MapInfoPanel table;
-
+	public static TablePanel infoPanel;
+	
+	
+	
 	/**
 	 * Create the application.
 	 */
@@ -99,18 +94,16 @@ public class mainFrame {
 
 		frame.getContentPane().setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(820, 10, 251, 332);
-		frame.getContentPane().add(scrollPane);
-
-	
-		
-		//table = new JTable();
 		
 
 		lp.setBounds(0, 0, 250, 695);
 		frame.getContentPane().add(lp);
+		
+		infoPanel = new TablePanel();
+		infoPanel.setBounds(700, 10, 400, 695);
+		infoPanel.setVisible(false);
+		frame.getContentPane().add(infoPanel);
+		
 		frame.setVisible(true);
 	}
 

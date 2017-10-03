@@ -1,4 +1,4 @@
-package MapEditor.View;
+package MapEditor.template;
 
 import java.util.Arrays;
 

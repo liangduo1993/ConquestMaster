@@ -8,12 +8,14 @@ import javax.swing.JTextArea;
 
 import MapEditor.mainFrame;
 import MapEditor.Util.MyStringUtil;
+import MapEditor.View.TablePanel;
 
 public class FileChooser{
 	private final String newline = "\n";
 	private ConquestMap map = mainFrame.map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
+	private TablePanel tablePanel = mainFrame.infoPanel;
 	
 	public FileChooser(String operation) {
 		fc = new JFileChooser();
@@ -65,6 +67,7 @@ public class FileChooser{
 			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
 			System.out.println(path.getAbsolutePath());
 			jta.append("New Map is successfully created!" + newline);
+			tablePanel.updateTable();
 		}else{
 			jta.append("Please choose a validate type of image!" + newline);
 			
@@ -77,6 +80,7 @@ public class FileChooser{
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
 			jta.append("Map is successfully loaded!" + newline);
+			tablePanel.updateTable();
 		} catch (IOException e) {
 			jta.append("Loading map failed!" + newline);
 			e.printStackTrace();

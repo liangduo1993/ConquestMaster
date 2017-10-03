@@ -1,6 +1,5 @@
 package MapEditor.Core;
 
-import java.awt.geom.Point2D;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,15 +13,12 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
 
 import javax.swing.JTextArea;
 
-import MapEditor.mainFrame;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
 import MapEditor.View.LogPanel;
-import MapEditor.template.util.ExtendedProperties;
 import MapEditor.template.util.StringUtil;
 
 public class ConquestMap implements Comparator<Object> {
@@ -42,8 +38,8 @@ public class ConquestMap implements Comparator<Object> {
 	private String author;
 	private boolean wrap;
 	private boolean warn;
-	public ArrayList<Continent> continents;
-	public ArrayList<Territory> territories;
+	public ArrayList<Continent> continents = new ArrayList<>();
+	public ArrayList<Territory> territories = new ArrayList<>();
 	// public String lastContinentUsed = null;
 	// public ExtendedProperties props;
 	public boolean dirty = false;

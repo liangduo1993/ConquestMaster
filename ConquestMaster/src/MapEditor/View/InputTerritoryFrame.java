@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,13 +19,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import MapEditor.mainFrame;
 import MapEditor.Core.ConquestMap;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
 import MapEditor.Util.MyStringUtil;
+import MapEditor.template.MainFrame;
 
 public class InputTerritoryFrame {
-
+	private TablePanel infoPanel = mainFrame.infoPanel;
 	private JFrame frmInputTerritory;
 	private JTextField neighbourNames;
 	private JTextArea tName, tCenterX, tCenterY;
@@ -35,19 +36,19 @@ public class InputTerritoryFrame {
 	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
-	// private ConquestMap map = MainFrame.map;
-	// private LogPanel log = MainFrame.lp;
-	public ConquestMap map;
+	 private ConquestMap map = mainFrame.map;
+	 private LogPanel log = mainFrame.lp;
+	//public ConquestMap map;
 	private List<Continent> contList;
 
 	public InputTerritoryFrame(String unchangedName) {
-		this.map = new ConquestMap();
-		try {
-			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-			System.out.println("=============================");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		this.map = new ConquestMap();
+//		try {
+//			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
+//			System.out.println("=============================");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		this.contList = map.continents;
 		this.unchanged = map.findTerritory(unchangedName);
 		initialize();
@@ -57,7 +58,7 @@ public class InputTerritoryFrame {
 		frmInputTerritory = new JFrame();
 		frmInputTerritory.setTitle("Input Territory");
 		frmInputTerritory.setBounds(100, 100, 528, 656);
-		frmInputTerritory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	frmInputTerritory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInputTerritory.getContentPane().setLayout(null);
 
 		errMsg.setBounds(60, 65, 400, 15);
@@ -157,17 +158,19 @@ public class InputTerritoryFrame {
 					for (Territory t : map.territories) {
 						System.out.println(t);
 					}
-
-					try {
-						map.save();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+				
+//					try {
+//						map.save();
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
 					System.out.println(name);
 					System.out.println(tCenterX.getText().trim());
 					System.out.println(tCenterY.getText().trim());
 					System.out.println(list.getSelectedValue());
 					System.out.println(neighbourNames.getText().trim());
+					infoPanel.updateTable();
+					frmInputTerritory.setVisible(false);
 				}
 			}
 
@@ -177,7 +180,7 @@ public class InputTerritoryFrame {
 		cancelBtn = new JButton("Cancel");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frmInputTerritory.setVisible(false);
 			}
 		});
 		cancelBtn.setBounds(354, 584, 93, 23);
