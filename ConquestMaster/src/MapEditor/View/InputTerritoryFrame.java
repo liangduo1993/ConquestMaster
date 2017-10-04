@@ -135,7 +135,6 @@ public class InputTerritoryFrame {
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				errMsg.setText("");
-				if (validateInput()) {
 					changed = new Territory();
 					String name = tName.getText().trim();
 					int centerX = Integer.parseInt(tCenterX.getText().trim());
@@ -151,6 +150,7 @@ public class InputTerritoryFrame {
 					changed.setCenter(centerX, centerY);
 					changed.setContinent(map.findContinent(continent));
 
+				if (validateInput()) {
 					map.deleteTerritory(unchanged);
 					map.addTerritory(changed);
 					map.buildTerritoryLinks(changed);
@@ -236,7 +236,7 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please select a continent!");
 			return false;
 		}
-		if (changed.getLinkNames().contains(tName.getText().trim())) {
+		if (changed.getLinkNames().size() > 0 && changed.getLinkNames().contains(tName.getText().trim())) {
 			errMsg.setText("Cannot have a connection with itself!");
 			return false;
 		}
