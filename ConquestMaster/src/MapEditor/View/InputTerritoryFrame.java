@@ -131,7 +131,7 @@ public class InputTerritoryFrame {
 		frmInputTerritory.getContentPane().add(tCenterY);
 
 		JLabel lblNewLabel_2 = new JLabel("Neighbours(split with \",\"):");
-		lblNewLabel_2.setForeground(Color.RED);
+		lblNewLabel_2.setForeground(Color.BLACK);
 		lblNewLabel_2.setBackground(Color.LIGHT_GRAY);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(38, 417, 198, 48);
