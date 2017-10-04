@@ -74,7 +74,7 @@ private JComboBox comboBox;
 		pathMsg.setBounds(40, 210, 410, 15);
 		pathMsg.setForeground(Color.RED);
 		
-		errMsg.setBounds(40, 10, 100, 15);
+		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
 		
 		// ImagePath button no Name needed
@@ -93,6 +93,7 @@ private JComboBox comboBox;
 						pathMsg.setText(path.getAbsolutePath());
 					} else {
 						jta.append("Please choose a validate type of image!" + newline);
+						errMsg.setText("Please choose a validate type of image!");
 					}
 				}
 			}
@@ -149,7 +150,14 @@ private JComboBox comboBox;
 	}
 
 	private boolean validateInfo() {
-
+		if(tAuthor.getText().trim().equals("") || tAuthor.getText() == null){
+			errMsg.setText("Author cannot be blank!");
+			return false;
+		}
+		if(map.getImageFilePath() == null){
+			errMsg.setText("Please choose a valid image path!");
+			return false;
+		}
 		return true;
 	}
 
