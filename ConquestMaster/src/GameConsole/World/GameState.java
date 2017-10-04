@@ -128,7 +128,7 @@ public class GameState {
 	}
 	
 	public void stopCurrentSound() {
-		this.music.close();
+		//this.music.close();
 	}
 
 	public Country getCountry1() {

@@ -54,7 +54,7 @@ public class WindowMain {
 	private void initialize() throws IOException {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
-		gameState.playSound("music\\intro_music.wav");
+		//gameState.playSound("music\\intro_music.wav");
 		frame1.setTitle("Risk - The Game of Global Domination");
 		frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame1.setBounds(100, 100, 1200, 900);
@@ -343,8 +343,8 @@ public class WindowMain {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
-				gameState.stopCurrentSound();
-				gameState.playSound("music\\introToMap.wav");
+				//gameState.stopCurrentSound();
+				//gameState.playSound("music\\introToMap.wav");
 				//gameState.playSound("music\\Risk.wav");
 				if(playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
