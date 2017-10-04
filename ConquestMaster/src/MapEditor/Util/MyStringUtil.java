@@ -40,5 +40,19 @@ public class MyStringUtil {
 		return str != null && !"".equals(str.trim());
 	}
 	
+	 public static String joinString(String[] array, String symbol) {
+	        String result = "";
+	        if (array != null) {
+	            for (int i = 0; i < array.length; i++) {
+	                String temp = array[i];
+	                if (temp != null && temp.trim().length() > 0)
+	                    result += (temp + symbol);
+	            }
+	            if (result.length() > 1)
+	                result = result.substring(0, result.length() - 1);
+	        }
+	        return result;
+	    }
+
 	
 }

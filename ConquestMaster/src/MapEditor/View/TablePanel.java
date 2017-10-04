@@ -46,7 +46,6 @@ public class TablePanel extends JPanel {
 					return columnEditables[column];
 				}
 			});
-			setVisible(true);
 		}
 		if (map.continents.size() > 0) {
 			contNames = new String[map.continents.size()][1];
@@ -62,8 +61,13 @@ public class TablePanel extends JPanel {
 					return columnEditables[column];
 				}
 			});
-			setVisible(true);
 		}
+		
+		
+		if(map.getMapFilePath() != null)
+			setVisible(true);
+		else
+			setVisible(false);
 	}
 
 	/**

@@ -192,12 +192,13 @@ public class InputTerritoryFrame {
 			tCenterX.setText(String.valueOf(unchanged.getCenterX()));
 			tCenterY.setText(String.valueOf(unchanged.getCenterY()));
 			if (unchanged.getLinkNames().size() > 0) {
-				StringBuilder sb = new StringBuilder(40);
-				for (String linkName : unchanged.getLinkNames()) {
-					sb.append(linkName).append(",");
-				}
-				sb.delete(sb.length() - 1, sb.length());
-				neighbourNames.setText(sb.toString());
+//				StringBuilder sb = new StringBuilder(40);
+//				for (String linkName : unchanged.getLinkNames()) {
+//					sb.append(linkName).append(",");
+//				}
+//				sb.delete(sb.length() - 1, sb.length());
+//				neighbourNames.setText(sb.toString());
+				neighbourNames.setText(MyStringUtil.joinString(unchanged.getLinkNames().toArray(new String[unchanged.getLinkNames().size()]), ","));
 			}
 		}
 
@@ -235,6 +236,11 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please select a continent!");
 			return false;
 		}
+		if (changed.getLinkNames().contains(tName.getText().trim())) {
+			errMsg.setText("Cannot have a connection with itself!");
+			return false;
+		}
+		
 		if (MyStringUtil.hasLength(neighbourNames.getText())) {
 			List<String> neighbourList = Arrays.asList(neighbourNames.getText().split(","));
 			for (String name : neighbourList) {
