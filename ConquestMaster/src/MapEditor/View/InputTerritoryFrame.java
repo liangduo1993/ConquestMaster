@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,6 +23,7 @@ import javax.swing.border.LineBorder;
 
 import MapEditor.mainFrame;
 import MapEditor.Core.ConquestMap;
+import MapEditor.Core.ConquestMap.ScrollOptions;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
 import MapEditor.Util.MyStringUtil;
@@ -32,7 +35,8 @@ public class InputTerritoryFrame {
 	private JTextField neighbourNames;
 	private JTextArea tName, tCenterX, tCenterY;
 	private JLabel errMsg = new JLabel();
-	private JList<String> list;
+//	private JList<String> list;
+	private JComboBox comboBox;
 	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
@@ -86,28 +90,37 @@ public class InputTerritoryFrame {
 		lblNewLabel.setBounds(53, 330, 61, 15);
 		frmInputTerritory.getContentPane().add(lblNewLabel);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setBounds(193, 329, 128, 24);
-		frmInputTerritory.getContentPane().add(scrollPane);
+//		JScrollPane scrollPane = new JScrollPane();
+//		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
+//		scrollPane.setBounds(193, 329, 128, 24);
+//		frmInputTerritory.getContentPane().add(scrollPane);
 
-		list = new JList<>();
-		list.setModel(new AbstractListModel<String>() {
-			private static final long serialVersionUID = 1L;
-			// String[] values = new String[] { "", "2", "3", "4", "5", "6",
-			// "7", "8" };
-			Object[] values = contList.toArray();
-
-			public int getSize() {
-				return values.length;
-			}
-
-			public String getElementAt(int index) {
-				return ((Continent) values[index]).getName();
-			}
-		});
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(list);
+//		list = new JList<>();
+//		list.setModel(new AbstractListModel<String>() {
+//			private static final long serialVersionUID = 1L;
+//			// String[] values = new String[] { "", "2", "3", "4", "5", "6",
+//			// "7", "8" };
+//			Object[] values = contList.toArray();
+//
+//			public int getSize() {
+//				return values.length;
+//			}
+//
+//			public String getElementAt(int index) {
+//				return ((Continent) values[index]).getName();
+//			}
+//		});
+//		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		scrollPane.setViewportView(list);
+		
+		comboBox = new JComboBox();
+		comboBox.setBounds(193, 329, 128, 24);
+		Continent[] values = map.continents.toArray(new Continent[map.continents.size()]);
+		comboBox.setModel(new DefaultComboBoxModel(values));
+		frmInputTerritory.getContentPane().add(comboBox);
+		
+		
+		
 
 		JLabel lblNewLabel_1 = new JLabel(",");
 		lblNewLabel_1.setBounds(257, 220, 54, 15);
@@ -135,12 +148,13 @@ public class InputTerritoryFrame {
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				errMsg.setText("");
+				if (validateInput()) {
 					changed = new Territory();
 					String name = tName.getText().trim();
 					int centerX = Integer.parseInt(tCenterX.getText().trim());
 					int centerY = Integer.parseInt(tCenterY.getText().trim());
 					String[] linkNames = neighbourNames.getText().trim().split(",");
-					String continent = contList.get(list.getSelectedIndex()).getName();
+					Continent c = (Continent)comboBox.getSelectedItem();
 					if (linkNames.length > 0) {
 						for (String linkName : linkNames) {
 							changed.getLinkNames().add(linkName);
@@ -148,9 +162,8 @@ public class InputTerritoryFrame {
 					}
 					changed.setName(name);
 					changed.setCenter(centerX, centerY);
-					changed.setContinent(map.findContinent(continent));
+					changed.setContinent(c);
 
-				if (validateInput()) {
 					map.deleteTerritory(unchanged);
 					map.addTerritory(changed);
 					map.buildTerritoryLinks(changed);
@@ -167,7 +180,7 @@ public class InputTerritoryFrame {
 					System.out.println(name);
 					System.out.println(tCenterX.getText().trim());
 					System.out.println(tCenterY.getText().trim());
-					System.out.println(list.getSelectedValue());
+					//System.out.println(list.getSelectedValue());
 					System.out.println(neighbourNames.getText().trim());
 					infoPanel.updateTable();
 					frmInputTerritory.setVisible(false);
@@ -232,11 +245,11 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please enter the number in (X, Y) location!");
 			return false;
 		}
-		if (list.isSelectionEmpty()) {
-			errMsg.setText("Please select a continent!");
-			return false;
-		}
-		if (changed.getLinkNames().size() > 0 && changed.getLinkNames().contains(tName.getText().trim())) {
+//		if (list.isSelectionEmpty()) {
+//			errMsg.setText("Please select a continent!");
+//			return false;
+//		}
+		if (neighbourNames.getText().contains(tName.getText())	) {
 			errMsg.setText("Cannot have a connection with itself!");
 			return false;
 		}

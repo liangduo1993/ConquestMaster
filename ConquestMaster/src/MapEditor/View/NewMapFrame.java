@@ -33,7 +33,8 @@ public class NewMapFrame {
 	private TablePanel tablePanel = mainFrame.infoPanel;
 	private JLabel errMsg = new JLabel();
 	private JLabel pathMsg = new JLabel();
-private JComboBox comboBox;
+	private JComboBox comboBox;
+
 	/**
 	 * Create the application.
 	 */
@@ -51,7 +52,7 @@ private JComboBox comboBox;
 		frame.setBounds(400, 100, 450, 370);
 		frame.setResizable(false);
 		frame.setTitle("New Map");
-	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		tAuthor = new JTextField();
 		tAuthor.setBounds(140, 35, 100, 21);
@@ -73,10 +74,10 @@ private JComboBox comboBox;
 
 		pathMsg.setBounds(40, 210, 410, 15);
 		pathMsg.setForeground(Color.RED);
-		
+
 		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
-		
+
 		// ImagePath button no Name needed
 		imgBtn = new JButton("Please select a image!");
 		imgBtn.setBounds(140, 243, 165, 23);
@@ -150,11 +151,11 @@ private JComboBox comboBox;
 	}
 
 	private boolean validateInfo() {
-		if(tAuthor.getText().trim().equals("") || tAuthor.getText() == null){
+		if (tAuthor.getText().trim().equals("") || tAuthor.getText() == null) {
 			errMsg.setText("Author cannot be blank!");
 			return false;
 		}
-		if(map.getImageFilePath() == null){
+		if (map.getImageFilePath() == null) {
 			errMsg.setText("Please choose a valid image path!");
 			return false;
 		}
@@ -163,7 +164,7 @@ private JComboBox comboBox;
 
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
-		map.setScroll((ConquestMap.ScrollOptions)comboBox.getSelectedItem());
+		map.setScroll((ConquestMap.ScrollOptions) comboBox.getSelectedItem());
 		map.setWarn(warnCheckBox.isSelected());
 		map.setWrap(wrapCheckBox.isSelected());
 		tablePanel.updateTable();
