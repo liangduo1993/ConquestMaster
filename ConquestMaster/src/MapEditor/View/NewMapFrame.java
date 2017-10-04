@@ -5,38 +5,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 
 import MapEditor.mainFrame;
 import MapEditor.Core.ConquestMap;
-
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import MapEditor.Core.ConquestMap.ScrollOptions;
 
 
 public class NewMapFrame {
-	// private ConquestMap map = mainFrame.map;
+	private ConquestMap map = mainFrame.map;
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField tAuthor;
 	private JCheckBox wrapCheckBox, warnCheckBox;
-	private JButton imgBtn, confirmBtn ;
+	private JButton imgBtn, confirmBtn, cancelBtn;
+	
+	
 	/**
 	 * Create the application.
 	 */
@@ -49,13 +37,14 @@ public class NewMapFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(400, 100, 338, 279);
+		frame.setBounds(400, 100, 380, 370);
 		frame.setResizable(false);
+		frame.setTitle("New Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		textField = new JTextField();
-		textField.setBounds(140, 5, 66, 21);
-		textField.setColumns(10);
+		tAuthor = new JTextField();
+		tAuthor.setBounds(140, 5, 100, 21);
+		tAuthor.setColumns(10);
 
 		wrapCheckBox = new JCheckBox("");
 		wrapCheckBox.setBounds(140, 52, 21, 21);
@@ -64,15 +53,16 @@ public class NewMapFrame {
 		warnCheckBox.setBounds(140, 91, 21, 21);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(140, 145, 94, 21);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] { "2", "3", "4", "5" }));
+		comboBox.setBounds(140, 145, 110, 21);
+		ScrollOptions[] values = ScrollOptions.values();
+		comboBox.setModel(new DefaultComboBoxModel(values));
 
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
-		lblNewLabel_1.setBounds(40, 217, 60, 15);
+		lblNewLabel_1.setBounds(40, 217, 100, 15);
 
 		// ImagePath button no Name needed
-		 imgBtn = new JButton("Please select a image!");
-		 imgBtn.setBounds(140, 213, 165, 23);
+		imgBtn = new JButton("Please select a image!");
+		imgBtn.setBounds(140, 213, 165, 23);
 		imgBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -82,12 +72,21 @@ public class NewMapFrame {
 		
 		
 		 confirmBtn = new JButton("Create");
+		 confirmBtn.setBounds(70, 270, 100, 23);
 		 confirmBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
 					
 				}
 			});
+		 cancelBtn = new JButton("Create");
+		 cancelBtn.setBounds(220, 270, 100, 23);
+		 cancelBtn.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 
+				 
+			 }
+		 });
 
 		JLabel lblNewLabel_4 = new JLabel("Scroll:");
 		lblNewLabel_4.setBounds(40, 148, 42, 15);
@@ -96,8 +95,10 @@ public class NewMapFrame {
 		frame.getContentPane().add(lblNewLabel_4);
 		frame.getContentPane().add(warnCheckBox);
 		frame.getContentPane().add(wrapCheckBox);
-		frame.getContentPane().add(textField);
+		frame.getContentPane().add(tAuthor);
 		frame.getContentPane().add(imgBtn);
+		frame.getContentPane().add(confirmBtn);
+		frame.getContentPane().add(cancelBtn);
 		frame.getContentPane().add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("Author:");
@@ -105,11 +106,11 @@ public class NewMapFrame {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Warp:");
-		lblNewLabel_2.setBounds(40, 50, 54, 15);
+		lblNewLabel_2.setBounds(40, 56, 54, 15);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Warn:");
-		lblNewLabel_3.setBounds(40, 90, 54, 15);
+		lblNewLabel_3.setBounds(40, 96, 54, 15);
 		frame.getContentPane().add(lblNewLabel_3);
 
 		frame.setVisible(true);
