@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import MapEditor.Core.ConquestMap;
-import MapEditor.View.FileChooserPanel;
 import MapEditor.View.LogPanel;
 import MapEditor.template.core.MapDisplay;
 

@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import MapEditor.Core.ConquestMap;
 import MapEditor.Core.FileChooser;
 import MapEditor.View.LogPanel;
+import MapEditor.View.NewMapFrame;
 import MapEditor.View.TablePanel;
 import MapEditor.template.core.MapDisplay;
 
@@ -24,7 +25,6 @@ public class mainFrame {
 	public FileChooser fcp;
 	public static LogPanel lp;
 	public static TablePanel infoPanel;
-	
 	
 	
 	/**
@@ -56,7 +56,8 @@ public class mainFrame {
 		mnFile.add(mntmNew);
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fcp = new FileChooser("new");
+				//fcp = new FileChooser("new");
+				new NewMapFrame();
 			}
 		});
 

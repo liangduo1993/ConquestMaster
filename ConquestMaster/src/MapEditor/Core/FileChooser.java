@@ -26,9 +26,9 @@ public class FileChooser{
 		int returnVal = fc.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			switch (operation) {
-			case "new":
-				mapNew();
-				break;
+//			case "new":
+//				mapNew();
+//				break;
 			case "load":
 				mapOpen();
 				break;
@@ -40,9 +40,9 @@ public class FileChooser{
 			}
 		}else{
 			switch (operation) {
-			case "new":
-				jta.append("New Map command cancelled by user." + newline);
-				break;
+//			case "new":
+//				jta.append("New Map command cancelled by user." + newline);
+//				break;
 			case "load":
 				jta.append("Open command cancelled by user." + newline);
 				break;
@@ -59,20 +59,20 @@ public class FileChooser{
 	
 	
 
-	public void mapNew() {
-		this.map.clear();
-		File path = fc.getSelectedFile();
-		if (MyStringUtil.checkType(path)) {
-			this.map.setImageFilePath(path.getAbsolutePath());
-			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
-			System.out.println(path.getAbsolutePath());
-			jta.append("New Map is successfully created!" + newline);
-			tablePanel.updateTable();
-		}else{
-			jta.append("Please choose a validate type of image!" + newline);
-			
-		}
-	}
+//	public void mapNew() {
+//		this.map.clear();
+//		File path = fc.getSelectedFile();
+//		if (MyStringUtil.checkType(path)) {
+//			this.map.setImageFilePath(path.getAbsolutePath());
+//			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
+//			System.out.println(path.getAbsolutePath());
+//			jta.append("New Map is successfully created!" + newline);
+//			tablePanel.updateTable();
+//		}else{
+//			jta.append("Please choose a validate type of image!" + newline);
+//			
+//		}
+//	}
 
 	public void mapOpen() {
 		File path = fc.getSelectedFile();
