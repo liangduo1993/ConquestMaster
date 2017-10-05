@@ -13,6 +13,7 @@ public class World {
 	private ArrayList<Continent> continents;
 	private ArrayList<Card> cards;
 	private ArrayList<Card> deck;
+	private GameState gameState;
 	
 	
 	public World() { 
@@ -21,6 +22,7 @@ public class World {
 		 read this from json file but in case we don't have time to design that just making
 		 this. 
 		 */
+		
 		this.continents = new ArrayList<Continent>();
 		this.deck = new ArrayList<Card>();
 		Continent NorthAmerica = new Continent("Yellow", "North America", 5, this); // intializing NorthAmerica
@@ -278,15 +280,16 @@ public class World {
 		return deck;
 	}
 	public void startGame(Group players){
-		int count = 0;
+		
+		int count =players.getPlayers().size() ;
 		/*
 		 Creating a card for every country, giving it a country and a star amount from 1 - 3
 		 */
 		for(Continent con : this.continents) {
 			for(Country cou : con.getCountries()) {
-				Card tempCard = new Card(cou, (count % 3) + 1);
+				Card tempCard = new Card(cou, count );
 				this.deck.add(tempCard);
-				count++;
+				//count++;
 			}
 		}
 		

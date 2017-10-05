@@ -56,7 +56,7 @@ public class Country {
 	public void addTroop(Troop t){
 		troops.add(t);
 	}
-	public void addInfrantry(int numTroops) {//����
+	public void addInfrantry(int numTroops) {
 		for(int i = 0; i < numTroops; i++) {
 			Infantry temp = new Infantry();
 			this.troops.add(temp);

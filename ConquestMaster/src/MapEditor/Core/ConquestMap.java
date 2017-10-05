@@ -477,7 +477,7 @@ public class ConquestMap implements Comparator<Object> {
 			ter.name = st.nextToken().trim();
 			ter.setCenter(Integer.parseInt(st.nextToken().trim()),
 					Integer.parseInt(st.nextToken().trim()));
-			ter.setContinent(findContinent(st.nextToken().trim()));
+			//ter.setContinent(findContinent(st.nextToken().trim()));
 			if ((ter.name == null) || (ter.name.length() < 0)) {
 				throw new Exception("name not found");
 			}
