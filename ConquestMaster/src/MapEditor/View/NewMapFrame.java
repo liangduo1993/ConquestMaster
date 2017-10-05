@@ -150,6 +150,8 @@ public class NewMapFrame {
 		frame.setVisible(true);
 	}
 
+	
+	
 	private boolean validateInfo() {
 		if (tAuthor.getText().trim().equals("") || tAuthor.getText() == null) {
 			errMsg.setText("Author cannot be blank!");
