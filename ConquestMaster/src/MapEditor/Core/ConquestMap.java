@@ -16,8 +16,10 @@ import java.util.StringTokenizer;
 
 import javax.swing.JTextArea;
 
+import MapEditor.mainFrame;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
+import MapEditor.Util.MyStringUtil;
 import MapEditor.View.LogPanel;
 import MapEditor.template.util.StringUtil;
 
@@ -45,7 +47,7 @@ public class ConquestMap implements Comparator<Object> {
 	public boolean dirty = false;
 	// public ConquestMapMaker cmm;
 	//private JTextArea log = mainFrame.lp.log;
-	private JTextArea log = new LogPanel().log;
+	private JTextArea log = mainFrame.lp.log;
 
 	public ConquestMap() {
 		this.continents = new ArrayList();
@@ -186,15 +188,16 @@ public class ConquestMap implements Comparator<Object> {
 	public void deleteContinent(Continent cont) {
 		if (this.continents.contains(cont)) {
 			this.continents.remove(cont);
-			ArrayList<Territory> temp = new ArrayList();
+			ArrayList<String> temp = new ArrayList<>();
 			for (Territory ter : this.territories) {
 				if (ter.getContinent() == cont) {
-					temp.add(ter);
+					temp.add(ter.getName());
+					ter.setContinent(null);
 				}
 			}
-			for (Territory ter : temp) {
-				deleteTerritory(ter);
-			}
+			String result = MyStringUtil.joinString(temp.toArray(new String[temp.size()]), ",");
+			log.append(result + ": these territories' continent has been set to null!");
+			System.out.println(result);
 			this.dirty = true;
 		}
 	}
@@ -401,9 +404,9 @@ public class ConquestMap implements Comparator<Object> {
 		loadContinents(in);
 		loadTerritories(in);
 		this.dirty = false;
-		if (!validityCheck()) {
-			clear();
-		}
+//		if (!validityCheck()) {
+//			clear();
+//		}
 		// this.props.put("LastMap", mapFilePath);
 		// this.props.put("LastPath", new File(mapFilePath).getParent());
 	}
@@ -582,14 +585,15 @@ public class ConquestMap implements Comparator<Object> {
 	// renameTerritories(ters, cont.getName() + " ", 1);
 	// }
 
-	public void save() throws IOException {
+	public void save() throws IOException,Exception {
 		if (validityCheck()) {
 			if (this.mapFilePath != null) {
 				save(this.mapFilePath);
 			} else {
 				throw new IOException("No path specified");
 			}
-		}
+		}else
+			throw new Exception("validate failed!");
 	}
 
 	public void save(PrintWriter out) {
@@ -640,7 +644,7 @@ public class ConquestMap implements Comparator<Object> {
 		}
 	}
 
-	public void save(String path) throws IOException {
+	public void save(String path) throws IOException, Exception {
 		if (validityCheck()) {
 			this.mapFilePath = path;
 
@@ -655,6 +659,7 @@ public class ConquestMap implements Comparator<Object> {
 			// this.props.put("LastMap", path);
 			// this.props.put("LastPath", new File(path).getParent());
 		}
+		throw new Exception("validate failed!");
 	}
 
 	// public void scaleAllTerritories(float pctX, float pctY) {
@@ -767,27 +772,34 @@ public class ConquestMap implements Comparator<Object> {
 
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList();
-		// if ((this.territories == null) || (this.territories.isEmpty())) {
-		// probs.add("Map contains no territories");
-		// }
-		// if ((this.continents == null) || (this.continents.isEmpty())) {
-		// probs.add("Map contains no continents");
-		// }
+		 if ((this.territories == null) || (this.territories.isEmpty())) {
+		 probs.add("Map contains no territories");
+		 }
+		 if ((this.continents == null) || (this.continents.isEmpty())) {
+		 probs.add("Map contains no continents");
+		 }
 //		for (Continent cont : this.continents) {
 //			if (countTerritories(cont) == 0) {
 //				probs.add(cont + "has not be allocated territories!");
 //			}
 //		}
+		 for(Territory t: this.territories){
+			 if(t.getContinent() == null){
+				 probs.add(t.getName() + " hasn't been allocated to a continent!");
+			 }
+		 }
 		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
 			probs.add("Map image is not specified");
-		} else if (getMapDirectory() != null) {
-			if (isDisparateImageFileDirectory()) {
-				probs.add("Map and image files are not located in the same directory");
-			}
-		}
+		} 
+//		else if (getMapDirectory() != null) {
+//			if (isDisparateImageFileDirectory()) {
+//				probs.add("Map and image files are not located in the same directory");
+//			}
+//		}
 		if ((this.warn) && (hasOneWayLinks())) {
 			probs.add("");
 		}
+		System.out.println(probs.size());
 		if (probs.isEmpty()) {
 			return true;
 		}
@@ -822,7 +834,7 @@ public class ConquestMap implements Comparator<Object> {
 				System.out.println(tt);
 			}
 			map.save();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
