@@ -13,11 +13,12 @@ import MapEditor.Core.ConquestMap;
 import MapEditor.Core.FileChooser;
 import MapEditor.View.LogPanel;
 import MapEditor.View.NewMapFrame;
+import MapEditor.View.SettingsFrame;
 import MapEditor.View.TablePanel;
 import MapEditor.template.core.MapDisplay;
 
 public class mainFrame {
-
+	private final String newline = "\n";
 	private JFrame frame;
 	private JMenuBar menuBar;
 	public static ConquestMap map;
@@ -82,6 +83,18 @@ public class mainFrame {
 		mntmSaveAsMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fcp = new FileChooser("saveas");
+			}
+		});
+		
+		JMenuItem mntmSettings = new JMenuItem("settings");
+		mnFile.add(mntmSettings);
+		mntmSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(map.getMapFilePath() != null){
+					new SettingsFrame();
+				}else{
+					lp.log.append("Please choose a map first!" + newline);
+				}
 			}
 		});
 
