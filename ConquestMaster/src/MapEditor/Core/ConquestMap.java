@@ -404,7 +404,6 @@ public class ConquestMap implements Comparator<Object> {
 		if (!validityCheck()) {
 			clear();
 		}
-
 		// this.props.put("LastMap", mapFilePath);
 		// this.props.put("LastPath", new File(mapFilePath).getParent());
 	}
