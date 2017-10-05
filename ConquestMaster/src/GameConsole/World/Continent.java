@@ -5,24 +5,33 @@ import java.util.ArrayList;
 		
 
 public class Continent {
-	private ArrayList<Country> countries;
+	private ArrayList<Country> countries = new ArrayList<Country>();
 	private int bonus;
 	private String color;
 	private String name;
 	private World world;
 	
 	public Continent(String color, String name, int bonus, World world){
-		this.countries = new ArrayList<Country>();
 		this.bonus = bonus;
 		this.color = color;
 		this.name = name;
 		this.world = world;
 	}
 	
+	
+	
+	public Continent(int bonus, String name) {
+		super();
+		this.bonus = bonus;
+		this.name = name;
+	}
+
+
+
 	public String toString() {
 		String retString = "";
 		for(Country c: this.countries) {
-			retString += c.toString();
+			retString += c.getName() + " ";
 		}
 		return retString;
 	}
