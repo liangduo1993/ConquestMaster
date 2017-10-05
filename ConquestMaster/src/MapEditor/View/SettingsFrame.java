@@ -99,7 +99,7 @@ public class SettingsFrame {
 			}
 		});
 
-		confirmBtn = new JButton("Create");
+		confirmBtn = new JButton("Change");
 		confirmBtn.setBounds(70, 300, 100, 23);
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,7 +110,7 @@ public class SettingsFrame {
 				}
 			}
 		});
-		cancelBtn = new JButton("Create");
+		cancelBtn = new JButton("Cancel");
 		cancelBtn.setBounds(220, 300, 100, 23);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

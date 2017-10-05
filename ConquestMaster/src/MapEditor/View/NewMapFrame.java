@@ -111,7 +111,7 @@ public class NewMapFrame {
 				}
 			}
 		});
-		cancelBtn = new JButton("Create");
+		cancelBtn = new JButton("Cancel");
 		cancelBtn.setBounds(220, 300, 100, 23);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
