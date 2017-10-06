@@ -3,6 +3,7 @@ package GameConsole.Player;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import GameConsole.Army.Infantry;
 import GameConsole.Army.Troop;
 import GameConsole.World.Card;
+import GameConsole.World.Cards;
 import GameConsole.World.Continent;
 import GameConsole.World.Country;
 import GameConsole.World.GameState;
@@ -31,8 +33,10 @@ public class Player {
 	private ArrayList<Troop> numTroops = new ArrayList<Troop>(); // all of the troops of a user
 	private ArrayList<Country> countries = new ArrayList<Country>(); // all of the countries a user owns
 	private ArrayList<Card> hand = new ArrayList<Card>(); // all of the cards in a player's hand
+	private ArrayList<Cards> onhand = new ArrayList<Cards>(); // all of the cards in a player's hand
 	private GameState game; // the state of the game
 	private JFormattedTextField playerTextName; // the fields at the top that contains the player's name
+	private static int totalCardsExchange=0;
 	
 	public Player(String name, Color color, GameState game) { 
 		this.name = name;
@@ -69,6 +73,27 @@ public class Player {
 	}
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
+	}
+	public ArrayList<Cards> getOnHand() {
+		return onhand;
+	}
+	/**
+	 * Add a certain type of card to player
+	 * @param cards
+	 * by LZ
+	 */
+	public void addCard(Cards cards)
+	{
+		this.onhand.add(cards);
+	}
+	/**
+	 * Add all cards of the given player to receive player
+	 * @param onhand
+	 * by LZ
+	 */
+	public void addAllCard(ArrayList<Cards> onhand)
+	{
+		this.onhand.addAll(onhand);
 	}
 	public GameState getGame() {
 		return game;
@@ -231,6 +256,258 @@ public class Player {
 	
 	public int getBonus() {
 		int reward = this.getCountries().size()/3;
+
+		/**-------
+		 * for cards test, add some cards to list "onhand"
+		 */
+		for (int i=0;i<4;i++){
+			Cards c = new Cards(this);
+			c.addRandomTypeCard();
+			this.onhand.add(c);
+			System.out.println(c);
+		}
+		//---------
+		
+		if (this.onhand.size()>=5){
+			System.out.println("Must exchange 3 of them");
+			int cardType0 = 0;
+			int cardType1 = 0;
+			int cardType2 = 0;
+			/**
+			 * Determine what will be displayed on the panel 
+			 */
+			for (Cards c:this.onhand){
+				if(c.getType()==0){
+					cardType0=cardType0+1;
+				}
+				if(c.getType()==1){
+					cardType1=cardType1+1;
+				}
+				if(c.getType()==2){
+					cardType2=cardType2+1;
+				}
+			}
+			
+			JPanel numPanel = new JPanel();
+			numPanel.add(new JLabel("Chose Cards!"));
+			DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
+			if(cardType0>2){
+				selection.addElement("Change 3*Type0");
+			}
+			if(cardType1>2){
+				selection.addElement("Change 3*Type1");
+			}
+			if(cardType2>2){
+				selection.addElement("Change 3*Type2");
+			}
+			if(cardType0>0&&cardType1>0&&cardType2>0){
+				selection.addElement("Change 1*Type0&Type1&Type2");
+			}
+			
+			JComboBox<String> comboBox = new JComboBox<String>(selection);
+			numPanel.add(comboBox);
+
+
+			
+			int result = JOptionPane.showConfirmDialog(null, numPanel, "Use Cards to Exchange Troops", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE);
+			String selected = comboBox.getSelectedItem().toString();
+
+			totalCardsExchange=totalCardsExchange+1;
+			addInfrantry(totalCardsExchange*5);
+			
+			/**
+			 * Remove 3 cards
+			 */	
+			switch(selected){
+			case ("Change 3*Type0"):{
+				int i=0;
+				Iterator<Cards> it = onhand.iterator();
+				while (it.hasNext()) 
+				{
+					Cards c = it.next();
+					if (c.getType()==0&&i<3) 
+					{
+						it.remove();
+						i++;
+					}
+				}
+				break;
+			}
+			case ("Change 3*Type1"):{
+				int i=0;
+				Iterator<Cards> it = onhand.iterator();
+				while (it.hasNext()) 
+				{
+					Cards c = it.next();
+					if (c.getType()==1&&i<3) 
+					{
+						it.remove();
+						i++;
+					}
+				}
+			}
+			case ("Change 3*Type2"):{
+				int i=0;
+				Iterator<Cards> it = onhand.iterator();
+				while (it.hasNext()) 
+				{
+					Cards c = it.next();
+					if (c.getType()==2&&i<3) 
+					{
+						it.remove();
+						i++;
+					}
+				}
+				break;
+			}
+			case ("Change 1*Type0&Type1&Type2"):{
+				int i=0;
+				int j=0;
+				int [] deleted={9,9,9};
+				Iterator<Cards> it = onhand.iterator();
+				while (it.hasNext()) 
+				{
+					Cards c = it.next();
+					if ((c.getType()!=deleted[0]||c.getType()!=deleted[1])&&i!=3) 
+					{
+						System.out.println("j="+j);
+						i++;
+						deleted[j]=c.getType();
+						j++;
+						it.remove();
+					}
+				}
+				break;
+			}
+		}
+			for (Cards c:onhand){System.out.println(c);}
+		}
+		else if(this.onhand.size()>=3){
+
+			int cardType0 = 0;
+			int cardType1 = 0;
+			int cardType2 = 0;
+			/**
+			 * Determine what will be displayed on the panel 
+			 */
+			for (Cards c:this.onhand){
+				if(c.getType()==0){
+					cardType0=cardType0+1;
+				}
+				if(c.getType()==1){
+					cardType1=cardType1+1;
+				}
+				if(c.getType()==2){
+					cardType2=cardType2+1;
+				}
+			}
+			
+			if((cardType0<3&&cardType1<3&&cardType2<3)&&(cardType0==0||cardType1==0||cardType2==0)){
+				System.out.println("Dont have valid card type to exchange troops!");
+			}
+			else{
+				System.out.println("Can exchange 3 of them");
+			
+				JPanel numPanel = new JPanel();
+				numPanel.add(new JLabel("Chose Cards!"));
+				DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
+				if(cardType0>2){
+					selection.addElement("Change 3*Type0");
+				}
+				if(cardType1>2){
+					selection.addElement("Change 3*Type1");
+				}
+				if(cardType2>2){
+					selection.addElement("Change 3*Type2");
+				}
+				if(cardType0>0&&cardType1>0&&cardType2>0){
+					selection.addElement("Change 1*Type0&Type1&Type2");
+				}
+			
+				JComboBox<String> comboBox = new JComboBox<String>(selection);
+				numPanel.add(comboBox);
+				int result = JOptionPane.showConfirmDialog(null, numPanel, "Use Cards to Exchange Troops", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				String selected = comboBox.getSelectedItem().toString();
+				if(result == JOptionPane.OK_OPTION) {
+				totalCardsExchange=totalCardsExchange+1;
+				addInfrantry(totalCardsExchange*5);
+			
+				/**
+				 * Remove 3 cards
+				 */	
+				switch(selected){
+				case ("Change 3*Type0"):{
+					int i=0;
+					Iterator<Cards> it = onhand.iterator();
+					while (it.hasNext()) 
+					{
+						Cards c = it.next();
+						if (c.getType()==0&&i<3) 
+						{
+							it.remove();
+							i++;
+						}
+					}
+					break;
+				}
+				case ("Change 3*Type1"):{
+					int i=0;
+					Iterator<Cards> it = onhand.iterator();
+					while (it.hasNext()) 
+					{
+						Cards c = it.next();
+						if (c.getType()==1&&i<3) 
+						{
+							it.remove();
+							i++;
+						}
+					}
+				}
+				case ("Change 3*Type2"):{
+					int i=0;
+					Iterator<Cards> it = onhand.iterator();
+					while (it.hasNext()) 
+					{
+						Cards c = it.next();
+						if (c.getType()==2&&i<3) 
+						{
+							it.remove();
+							i++;
+						}
+					}
+					break;
+				}
+				case ("Change 1*Type0&Type1&Type2"):{
+					int i=0;
+					int j=0;
+					int [] deleted={9,9,9};
+					Iterator<Cards> it = onhand.iterator();
+					while (it.hasNext()) 
+					{
+						Cards c = it.next();
+						if ((c.getType()!=deleted[0]||c.getType()!=deleted[1])&&i!=3) 
+						{
+							System.out.println("j="+j);
+							i++;
+							deleted[j]=c.getType();
+							j++;
+							it.remove();
+						}
+					}
+					break;
+				}
+				}
+		
+				for (Cards c:onhand){System.out.println(c);}
+				}
+				else {
+					System.out.println("Do nothing!");
+				}
+			}
+		}
+		else{
+			System.out.println("Not enough cards!");
+		}
 		boolean owned = true;
 		if(this.countries.size() == 0) {
 			this.loseGame();
