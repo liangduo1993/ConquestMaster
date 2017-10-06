@@ -30,7 +30,7 @@ public class mainFrame {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private JButton openButton;
 	/**
 	 * Launch the application.
 	 */

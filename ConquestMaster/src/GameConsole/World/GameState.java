@@ -26,12 +26,12 @@ public class GameState {
 	private Country country2;
 	private WindowMain win;
 	
-	public GameState(WindowMain win) {
+	public GameState(WindowMain win, String path) {
 		this.win = win;
 		this.currPlayer = null;  // will set this at the beggining of the turn
 		this.allPlayers = new Group();
 		this.currPhase = 0;
-		this.world = new World(); // creating the world
+		this.world = new World(path); // creating the world
 		this.music = null;
 	}
 	

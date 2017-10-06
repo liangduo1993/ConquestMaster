@@ -1,6 +1,7 @@
 package GameConsole.Window;
 
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -10,12 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,8 +34,9 @@ import javax.swing.border.LineBorder;
 
 import GameConsole.Player.Player;
 import GameConsole.World.GameState;
+import MapEditor.Editor.FileChooserPanel;
 
-public class WindowMain {
+public class WindowMain implements ActionListener  {
 
 	private JFrame frame1;
 	private JPanel cards;
@@ -45,13 +49,10 @@ public class WindowMain {
 	private int troopsLeft;
 	private JLabel playerWonLabell;
 	private CardLayout cardLayout;
+	private JFileChooser fc;
+	private JButton openButton;
 
 	public WindowMain() throws IOException {
-		gameState = new GameState(this);
-		initialize();
-	}
-
-	private void initialize() throws IOException {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
 		//gameState.playSound("music\\intro_music.wav");
@@ -61,6 +62,32 @@ public class WindowMain {
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.setVisible(true);
 		frame1.getContentPane().setLayout(new CardLayout(0, 0));
+		fc = new JFileChooser();
+		openButton = new JButton("Open Map", null);
+		openButton.addActionListener(this);
+		openButton.setBounds(400, 400, 250, 100);
+		this.frame1.add(openButton, BorderLayout.PAGE_START);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == openButton) {
+			int returnVal = fc.showOpenDialog(this.frame1);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				String path = file.getAbsolutePath();
+				gameState = new GameState(this, path);
+				try {
+					initialize();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				openButton.setVisible(false);
+			}
+		}
+	}
+
+	private void initialize() throws IOException {
+		
 	
 		cards = new JPanel(new CardLayout());
 		cards.setBounds(100, 100, 1200, 900);
