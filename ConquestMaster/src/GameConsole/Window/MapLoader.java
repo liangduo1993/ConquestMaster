@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 
 import GameConsole.World.Continent;
 import GameConsole.World.Country;
+import GameConsole.World.World;
 import MapEditor.Util.StringUtil;
 
 public class MapLoader {
@@ -39,6 +40,13 @@ public class MapLoader {
 		clear();
 	}
 
+	public void setWorld(World world){
+	  System.out.println(this.continents.size());
+	  for(Continent continent : this.continents){
+	     world.addContinent(continent);
+	  }
+	}
+	
 	// public boolean addContinent(Continent cont) {
 	// if (findContinent(cont.getName()) == null) {
 	// this.continents.add(cont);
@@ -184,7 +192,7 @@ public class MapLoader {
 				if (line.startsWith("[")) {
 					if (line.equalsIgnoreCase("[Territories]")) {
 						for (Continent c : this.continents) {
-							System.out.println(c.getName());
+//							System.out.println(c.getName());
 						}
 						return;
 					}
@@ -258,7 +266,7 @@ public class MapLoader {
 		}
 		for (Country t : this.countries) {
 			buildCountryName(t);
-			System.out.println(t);
+//			System.out.println(t);
 		}
 	}
 
@@ -365,7 +373,7 @@ public class MapLoader {
 			// Territory t = map.findTerritory("Forgoth");
 			// map.deleteTerritory(t);
 			for (Continent tt : map.continents) {
-				System.out.println(tt);
+//				System.out.println(tt);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

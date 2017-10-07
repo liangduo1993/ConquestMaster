@@ -22,10 +22,22 @@ public class World {
 		 * programatically read this from json file but in case we don't have
 		 * time to design that just making this.
 		 */
+	  
+	    this.initialWorld();
 
 		mapLoader = new MapLoader();
 		try {
 			mapLoader.load(path);
+			System.out.println("map load结束");
+			mapLoader.setWorld(this);
+			
+			for(Continent continent : this.continents){
+              System.out.println("continents:"+continent.getName());
+			  for(Country country : continent.getCountries()){
+			    System.out.println("country:"+country.getName());
+			  }
+			}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -230,6 +242,11 @@ public class World {
 		// NewGuinea.addBorderingCountry(WesternAustralia);
 		// WesternAustralia.addBorderingCountry(EasternAustralia);
 	}
+	
+	private void initialWorld(){
+	  this.continents = new ArrayList<Continent>();
+	}
+	
 
 	public String toString() {
 		String retString = "";

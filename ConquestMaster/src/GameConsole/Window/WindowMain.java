@@ -32,6 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+import com.sun.jmx.snmp.tasks.ThreadService;
+
 import GameConsole.Player.Player;
 import GameConsole.World.GameState;
 import MapEditor.Editor.FileChooserPanel;
@@ -51,8 +53,31 @@ public class WindowMain implements ActionListener  {
 	private CardLayout cardLayout;
 	private JFileChooser fc;
 	private JButton openButton;
+	private String mapPath;
 
 	public WindowMain() throws IOException {
+//		frame1 = new JFrame();
+//		frame1.setResizable(false);
+//		//gameState.playSound("music\\intro_music.wav");
+//		frame1.setTitle("Risk - The Game of Global Domination");
+//		frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
+//		frame1.setBounds(100, 100, 1200, 900);
+//		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame1.getContentPane().setLayout(new CardLayout(0, 0));
+//		fc = new JFileChooser();
+//		openButton = new JButton("Open Map", null);
+//		openButton.addActionListener(this);
+//		openButton.setBounds(400, 400, 250, 100);
+//		
+//		this.frame1.add(openButton, BorderLayout.PAGE_START);
+//		frame1.setVisible(true);
+		
+		
+		this.openMapFile();
+		
+	}
+	
+	public void openMapFile(){
 		frame1 = new JFrame();
 		frame1.setResizable(false);
 		//gameState.playSound("music\\intro_music.wav");
@@ -60,13 +85,15 @@ public class WindowMain implements ActionListener  {
 		frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame1.setBounds(100, 100, 1200, 900);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.setVisible(true);
 		frame1.getContentPane().setLayout(new CardLayout(0, 0));
 		fc = new JFileChooser();
 		openButton = new JButton("Open Map", null);
 		openButton.addActionListener(this);
 		openButton.setBounds(400, 400, 250, 100);
+		
 		this.frame1.add(openButton, BorderLayout.PAGE_START);
+		frame1.setVisible(true);
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -75,9 +102,11 @@ public class WindowMain implements ActionListener  {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				String path = file.getAbsolutePath();
+//				this.frame1.setVisible(false);
 				gameState = new GameState(this, path);
 				try {
 					initialize();
+					
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
