@@ -16,7 +16,6 @@ import GameConsole.World.World;
  * Created by jingyang on 2017-10-06.
  */
 
-
 public class CountryDisplay {
     private JPanel map;
     private ArrayList<CountryButton> buttons = new ArrayList<>();
@@ -50,8 +49,5 @@ public class CountryDisplay {
     public ArrayList<CountryButton> getButtons() {
         return buttons;
     }
-
-
-
 
 }
