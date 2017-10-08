@@ -3,6 +3,7 @@ package GameConsole.Window;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import GameConsole.World.Country;
 import GameConsole.World.World;
 
 public class Game {
@@ -62,6 +64,7 @@ public class Game {
 		frame = map;
 
 		MapLoader mapLoader = new MapLoader();
+		mapLoader.setWorld(world);
 		int countryNum = mapLoader.countries.size();
 		for(int i = 0; i < countryNum; i++) {
 			BufferedImage buttonImage = ImageIO.read(new File(mapLoader.getImageFilePath()));
