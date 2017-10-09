@@ -514,6 +514,7 @@ public class Player {
 			return 0;
 		}
 		World world = this.countries.get(0).getContinent().getWorld();
+		System.out.println(world.getContinents().size());
 		
 		for(Continent con : world.getContinents()) {
 			owned = true;

@@ -62,10 +62,13 @@ public class Game {
 	 */
 	private void initialize(JPanel map, World world) throws IOException {
 		frame = map;
-
-		MapLoader mapLoader = new MapLoader();
-		mapLoader.setWorld(world);
+		MapLoader mapLoader = world.getMapLoader();
+		//MapLoader mapLoader = new MapLoader();
+		//mapLoader.setWorld(world);
 		int countryNum = mapLoader.countries.size();
+	//	System.out.println(mapLoader.countries.contains(mapLoader.continents.get(0).getCountries().get(0)));
+		
+		
 		for(int i = 0; i < countryNum; i++) {
 			BufferedImage buttonImage = ImageIO.read(new File(mapLoader.getImageFilePath()));
 			String buttonName = mapLoader.countries.get(i).getName();
@@ -77,6 +80,7 @@ public class Game {
 			map.add(countryButton.getLabel());
 			map.add(countryButton.b);
 			buttons.add(countryButton);
+			country.setButton(countryButton);
 		}
 				
 	}

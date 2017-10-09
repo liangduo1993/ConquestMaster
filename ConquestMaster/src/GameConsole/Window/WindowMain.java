@@ -32,11 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
-import com.sun.jmx.snmp.tasks.ThreadService;
-
 import GameConsole.Player.Player;
 import GameConsole.World.GameState;
-import MapEditor.Editor.FileChooserPanel;
 
 public class WindowMain implements ActionListener  {
 
@@ -104,13 +101,14 @@ public class WindowMain implements ActionListener  {
 				String path = file.getAbsolutePath();
 //				this.frame1.setVisible(false);
 				gameState = new GameState(this, path);
+				openButton.setVisible(false);
+				this.frame1.remove(openButton);
 				try {
 					initialize();
 					
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				openButton.setVisible(false);
 			}
 		}
 	}
@@ -395,6 +393,128 @@ public class WindowMain implements ActionListener  {
 	    	}
 		});
 		
+		Game g = new Game(map, gameState.getWorld()); 
+		
+		for (CountryButton countryButton : g.getButtons()){
+			countryButton.b.addActionListener(new ActionListener(){
+		    	@Override
+	            public void actionPerformed(ActionEvent e) {
+		    		if (gameState.getCurrPhase() == 0){ 
+		    			if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0){
+		    				troopsLeft--;
+		    				countryButton.country.addInfrantry(1);
+		    				numberOfTroops.setText(Integer.toString(troopsLeft));
+		    				gameState.updateCountryLabels();
+		    			}
+		    			else if (troopsLeft == 0){
+		    				JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
+		    			}
+		    			else{
+		    				JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
+		    			}
+		    		}
+		    		else if (gameState.getCurrPhase() == 1){
+			    		if (countryButton.country.getPlayer() == gameState.getCurrPlayer() && gameState.getCountry1() == null){
+			    			if(countryButton.country.getTroops().size() > 1){
+				    			gameState.setCountry1(countryButton.country);
+				    			//JOptionPane.showMessageDialog(countryButton.b, "Country1 is " + gameState.getCountry1().getName());
+				    			country1.setText(gameState.getCountry1().getName());
+				    			cancelCountryButton.setVisible(true);
+				    			cancelCountryButton.setEnabled(true);
+			    			}
+			    			else{
+			    				gameState.setCountry1(null);
+			    				JOptionPane.showMessageDialog(countryButton.b, "Country does not have enough troops to attack");
+			    				country1.setText((String) null);
+			    			}
+			    		}
+			    		else if (countryButton.country.getPlayer() != gameState.getCurrPlayer() && gameState.getCountry1() != null && gameState.getCountry2() == null){
+			    			gameState.setCountry2(countryButton.country);
+			    			if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())){
+			    				cancelCountryButton.setVisible(false);
+				    			cancelCountryButton.setEnabled(false);
+			    				country2.setText(gameState.getCountry2().getName());
+			    				//JOptionPane.showMessageDialog(countryButton.b, "Country2 is " + gameState.getCountry2().getName());	    				
+			    				gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
+//			    				if (gameState.getCountry2().getPlayer().getCountries().size() == 0){
+//			    					gameState.getCountry2().getPlayer().getPlayerTextName().setVisible(false);
+//			    					gameState.getAllPlayers().getPlayers().remove(gameState.getCountry2().getPlayer());
+//			    				}
+				    			gameState.updateCountryLabels();
+				    			gameState.setCountry1(null);
+				    			gameState.setCountry2(null);
+				    			country1.setText((String) null);
+				    			country2.setText((String) null);
+			    			}
+			    			else{
+			    				JOptionPane.showMessageDialog(countryButton.b, "Countries are not adjacent, select the second country again.");			    				
+			    				gameState.setCountry2(null);
+			    				country2.setText((String) null);
+			    			}
+			    		}			    		
+		    		}
+		    		else{
+		    			if (gameState.getCountry1() == null){
+			    			gameState.setCountry1(countryButton.country);
+			    			country1.setText(gameState.getCountry1().getName());
+			    			if (gameState.getCountry1().getTroops().size() == 1){
+			    				JOptionPane.showMessageDialog(countryButton.b, "Troops cannot be moved from here because " + gameState.getCountry1().getName() + " only has 1 troop.");
+			    				gameState.setCountry1(null);
+			    				country1.setText((String) null);
+			    			}
+			    			else{
+			    				cancelCountryButton.setVisible(true);
+			    				cancelCountryButton.setEnabled(true);
+			    			}
+			    		}
+			    		else if (countryButton.country.getPlayer() == gameState.getCurrPlayer() && gameState.getCountry1() != null && gameState.getCountry2() == null){
+			    			gameState.setCountry2(countryButton.country);
+			    			country2.setText(gameState.getCountry2().getName());
+			    			if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())){
+			    				cancelCountryButton.setVisible(false);
+				    			cancelCountryButton.setEnabled(false);
+			    				JPanel numPanel = new JPanel();
+			    				numPanel.add(new JLabel("Select how many troops to add"));
+			    				DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
+			    				for (int i = 1; i < gameState.getCountry1().getTroops().size(); i++){
+			    					selection.addElement(Integer.toString(i));
+			    				}
+			    				JComboBox<String> comboBox = new JComboBox<String>(selection);
+			    				numPanel.add(comboBox);
+			    				int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			    				if (result == JOptionPane.OK_OPTION){
+			    					gameState.getCurrPlayer().moveTroops(gameState.getCountry1(), gameState.getCountry2(), Integer.parseInt(comboBox.getSelectedItem().toString()));
+					    			gameState.updateCountryLabels();
+					    			gameState.setCountry1(null);
+					    			gameState.setCountry2(null);
+					    			country1.setText((String) null);
+					    			country2.setText((String) null);
+			    				}
+			    				else{
+			    					JOptionPane.showMessageDialog(countryButton.b, "Move was cancelled.");
+			    					gameState.setCountry1(null);
+					    			gameState.setCountry2(null);
+					    			country1.setText((String) null);
+					    			country2.setText((String) null);
+			    				}
+			    			}
+			    			else{
+			    				JOptionPane.showMessageDialog(countryButton.b, "Countries are not adjacent, select the second country again.");
+			    				gameState.setCountry2(null);
+			    				country2.setText((String) null);
+			    			}
+			    			gameState.updateCountryLabels();
+			    			gameState.setCountry1(null);
+			    			gameState.setCountry2(null);
+			    			country1.setText((String) null);
+			    			country2.setText((String) null);
+			    		}
+		    		}
+	            }
+		    });
+		}
+		
+		
 		startGamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -548,126 +668,7 @@ public class WindowMain implements ActionListener  {
 		playerFiveText.add(player5TextField);
 		this.playerWonLabell = new JLabel("playerName");
 		map.setLayout(null);
-		Game g = new Game(map, gameState.getWorld()); 
-		
-		for (CountryButton countryButton : g.getButtons()){
-			countryButton.b.addActionListener(new ActionListener(){
-		    	@Override
-	            public void actionPerformed(ActionEvent e) {
-		    		if (gameState.getCurrPhase() == 0){ 
-		    			if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0){
-		    				troopsLeft--;
-		    				countryButton.country.addInfrantry(1);
-		    				numberOfTroops.setText(Integer.toString(troopsLeft));
-		    				gameState.updateCountryLabels();
-		    			}
-		    			else if (troopsLeft == 0){
-		    				JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
-		    			}
-		    			else{
-		    				JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
-		    			}
-		    		}
-		    		else if (gameState.getCurrPhase() == 1){
-			    		if (countryButton.country.getPlayer() == gameState.getCurrPlayer() && gameState.getCountry1() == null){
-			    			if(countryButton.country.getTroops().size() > 1){
-				    			gameState.setCountry1(countryButton.country);
-				    			//JOptionPane.showMessageDialog(countryButton.b, "Country1 is " + gameState.getCountry1().getName());
-				    			country1.setText(gameState.getCountry1().getName());
-				    			cancelCountryButton.setVisible(true);
-				    			cancelCountryButton.setEnabled(true);
-			    			}
-			    			else{
-			    				gameState.setCountry1(null);
-			    				JOptionPane.showMessageDialog(countryButton.b, "Country does not have enough troops to attack");
-			    				country1.setText((String) null);
-			    			}
-			    		}
-			    		else if (countryButton.country.getPlayer() != gameState.getCurrPlayer() && gameState.getCountry1() != null && gameState.getCountry2() == null){
-			    			gameState.setCountry2(countryButton.country);
-			    			if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())){
-			    				cancelCountryButton.setVisible(false);
-				    			cancelCountryButton.setEnabled(false);
-			    				country2.setText(gameState.getCountry2().getName());
-			    				//JOptionPane.showMessageDialog(countryButton.b, "Country2 is " + gameState.getCountry2().getName());	    				
-			    				gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
-//			    				if (gameState.getCountry2().getPlayer().getCountries().size() == 0){
-//			    					gameState.getCountry2().getPlayer().getPlayerTextName().setVisible(false);
-//			    					gameState.getAllPlayers().getPlayers().remove(gameState.getCountry2().getPlayer());
-//			    				}
-				    			gameState.updateCountryLabels();
-				    			gameState.setCountry1(null);
-				    			gameState.setCountry2(null);
-				    			country1.setText((String) null);
-				    			country2.setText((String) null);
-			    			}
-			    			else{
-			    				JOptionPane.showMessageDialog(countryButton.b, "Countries are not adjacent, select the second country again.");			    				
-			    				gameState.setCountry2(null);
-			    				country2.setText((String) null);
-			    			}
-			    		}			    		
-		    		}
-		    		else{
-		    			if (gameState.getCountry1() == null){
-			    			gameState.setCountry1(countryButton.country);
-			    			country1.setText(gameState.getCountry1().getName());
-			    			if (gameState.getCountry1().getTroops().size() == 1){
-			    				JOptionPane.showMessageDialog(countryButton.b, "Troops cannot be moved from here because " + gameState.getCountry1().getName() + " only has 1 troop.");
-			    				gameState.setCountry1(null);
-			    				country1.setText((String) null);
-			    			}
-			    			else{
-			    				cancelCountryButton.setVisible(true);
-			    				cancelCountryButton.setEnabled(true);
-			    			}
-			    		}
-			    		else if (countryButton.country.getPlayer() == gameState.getCurrPlayer() && gameState.getCountry1() != null && gameState.getCountry2() == null){
-			    			gameState.setCountry2(countryButton.country);
-			    			country2.setText(gameState.getCountry2().getName());
-			    			if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())){
-			    				cancelCountryButton.setVisible(false);
-				    			cancelCountryButton.setEnabled(false);
-			    				JPanel numPanel = new JPanel();
-			    				numPanel.add(new JLabel("Select how many troops to add"));
-			    				DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-			    				for (int i = 1; i < gameState.getCountry1().getTroops().size(); i++){
-			    					selection.addElement(Integer.toString(i));
-			    				}
-			    				JComboBox<String> comboBox = new JComboBox<String>(selection);
-			    				numPanel.add(comboBox);
-			    				int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-			    				if (result == JOptionPane.OK_OPTION){
-			    					gameState.getCurrPlayer().moveTroops(gameState.getCountry1(), gameState.getCountry2(), Integer.parseInt(comboBox.getSelectedItem().toString()));
-					    			gameState.updateCountryLabels();
-					    			gameState.setCountry1(null);
-					    			gameState.setCountry2(null);
-					    			country1.setText((String) null);
-					    			country2.setText((String) null);
-			    				}
-			    				else{
-			    					JOptionPane.showMessageDialog(countryButton.b, "Move was cancelled.");
-			    					gameState.setCountry1(null);
-					    			gameState.setCountry2(null);
-					    			country1.setText((String) null);
-					    			country2.setText((String) null);
-			    				}
-			    			}
-			    			else{
-			    				JOptionPane.showMessageDialog(countryButton.b, "Countries are not adjacent, select the second country again.");
-			    				gameState.setCountry2(null);
-			    				country2.setText((String) null);
-			    			}
-			    			gameState.updateCountryLabels();
-			    			gameState.setCountry1(null);
-			    			gameState.setCountry2(null);
-			    			country1.setText((String) null);
-			    			country2.setText((String) null);
-			    		}
-		    		}
-	            }
-		    });
-		}
+
 		
 		JLabel labelPlayer = new JLabel("");
 		labelPlayer.setIcon(new ImageIcon("GimpFiles\\Map.png"));
@@ -941,13 +942,13 @@ public class WindowMain implements ActionListener  {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 		
-		gameState.getWorld().getContinents().get(0).getCountries().get(0).getButton().b.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(gameState.getWorld().getContinents().get(0).getCountries().get(0).getName());
-			
-			}
-		});
+//		gameState.getWorld().getContinents().get(0).getCountries().get(0).getButton().b.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				System.out.println(gameState.getWorld().getContinents().get(0).getCountries().get(0).getName());
+//			
+//			}
+//		});
 
 	}
 	

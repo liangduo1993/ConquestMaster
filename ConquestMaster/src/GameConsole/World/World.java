@@ -12,7 +12,7 @@ import GameConsole.Window.MapLoader;
 public class World {
 	private ArrayList<Continent> continents;
 	private ArrayList<Card> cards;
-	private ArrayList<Card> deck;
+	private ArrayList<Card> deck = new ArrayList<>();
 	private GameState gameState;
 	private MapLoader mapLoader;
 
@@ -363,4 +363,15 @@ public class World {
 		long seed = System.nanoTime(); // shuffling
 		Collections.shuffle(this.deck, new Random(seed));
 	}
+
+	public MapLoader getMapLoader() {
+		return mapLoader;
+	}
+
+	public void setMapLoader(MapLoader mapLoader) {
+		this.mapLoader = mapLoader;
+	}
+	
+	
+	
 }

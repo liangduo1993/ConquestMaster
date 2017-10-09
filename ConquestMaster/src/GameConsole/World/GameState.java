@@ -56,6 +56,10 @@ public class GameState {
 	public void updateCountryLabels() {
 		for(Continent con : this.world.getContinents()) {
 			for(Country cou : con.getCountries()) {
+				System.out.println(cou.getName());
+				System.out.println(cou.getButton().getClass());
+				System.out.println(cou.getButton().getLabel());
+				System.out.println(cou.getPlayer());
 				cou.getButton().updateLabel(cou.getPlayer());
 			}
 		}
