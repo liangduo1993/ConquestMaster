@@ -676,7 +676,7 @@ public class WindowMain implements ActionListener  {
 		MapLoader mapLoader = gameState.getWorld().getMapLoader();
 		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
 		//labelPlayer.setBounds(0, 30, 1194, 831);
-		labelPlayer.setBounds(0, 0, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
+		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
 		map.add(labelPlayer);
 		
 		JMenuBar menuBar = new JMenuBar();
