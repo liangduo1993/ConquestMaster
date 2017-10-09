@@ -150,6 +150,10 @@ public class GameState {
 	public void setCountry2(Country country2) {
 		this.country2 = country2;
 	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
 	
 	
 	

@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -99,7 +100,7 @@ public class WindowMain implements ActionListener  {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				String path = file.getAbsolutePath();
-//				this.frame1.setVisible(false);
+//				tframe1.setVisible(false);
 				gameState = new GameState(this, path);
 				openButton.setVisible(false);
 				this.frame1.remove(openButton);
@@ -671,8 +672,11 @@ public class WindowMain implements ActionListener  {
 
 		
 		JLabel labelPlayer = new JLabel("");
-		labelPlayer.setIcon(new ImageIcon("GimpFiles\\Map.png"));
-		labelPlayer.setBounds(0, 30, 1194, 831);
+		//labelPlayer.setIcon(new ImageIcon("GimpFiles\\Map.png"));
+		MapLoader mapLoader = gameState.getWorld().getMapLoader();
+		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
+		//labelPlayer.setBounds(0, 30, 1194, 831);
+		labelPlayer.setBounds(0, 0, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
 		map.add(labelPlayer);
 		
 		JMenuBar menuBar = new JMenuBar();
