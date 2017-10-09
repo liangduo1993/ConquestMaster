@@ -513,7 +513,8 @@ public class Player {
 			this.loseGame();
 			return 0;
 		}
-		World world = this.countries.get(0).getContinent().getWorld();
+		//World world = this.countries.get(0).getContinent().getWorld();
+		World world = game.getWorld();
 		System.out.println(world.getContinents().size());
 		
 		for(Continent con : world.getContinents()) {

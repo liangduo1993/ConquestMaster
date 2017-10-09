@@ -78,6 +78,8 @@ public class CountryButton{
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);
 		this.label.setForeground(Color.RED);
 		this.label.setFont(new Font("Dialog", Font.PLAIN, 20));
+		//label.setBounds(c.getXLoc(), c.getYLoc(), 20, 20);
+		//label.setBounds(100, 100, 20, 20);
 		
 		this.b = new JButton() {
 	        @Override

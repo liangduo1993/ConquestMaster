@@ -19,6 +19,7 @@ public class Game {
 
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<CountryButton>(42);
+	private World world;
 	/**
 	 * Launch the application.
 	 */
@@ -63,6 +64,7 @@ public class Game {
 	private void initialize(JPanel map, World world) throws IOException {
 		frame = map;
 		MapLoader mapLoader = world.getMapLoader();
+		this.world = world;
 		//MapLoader mapLoader = new MapLoader();
 		//mapLoader.setWorld(world);
 		int countryNum = mapLoader.countries.size();
@@ -76,7 +78,7 @@ public class Game {
 			CountryButton countryButton = new CountryButton(buttonImage, buttonName, country);
 			int x = country.getXLoc();
 			int y = country.getYLoc();
-			countryButton.setDoubleBounds(x, y, 100, 100);
+			countryButton.setDoubleBounds(x - 10, y - 10, 20, 20);
 			map.add(countryButton.getLabel());
 			map.add(countryButton.b);
 			buttons.add(countryButton);
@@ -91,4 +93,14 @@ public class Game {
 	public ArrayList<CountryButton> getButtons(){
 		return buttons;
 	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+	
+	
 }
