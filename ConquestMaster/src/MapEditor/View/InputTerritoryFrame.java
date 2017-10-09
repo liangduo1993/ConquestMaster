@@ -157,10 +157,10 @@ public class InputTerritoryFrame {
 					map.deleteTerritory(unchanged);
 					map.addTerritory(changed);
 					map.buildTerritoryLinks(changed);
-					unchanged = changed;
-					for (Territory t : map.territories) {
-						System.out.println(t);
-					}
+				//	unchanged = changed;
+//					for (Territory t : map.territories) {
+//						System.out.println(t);
+//					}
 
 					// try {
 					// map.save();

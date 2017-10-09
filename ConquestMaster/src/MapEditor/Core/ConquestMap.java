@@ -12,12 +12,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import javax.swing.JTextArea;
 
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
+import MapEditor.Util.MyStringUtil;
 import MapEditor.Util.StringUtil;
 import MapEditor.View.LogPanel;
 
@@ -44,7 +46,7 @@ public class ConquestMap implements Comparator<Object> {
 	// public ExtendedProperties props;
 	public boolean dirty = false;
 	// public ConquestMapMaker cmm;
-	//private JTextArea log = mainFrame.lp.log;
+	// private JTextArea log = mainFrame.lp.log;
 	private JTextArea log = new LogPanel().log;
 
 	public ConquestMap() {
@@ -212,6 +214,8 @@ public class ConquestMap implements Comparator<Object> {
 					if (neighbour != null) {
 						neighbour.getLinkNames().remove(ter.getName());
 						buildTerritoryLinks(neighbour);
+						System.out.println("after delete: " + neighbour.getLinkNames());
+						System.out.println("after delete: " + neighbour.getLinks());
 					}
 				}
 			}
@@ -499,11 +503,19 @@ public class ConquestMap implements Comparator<Object> {
 
 	public void buildTerritoryLinks(Territory t) {
 		if (findTerritory(t.getName()) != null) {
+			Set<String> set = new HashSet<>();
+			for (String linkName : t.getLinkNames()) {
+				set.add(linkName);
+			}
+			t.setLinkNames(new ArrayList<String>(set));
+			
 			t.links = new ArrayList<Territory>();
 			if (t.getLinkNames().size() > 0) {
 				for (String linkName : t.getLinkNames()) {
-					Territory link = findTerritory(linkName);
-					t.getLinks().add(link);
+					//if (MyStringUtil.hasLength(linkName)) {
+						Territory link = findTerritory(linkName);
+						t.getLinks().add(link);
+				//	}
 				}
 				System.out.println(t.getName() + "'s link: =============");
 				for (Territory neighbour : t.getLinks()) {
@@ -609,9 +621,9 @@ public class ConquestMap implements Comparator<Object> {
 		out.println("[Continents]");
 		if (this.continents != null) {
 			for (Continent cont : this.continents) {
-				//if (countTerritories(cont) > 0) {
-					out.println(cont.getName() + "=" + cont.getBonus());
-			//	}
+				// if (countTerritories(cont) > 0) {
+				out.println(cont.getName() + "=" + cont.getBonus());
+				// }
 			}
 		}
 		out.println();
@@ -774,11 +786,11 @@ public class ConquestMap implements Comparator<Object> {
 		// if ((this.continents == null) || (this.continents.isEmpty())) {
 		// probs.add("Map contains no continents");
 		// }
-//		for (Continent cont : this.continents) {
-//			if (countTerritories(cont) == 0) {
-//				probs.add(cont + "has not be allocated territories!");
-//			}
-//		}
+		// for (Continent cont : this.continents) {
+		// if (countTerritories(cont) == 0) {
+		// probs.add(cont + "has not be allocated territories!");
+		// }
+		// }
 		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
 			probs.add("Map image is not specified");
 		} else if (getMapDirectory() != null) {
