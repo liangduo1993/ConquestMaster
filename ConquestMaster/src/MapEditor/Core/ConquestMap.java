@@ -15,14 +15,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import javax.net.ssl.HandshakeCompletedListener;
 import javax.swing.JTextArea;
 
+import MapEditor.mainFrame;
 import MapEditor.Domain.Continent;
 import MapEditor.Domain.Territory;
 import MapEditor.Util.MyStringUtil;
 import MapEditor.Util.StringUtil;
-import MapEditor.View.LogPanel;
 
 public class ConquestMap implements Comparator<Object> {
 	public static enum ScrollOptions {
@@ -48,7 +47,7 @@ public class ConquestMap implements Comparator<Object> {
 	public boolean dirty = false;
 	// public ConquestMapMaker cmm;
 	// private JTextArea log = mainFrame.lp.log;
-	private JTextArea log = new LogPanel().log;
+	private JTextArea log = mainFrame.lp.log;
 
 	public ConquestMap() {
 		this.continents = new ArrayList();
@@ -600,7 +599,7 @@ public class ConquestMap implements Comparator<Object> {
 	// renameTerritories(ters, cont.getName() + " ", 1);
 	// }
 
-	public void save() throws IOException {
+	public void save() throws IOException, Exception {
 		if (validityCheck()) {
 			if (this.mapFilePath != null) {
 				save(this.mapFilePath);
@@ -608,7 +607,7 @@ public class ConquestMap implements Comparator<Object> {
 				throw new IOException("No path specified");
 			}
 		}else{
-			throw new IOException("Cannot pass the validation!");
+			throw new Exception("Cannot pass the validation!");
 		}
 	}
 
@@ -881,7 +880,7 @@ public class ConquestMap implements Comparator<Object> {
 				System.out.println(tt);
 			}
 			map.save();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

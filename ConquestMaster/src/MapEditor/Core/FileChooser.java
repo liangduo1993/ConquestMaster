@@ -93,7 +93,7 @@ public class FileChooser{
 			try {
 				this.map.save();
 				jta.append("Map is successfully saved!" + newline);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				jta.append("Save failed!" + newline);
 				e.printStackTrace();
 			}
