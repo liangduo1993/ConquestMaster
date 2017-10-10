@@ -195,7 +195,8 @@ public class ConquestMap implements Comparator<Object> {
 				}
 			}
 			for (Territory ter : temp) {
-				deleteTerritory(ter);
+				// deleteTerritory(ter);
+				ter.setContinent(null);
 			}
 			this.dirty = true;
 		}
@@ -508,14 +509,14 @@ public class ConquestMap implements Comparator<Object> {
 				set.add(linkName);
 			}
 			t.setLinkNames(new ArrayList<String>(set));
-			
+
 			t.links = new ArrayList<Territory>();
 			if (t.getLinkNames().size() > 0) {
 				for (String linkName : t.getLinkNames()) {
-					//if (MyStringUtil.hasLength(linkName)) {
-						Territory link = findTerritory(linkName);
-						t.getLinks().add(link);
-				//	}
+					// if (MyStringUtil.hasLength(linkName)) {
+					Territory link = findTerritory(linkName);
+					t.getLinks().add(link);
+					// }
 				}
 				System.out.println(t.getName() + "'s link: =============");
 				for (Territory neighbour : t.getLinks()) {
@@ -643,7 +644,11 @@ public class ConquestMap implements Comparator<Object> {
 				out.print(',');
 				out.print(ter.getCenterY());
 				out.print(',');
-				out.print(ter.getContinent().getName());
+				if (ter.getContinent() != null) {
+					out.print(ter.getContinent().getName());
+				} else {
+					out.print("");
+				}
 				for (String linkName : ter.linkNames) {
 					out.print(',');
 					out.print(linkName);

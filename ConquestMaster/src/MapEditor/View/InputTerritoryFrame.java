@@ -194,6 +194,7 @@ public class InputTerritoryFrame {
 			tName.setText(unchanged.getName());
 			tCenterX.setText(String.valueOf(unchanged.getCenterX()));
 			tCenterY.setText(String.valueOf(unchanged.getCenterY()));
+			comboBox.setSelectedItem(unchanged.getContinent());
 			if (unchanged.getLinkNames().size() > 0) {
 				// StringBuilder sb = new StringBuilder(40);
 				// for (String linkName : unchanged.getLinkNames()) {

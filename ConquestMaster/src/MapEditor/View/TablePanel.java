@@ -46,6 +46,9 @@ public class TablePanel extends JPanel {
 					return columnEditables[column];
 				}
 			});
+		}else{
+			terTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			terTable.setModel(new DefaultTableModel(null, new String[] { "Territory" }));
 		}
 		if (map.continents.size() > 0) {
 			contNames = new String[map.continents.size()][1];
@@ -61,6 +64,9 @@ public class TablePanel extends JPanel {
 					return columnEditables[column];
 				}
 			});
+		}else{
+			contTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			contTable.setModel(new DefaultTableModel(null, new String[] { "Continent" }));
 		}
 		
 		
