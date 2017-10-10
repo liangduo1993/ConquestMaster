@@ -537,15 +537,19 @@ public class ConquestMap implements Comparator<Object> {
 			Territory ter = new Territory();
 			ter.name = st.nextToken().trim();
 			ter.setCenter(Integer.parseInt(st.nextToken().trim()), Integer.parseInt(st.nextToken().trim()));
-			ter.setContinent(findContinent(st.nextToken().trim()));
+			String name = st.nextToken().trim();
+			ter.setContinent(findContinent(name));
 			if ((ter.name == null) || (ter.name.length() < 0)) {
 				throw new Exception("name not found");
 			}
-			if (ter.getContinent() == null) {
-				throw new Exception("continent not found");
-			}
+			// if (ter.getContinent() == null) {
+			// throw new Exception("continent not found");
+			// }
 			if ((ter.getCenterX() == -1) || (ter.getCenterY() == -1)) {
 				throw new Exception("invalid coordinates");
+			}
+			if (ter.getContinent() == null) {
+				ter.getLinkNames().add(name);
 			}
 			while (st.hasMoreTokens()) {
 				ter.getLinkNames().add(st.nextToken().trim());
@@ -606,7 +610,7 @@ public class ConquestMap implements Comparator<Object> {
 			} else {
 				throw new IOException("No path specified");
 			}
-		}else{
+		} else {
 			throw new Exception("Cannot pass the validation!");
 		}
 	}
