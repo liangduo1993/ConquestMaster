@@ -826,7 +826,7 @@ public class ConquestMap implements Comparator<Object> {
 	private boolean eachTerReachable() {
 		clearReach();
 		Territory head = this.territories.get(0);
-		BFS(head);
+		DFS(head);
 		int count = 0;
 		for (Territory t : this.territories) {
 			if (t.hasReached) {
@@ -849,14 +849,14 @@ public class ConquestMap implements Comparator<Object> {
 		}
 	}
 
-	public void BFS(Territory head) {
+	public void DFS(Territory head) {
 		head.hasReached = true;
 		if (head.getLinks().size() == 0) {
 			return;
 		}
 		for (Territory neighbour : head.getLinks()) {
 			if (!neighbour.hasReached) {
-				BFS(neighbour);
+				DFS(neighbour);
 			}
 		}
 	}
