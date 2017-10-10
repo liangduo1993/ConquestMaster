@@ -16,6 +16,7 @@ public class Territory {
 	//boolean isBridge;
 	public ArrayList<Territory> links = new ArrayList<>();
 	public ArrayList<String> linkNames = new ArrayList<>();
+	public boolean hasReached = false;
 	//private transient ArrayList<Territory> recommendedLinks;
 	//private transient ArrayList<Territory> missingLinks;
 	//private transient ArrayList<Territory> extraLinks;
@@ -24,7 +25,6 @@ public class Territory {
 	//private transient Color originalColor;
 
 	public Territory() {
-		this.links = new ArrayList();
 	}
 
 	public void addLink(Territory t) {

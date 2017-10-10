@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import javax.net.ssl.HandshakeCompletedListener;
 import javax.swing.JTextArea;
 
 import MapEditor.Domain.Continent;
@@ -363,9 +364,10 @@ public class ConquestMap implements Comparator<Object> {
 
 	public boolean hasOneWayLinks() {
 		for (Territory ter : this.territories) {
-			if (ter.getLinks() != null) {
+			System.out.println(ter.getLinks().size() + ": size");
+			if (ter.getLinks().size() != 0) {
 				for (Territory ter2 : ter.getLinks()) {
-					if ((ter2.getLinks() == null) || (!ter2.getLinks().contains(ter))) {
+					if (ter2.getLinks().size() == 0 || !ter2.getLinks().contains(ter)) {
 						log.append(ter2.getName() + " has no link with " + ter.getName()
 								+ ", please check your map file!" + newline);
 						System.out.println(ter.getName() + " has no link with " + ter2.getName());
@@ -506,7 +508,9 @@ public class ConquestMap implements Comparator<Object> {
 		if (findTerritory(t.getName()) != null) {
 			Set<String> set = new HashSet<>();
 			for (String linkName : t.getLinkNames()) {
-				set.add(linkName);
+				if (MyStringUtil.hasLength(linkName)) {
+					set.add(linkName);
+				}
 			}
 			t.setLinkNames(new ArrayList<String>(set));
 
@@ -603,6 +607,8 @@ public class ConquestMap implements Comparator<Object> {
 			} else {
 				throw new IOException("No path specified");
 			}
+		}else{
+			throw new IOException("Cannot pass the validation!");
 		}
 	}
 
@@ -784,18 +790,10 @@ public class ConquestMap implements Comparator<Object> {
 	}
 
 	public boolean validityCheck() {
-		ArrayList<String> probs = new ArrayList();
-		// if ((this.territories == null) || (this.territories.isEmpty())) {
-		// probs.add("Map contains no territories");
-		// }
-		// if ((this.continents == null) || (this.continents.isEmpty())) {
-		// probs.add("Map contains no continents");
-		// }
-		// for (Continent cont : this.continents) {
-		// if (countTerritories(cont) == 0) {
-		// probs.add(cont + "has not be allocated territories!");
-		// }
-		// }
+		ArrayList<String> probs = new ArrayList<>();
+		if ((this.territories == null) || (this.territories.isEmpty())) {
+			probs.add("Map contains no territories");
+		}
 		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
 			probs.add("Map image is not specified");
 		} else if (getMapDirectory() != null) {
@@ -803,9 +801,14 @@ public class ConquestMap implements Comparator<Object> {
 				probs.add("Map and image files are not located in the same directory");
 			}
 		}
-		if ((this.warn) && (hasOneWayLinks())) {
+		if (hasOneWayLinks()) {
 			probs.add("");
 		}
+
+		if (this.territories.size() > 0 && !eachTerReachable()) {
+			probs.add("There's some teris cannot reach to every other territories!");
+		}
+
 		if (probs.isEmpty()) {
 			return true;
 		}
@@ -815,6 +818,44 @@ public class ConquestMap implements Comparator<Object> {
 		}
 
 		return false;
+	}
+
+	private boolean eachTerReachable() {
+		clearReach();
+		Territory head = this.territories.get(0);
+		BFS(head);
+		int count = 0;
+		for (Territory t : this.territories) {
+			if (t.hasReached) {
+				count++;
+			}
+		}
+		clearReach();
+		System.out.println(count + " countries can connect to each other ");
+		System.out.println("With total of " + this.territories.size() + " countries!");
+		if (count == this.territories.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void clearReach() {
+		for (Territory t : this.territories) {
+			t.hasReached = false;
+		}
+	}
+
+	public void BFS(Territory head) {
+		head.hasReached = true;
+		if (head.getLinks().size() == 0) {
+			return;
+		}
+		for (Territory neighbour : head.getLinks()) {
+			if (!neighbour.hasReached) {
+				BFS(neighbour);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
