@@ -130,7 +130,7 @@ public class TablePanel extends JPanel implements Observer{
 		terAddBtn = new JButton("Add");
 		terAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InputTerritoryFrame("");
+				new InputTerritoryFrame("", map);
 				//updateTable();
 			}
 		});
@@ -141,7 +141,7 @@ public class TablePanel extends JPanel implements Observer{
 		terEditBtn = new JButton("Edit");
 		terEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InputTerritoryFrame((String) terNames[terTable.getSelectedRow()][0]);
+				new InputTerritoryFrame((String) terNames[terTable.getSelectedRow()][0], map);
 				//updateTable();
 			}
 		});
@@ -164,7 +164,7 @@ public class TablePanel extends JPanel implements Observer{
 		contAddBtn.setBounds(218, 590, 93, 23);
 		contAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InputContinentFrame("");
+				new InputContinentFrame("", map);
 				//updateTable();
 			}
 		});
@@ -175,7 +175,7 @@ public class TablePanel extends JPanel implements Observer{
 		contEditBtn.setBounds(218, 620, 93, 23);
 		contEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InputContinentFrame((String) contNames[contTable.getSelectedRow()][0]);
+				new InputContinentFrame((String) contNames[contTable.getSelectedRow()][0], map);
 				//updateTable();
 			}
 		});

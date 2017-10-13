@@ -33,12 +33,12 @@ public class InputTerritoryFrame {
 	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
-	private ConquestMap map = mainFrame.map;
+	private ConquestMap map;
 	//private LogPanel log = mainFrame.lp;
 	// public ConquestMap map;
 	//private List<Continent> contList;
 
-	public InputTerritoryFrame(String unchangedName) {
+	public InputTerritoryFrame(String unchangedName, ConquestMap map) {
 		// this.map = new ConquestMap();
 		// try {
 		// map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
@@ -47,6 +47,7 @@ public class InputTerritoryFrame {
 		// e.printStackTrace();
 		// }
 		//this.contList = map.continents;
+		this.map = map;
 		this.unchanged = map.findTerritory(unchangedName);
 		initialize();
 	}
@@ -295,7 +296,7 @@ public class InputTerritoryFrame {
 					// e.printStackTrace();
 					// }
 
-					InputTerritoryFrame window = new InputTerritoryFrame("");
+					InputTerritoryFrame window = new InputTerritoryFrame("", new ConquestMap());
 
 				} catch (Exception e) {
 					e.printStackTrace();

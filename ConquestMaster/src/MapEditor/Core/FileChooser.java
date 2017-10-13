@@ -11,12 +11,13 @@ import MapEditor.Util.MyStringUtil;
 
 public class FileChooser{
 	private final String newline = "\n";
-	private ConquestMap map = mainFrame.map;
+	private ConquestMap map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
 	//private TablePanel tablePanel = mainFrame.infoPanel;
 	
-	public FileChooser(String operation) {
+	public FileChooser(String operation, ConquestMap map) {
+		this.map = map;
 		fc = new JFileChooser();
 		if(operation.equals("save")){
 			mapSave();

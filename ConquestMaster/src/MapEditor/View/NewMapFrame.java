@@ -23,7 +23,7 @@ import MapEditor.Util.MyStringUtil;
 
 public class NewMapFrame {
 	private final String NEWLINE = "\n";
-	private ConquestMap map = mainFrame.map;
+	private ConquestMap map;
 	private JFrame frame;
 	private JTextField tAuthor;
 	// private JCheckBox wrapCheckBox, warnCheckBox;
@@ -38,7 +38,8 @@ public class NewMapFrame {
 	/**
 	 * Create the application.
 	 */
-	public NewMapFrame() {
+	public NewMapFrame(ConquestMap map) {
+		this.map = map;
 		initialize();
 	}
 
@@ -181,7 +182,7 @@ public class NewMapFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NewMapFrame window = new NewMapFrame();
+					NewMapFrame window = new NewMapFrame(new ConquestMap());
 
 				} catch (Exception e) {
 					e.printStackTrace();

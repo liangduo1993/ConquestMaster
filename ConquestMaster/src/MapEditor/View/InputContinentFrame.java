@@ -23,7 +23,7 @@ public class InputContinentFrame {
 	private JButton confirmBtn, cancelBtn;
 	private JLabel errMsg = new JLabel();
 
-	private ConquestMap map = mainFrame.map;
+	private ConquestMap map;
 	//private LogPanel log = mainFrame.lp;
 	// public ConquestMap map;
 	private Continent unchanged;
@@ -32,7 +32,7 @@ public class InputContinentFrame {
 	/**
 	 * Create the application.
 	 */
-	public InputContinentFrame(String unchangedName) {
+	public InputContinentFrame(String unchangedName, ConquestMap map) {
 //		this.map = new ConquestMap();
 //		try {
 //			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
@@ -40,6 +40,7 @@ public class InputContinentFrame {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
+		this.map = map;
 		this.unchanged = map.findContinent(unchangedName);
 		initialize();
 	}
@@ -152,7 +153,7 @@ public class InputContinentFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InputContinentFrame window = new InputContinentFrame("Kala");
+					InputContinentFrame window = new InputContinentFrame("Kala", new ConquestMap());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

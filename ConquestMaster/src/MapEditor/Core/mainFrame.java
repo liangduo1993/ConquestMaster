@@ -18,11 +18,11 @@ public class mainFrame {
 
 	private JFrame frame;
 	private JMenuBar menuBar;
-	public static ConquestMap map;
+	public ConquestMap map;
 	//public static MapDisplay mapDisplay;
 	public FileChooser fcp;
 	public static LogPanel lp;
-	public static TablePanel infoPanel;
+	public TablePanel infoPanel;
 	
 	
 	/**
@@ -55,7 +55,7 @@ public class mainFrame {
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//fcp = new FileChooser("new");
-				new NewMapFrame();
+				new NewMapFrame(map);
 			}
 		});
 
@@ -63,7 +63,7 @@ public class mainFrame {
 		mnFile.add(mntmLoadMap);
 		mntmLoadMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fcp = new FileChooser("load");
+				fcp = new FileChooser("load", map);
 			}
 		});
 
@@ -71,7 +71,7 @@ public class mainFrame {
 		mnFile.add(mntmSaveMap);
 		mntmSaveMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fcp = new FileChooser("save");
+				fcp = new FileChooser("save", map);
 			}
 		});
 
@@ -79,7 +79,7 @@ public class mainFrame {
 		mnFile.add(mntmSaveAsMap);
 		mntmSaveAsMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fcp = new FileChooser("saveas");
+				fcp = new FileChooser("saveas", map);
 			}
 		});
 
