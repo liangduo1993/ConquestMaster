@@ -6,16 +6,15 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 
-import MapEditor.mainFrame;
+import MapEditor.Model.ConquestMap;
 import MapEditor.Util.MyStringUtil;
-import MapEditor.View.TablePanel;
 
 public class FileChooser{
 	private final String newline = "\n";
 	private ConquestMap map = mainFrame.map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
-	private TablePanel tablePanel = mainFrame.infoPanel;
+	//private TablePanel tablePanel = mainFrame.infoPanel;
 	
 	public FileChooser(String operation) {
 		fc = new JFileChooser();

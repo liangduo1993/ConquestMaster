@@ -1,4 +1,4 @@
-package MapEditor;
+package MapEditor.Core;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -9,8 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import MapEditor.Core.ConquestMap;
-import MapEditor.Core.FileChooser;
+import MapEditor.Model.ConquestMap;
 import MapEditor.View.LogPanel;
 import MapEditor.View.NewMapFrame;
 import MapEditor.View.TablePanel;

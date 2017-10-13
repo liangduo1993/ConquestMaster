@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class LogPanel extends JPanel {
-	private static final String newline = "\n";
+	private static final long serialVersionUID = 1L;
 	public JTextArea log = new JTextArea();
 
 	public LogPanel() {

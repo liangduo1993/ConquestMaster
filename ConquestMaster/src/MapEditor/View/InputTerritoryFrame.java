@@ -16,27 +16,27 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import MapEditor.mainFrame;
-import MapEditor.Core.ConquestMap;
-import MapEditor.Domain.Continent;
-import MapEditor.Domain.Territory;
+import MapEditor.Core.mainFrame;
+import MapEditor.Model.ConquestMap;
+import MapEditor.Model.Continent;
+import MapEditor.Model.Territory;
 import MapEditor.Util.MyStringUtil;
 
 public class InputTerritoryFrame {
-	private TablePanel infoPanel = mainFrame.infoPanel;
+	//private TablePanel infoPanel = mainFrame.infoPanel;
 	private JFrame frmInputTerritory;
 	private JTextField neighbourNames;
 	private JTextArea tName, tCenterX, tCenterY;
 	private JLabel errMsg = new JLabel();
 	// private JList<String> list;
-	private JComboBox comboBox;
+	private JComboBox<Continent> comboBox;
 	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
 	private ConquestMap map = mainFrame.map;
-	private LogPanel log = mainFrame.lp;
+	//private LogPanel log = mainFrame.lp;
 	// public ConquestMap map;
-	private List<Continent> contList;
+	//private List<Continent> contList;
 
 	public InputTerritoryFrame(String unchangedName) {
 		// this.map = new ConquestMap();
@@ -46,7 +46,7 @@ public class InputTerritoryFrame {
 		// } catch (IOException e) {
 		// e.printStackTrace();
 		// }
-		this.contList = map.continents;
+		//this.contList = map.continents;
 		this.unchanged = map.findTerritory(unchangedName);
 		initialize();
 	}
@@ -106,10 +106,10 @@ public class InputTerritoryFrame {
 		// list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		// scrollPane.setViewportView(list);
 
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<>();
 		comboBox.setBounds(193, 329, 128, 24);
 		Continent[] values = map.continents.toArray(new Continent[map.continents.size()]);
-		comboBox.setModel(new DefaultComboBoxModel(values));
+		comboBox.setModel(new DefaultComboBoxModel<>(values));
 		frmInputTerritory.getContentPane().add(comboBox);
 
 		JLabel lblNewLabel_1 = new JLabel(",");

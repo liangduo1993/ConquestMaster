@@ -5,28 +5,26 @@ import java.awt.EventQueue;
 import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import MapEditor.mainFrame;
-import MapEditor.Core.ConquestMap;
-import MapEditor.Domain.Continent;
-import MapEditor.Domain.Territory;
+import MapEditor.Core.mainFrame;
+import MapEditor.Model.ConquestMap;
+import MapEditor.Model.Continent;
 import MapEditor.Util.MyStringUtil;
 
 public class InputContinentFrame {
-	private TablePanel infoPanel = mainFrame.infoPanel;
+	//private TablePanel infoPanel = mainFrame.infoPanel;
 	private JFrame frmInputcontinent;
 	private JTextField tName, tBonus;
 	private JButton confirmBtn, cancelBtn;
 	private JLabel errMsg = new JLabel();
 
 	private ConquestMap map = mainFrame.map;
-	private LogPanel log = mainFrame.lp;
+	//private LogPanel log = mainFrame.lp;
 	// public ConquestMap map;
 	private Continent unchanged;
 	private Continent changed;

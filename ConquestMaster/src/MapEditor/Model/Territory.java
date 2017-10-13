@@ -1,4 +1,4 @@
-package MapEditor.Domain;
+package MapEditor.Model;
 
 import java.awt.Color;
 import java.awt.Point;

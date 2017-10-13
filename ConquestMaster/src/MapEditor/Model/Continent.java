@@ -1,4 +1,4 @@
-package MapEditor.Domain;
+package MapEditor.Model;
 
 public class Continent {
 	String name;

@@ -1,4 +1,4 @@
-package MapEditor.Core;
+package MapEditor.Model;
 
 import java.io.EOFException;
 import java.io.File;
@@ -12,15 +12,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Observable;
-import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import javax.swing.JTextArea;
 
-import MapEditor.mainFrame;
-import MapEditor.Domain.Continent;
-import MapEditor.Domain.Territory;
+import MapEditor.Core.mainFrame;
 import MapEditor.Util.MyStringUtil;
 import MapEditor.Util.StringUtil;
 
@@ -29,10 +26,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		HORIZONTAL, VERTICAL, NONE;
 	}
 
-	private final String newline = "\n";
-	private static Random rnd = new Random();
-	static final String NEWCONTINENTSTRING = "<new continent>";
-	static final String UNTITLEDMAPNAME = "Untitled Map";
+	private final String NEWLINE = "\n";
+	// private static Random rnd = new Random();
+	// static final String NEWCONTINENTSTRING = "<new continent>";
+	// static final String UNTITLEDMAPNAME = "Untitled Map";
 	// private static Logger logger =
 	// Logger.getLogger(ConquestMapMaker.class.getPackage().getName());
 	private String mapFilePath;
@@ -45,29 +42,29 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public ArrayList<Territory> territories = new ArrayList<>();
 	// public String lastContinentUsed = null;
 	// public ExtendedProperties props;
-	public boolean dirty = false;
+	// public boolean dirty = false;
 	// public ConquestMapMaker cmm;
 	// private JTextArea log = mainFrame.lp.log;
 	private JTextArea log = mainFrame.lp.log;
 
 	public ConquestMap() {
-//		this.continents = new ArrayList();
-//		this.territories = new ArrayList();
+		// this.continents = new ArrayList();
+		// this.territories = new ArrayList();
 		clear();
 		// this.cmm = cmm;
 		// this.props = props;
 	}
 
-	public void changeState(){
+	public void changeState() {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public boolean addContinent(Continent cont) {
 		if (findContinent(cont.getName()) == null) {
 			this.continents.add(cont);
 			// this.lastContinentUsed = cont.getName();
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 			return true;
 		}
@@ -90,12 +87,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 			changeState();
 
-			//this.dirty = true;
+			// this.dirty = true;
 		}
 	}
 
-	
-	
 	// public boolean allTerritiriesReachable() {
 	// if ((this.territories == null) || (this.territories.isEmpty())) {
 	// return true;
@@ -153,7 +148,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		this.warn = true;
 		this.continents.clear();
 		this.territories.clear();
-	//	this.dirty = false;
+		// this.dirty = false;
 		changeState();
 
 	}
@@ -210,7 +205,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 				// deleteTerritory(ter);
 				ter.setContinent(null);
 			}
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -237,7 +232,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		changeState();
 
-		//this.dirty = true;
+		// this.dirty = true;
 	}
 
 	// Territory findClosestTerritory(int x, int y, int max) {
@@ -383,7 +378,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 				for (Territory ter2 : ter.getLinks()) {
 					if (ter2.getLinks().size() == 0 || !ter2.getLinks().contains(ter)) {
 						log.append(ter2.getName() + " has no link with " + ter.getName()
-								+ ", please check your map file!" + newline);
+								+ ", please check your map file!" + NEWLINE);
 						System.out.println(ter.getName() + " has no link with " + ter2.getName());
 						return true;
 					}
@@ -421,7 +416,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		loadMapSection(in);
 		loadContinents(in);
 		loadTerritories(in);
-		//this.dirty = false;
+		// this.dirty = false;
 		changeState();
 
 		if (!validityCheck()) {
@@ -697,7 +692,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			if (out.checkError()) {
 				throw new IOException("An error occurred while attempting to save the map file");
 			}
-			this.dirty = false;
+			// this.dirty = false;
 			// this.props.put("LastMap", path);
 			// this.props.put("LastPath", new File(path).getParent());
 		}
@@ -714,7 +709,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {
 			this.author = author;
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 		}
 	}
@@ -724,7 +719,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			// this.lastContinentUsed = name;
 			cont.setName(name);
 			// this.cmm.updateContinentData();
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -733,7 +728,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public void setImageFilePath(String imageFilePath) {
 		if (!StringUtil.equal(this.imageFilePath, imageFilePath)) {
 			this.imageFilePath = imageFilePath;
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -746,7 +741,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public final void setScroll(ScrollOptions scroll) {
 		if (this.scroll != scroll) {
 			this.scroll = scroll;
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -795,7 +790,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public final void setWarn(boolean warn) {
 		if (warn != this.warn) {
 			this.warn = warn;
-			//this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -804,7 +799,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	public final void setWrap(boolean wrap) {
 		if (wrap != this.wrap) {
 			this.wrap = wrap;
-		//	this.dirty = true;
+			// this.dirty = true;
 			changeState();
 
 		}
@@ -847,7 +842,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 
 		for (String string : probs) {
-			log.append(string + newline);
+			log.append(string + NEWLINE);
 		}
 
 		return false;

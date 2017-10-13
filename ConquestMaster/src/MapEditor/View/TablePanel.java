@@ -14,10 +14,10 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import MapEditor.mainFrame;
-import MapEditor.Core.ConquestMap;
+import MapEditor.Model.ConquestMap;
 
 public class TablePanel extends JPanel implements Observer{
+	private static final long serialVersionUID = 1L;
 	private ConquestMap map;
 	private JTable terTable, contTable;
 	private JButton terAddBtn, terEditBtn, terDelBtn; // ter
