@@ -10,11 +10,10 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Util.MyStringUtil;
 
 public class FileChooser{
-	private final String newline = "\n";
+	private final String NEWLINE = "\n";
 	private ConquestMap map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
-	//private TablePanel tablePanel = mainFrame.infoPanel;
 	
 	public FileChooser(String operation, ConquestMap map) {
 		this.map = map;
@@ -26,9 +25,6 @@ public class FileChooser{
 		int returnVal = fc.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			switch (operation) {
-//			case "new":
-//				mapNew();
-//				break;
 			case "load":
 				mapOpen();
 				break;
@@ -40,14 +36,11 @@ public class FileChooser{
 			}
 		}else{
 			switch (operation) {
-//			case "new":
-//				jta.append("New Map command cancelled by user." + newline);
-//				break;
 			case "load":
-				jta.append("Open command cancelled by user." + newline);
+				jta.append("Open command cancelled by user." + NEWLINE);
 				break;
 			case "saveas":
-				jta.append("Save command cancelled by user." + newline);
+				jta.append("Save command cancelled by user." + NEWLINE);
 				break;
 			default:
 				break;
@@ -56,33 +49,16 @@ public class FileChooser{
 		jta.setCaretPosition(jta.getDocument().getLength());
 	}
 
-	
-	
-
-//	public void mapNew() {
-//		this.map.clear();
-//		File path = fc.getSelectedFile();
-//		if (MyStringUtil.checkType(path)) {
-//			this.map.setImageFilePath(path.getAbsolutePath());
-//			this.map.setMapFilePath(MyStringUtil.getMapPath(path));
-//			System.out.println(path.getAbsolutePath());
-//			jta.append("New Map is successfully created!" + newline);
-//			tablePanel.updateTable();
-//		}else{
-//			jta.append("Please choose a validate type of image!" + newline);
-//			
-//		}
-//	}
 
 	public void mapOpen() {
 		File path = fc.getSelectedFile();
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
-			jta.append("Map is successfully loaded!" + newline);
+			jta.append("Map is successfully loaded!" + NEWLINE);
 			//tablePanel.updateTable();
 		} catch (IOException e) {
-			jta.append("Loading map failed!" + newline);
+			jta.append("Loading map failed!" + NEWLINE);
 			e.printStackTrace();
 		}
 
@@ -92,13 +68,13 @@ public class FileChooser{
 		if (this.map.getMapFilePath() != null) {
 			try {
 				this.map.save();
-				jta.append("Map is successfully saved!" + newline);
+				jta.append("Map is successfully saved!" + NEWLINE);
 			} catch (Exception e) {
-				jta.append("Save failed!" + newline);
+				jta.append("Save failed!" + NEWLINE);
 				e.printStackTrace();
 			}
 		}else{
-			jta.append("There's no Map loaded!" + newline);
+			jta.append("There's no Map loaded!" + NEWLINE);
 		}
 
 	}
@@ -108,9 +84,9 @@ public class FileChooser{
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.save(MyStringUtil.getMapPath(path));
-			jta.append("Map is successfully saved!" + newline);
+			jta.append("Map is successfully saved!" + NEWLINE);
 		} catch (IOException e) {
-			jta.append("Save as failed!" + newline);
+			jta.append("Save as failed!" + NEWLINE);
 			e.printStackTrace();
 		}
 	}
