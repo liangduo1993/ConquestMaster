@@ -113,7 +113,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	}
 
 	/**
-	 * The override function for Comparator, designed to compare the order of two territory.
+	 * The override function for Comparator, designed to compare the order of
+	 * two territory.
 	 */
 	public int compare(Object o1, Object o2) {
 		if ((o1 == null) && (o2 == null)) {
@@ -138,8 +139,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Convert the string to ScrollOptions enum.
-	 * @param option The input string.
-	 * @param defaultValue If the string is not valid, return the default enum.
+	 * 
+	 * @param option
+	 *            The input string.
+	 * @param defaultValue
+	 *            If the string is not valid, return the default enum.
 	 * @return The output ScrollOptions enum.
 	 */
 	private ScrollOptions convertScrollOptionsString(String option, ScrollOptions defaultValue) {
@@ -152,7 +156,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Count the number of current territories in target continent.
-	 * @param cont The target continent.
+	 * 
+	 * @param cont
+	 *            The target continent.
 	 * @return The number of current territories.
 	 */
 	public int countTerritories(Continent cont) {
@@ -166,8 +172,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	}
 
 	/**
-	 * Delete the input continent, and remove the link between continent and its territories,set null continent to these territories.
-	 * @param cont The target continent needed to remove.
+	 * Delete the input continent, and remove the link between continent and its
+	 * territories,set null continent to these territories.
+	 * 
+	 * @param cont
+	 *            The target continent needed to remove.
 	 */
 	public void deleteContinent(Continent cont) {
 		if (this.continents.contains(cont)) {
@@ -187,8 +196,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	}
 
 	/**
-	 * Delete the target territory, also remove all links in its neighbours. 
-	 * @param ter The target territory needed to be removed.
+	 * Delete the target territory, also remove all links in its neighbours.
+	 * 
+	 * @param ter
+	 *            The target territory needed to be removed.
 	 */
 	public void deleteTerritory(Territory ter) {
 		if (this.territories.contains(ter)) {
@@ -211,8 +222,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Input a name of the continent, if valid, return the continent.
-	 * @param name The input name.
-	 * @return If name is valid, return the continent. If not valid, return null.
+	 * 
+	 * @param name
+	 *            The input name.
+	 * @return If name is valid, return the continent. If not valid, return
+	 *         null.
 	 */
 	public Continent findContinent(String name) {
 		for (Continent cont : this.continents) {
@@ -225,7 +239,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Return the index of continent in local variables.
-	 * @param name The target name of continent wanted to find out.
+	 * 
+	 * @param name
+	 *            The target name of continent wanted to find out.
 	 * @return If name is valid, return the index. If not, return -1.
 	 */
 	public int findContinentIndex(String name) {
@@ -240,9 +256,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Makes the pointer of LineNumberReader points to the target section.
-	 * @param in The input LineNumberReader.
-	 * @param section The section among "Map", "Continent" and "Territory".
-	 * @throws IOException 
+	 * 
+	 * @param in
+	 *            The input LineNumberReader.
+	 * @param section
+	 *            The section among "Map", "Continent" and "Territory".
+	 * @throws IOException
 	 */
 	public void findSection(LineNumberReader in, String section) throws IOException {
 		String head = "[" + section + "]";
@@ -257,8 +276,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Input a name of the territory, if valid, return the territory.
-	 * @param name The input name.
-	 * @return If name is valid, return the territory. If not valid, return null.
+	 * 
+	 * @param name
+	 *            The input name.
+	 * @return If name is valid, return the territory. If not valid, return
+	 *         null.
 	 */
 	public Territory findTerritory(String name) {
 		for (Territory ter : this.territories) {
@@ -268,9 +290,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return null;
 	}
+
 	/**
 	 * Return the index of territory in local variables.
-	 * @param name The target name of territory wanted to find out.
+	 * 
+	 * @param name
+	 *            The target name of territory wanted to find out.
 	 * @return If name is valid, return the index. If not, return -1.
 	 */
 	public int findTerritoryIndex(String name) {
@@ -285,6 +310,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Return the current Author.
+	 * 
 	 * @return The current Author.
 	 */
 	public final String getAuthor() {
@@ -293,7 +319,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Return a unrepeated territory set of target continent.
-	 * @param cont The target continent.
+	 * 
+	 * @param cont
+	 *            The target continent.
 	 * @return Set of territories in target continent.
 	 */
 	public HashSet<Territory> getContinentTerritories(Continent cont) {
@@ -308,6 +336,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Return the current ImageFileName.
+	 * 
 	 * @return The current ImageFileName.
 	 */
 	public String getImageFileName() {
@@ -316,8 +345,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return new File(this.imageFilePath).getName();
 	}
+
 	/**
 	 * Return the current ImageFilePath.
+	 * 
 	 * @return The current ImageFilePath.
 	 */
 	public String getImageFilePath() {
@@ -326,6 +357,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Return the current MapDirectory.
+	 * 
 	 * @return The current MapDirectory.
 	 */
 	public File getMapDirectory() {
@@ -334,17 +366,19 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return new File(this.mapFilePath).getParentFile();
 	}
-	
-	
+
 	/**
 	 * Return the current MapFilePath.
+	 * 
 	 * @return The current MapFilePath.
 	 */
 	public String getMapFilePath() {
 		return this.mapFilePath;
 	}
+
 	/**
 	 * Return the current MapName.
+	 * 
 	 * @return The current MapName.
 	 */
 	public String getMapName() {
@@ -353,8 +387,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return new File(this.mapFilePath).getName();
 	}
+
 	/**
 	 * Return the current SaveImageFilePath.
+	 * 
 	 * @return The current SaveImageFilePath.
 	 */
 	public String getSaveImageFilePath() {
@@ -366,8 +402,10 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return getImageFileName();
 	}
+
 	/**
 	 * Return the current ScrollOptions.
+	 * 
 	 * @return The current ScrollOptions.
 	 */
 	public final ScrollOptions getScroll() {
@@ -376,7 +414,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 	/**
 	 * Check whether the current map contains one way link.
-	 * @return Return true if the current map contains one way link, return false if not.
+	 * 
+	 * @return Return true if the current map contains one way link, return
+	 *         false if not.
 	 */
 	public boolean hasOneWayLinks() {
 		for (Territory ter : this.territories) {
@@ -394,10 +434,13 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * check whether a map contains two different format files including .map text file and .bmp image file.
-	 * @return Return true if two different files are matched exactly, other wise return false.
+	 * check whether a map contains two different format files including .map
+	 * text file and .bmp image file.
+	 * 
+	 * @return Return true if two different files are matched exactly, other
+	 *         wise return false.
 	 */
 	public boolean isDisparateImageFileDirectory() {
 		if (this.imageFilePath == null) {
@@ -410,30 +453,35 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		File imgDir = new File(this.imageFilePath).getParentFile();
 		return (mapDir != null) && (imgDir != null) && (mapDir.compareTo(imgDir) != 0);
 	}
-	
+
 	/**
 	 * check whether is Warn or not
+	 * 
 	 * @return Return warn
 	 */
 	public final boolean isWarn() {
 		return this.warn;
 	}
-	
+
 	/**
 	 * check whether is Warp or not
+	 * 
 	 * @return Return warp
 	 */
 
 	public final boolean isWrap() {
 		return this.wrap;
 	}
-	
+
 	/**
-	 * loading the map in absolute path and if a map file does not match the format, throwing the exception and resetting.
-	 * parsing map, reading information of Continents and Territories, finishing map reading and change current state.
+	 * loading the map in absolute path and if a map file does not match the
+	 * format, throwing the exception and resetting. parsing map, reading
+	 * information of Continents and Territories, finishing map reading and
+	 * change current state.
+	 * 
 	 * @param mapFilePath
 	 * @throws IOException
-	 * @see validityCheck(); 
+	 * @see validityCheck();
 	 * @see clear();
 	 * @see changeState
 	 */
@@ -450,10 +498,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			clear();
 		}
 	}
-	
+
 	/**
-	 * parsing map file and search Territories information, if the Territories information matches the format, IO streaming in,
-	 * otherwise printing the error information where it locates, throws exception.
+	 * parsing map file and search Territories information, if the Territories
+	 * information matches the format, IO streaming in, otherwise printing the
+	 * error information where it locates, throws exception.
+	 * 
 	 * @param in
 	 * @throws IOException
 	 */
@@ -488,10 +538,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 
 	}
-	
+
 	/**
-	 * parsing map file and search Continents information, if the Continents information matches the format, IO streaming in,
-	 * otherwise printing the error information where it locates, throws exception.
+	 * parsing map file and search Continents information, if the Continents
+	 * information matches the format, IO streaming in, otherwise printing the
+	 * error information where it locates, throws exception.
+	 * 
 	 * @param in
 	 * @throws IOException
 	 */
@@ -530,10 +582,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 	}
-	
+
 	/**
-	 * building links among all valid Territories, if one Territory matches the format and it does not exist in the Territories
-	 * list, building links among them, otherwise break.  
+	 * building links among all valid Territories, if one Territory matches the
+	 * format and it does not exist in the Territories list, building links
+	 * among them, otherwise break.
+	 * 
 	 * @param in
 	 * @throws IOException
 	 * @see buildTerritoryLinks();
@@ -556,9 +610,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			System.out.println(t);
 		}
 	}
-	
+
 	/**
-	 * method building connections among territories, each territory has a parameters of its linked territories
+	 * method building connections among territories, each territory has a
+	 * parameters of its linked territories
+	 * 
 	 * @param t
 	 */
 	public void buildTerritoryLinks(Territory t) {
@@ -586,14 +642,15 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 	}
-	
+
 	/**
 	 * parsing the neighbour of the territory, spliting with ","
+	 * 
 	 * @param line
 	 * @return return territories list
 	 * @throws IOException
-	 * @see getContinentX();  getContinentY();
-	 * @see getCenterX();     getCenterY();
+	 * @see getContinentX(); getContinentY();
+	 * @see getCenterX(); getCenterY();
 	 */
 	private Territory parseTerritoryLine(String line) throws IOException {
 		try {
@@ -620,14 +677,15 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			throw new IOException("Invalid territory line (" + e + "): " + line);
 		}
 	}
-	
+
 	/**
-	 * updating the continent information, containing original name and new name and bonus which are expected to change,
-	 * And change state of the new continent.
+	 * updating the continent information, containing original name and new name
+	 * and bonus which are expected to change, And change state of the new
+	 * continent.
+	 * 
 	 * @param oldName
 	 * @param newName
 	 * @param newBonus
-	 * @see changeState();
 	 */
 	public void updateContinent(String oldName, String newName, int newBonus) {
 		Continent continent = findContinent(oldName);
@@ -636,8 +694,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		changeState();
 
 	}
+
 	/**
-	 * saving a map, if path is valid and save the file, else throws path does not exist information.
+	 * saving a map, if path is valid and save the file, else throws path does
+	 * not exist information.
+	 * 
 	 * @throws IOException
 	 * @throws Exception
 	 * @see validityCheck();
@@ -653,11 +714,16 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			throw new Exception("Cannot pass the validation!");
 		}
 	}
-	
+
 	/**
-	 * saving information of the new map, parsing new map file, search information of the new map,
-	 * printing information of new map including features of author, continents and territories.
+	 * saving information of the new map, parsing new map file that if
+	 * continents and territories are not null, search information of the new
+	 * map, printing information of new map including features of author,
+	 * continents and territories.
+	 * 
 	 * @param out
+	 * @see sortContinentsCollection();
+	 * @see sortTerritoriesCollection();
 	 */
 	public void save(PrintWriter out) {
 		sortContinentsCollection();
@@ -709,6 +775,13 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * comfirming to save the new map
+	 * 
+	 * @param path
+	 * @throws IOException
+	 * @see validityCheck();
+	 */
 	public void save(String path) throws IOException {
 		if (validityCheck()) {
 			this.mapFilePath = path;
@@ -723,6 +796,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * input the author of the edited map file, change the map information.
+	 * 
+	 * @param author
+	 */
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {
 			this.author = author;
@@ -730,6 +808,13 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * input the Continent name, it can not be null, and change the map
+	 * information
+	 * 
+	 * @param cont
+	 * @param name
+	 */
 	public void setContinentName(Continent cont, String name) {
 		if ((name != null) && (name.length() > 0)) {
 			cont.setName(name);
@@ -738,6 +823,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * save the image file in a path the user wants.
+	 * 
+	 * @param imageFilePath
+	 */
 	public void setImageFilePath(String imageFilePath) {
 		if (!StringUtil.equal(this.imageFilePath, imageFilePath)) {
 			this.imageFilePath = imageFilePath;
@@ -746,10 +836,20 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * save the map file path in a path the user wants
+	 * 
+	 * @param mapFilePath
+	 */
 	public void setMapFilePath(String mapFilePath) {
 		this.mapFilePath = mapFilePath;
 	}
 
+	/**
+	 * confirming if it is scroll.
+	 * 
+	 * @param scroll
+	 */
 	public final void setScroll(ScrollOptions scroll) {
 		if (this.scroll != scroll) {
 			this.scroll = scroll;
@@ -758,6 +858,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * confirming if it is warn.
+	 * 
+	 * @param warn
+	 */
 	public final void setWarn(boolean warn) {
 		if (warn != this.warn) {
 			this.warn = warn;
@@ -766,6 +871,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * confirming if it is warp.
+	 * 
+	 * @param wrap
+	 */
 	public final void setWrap(boolean wrap) {
 		if (wrap != this.wrap) {
 			this.wrap = wrap;
@@ -774,18 +884,33 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * sorting continents if continents list is not null or empty
+	 */
 	void sortContinentsCollection() {
 		if ((this.continents != null) && (!this.continents.isEmpty())) {
 			Collections.sort(this.continents, this);
 		}
 	}
 
+	/**
+	 * sorting the territories list if it is not null or empty
+	 */
 	void sortTerritoriesCollection() {
 		if ((this.territories != null) && (!this.territories.isEmpty())) {
 			Collections.sort(this.territories, this);
 		}
 	}
 
+	/**
+	 * check map parameters, if a territory has links. check if a map file has a
+	 * matched image file. check if a map file and its matched image file are in
+	 * the same path. check the territory link information. check if the
+	 * territory list is not empty and it can not reach to other territories.
+	 * 
+	 * @return false if also the check failed
+	 * @see eachTerReachable();
+	 */
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList<>();
 		if ((this.territories == null) || (this.territories.isEmpty())) {
@@ -817,6 +942,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		return false;
 	}
 
+	/**
+	 * method to check if a territory is board to others in the territories
+	 * list.
+	 * 
+	 * @return true if they are boarded, else return false.
+	 */
 	private boolean eachTerReachable() {
 		clearReach();
 		Territory head = this.territories.get(0);
@@ -837,12 +968,20 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
+	/**
+	 * delete the linked relationships among territories.
+	 */
 	public void clearReach() {
 		for (Territory t : this.territories) {
 			t.hasReached = false;
 		}
 	}
 
+	/**
+	 * searching all the connections relationship among territories.
+	 * 
+	 * @param head
+	 */
 	public void DFS(Territory head) {
 		head.hasReached = true;
 		if (head.getLinks().size() == 0) {
@@ -871,9 +1010,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			t.getLinkNames().add("Ssag");
 			map.addTerritory(t);
 			map.buildTerritoryLinks(t);
-
-			// Territory t = map.findTerritory("Forgoth");
-			// map.deleteTerritory(t);
 			for (Territory tt : map.territories) {
 				System.out.println(tt);
 			}
