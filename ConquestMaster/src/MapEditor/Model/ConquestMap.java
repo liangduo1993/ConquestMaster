@@ -23,7 +23,7 @@ import MapEditor.Util.StringUtil;
 
 /**
  * 
- * The Map model. Handles with the data change, also takes care of load& save
+ * The Map model. Handles with the data change, also takes care of load & save
  * function. In Observer pattern, plays the role of subject.
  *
  */
@@ -76,8 +76,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * Add a qualified territory to the local variables, then build the
 	 * neighbour links.
 	 * 
-	 * @param cont
+	 * @param ter
 	 *            The input territory.
+	 * 
 	 */
 	public void addTerritory(Territory ter) {
 		if (findTerritory(ter.name) == null) {
@@ -479,11 +480,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * information of Continents and Territories, finishing map reading and
 	 * change current state.
 	 * 
-	 * @param mapFilePath
+	 * @param mapFilePath path where map file locates.
 	 * @throws IOException
-	 * @see validityCheck();
-	 * @see clear();
-	 * @see changeState
+	 * @see validityCheck()
+	 * @see clear()
+	 * @see changeState()
 	 */
 	public void load(String mapFilePath) throws IOException {
 		clear();
@@ -701,7 +702,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * 
 	 * @throws IOException
 	 * @throws Exception
-	 * @see validityCheck();
+	 * @see validityCheck()
 	 */
 	public void save() throws IOException, Exception {
 		if (validityCheck()) {
@@ -722,8 +723,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * continents and territories.
 	 * 
 	 * @param out
-	 * @see sortContinentsCollection();
-	 * @see sortTerritoriesCollection();
+	 * @see sortContinentsCollection()
+	 * @see sortTerritoriesCollection()
 	 */
 	public void save(PrintWriter out) {
 		sortContinentsCollection();
@@ -780,7 +781,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * 
 	 * @param path
 	 * @throws IOException
-	 * @see validityCheck();
+	 * @see validityCheck()
 	 */
 	public void save(String path) throws IOException {
 		if (validityCheck()) {
@@ -909,7 +910,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * territory list is not empty and it can not reach to other territories.
 	 * 
 	 * @return false if also the check failed
-	 * @see eachTerReachable();
+	 * @see eachTerReachable()
 	 */
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList<>();
