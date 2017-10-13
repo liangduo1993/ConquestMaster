@@ -167,7 +167,7 @@ public class NewMapFrame {
 		map.setScroll((ConquestMap.ScrollOptions) comboBox.getSelectedItem());
 		map.setWarn(warnCheckBox.isSelected());
 		map.setWrap(wrapCheckBox.isSelected());
-		tablePanel.updateTable();
+		//tablePanel.updateTable();
 	}
 
 	/**

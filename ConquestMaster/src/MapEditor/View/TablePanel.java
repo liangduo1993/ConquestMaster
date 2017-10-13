@@ -3,6 +3,8 @@ package MapEditor.View;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import MapEditor.mainFrame;
 import MapEditor.Core.ConquestMap;
 
-public class TablePanel extends JPanel {
-	private ConquestMap map = mainFrame.map;
+public class TablePanel extends JPanel implements Observer{
+	private ConquestMap map;
 	private JTable terTable, contTable;
 	private JButton terAddBtn, terEditBtn, terDelBtn; // ter
 	private JButton contAddBtn, contEditBtn, contDelBtn;// cont
@@ -26,11 +28,12 @@ public class TablePanel extends JPanel {
 	/**
 	 * Create the application.
 	 */
-	public TablePanel() {
+	public TablePanel(ConquestMap map) {
+		this.map = map;
 		initialize();
 	}
 
-	public void updateTable() {
+	public void update(Observable o, Object args) {
 		if (map.territories.size() > 0) {
 			terNames = new String[map.territories.size()][1];
 			for (int i = 0; i < map.territories.size(); i++) {
@@ -128,7 +131,7 @@ public class TablePanel extends JPanel {
 		terAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputTerritoryFrame("");
-				updateTable();
+				//updateTable();
 			}
 		});
 		terAddBtn.setBounds(46, 590, 93, 23);
@@ -139,7 +142,7 @@ public class TablePanel extends JPanel {
 		terEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputTerritoryFrame((String) terNames[terTable.getSelectedRow()][0]);
-				updateTable();
+				//updateTable();
 			}
 		});
 		terEditBtn.setBounds(46, 620, 93, 23);
@@ -150,7 +153,7 @@ public class TablePanel extends JPanel {
 		terDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				map.deleteTerritory(map.findTerritory((String) terNames[terTable.getSelectedRow()][0]));
-				updateTable();
+				//updateTable();
 			}
 		});
 		terDelBtn.setBounds(46, 650, 93, 23);
@@ -162,7 +165,7 @@ public class TablePanel extends JPanel {
 		contAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputContinentFrame("");
-				updateTable();
+				//updateTable();
 			}
 		});
 		add(contAddBtn);
@@ -173,7 +176,7 @@ public class TablePanel extends JPanel {
 		contEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputContinentFrame((String) contNames[contTable.getSelectedRow()][0]);
-				updateTable();
+				//updateTable();
 			}
 		});
 		add(contEditBtn);
@@ -184,7 +187,7 @@ public class TablePanel extends JPanel {
 		contDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				map.deleteContinent(map.findContinent((String) contNames[contTable.getSelectedRow()][0]));
-				updateTable();
+				//updateTable();
 			}
 		});
 		add(contDelBtn);
@@ -198,7 +201,7 @@ public class TablePanel extends JPanel {
 			public void run() {
 				try {
 					JFrame jFrame = new JFrame();
-					TablePanel panel = new TablePanel();
+					TablePanel panel = new TablePanel(new ConquestMap());
 					jFrame.getContentPane().add(panel);
 					jFrame.setBounds(0, 0, 1000, 1000);
 					jFrame.setVisible(true);

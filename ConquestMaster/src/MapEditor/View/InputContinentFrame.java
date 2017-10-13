@@ -107,7 +107,7 @@ public class InputContinentFrame {
 					// } catch (IOException e1) {
 					// e1.printStackTrace();
 					// }
-					infoPanel.updateTable();
+					//infoPanel.updateTable();
 					frmInputcontinent.setVisible(false);
 				}
 			}

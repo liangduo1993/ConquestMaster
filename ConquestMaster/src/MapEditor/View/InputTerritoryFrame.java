@@ -172,7 +172,7 @@ public class InputTerritoryFrame {
 					// System.out.println(tCenterY.getText().trim());
 					// // System.out.println(list.getSelectedValue());
 					// System.out.println(neighbourNames.getText().trim());
-					infoPanel.updateTable();
+					//infoPanel.updateTable();
 					frmInputTerritory.setVisible(false);
 				}
 			}

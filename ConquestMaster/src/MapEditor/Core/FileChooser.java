@@ -80,7 +80,7 @@ public class FileChooser{
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
 			jta.append("Map is successfully loaded!" + newline);
-			tablePanel.updateTable();
+			//tablePanel.updateTable();
 		} catch (IOException e) {
 			jta.append("Loading map failed!" + newline);
 			e.printStackTrace();
