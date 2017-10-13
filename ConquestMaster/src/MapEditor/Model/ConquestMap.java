@@ -410,15 +410,33 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		File imgDir = new File(this.imageFilePath).getParentFile();
 		return (mapDir != null) && (imgDir != null) && (mapDir.compareTo(imgDir) != 0);
 	}
-
+	
+	/**
+	 * check whether is Warn or not
+	 * @return Return warn
+	 */
 	public final boolean isWarn() {
 		return this.warn;
 	}
+	
+	/**
+	 * check whether is Warp or not
+	 * @return Return warp
+	 */
 
 	public final boolean isWrap() {
 		return this.wrap;
 	}
-
+	
+	/**
+	 * loading the map in absolute path and if a map file does not match the format, throwing the exception and resetting.
+	 * parsing map, reading information of Continents and Territories, finishing map reading and change current state.
+	 * @param mapFilePath
+	 * @throws IOException
+	 * @see validityCheck(); 
+	 * @see clear();
+	 * @see changeState
+	 */
 	public void load(String mapFilePath) throws IOException {
 		clear();
 		this.mapFilePath = mapFilePath;
@@ -432,7 +450,13 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			clear();
 		}
 	}
-
+	
+	/**
+	 * parsing map file and search Continents information, if the Continents information matches the format, IO streaming in,
+	 * otherwise printing the error information where it locates.
+	 * @param in
+	 * @throws IOException
+	 */
 	private void loadContinents(LineNumberReader in) throws IOException {
 		this.continents.clear();
 		for (;;) {
