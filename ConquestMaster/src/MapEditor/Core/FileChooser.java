@@ -9,16 +9,29 @@ import javax.swing.JTextArea;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Util.MyStringUtil;
 
-public class FileChooser{
+/**
+ * 
+ * This class is to realize the function of new/save/save as functions for map.
+ *
+ */
+public class FileChooser {
 	private final String NEWLINE = "\n";
 	private ConquestMap map;
 	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
-	
+
+	/**
+	 * The constructor of the class, to do some initial work.
+	 * 
+	 * @param operation
+	 *            The operation inputed, like "save" or "saveas".
+	 * @param map
+	 *            The current reading map in memory.
+	 */
 	public FileChooser(String operation, ConquestMap map) {
 		this.map = map;
 		fc = new JFileChooser();
-		if(operation.equals("save")){
+		if (operation.equals("save")) {
 			mapSave();
 			return;
 		}
@@ -34,7 +47,7 @@ public class FileChooser{
 			default:
 				break;
 			}
-		}else{
+		} else {
 			switch (operation) {
 			case "load":
 				jta.append("Open command cancelled by user." + NEWLINE);
@@ -49,14 +62,16 @@ public class FileChooser{
 		jta.setCaretPosition(jta.getDocument().getLength());
 	}
 
-
+	/**
+	 * Open function.
+	 */
 	public void mapOpen() {
 		File path = fc.getSelectedFile();
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
 			jta.append("Map is successfully loaded!" + NEWLINE);
-			//tablePanel.updateTable();
+			// tablePanel.updateTable();
 		} catch (IOException e) {
 			jta.append("Loading map failed!" + NEWLINE);
 			e.printStackTrace();
@@ -64,6 +79,9 @@ public class FileChooser{
 
 	}
 
+	/**
+	 * Save function.
+	 */
 	public void mapSave() {
 		if (this.map.getMapFilePath() != null) {
 			try {
@@ -73,12 +91,15 @@ public class FileChooser{
 				jta.append("Save failed!" + NEWLINE);
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			jta.append("There's no Map loaded!" + NEWLINE);
 		}
 
 	}
 
+	/**
+	 * Save as function.
+	 */
 	public void mapSaveAs() {
 		File path = fc.getSelectedFile();
 		System.out.println(MyStringUtil.getMapPath(path));
@@ -90,7 +111,5 @@ public class FileChooser{
 			e.printStackTrace();
 		}
 	}
-
-
 
 }

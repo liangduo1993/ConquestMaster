@@ -14,6 +14,11 @@ import MapEditor.View.LogPanel;
 import MapEditor.View.NewMapFrame;
 import MapEditor.View.TablePanel;
 
+/**
+ * 
+ * The main entrance of the module, also designed as a controller.
+ *
+ */
 public class mainFrame {
 
 	private JFrame frame;
