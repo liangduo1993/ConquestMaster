@@ -452,8 +452,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	}
 	
 	/**
-	 * parsing map file and search Continents information, if the Continents information matches the format, IO streaming in,
-	 * otherwise printing the error information where it locates.
+	 * parsing map file and search Territories information, if the Territories information matches the format, IO streaming in,
+	 * otherwise printing the error information where it locates, throws exception.
 	 * @param in
 	 * @throws IOException
 	 */
@@ -488,7 +488,13 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 
 	}
-
+	
+	/**
+	 * parsing map file and search Continents information, if the Continents information matches the format, IO streaming in,
+	 * otherwise printing the error information where it locates, throws exception.
+	 * @param in
+	 * @throws IOException
+	 */
 	private void loadMapSection(LineNumberReader in) throws IOException {
 		findSection(in, "Map");
 		for (;;) {
@@ -524,7 +530,14 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 	}
-
+	
+	/**
+	 * building links among all valid Territories, if one Territory matches the format and it does not exist in the Territories
+	 * list, building links among them, otherwise break.  
+	 * @param in
+	 * @throws IOException
+	 * @see buildTerritoryLinks();
+	 */
 	private void loadTerritories(LineNumberReader in) throws IOException {
 		this.territories.clear();
 		Territory ter;
@@ -543,7 +556,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			System.out.println(t);
 		}
 	}
-
+	
+	/**
+	 * method building connections among territories, each territory has a parameters of its linked territories
+	 * @param t
+	 */
 	public void buildTerritoryLinks(Territory t) {
 		if (findTerritory(t.getName()) != null) {
 			Set<String> set = new HashSet<>();
@@ -569,7 +586,15 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 	}
-
+	
+	/**
+	 * parsing the neighbour of the territory, spliting with ","
+	 * @param line
+	 * @return return territories list
+	 * @throws IOException
+	 * @see getContinentX();  getContinentY();
+	 * @see getCenterX();     getCenterY();
+	 */
 	private Territory parseTerritoryLine(String line) throws IOException {
 		try {
 			StringTokenizer st = new StringTokenizer(line, ",");
@@ -595,7 +620,15 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			throw new IOException("Invalid territory line (" + e + "): " + line);
 		}
 	}
-
+	
+	/**
+	 * updating the continent information, containing original name and new name and bonus which are expected to change,
+	 * And change state of the new continent.
+	 * @param oldName
+	 * @param newName
+	 * @param newBonus
+	 * @see changeState();
+	 */
 	public void updateContinent(String oldName, String newName, int newBonus) {
 		Continent continent = findContinent(oldName);
 		continent.setName(newName);
@@ -603,7 +636,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		changeState();
 
 	}
-
+	/**
+	 * saving a map, if path is valid and save the file, else throws path does not exist information.
+	 * @throws IOException
+	 * @throws Exception
+	 * @see validityCheck();
+	 */
 	public void save() throws IOException, Exception {
 		if (validityCheck()) {
 			if (this.mapFilePath != null) {
@@ -615,7 +653,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			throw new Exception("Cannot pass the validation!");
 		}
 	}
-
+	
+	/**
+	 * saving information of the new map, parsing new map file, search information of the new map,
+	 * printing information of new map including features of author, continents and territories.
+	 * @param out
+	 */
 	public void save(PrintWriter out) {
 		sortContinentsCollection();
 		sortTerritoriesCollection();
