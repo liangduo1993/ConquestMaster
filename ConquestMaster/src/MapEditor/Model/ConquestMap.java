@@ -394,7 +394,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * check whether a map contains two different format files including .map text file and .bmp image file.
+	 * @return Return true if two different files are matched exactly, other wise return false.
+	 */
 	public boolean isDisparateImageFileDirectory() {
 		if (this.imageFilePath == null) {
 			return false;
