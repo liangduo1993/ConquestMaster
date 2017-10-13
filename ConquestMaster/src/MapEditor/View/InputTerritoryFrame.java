@@ -16,37 +16,23 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import MapEditor.Core.mainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;
 import MapEditor.Util.MyStringUtil;
 
 public class InputTerritoryFrame {
-	//private TablePanel infoPanel = mainFrame.infoPanel;
 	private JFrame frmInputTerritory;
 	private JTextField neighbourNames;
 	private JTextArea tName, tCenterX, tCenterY;
 	private JLabel errMsg = new JLabel();
-	// private JList<String> list;
 	private JComboBox<Continent> comboBox;
 	private JButton confirmBtn, cancelBtn;
 	private Territory unchanged;
 	private Territory changed;
 	private ConquestMap map;
-	//private LogPanel log = mainFrame.lp;
-	// public ConquestMap map;
-	//private List<Continent> contList;
 
 	public InputTerritoryFrame(String unchangedName, ConquestMap map) {
-		// this.map = new ConquestMap();
-		// try {
-		// map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-		// System.out.println("=============================");
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//this.contList = map.continents;
 		this.map = map;
 		this.unchanged = map.findTerritory(unchangedName);
 		initialize();
@@ -56,7 +42,6 @@ public class InputTerritoryFrame {
 		frmInputTerritory = new JFrame();
 		frmInputTerritory.setTitle("Input Territory");
 		frmInputTerritory.setBounds(100, 100, 528, 656);
-		// frmInputTerritory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInputTerritory.getContentPane().setLayout(null);
 
 		errMsg.setBounds(60, 65, 400, 15);
@@ -84,32 +69,9 @@ public class InputTerritoryFrame {
 		lblNewLabel.setBounds(53, 330, 61, 15);
 		frmInputTerritory.getContentPane().add(lblNewLabel);
 
-		// JScrollPane scrollPane = new JScrollPane();
-		// scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		// scrollPane.setBounds(193, 329, 128, 24);
-		// frmInputTerritory.getContentPane().add(scrollPane);
-
-		// list = new JList<>();
-		// list.setModel(new AbstractListModel<String>() {
-		// private static final long serialVersionUID = 1L;
-		// // String[] values = new String[] { "", "2", "3", "4", "5", "6",
-		// // "7", "8" };
-		// Object[] values = contList.toArray();
-		//
-		// public int getSize() {
-		// return values.length;
-		// }
-		//
-		// public String getElementAt(int index) {
-		// return ((Continent) values[index]).getName();
-		// }
-		// });
-		// list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		// scrollPane.setViewportView(list);
 
 		comboBox = new JComboBox<>();
 		comboBox.setBounds(193, 329, 128, 24);
-		//Continent[] values = map.continents.toArray(new Continent[map.continents.size() + 1]);
 		Continent[] values = new Continent[map.continents.size() + 1];
 		values[0] = null;
 		for(int index = 1; index < values.length; index++){
@@ -164,22 +126,6 @@ public class InputTerritoryFrame {
 					map.deleteTerritory(unchanged);
 					map.addTerritory(changed);
 					map.buildTerritoryLinks(changed);
-				//	unchanged = changed;
-//					for (Territory t : map.territories) {
-//						System.out.println(t);
-//					}
-
-					// try {
-					// map.save();
-					// } catch (IOException e1) {
-					// e1.printStackTrace();
-					// }
-					// System.out.println(name);
-					// System.out.println(tCenterX.getText().trim());
-					// System.out.println(tCenterY.getText().trim());
-					// // System.out.println(list.getSelectedValue());
-					// System.out.println(neighbourNames.getText().trim());
-					//infoPanel.updateTable();
 					frmInputTerritory.setVisible(false);
 				}
 			}
@@ -203,12 +149,6 @@ public class InputTerritoryFrame {
 			tCenterY.setText(String.valueOf(unchanged.getCenterY()));
 			comboBox.setSelectedItem(unchanged.getContinent());
 			if (unchanged.getLinkNames().size() > 0) {
-				// StringBuilder sb = new StringBuilder(40);
-				// for (String linkName : unchanged.getLinkNames()) {
-				// sb.append(linkName).append(",");
-				// }
-				// sb.delete(sb.length() - 1, sb.length());
-				// neighbourNames.setText(sb.toString());
 				neighbourNames.setText(MyStringUtil.joinString(
 						unchanged.getLinkNames().toArray(new String[unchanged.getLinkNames().size()]), ","));
 			}
@@ -251,10 +191,6 @@ public class InputTerritoryFrame {
 			errMsg.setText("Please enter the number in (X, Y) location!");
 			return false;
 		}
-		// if (list.isSelectionEmpty()) {
-		// errMsg.setText("Please select a continent!");
-		// return false;
-		// }
 		if (neighbourNames.getText().contains(tName.getText())) {
 			errMsg.setText("Cannot have a connection with itself!");
 			return false;

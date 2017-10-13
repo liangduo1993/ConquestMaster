@@ -19,7 +19,6 @@ public class mainFrame {
 	private JFrame frame;
 	private JMenuBar menuBar;
 	public ConquestMap map;
-	//public static MapDisplay mapDisplay;
 	public FileChooser fcp;
 	public static LogPanel lp;
 	public TablePanel infoPanel;
@@ -54,7 +53,6 @@ public class mainFrame {
 		mnFile.add(mntmNew);
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//fcp = new FileChooser("new");
 				new NewMapFrame(map);
 			}
 		});

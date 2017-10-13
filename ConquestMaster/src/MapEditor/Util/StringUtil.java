@@ -80,23 +80,10 @@ public class StringUtil
     return def;
   }
   
-//  public static ArrayList<String> parseDelimitedEncodedString(String des, String delimiter, boolean encoded)
-//  {
-//    ArrayList<String> al = new ArrayList();
-//    StringTokenizer st = new StringTokenizer(des, delimiter);
-//    while (st.hasMoreTokens()) {
-//      if (encoded) {
-//        al.add(new String(Base64Util.base64ToByteArray(st.nextToken())));
-//      } else {
-//        al.add(st.nextToken());
-//      }
-//    }
-//    return al;
-//  }
   
   public static ArrayList<Object> parseDelimitedString(String str, String regEx, boolean includeEmpty, boolean trim)
   {
-    ArrayList<Object> list = new ArrayList();
+    ArrayList<Object> list = new ArrayList<>();
     if (str != null)
     {
       String[] sa = str.split(regEx);

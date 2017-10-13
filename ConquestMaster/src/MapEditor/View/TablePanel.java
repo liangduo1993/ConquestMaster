@@ -83,11 +83,6 @@ public class TablePanel extends JPanel implements Observer{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		JScrollPane scrollPane = new JScrollPane();
-		// frame = new JFrame();
-
-		// JPanel panel = new JPanel();
-		// frame.getContentPane().add(panel, BorderLayout.CENTER);
 		setLayout(null);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -131,7 +126,6 @@ public class TablePanel extends JPanel implements Observer{
 		terAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputTerritoryFrame("", map);
-				//updateTable();
 			}
 		});
 		terAddBtn.setBounds(46, 590, 93, 23);
@@ -142,7 +136,6 @@ public class TablePanel extends JPanel implements Observer{
 		terEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputTerritoryFrame((String) terNames[terTable.getSelectedRow()][0], map);
-				//updateTable();
 			}
 		});
 		terEditBtn.setBounds(46, 620, 93, 23);
@@ -153,7 +146,6 @@ public class TablePanel extends JPanel implements Observer{
 		terDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				map.deleteTerritory(map.findTerritory((String) terNames[terTable.getSelectedRow()][0]));
-				//updateTable();
 			}
 		});
 		terDelBtn.setBounds(46, 650, 93, 23);
@@ -165,7 +157,6 @@ public class TablePanel extends JPanel implements Observer{
 		contAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputContinentFrame("", map);
-				//updateTable();
 			}
 		});
 		add(contAddBtn);
@@ -176,7 +167,6 @@ public class TablePanel extends JPanel implements Observer{
 		contEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InputContinentFrame((String) contNames[contTable.getSelectedRow()][0], map);
-				//updateTable();
 			}
 		});
 		add(contEditBtn);
@@ -187,7 +177,6 @@ public class TablePanel extends JPanel implements Observer{
 		contDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				map.deleteContinent(map.findContinent((String) contNames[contTable.getSelectedRow()][0]));
-				//updateTable();
 			}
 		});
 		add(contDelBtn);

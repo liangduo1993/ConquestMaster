@@ -26,14 +26,11 @@ public class NewMapFrame {
 	private ConquestMap map;
 	private JFrame frame;
 	private JTextField tAuthor;
-	// private JCheckBox wrapCheckBox, warnCheckBox;
 	private JButton imgBtn, confirmBtn, cancelBtn;
 	private JFileChooser fc;
 	private JTextArea jta = mainFrame.lp.log;
-	// private TablePanel tablePanel = mainFrame.infoPanel;
 	private JLabel errMsg = new JLabel();
 	private JLabel pathMsg = new JLabel();
-	// private JComboBox comboBox;
 
 	/**
 	 * Create the application.
@@ -53,22 +50,11 @@ public class NewMapFrame {
 		frame.setBounds(400, 100, 450, 370 - 150);
 		frame.setResizable(false);
 		frame.setTitle("New Map");
-		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		tAuthor = new JTextField();
 		tAuthor.setBounds(140, 35, 100, 21);
 		tAuthor.setColumns(10);
 
-		// wrapCheckBox = new JCheckBox("");
-		// wrapCheckBox.setBounds(140, 82, 21, 21);
-		//
-		// warnCheckBox = new JCheckBox("");
-		// warnCheckBox.setBounds(140, 121, 21, 21);
-		//
-		// comboBox = new JComboBox();
-		// comboBox.setBounds(140, 175, 110, 21);
-		// ScrollOptions[] values = ScrollOptions.values();
-		// comboBox.setModel(new DefaultComboBoxModel(values));
 
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
@@ -121,32 +107,19 @@ public class NewMapFrame {
 			}
 		});
 
-		// JLabel lblNewLabel_4 = new JLabel("Scroll:");
-		// lblNewLabel_4.setBounds(40, 178, 42, 15);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(lblNewLabel_1);
-		// frame.getContentPane().add(lblNewLabel_4);
-		// frame.getContentPane().add(warnCheckBox);
-		// frame.getContentPane().add(wrapCheckBox);
 		frame.getContentPane().add(tAuthor);
 		frame.getContentPane().add(pathMsg);
 		frame.getContentPane().add(errMsg);
 		frame.getContentPane().add(imgBtn);
 		frame.getContentPane().add(confirmBtn);
 		frame.getContentPane().add(cancelBtn);
-		// frame.getContentPane().add(comboBox);
 
 		JLabel lblNewLabel = new JLabel("Author:");
 		lblNewLabel.setBounds(40, 40, 54, 15);
 		frame.getContentPane().add(lblNewLabel);
 
-		// JLabel lblNewLabel_2 = new JLabel("Warp:");
-		// lblNewLabel_2.setBounds(40, 86, 54, 15);
-		// frame.getContentPane().add(lblNewLabel_2);
-		//
-		// JLabel lblNewLabel_3 = new JLabel("Warn:");
-		// lblNewLabel_3.setBounds(40, 126, 54, 15);
-		// frame.getContentPane().add(lblNewLabel_3);
 
 		frame.setVisible(true);
 	}
@@ -165,14 +138,9 @@ public class NewMapFrame {
 
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
-		// map.setScroll((ConquestMap.ScrollOptions)
-		// comboBox.getSelectedItem());
-		// map.setWarn(warnCheckBox.isSelected());
-		// map.setWrap(wrapCheckBox.isSelected());
 		map.setScroll(ConquestMap.ScrollOptions.HORIZONTAL);
 		map.setWarn(true);
 		map.setWrap(false);
-		// tablePanel.updateTable();
 	}
 
 	/**

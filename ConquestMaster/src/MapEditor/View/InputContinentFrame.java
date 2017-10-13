@@ -11,21 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import MapEditor.Core.mainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Util.MyStringUtil;
 
 public class InputContinentFrame {
-	//private TablePanel infoPanel = mainFrame.infoPanel;
 	private JFrame frmInputcontinent;
 	private JTextField tName, tBonus;
 	private JButton confirmBtn, cancelBtn;
 	private JLabel errMsg = new JLabel();
 
 	private ConquestMap map;
-	//private LogPanel log = mainFrame.lp;
-	// public ConquestMap map;
 	private Continent unchanged;
 	private Continent changed;
 
@@ -33,13 +29,6 @@ public class InputContinentFrame {
 	 * Create the application.
 	 */
 	public InputContinentFrame(String unchangedName, ConquestMap map) {
-//		this.map = new ConquestMap();
-//		try {
-//			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-//			System.out.println("=============================");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 		this.map = map;
 		this.unchanged = map.findContinent(unchangedName);
 		initialize();
@@ -53,7 +42,6 @@ public class InputContinentFrame {
 		frmInputcontinent.setType(Type.UTILITY);
 		frmInputcontinent.setTitle("InputContinent");
 		frmInputcontinent.setBounds(100, 100, 520, 428);
-		// frmInputcontinent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInputcontinent.getContentPane().setLayout(null);
 
 		errMsg.setBounds(94, 60, 400, 15);
@@ -82,7 +70,6 @@ public class InputContinentFrame {
 		confirmBtn = new JButton("Confirm");
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				infoPanel = mainFrame.infoPanel;
 				errMsg.setText("");
 				if (validateInput()) {
 					changed = new Continent();
@@ -101,12 +88,6 @@ public class InputContinentFrame {
 					for (Continent t : map.continents) {
 						System.out.println(t);
 					}
-					// try {
-					// map.save();
-					// } catch (IOException e1) {
-					// e1.printStackTrace();
-					// }
-					//infoPanel.updateTable();
 					frmInputcontinent.setVisible(false);
 				}
 			}
