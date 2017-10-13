@@ -109,7 +109,13 @@ public class InputTerritoryFrame {
 
 		comboBox = new JComboBox<>();
 		comboBox.setBounds(193, 329, 128, 24);
-		Continent[] values = map.continents.toArray(new Continent[map.continents.size()]);
+		//Continent[] values = map.continents.toArray(new Continent[map.continents.size() + 1]);
+		Continent[] values = new Continent[map.continents.size() + 1];
+		values[0] = null;
+		for(int index = 1; index < values.length; index++){
+			values[index] = map.continents.get(index - 1);
+		}
+		
 		comboBox.setModel(new DefaultComboBoxModel<>(values));
 		frmInputTerritory.getContentPane().add(comboBox);
 
