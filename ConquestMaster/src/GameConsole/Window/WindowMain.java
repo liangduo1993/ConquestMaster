@@ -180,7 +180,13 @@ public class WindowMain implements ActionListener  {
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
-		label.setIcon(new ImageIcon("GimpFiles\\StartGame.png")); //This should work for you, let me know if it does not. -Diego
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("mac")) {
+			label.setIcon(new ImageIcon("GimpFiles/StartGame.png"));
+		}else {
+			label.setIcon(new ImageIcon("GimpFiles\\StartGame.png"));
+		}
+
 		
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);

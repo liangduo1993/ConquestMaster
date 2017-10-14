@@ -225,7 +225,12 @@ public class MapLoader {
 					String val = pair[1];
 					if ("image".equals(prop)) {
 						if ((val != null) && (val.length() > 0)) {
-							this.imageFilePath = (new File(this.mapFilePath).getParent() + "\\" + val);
+							String os = System.getProperty("os.name").toLowerCase();
+							if (os.contains("mac")) {
+								this.imageFilePath = (new File(this.mapFilePath).getParent() + "/" + val);
+							}else {
+								this.imageFilePath = (new File(this.mapFilePath).getParent() + "\\" + val);
+							}
 						}
 					} else if ("wrap".equals(prop)) {
 						this.wrap = val.equalsIgnoreCase("yes");
