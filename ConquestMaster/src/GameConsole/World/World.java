@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import GameConsole.Army.Infantry;
 import GameConsole.Player.Group;
 import GameConsole.Player.Player;
 import GameConsole.Window.MapLoader;
@@ -28,7 +29,7 @@ public class World {
 		mapLoader = new MapLoader();
 		try {
 			mapLoader.load(path);
-			System.out.println("map load结束");
+			System.out.println("map load");
 			mapLoader.setWorld(this);
 			
 			for(Continent continent : this.continents){
@@ -316,7 +317,7 @@ public class World {
 		 */
 		for (Continent con : this.continents) {
 			for (Country cou : con.getCountries()) {
-				Card tempCard = new Card(cou, count);
+				Card tempCard = new Card(cou,new Infantry().getStrength());
 				this.deck.add(tempCard);
 				// count++;
 			}
