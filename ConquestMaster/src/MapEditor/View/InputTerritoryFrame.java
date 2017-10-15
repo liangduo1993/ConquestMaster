@@ -208,43 +208,5 @@ public class InputTerritoryFrame {
 		return true;
 	}
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// ConquestMap map = new ConquestMap();
-					// try {
-					// map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-					// System.out.println("=============================");
-					//
-					// // Territory t = new Territory();
-					// // t.setName("China");
-					// // t.setCenter(100, 100);
-					// // t.setContinent(map.findContinent("Kala"));
-					// // t.setLinkNames(new ArrayList<String>());
-					// // t.getLinkNames().add("Jer");
-					// // t.getLinkNames().add("Rove");
-					// // t.getLinkNames().add("Ssag");
-					// // map.addTerritory(t);
-					// // map.buildTerritoryLinks(t);
-					// //
-					// // // Territory t = map.findTerritory("Forgoth");
-					// // // map.deleteTerritory(t);
-					// // for (Territory tt : map.territories) {
-					// // System.out.println(tt);
-					// // }
-					// // map.save();
-					// } catch (IOException e) {
-					// e.printStackTrace();
-					// }
-
-					InputTerritoryFrame window = new InputTerritoryFrame("", new ConquestMap());
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 }

@@ -1,13 +1,11 @@
 package MapEditor.View;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -180,25 +178,6 @@ public class TablePanel extends JPanel implements Observer{
 			}
 		});
 		add(contDelBtn);
-	}
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JFrame jFrame = new JFrame();
-					TablePanel panel = new TablePanel(new ConquestMap());
-					jFrame.getContentPane().add(panel);
-					jFrame.setBounds(0, 0, 1000, 1000);
-					jFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 }

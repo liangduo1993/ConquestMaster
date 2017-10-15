@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ConquestMapTest {
+public class MapValidateTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -236,9 +236,5 @@ public class ConquestMapTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
-	}
 
 }

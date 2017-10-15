@@ -143,19 +143,4 @@ public class NewMapFrame {
 		map.setWrap(false);
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewMapFrame window = new NewMapFrame(new ConquestMap());
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }

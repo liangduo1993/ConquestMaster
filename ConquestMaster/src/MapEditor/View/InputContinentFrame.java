@@ -127,19 +127,5 @@ public class InputContinentFrame {
 		return true;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InputContinentFrame window = new InputContinentFrame("Kala", new ConquestMap());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 }
