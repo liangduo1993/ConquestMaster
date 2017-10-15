@@ -212,8 +212,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 					if (neighbour != null) {
 						neighbour.getLinkNames().remove(ter.getName());
 						buildTerritoryLinks(neighbour);
-						System.out.println("after delete: " + neighbour.getLinkNames());
-						System.out.println("after delete: " + neighbour.getLinks());
 					}
 				}
 			}
@@ -422,13 +420,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 */
 	public boolean hasOneWayLinks() {
 		for (Territory ter : this.territories) {
-			System.out.println(ter.getLinks().size() + ": size");
 			if (ter.getLinks().size() != 0) {
 				for (Territory ter2 : ter.getLinks()) {
 					if (ter2.getLinks().size() == 0 || !ter2.getLinks().contains(ter)) {
 						log.append(ter2.getName() + " has no link with " + ter.getName()
 								+ ", please check your map file!" + NEWLINE);
-						System.out.println(ter.getName() + " has no link with " + ter2.getName());
 						return true;
 					}
 				}
@@ -487,7 +483,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * @see clear()
 	 * @see changeState()
 	 */
-	public void load(String mapFilePath) throws IOException {
+	public void load(String mapFilePath) throws Exception {
 		clear();
 		this.mapFilePath = mapFilePath;
 		LineNumberReader in = new LineNumberReader(new FileReader(mapFilePath));
@@ -498,6 +494,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 
 		if (!validityCheck()) {
 			clear();
+			throw new RuntimeException("didn't pass the validation!");
 		}
 	}
 
@@ -519,9 +516,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			if (!line.trim().equals("")) {
 				if (line.startsWith("[")) {
 					if (line.equalsIgnoreCase("[Territories]")) {
-						for (Continent c : this.continents) {
-							System.out.println(c);
-						}
 						return;
 					}
 					throw new IOException("[Territories] Section expected; found " + line);
@@ -609,7 +603,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		for (Territory t : this.territories) {
 			buildTerritoryLinks(t);
-			System.out.println(t);
 		}
 	}
 
@@ -635,11 +628,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 					Territory link = findTerritory(linkName);
 					t.getLinks().add(link);
 				}
-				System.out.println(t.getName() + "'s link: =============");
-				for (Territory neighbour : t.getLinks()) {
-					System.out.println(neighbour);
-				}
-				System.out.println("===================");
 
 			}
 		}
