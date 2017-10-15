@@ -17,6 +17,7 @@ import GameConsole.Window.WindowMain;
 
 
 public class GameState {
+	public int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
 	private int currPhase; // 0 beggining, 1 attack, 2 move

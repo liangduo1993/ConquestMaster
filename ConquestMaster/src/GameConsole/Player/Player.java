@@ -256,7 +256,7 @@ public class Player {
 	
 	
 	public int getBonus() {
-		if(firstRound == 1){
+		if(firstRound ==1){
 			if(game.getAllPlayers().getPlayers().size() == 2){
 				firstRound--;
 				return 40- this.getCountries().size();

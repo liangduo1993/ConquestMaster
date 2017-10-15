@@ -647,6 +647,7 @@ public class WindowMain implements ActionListener  {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
+				
 				if (gameState.getCurrPhase() == 0){
 					unitDisplay.setVisible(true);
 					arrow0.setVisible(true);
