@@ -1,10 +1,9 @@
 package MapEditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,19 +25,12 @@ public class MapHandlerTest {
 	@Test
 	public void testLoad() throws IOException {
 		map.load(path);
-		assertEquals(6, map.continents.size());
 		assertEquals(42, map.territories.size());
 		assertEquals(2, map.findTerritory("Forgoth").getLinks().size());
 		assertEquals("Kala", map.findTerritory("Forgoth").getContinent().getName());
 	}
 
-	@Test
-	public void testSave() throws Exception {
-		map.load(path);
-		map.addContinent(new Continent("newContinent", 1));
-		map.save();
-	}
-
+	
 	@Test
 	public void testSaveString() throws Exception {
 		map.load(path);
@@ -46,24 +38,5 @@ public class MapHandlerTest {
 		map.save("f:\\1.map");
 	}
 
-	@Test
-	public void testBuildTerritoryLinks() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCompare() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSortContinentsCollection() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSortTerritoriesCollection() {
-		fail("Not yet implemented");
-	}
 
 }

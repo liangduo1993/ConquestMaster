@@ -1,244 +1,106 @@
 package MapEditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import MapEditor.Core.mainFrame;
+import MapEditor.Model.ConquestMap;
+import MapEditor.Model.Continent;
+import MapEditor.Model.Territory;
+
 public class MapEditTest {
+	private ConquestMap map;
+	private mainFrame mainFrame;
+	private String path;
 
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@Test
-	public void testConquestMap() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testChangeState() {
-		fail("Not yet implemented");
+		mainFrame = new mainFrame();
+		map = new ConquestMap();
+		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
+		map.load(path);
 	}
 
 	@Test
 	public void testAddContinent() {
-		fail("Not yet implemented");
+		Continent newContinent = new Continent("newContinent", 1);
+		map.addContinent(newContinent);
+		assertEquals(7, map.continents.size());
 	}
 
 	@Test
 	public void testAddTerritory() {
-		fail("Not yet implemented");
+		Territory newTerritory = new Territory();
+		newTerritory.setName("newTerritory");
+		newTerritory.setCenter(1, 1);
+		newTerritory.setCont(map.continents.get(0));
+		map.addTerritory(newTerritory);
+		assertEquals(true, map.territories.contains(newTerritory));
 	}
 
 	@Test
 	public void testClear() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCompare() {
-		fail("Not yet implemented");
+		map.clear();
+		assertEquals(true, map.territories.size() == 0);
+		assertEquals(true, map.continents.size() == 0);
 	}
 
 	@Test
 	public void testCountTerritories() {
-		fail("Not yet implemented");
+		assertEquals(7, map.countTerritories(map.findContinent("Kala")));
 	}
 
 	@Test
 	public void testDeleteContinent() {
-		fail("Not yet implemented");
+		Continent kala = map.findContinent("Kala");
+		map.deleteContinent(kala);
+		assertEquals(false, map.continents.contains(kala));
+		assertEquals(null, map.findTerritory("Forgoth").getContinent());
 	}
 
 	@Test
 	public void testDeleteTerritory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFindContinent() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFindContinentIndex() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFindSection() {
-		fail("Not yet implemented");
+		Territory forgoth = map.findTerritory("Forgoth");
+		map.deleteTerritory(forgoth);
+		assertEquals(false, map.territories.contains(forgoth));
+		assertEquals(false, map.findTerritory("Rove").getLinks().contains(forgoth));
 	}
 
 	@Test
 	public void testFindTerritory() {
-		fail("Not yet implemented");
+		Territory forgoth = map.findTerritory("Forgoth");
+		assertEquals(true, map.territories.contains(forgoth));
+		assertEquals("Forgoth", forgoth.getName());
+		assertEquals("Kala", forgoth.getContinent().getName());
 	}
 
 	@Test
-	public void testFindTerritoryIndex() {
-		fail("Not yet implemented");
+	public void testFindContinent() {
+		Continent kala = map.findContinent("Kala");
+		assertEquals(true, map.continents.contains(kala));
+		assertEquals("Kala", kala.getName());
+		assertEquals(6, kala.getBonus());
 	}
 
-	@Test
-	public void testGetAuthor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetContinentTerritories() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetImageFileName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetImageFilePath() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMapDirectory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMapFilePath() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetMapName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetSaveImageFilePath() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetScroll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasOneWayLinks() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsDisparateImageFileDirectory() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsWarn() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsWrap() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testLoad() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testBuildTerritoryLinks() {
-		fail("Not yet implemented");
+		Territory forgoth = map.findTerritory("Forgoth");
+		Territory rove = map.findTerritory("Rove");
+		map.buildTerritoryLinks(forgoth);
+		assertEquals(2, forgoth.getLinkNames().size());
+		assertEquals(2, forgoth.getLinks().size());
+		assertEquals(true, forgoth.getLinks().contains(rove));
 	}
 
 	@Test
 	public void testUpdateContinent() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSave() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSavePrintWriter() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSaveString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetAuthor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetContinentName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetImageFilePath() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetMapFilePath() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetScroll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetWarn() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetWrap() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSortContinentsCollection() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSortTerritoriesCollection() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testValidityCheck() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testClearReach() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDFS() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
+		Continent kala = map.findContinent("Kala");
+		map.updateContinent("kala", "newKala", 1);
+		assertEquals("newKala", kala.getName());
+		assertEquals(1, kala.getBonus());
 	}
 
 }

@@ -950,7 +950,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * 
 	 * @return true if they are boarded, else return false.
 	 */
-	private boolean eachTerReachable() {
+	public boolean eachTerReachable() {
 		clearReach();
 		Territory head = this.territories.get(0);
 		DFS(head);
@@ -973,7 +973,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	/**
 	 * delete the linked relationships among territories.
 	 */
-	public void clearReach() {
+	private void clearReach() {
 		for (Territory t : this.territories) {
 			t.hasReached = false;
 		}
@@ -984,7 +984,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * 
 	 * @param head
 	 */
-	public void DFS(Territory head) {
+	private void DFS(Territory head) {
 		head.hasReached = true;
 		if (head.getLinks().size() == 0) {
 			return;
@@ -996,30 +996,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 	}
 
-	public static void main(String[] args) {
-		ConquestMap map = new ConquestMap();
-		try {
-			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-			System.out.println("=============================");
-
-			Territory t = new Territory();
-			t.setName("China");
-			t.setCenter(100, 100);
-			t.setContinent(map.findContinent("Kala"));
-			t.setLinkNames(new ArrayList<String>());
-			t.getLinkNames().add("Jer");
-			t.getLinkNames().add("Rove");
-			t.getLinkNames().add("Ssag");
-			map.addTerritory(t);
-			map.buildTerritoryLinks(t);
-			for (Territory tt : map.territories) {
-				System.out.println(tt);
-			}
-			map.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 
 }

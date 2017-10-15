@@ -180,4 +180,20 @@ public class TablePanel extends JPanel implements Observer{
 		add(contDelBtn);
 	}
 
+	public Object[][] getTerNames() {
+		return terNames;
+	}
+
+	public void setTerNames(Object[][] terNames) {
+		this.terNames = terNames;
+	}
+
+	public Object[][] getContNames() {
+		return contNames;
+	}
+
+	public void setContNames(Object[][] contNames) {
+		this.contNames = contNames;
+	}
+
 }
