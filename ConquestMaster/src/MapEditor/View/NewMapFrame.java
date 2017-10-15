@@ -138,7 +138,7 @@ public class NewMapFrame {
 
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
-		map.setScroll(ConquestMap.ScrollOptions.HORIZONTAL);
+		map.setScroll(ConquestMap.ScrollOptions.NONE);
 		map.setWarn(true);
 		map.setWrap(false);
 	}

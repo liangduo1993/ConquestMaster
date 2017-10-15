@@ -10,6 +10,7 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;
 
+
 public class MapEditTest {
 	private ConquestMap map;
 	private mainFrame mainFrame;
