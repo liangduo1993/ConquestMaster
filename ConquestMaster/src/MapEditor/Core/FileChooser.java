@@ -62,6 +62,7 @@ public class FileChooser {
 		jta.setCaretPosition(jta.getDocument().getLength());
 	}
 
+
 	/**
 	 * Open function.
 	 */

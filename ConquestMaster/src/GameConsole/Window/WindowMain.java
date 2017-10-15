@@ -410,9 +410,6 @@ public class WindowMain implements ActionListener  {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
-				//gameState.stopCurrentSound();
-				//gameState.playSound("music\\introToMap.wav");
-				//gameState.playSound("music\\Risk.wav");
 				if(playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
 					gameState.addPlayer(p1);
@@ -731,7 +728,11 @@ public class WindowMain implements ActionListener  {
 		arrow0.setLayout(null);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		if (os.contains("mac")) {
+			lblNewLabel_3.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		}else {
+			lblNewLabel_3.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		}
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 		
@@ -742,7 +743,11 @@ public class WindowMain implements ActionListener  {
 		arrow1.setBackground(Color.LIGHT_GRAY);
 		
 		JLabel label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		if (os.contains("mac")) {
+			label_7.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		}else {
+			label_7.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		}
 		label_7.setBounds(0, 0, 30, 30);
 		arrow1.add(label_7);
 		
@@ -753,7 +758,12 @@ public class WindowMain implements ActionListener  {
 		map.add(arrow2);
 		
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		if (os.contains("mac")) {
+			label_8.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		}else {
+			label_8.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		}
+
 		label_8.setBounds(0, 0, 30, 30);
 		arrow2.add(label_8);
 		
@@ -833,7 +843,12 @@ public class WindowMain implements ActionListener  {
 		playerWinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel label_12 = new JLabel("");
-		label_12.setIcon(new ImageIcon("GimpFiles\\Soldiers.png"));
+		if (os.contains("mac")) {
+			label_12.setIcon(new ImageIcon("GimpFiles/Soldiers.png"));
+		}else {
+			label_12.setIcon(new ImageIcon("GimpFiles\\Soldiers.png"));
+		}
+
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 		

@@ -477,7 +477,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * information of Continents and Territories, finishing map reading and
 	 * change current state.
 	 * 
-	 * @param mapFilePath path where map file locates.
+	 * @param mapFilePath
+	 *            path where map file locates.
 	 * @throws IOException
 	 * @see validityCheck()
 	 * @see clear()
@@ -648,23 +649,26 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			Territory ter = new Territory();
 			ter.name = st.nextToken().trim();
 			ter.setCenter(Integer.parseInt(st.nextToken().trim()), Integer.parseInt(st.nextToken().trim()));
-			String name = st.nextToken().trim();
-			ter.setContinent(findContinent(name));
-			if ((ter.name == null) || (ter.name.length() < 0)) {
-				throw new Exception("name not found");
-			}
-			if ((ter.getCenterX() == -1) || (ter.getCenterY() == -1)) {
-				throw new Exception("invalid coordinates");
-			}
-			if (ter.getContinent() == null) {
-				ter.getLinkNames().add(name);
-			}
-			while (st.hasMoreTokens()) {
-				ter.getLinkNames().add(st.nextToken().trim());
+
+			if (st.hasMoreTokens()) {
+				String name = st.nextToken().trim();
+				ter.setContinent(findContinent(name));
+				if ((ter.name == null) || (ter.name.length() < 0)) {
+					throw new Exception("name not found");
+				}
+				if ((ter.getCenterX() == -1) || (ter.getCenterY() == -1)) {
+					throw new Exception("invalid coordinates");
+				}
+				if (ter.getContinent() == null && !name.equals("")) {
+					ter.getLinkNames().add(name);
+				}
+				while (st.hasMoreTokens()) {
+					ter.getLinkNames().add(st.nextToken().trim());
+				}
 			}
 			return ter;
 		} catch (Exception e) {
-			throw new IOException("Invalid territory line (" + e + "): " + line);
+			throw new IOException(" :Invalid territory line (" + e + "): " + line);
 		}
 	}
 
@@ -983,7 +987,5 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 	}
-
-	
 
 }
