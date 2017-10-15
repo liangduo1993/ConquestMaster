@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import MapEditor.Model.ConquestMap;
 import MapEditor.View.LogPanel;
 import MapEditor.View.NewMapFrame;
+import MapEditor.View.SettingsFrame;
 import MapEditor.View.TablePanel;
 
 /**
@@ -83,6 +84,14 @@ public class mainFrame {
 		mntmSaveAsMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fcp = new FileChooser("saveas", map);
+			}
+		});
+		
+		JMenuItem mntmSettings = new JMenuItem("settings");
+		mnFile.add(mntmSettings);
+		mntmSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new SettingsFrame(map);
 			}
 		});
 

@@ -21,7 +21,7 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.ConquestMap.ScrollOptions;
 import MapEditor.Util.MyStringUtil;
 
-public class NewMapFrame {
+public class SettingsFrame {
 	private final String NEWLINE = "\n";
 	private ConquestMap map;
 	private JFrame frame;
@@ -36,7 +36,7 @@ public class NewMapFrame {
 	/**
 	 * Create the application.
 	 */
-	public NewMapFrame(ConquestMap map) {
+	public SettingsFrame(ConquestMap map) {
 		this.map = map;
 		initialize();
 	}
@@ -45,33 +45,33 @@ public class NewMapFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		map.clear();
 		fc = new JFileChooser();
 		frame = new JFrame();
 		frame.setBounds(400, 100, 450, 370 - 100);
 		frame.setResizable(false);
-		frame.setTitle("New Map");
+		frame.setTitle("Settings");
 
 		tAuthor = new JTextField();
 		tAuthor.setBounds(140, 35, 100, 21);
 		tAuthor.setColumns(10);
-
+		tAuthor.setText(map.getAuthor());
+		
 		warnCheckBox = new JCheckBox("");
 		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
-		warnCheckBox.setSelected(true);
-		
+		warnCheckBox.setSelected(map.isWarn());
 		
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
 
 		pathMsg.setBounds(40, 210 - 100, 410, 15);
 		pathMsg.setForeground(Color.RED);
-
+		pathMsg.setText(map.getImageFilePath());
+		
 		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
 
 		// ImagePath button no Name needed
-		imgBtn = new JButton("Please select a image!");
+		imgBtn = new JButton("Click if you want to change a background!");
 		imgBtn.setBounds(140, 243 - 100, 165, 23);
 		imgBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,13 +92,13 @@ public class NewMapFrame {
 			}
 		});
 
-		confirmBtn = new JButton("Create");
+		confirmBtn = new JButton("Change");
 		confirmBtn.setBounds(70, 150 + 40, 100, 23);
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				errMsg.setText("");
 				if (validateInfo()) {
-					mapNew();
+					changeSettings();
 					frame.setVisible(false);
 				}
 			}
@@ -145,11 +145,9 @@ public class NewMapFrame {
 		return true;
 	}
 
-	public void mapNew() {
+	public void changeSettings() {
 		map.setAuthor(tAuthor.getText().trim());
-		map.setScroll(ConquestMap.ScrollOptions.NONE);
 		map.setWarn(warnCheckBox.isSelected());
-		map.setWrap(false);
 	}
 
 }
