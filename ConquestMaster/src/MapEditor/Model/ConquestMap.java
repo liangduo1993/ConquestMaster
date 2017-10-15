@@ -264,7 +264,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 *            The section among "Map", "Continent" and "Territory".
 	 * @throws IOException
 	 */
-	public void findSection(LineNumberReader in, String section) throws IOException {
+	private int findSection(LineNumberReader in, String section) throws IOException {
 		String head = "[" + section + "]";
 		String line;
 		do {
@@ -273,6 +273,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 				throw new EOFException("EOF encountered before section " + head + " found");
 			}
 		} while (!line.equalsIgnoreCase(head));
+		return in.getLineNumber();
 	}
 
 	/**
@@ -726,7 +727,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * @see sortContinentsCollection()
 	 * @see sortTerritoriesCollection()
 	 */
-	public void save(PrintWriter out) {
+	private void save(PrintWriter out) {
 		sortContinentsCollection();
 		sortTerritoriesCollection();
 
