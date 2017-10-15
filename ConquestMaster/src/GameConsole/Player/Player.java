@@ -28,7 +28,7 @@ import GameConsole.World.World;
  * All of the actions that a player would do eventually comes back to this class.
  */
 public class Player {
-	private int firstRound =1;
+	private int firstRound = 1;
 	private String name;
 	private Color color;
 	private ArrayList<Troop> numTroops = new ArrayList<Troop>(); // all of the troops of a user
