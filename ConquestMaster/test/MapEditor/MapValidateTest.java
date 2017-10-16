@@ -33,9 +33,11 @@ public class MapValidateTest {
 		forgoth.getLinks().remove(rove);
 		assertEquals(true, map.hasOneWayLinks());
 	}
+
 	/**
-	 * test class: ConquestMap, function eachTerReachable(), check the territories of the map is boarding each other when we load a map,
-	 * check a new territory is boarding to each other we want when we add it in the map.
+	 * test class: ConquestMap, function eachTerReachable(), check the territories
+	 * of the map is boarding each other when we load a map, check a new territory
+	 * is boarding to each other we want when we add it in the map.
 	 */
 	@Test
 	public void testEachTerReachable() {
