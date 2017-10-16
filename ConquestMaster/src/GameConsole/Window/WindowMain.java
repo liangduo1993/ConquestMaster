@@ -860,6 +860,7 @@ public class WindowMain implements ActionListener {
 						arrow0.setVisible(false);
 						arrow1.setVisible(true);
 						arrow2.setVisible(false);
+						gameState.getCurrPlayer().giveCards();//This is simulation for giving cards to player 20171016 by lz
 					} else {
 						unitDisplay.setVisible(false);
 						arrow0.setVisible(false);
