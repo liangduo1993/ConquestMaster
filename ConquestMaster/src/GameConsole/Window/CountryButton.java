@@ -3,15 +3,11 @@ package GameConsole.Window;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import GameConsole.Player.Player;
 import GameConsole.World.Country;

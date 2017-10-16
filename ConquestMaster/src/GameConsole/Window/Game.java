@@ -78,7 +78,7 @@ public class Game {
 			CountryButton countryButton = new CountryButton(buttonImage, buttonName, country);
 			int x = country.getXLoc();
 			int y = country.getYLoc();
-			countryButton.setDoubleBounds(x - 10 + 100, y - 10 + 200, 20, 20);
+			countryButton.setDoubleBounds(x - 10 + 85, y - 10 + 200, 50, 20);
 			map.add(countryButton.getLabel());
 			map.add(countryButton.b);
 			buttons.add(countryButton);
