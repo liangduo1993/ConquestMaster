@@ -885,6 +885,7 @@ public class WindowMain implements ActionListener {
 									// player
 									// 20171016
 									// by lz
+							cardUpdate();
 						}
 
 					}
