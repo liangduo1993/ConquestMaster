@@ -24,6 +24,7 @@ public class Cards{
 	   
 	   /**
 	    * If player conquered at least one territory during the attack phase, he will be given a card
+	    * 
 	    */
 	   public void addRandomTypeCard(){
 		   this.type=(int) (Math.random()*3);
