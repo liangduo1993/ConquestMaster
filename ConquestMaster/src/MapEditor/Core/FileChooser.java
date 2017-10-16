@@ -86,7 +86,6 @@ public class FileChooser {
 				LogPanel.addLog("Map is successfully saved!");
 			} catch (Exception e) {
 				LogPanel.addLog("Save failed!");
-				e.printStackTrace();
 			}
 		} else {
 			LogPanel.addLog("There's no Map loaded!");
