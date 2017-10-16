@@ -135,7 +135,13 @@ public class InputContinentFrame {
 			errMsg.setText("Name and Bonus cannot be empty!");
 			return false;
 		}
+		if (map.findContinent(tName.getText()) != null &&
+				(unchanged == null || !tName.getText().equals(unchanged.getName())  )) {
+			errMsg.setText("The name has already existed!");
+			return false;
+		}
 
+		
 		return true;
 	}
 
