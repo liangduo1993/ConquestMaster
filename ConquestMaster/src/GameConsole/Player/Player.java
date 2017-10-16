@@ -28,7 +28,6 @@ import GameConsole.World.World;
  * All of the actions that a player would do eventually comes back to this class.
  */
 public class Player {
-	private int firstRound = 1;
 	private String name;
 	private Color color;
 	private ArrayList<Troop> numTroops = new ArrayList<Troop>(); // all of the troops of a user
@@ -256,25 +255,17 @@ public class Player {
 	
 	
 	public int getBonus() {
-		if(firstRound == 1 ){
+		int firstRound = game.firstRound;
+		if(firstRound ==1){
 			if(game.getAllPlayers().getPlayers().size() == 2){
-				firstRound--;
 				return 40- this.getCountries().size();
-				
 			}else if(game.getAllPlayers().getPlayers().size() == 3){
-				firstRound--;
 				return 35- this.getCountries().size();
-				
 			}else if(game.getAllPlayers().getPlayers().size() == 4){
-				firstRound--;
 				return 30- this.getCountries().size();
-				
 			}else if(game.getAllPlayers().getPlayers().size() == 5){
-				firstRound--;
 				return 25- this.getCountries().size();
-				
 			}else {
-				firstRound--;
 				return 20- this.getCountries().size();
 			}
 			

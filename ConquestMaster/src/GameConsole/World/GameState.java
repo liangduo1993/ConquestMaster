@@ -155,6 +155,10 @@ public class GameState {
 	public void setWorld(World world) {
 		this.world = world;
 	}
+
+	public void setAllPlayers(Group allPlayers) {
+		this.allPlayers = allPlayers;
+	}
 	
 	
 	
