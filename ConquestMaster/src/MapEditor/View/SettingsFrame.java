@@ -102,7 +102,7 @@ public class SettingsFrame {
 		cancelBtn.setBounds(220 + 30, 150 + 40, 100, 23);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LogPanel.addLog("New Map command cancelled by user.");
+				LogPanel.addLog("Settings change command cancelled by user.");
 				frame.setVisible(false);
 			}
 		});

@@ -20,7 +20,7 @@ import MapEditor.View.TablePanel;
  * The main entrance of the module, also designed as a controller.
  *
  */
-public class mainFrame {
+public class MainFrame {
 
 	private JFrame frame;
 	private JMenuBar menuBar;
@@ -33,7 +33,7 @@ public class mainFrame {
 	/**
 	 * Create the application.
 	 */
-	public mainFrame() {
+	public MainFrame() {
 		initialize();
 	}
 
@@ -127,7 +127,7 @@ public class mainFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainFrame window = new mainFrame();
+					MainFrame window = new MainFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import MapEditor.Core.mainFrame;
+import MapEditor.Core.MainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;

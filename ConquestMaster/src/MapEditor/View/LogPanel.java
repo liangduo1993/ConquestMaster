@@ -27,7 +27,7 @@ public class LogPanel extends JPanel {
 	}
 	
 	public static void addLog(String msg){
-		log.append("Loading map failed!" + NEWLINE);
+		log.append(msg + NEWLINE);
 	}
 
 }

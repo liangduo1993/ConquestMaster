@@ -69,7 +69,6 @@ public class FileChooser {
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
 			LogPanel.addLog("Map is successfully loaded!");
-			// tablePanel.updateTable();
 		} catch (Exception e) {
 			LogPanel.addLog("Loading map failed!");
 			e.printStackTrace();
