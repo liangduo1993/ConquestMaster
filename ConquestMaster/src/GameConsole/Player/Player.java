@@ -417,7 +417,6 @@ public class Player {
 						cardType2 = cardType2 + 1;
 					}
 				}
-				System.out.println(cardType0 + ":" + cardType1 + ":" + cardType2);
 
 				JPanel numPanel = new JPanel();
 				numPanel.add(new JLabel("Chose Cards!"));
