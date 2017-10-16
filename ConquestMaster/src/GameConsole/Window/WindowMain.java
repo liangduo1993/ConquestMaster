@@ -813,8 +813,8 @@ public class WindowMain implements ActionListener {
 					arrow2.setVisible(false);
 					gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 					gameState.setNextPlayer();
-					numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getBonus()));
 					troopsLeft = gameState.getCurrPlayer().getBonus();
+					numberOfTroops.setText(Integer.toString(troopsLeft));
 					gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 					gameState.setCountry1(null);
 					gameState.setCountry2(null);
@@ -849,8 +849,8 @@ public class WindowMain implements ActionListener {
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 						gameState.getCurrPlayer().setHasMoved(false);
 						gameState.setNextPlayer();
-						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getBonus()));
 						troopsLeft = gameState.getCurrPlayer().getBonus();
+						numberOfTroops.setText(Integer.toString(troopsLeft));
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 						gameState.setCountry1(null);
 						gameState.setCountry2(null);
