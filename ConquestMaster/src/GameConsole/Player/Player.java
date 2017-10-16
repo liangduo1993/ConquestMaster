@@ -22,7 +22,7 @@ import GameConsole.World.Country;
 import GameConsole.World.GameState;
 import GameConsole.World.World;
 
-/*
+/**
  * This class represents all of the data and funcionality that a player would have.
  * All of the actions that a player would do eventually comes back to this class.
  */
@@ -50,60 +50,119 @@ public class Player {
 												// player has changed his cards
 	private boolean hasMoved = false;
 
+
+	/**
+	 * Constructor method
+	 * @param name the player name with String type
+	 * @param color the color of the player with Color type
+	 * @param game the game state with GameState type
+	 */
 	public Player(String name, Color color, GameState game) {
 		this.name = name;
 		this.color = color;
 		this.game = game;
 	}
 
+	/**
+	 * To check whether the player has moved the troop or not
+	 * @return true if the palyer has moved otherwise return flase
+	 */
 	public boolean isHasMoved() {
 		return hasMoved;
 	}
 
+	/**
+	 * To set the status that the player has moved the troop or not
+	 * @param hasMoved the status that the player has moved the troop or not with boolean type
+	 */
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
 	}
 
+	/**
+	 * To get the player name
+	 * @return the player name with String type
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * To set the player name
+	 * @param name the desired the player name that want to be set with String type
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * To get the player's color
+	 * @return the player color with Color type
+	 */
 	public Color getColor() {
 		return color;
 	}
 
+	/**
+	 * To set the player's color
+	 * @param color the desired the player color that want to be set with Color type
+	 */
 	public void setColor(Color color) {
 		this.color = color;
 	}
 
+	/**
+	 * To get the player's troops list
+	 * @return the player's troops list with ArrayList type
+	 */
 	public ArrayList<Troop> getNumTroops() {
 		return numTroops;
 	}
 
+	/**
+	 * To set the player's troops list
+	 * @param numTroops the desired player's troops list with ArrayList type
+	 */
 	public void setNumTroops(ArrayList<Troop> numTroops) {
 		this.numTroops = numTroops;
 	}
 
+	/**
+	 * To get the player's countries list
+	 * @return the player's countries list with ArrayList type
+	 */
 	public ArrayList<Country> getCountries() {
 		return countries;
 	}
 
+	/**
+	 * To set the countries list to belong to the player
+	 * @param countries the countries list desired to be set to belong to the player with ArrayList type
+	 */
 	public void setCountries(ArrayList<Country> countries) {
 		this.countries = countries;
 	}
 
+	/**
+	 * To get the player's hand cards list
+	 * @return the player's hand cards list with  ArrayList type
+	 */
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
 
+	/**
+	 * To set the player's hand cards list
+	 * @param hand the hand cards list desired to be set to belong to the player with ArrayList type
+	 */
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
 
+	/**
+	 * To get the player's hand cards list
+	 * @return the player's hand cards list with  ArrayList type
+	 */
 	public ArrayList<Cards> getOnHand() {
 		return onhand;
 	}
@@ -128,14 +187,27 @@ public class Player {
 		this.onhand.addAll(onhand);
 	}
 
+	/**
+	 * To get the game state
+	 * @return the game state with GameState type
+	 */
 	public GameState getGame() {
 		return game;
 	}
 
+	/**
+	 * To set the game state
+	 * @param g the desired game state wanted to be set with Gamestate type
+	 */
 	public void setgame(GameState g) {
 		this.game = g;
 	}
 
+	/**
+	 * To check if the country is belong to the player
+	 * @param countryName the country name with String type
+	 * @return country if the player owns the country otherwise return null
+	 */
 	public Country checkIfOwned(String countryName) {
 		for (Country c : this.countries) {
 			if (c.getName().equals(countryName)) {
@@ -146,10 +218,13 @@ public class Player {
 		return null;
 	}
 
-	/*
-	 * This class will take in a country as well as the country it is going to
-	 * attack. It will return the object of the country it wants to attack if
-	 * the player is allowed to attack that country
+	/**
+	 * This class will take in a country as well as the country it is going to attack.
+	 * It will return the object of the country it wants to attack if the player is allowed to
+	 * attack that country
+	 * @param origin the country that selected with Country type
+	 * @param countryName the country name with String type
+	 * @return country if the country is able to perform attack otherwise return null
 	 */
 	public Country checkIfCanAttack(Country origin, String countryName) {
 
@@ -185,8 +260,11 @@ public class Player {
 		return null;
 	}
 
-	/*
-	 * Will check to see if a
+	/**
+	 * To check the selected country is able to move the troop to another
+	 * @param origin the selected country with Country type
+	 * @param countryName the country name with String type
+	 * @return country with Country type if the selected country is able move troop otherwise return null
 	 */
 	public Country checkIfCanMove(Country origin, String countryName) {
 		if ((this.checkIfOwned(countryName) == null) || (origin.getTroops().size() == 1)) { // will
@@ -221,6 +299,11 @@ public class Player {
 		return null;
 	}
 
+	/**
+	 * To perform attack action
+	 * @param c1 the selected country to perform attack action with Country type
+	 * @param c2 the selected target to be attacked with Country type
+	 */
 	public void attack(Country c1, Country c2) {
 		Random rand = new Random(); // so we can create random numbers to
 									// simulate rolling (omg I am such a raver)
@@ -349,17 +432,30 @@ public class Player {
 		}
 	}
 
+	/**
+	 * To remove troop from troop list
+	 * @param numToRemove the number the troops that need to be removed with int type
+	 */
 	public void removeTroops(int numToRemove) {
 		for (int i = 0; i < numToRemove; i++) {
 			this.numTroops.remove(this.numTroops.size() - 1);
 		}
 	}
 
+	/**
+	 * To perform move troop action
+	 * @param c1 the selected country to perform move troops action with Country type
+	 * @param c2 the selected target country to receive the moved troop with Country type
+	 * @param toMove the number of the troops that need to be moved
+	 */
 	public void moveTroops(Country c1, Country c2, int toMove) {
 		c1.removeTroops(toMove);
 		c2.addInfrantry(toMove);
 	}
 
+	/**
+	 * Method to claim the player fails and remove the player from the players list
+	 */
 	public void loseGame() {
 		JOptionPane.showMessageDialog(null, this.name + " has lost the game!");
 		this.game.getAllPlayers().getPlayers().remove(this);
@@ -372,6 +468,9 @@ public class Player {
 
 	}
 
+	/**
+	 * To give the player the hand cards
+	 */
 	public void giveCards() {
 		for (int i = 0; i < 4; i++) {
 			Cards c = new Cards(this);
@@ -381,6 +480,10 @@ public class Player {
 		}
 	}
 
+	/**
+	 * To get the initial army bonus in the setup phase
+	 * @return the number of the got armies
+	 */
 	public int getBonus() {
 		int firstRound = game.firstRound;
 		if (firstRound == 1) {
@@ -663,6 +766,10 @@ public class Player {
 		}
 	}
 
+	/**
+	 * To add the troop to the troop list
+	 * @param numTroops the number of the troop that need to be added
+	 */
 	public void addInfrantry(int numTroops) {
 		for (int i = 0; i < numTroops; i++) {
 			Infantry temp = new Infantry();
@@ -670,18 +777,34 @@ public class Player {
 		}
 	}
 
+	/**
+	 * To add a country to the player's countries list
+	 * @param c a country that need to be added with Country type
+	 */
 	public void addCountry(Country c) {
 		this.countries.add(c);
 	}
 
+	/**
+	 * To remove a country from the player's countries list
+	 * @param c a country that need to be removed with Country type
+	 */
 	public void removeCountry(Country c) {
 		this.countries.remove(c);
 	}
 
+	/**
+	 * To get the playerName in the text
+	 * @return playertextname with JFormattedTextField type
+	 */
 	public JFormattedTextField getPlayerTextName() {
 		return playerTextName;
 	}
 
+	/**
+	 * To set the playerTextName
+	 * @param playerTextName the playerTextName need to be set
+	 */
 	public void setPlayerTextName(JFormattedTextField playerTextName) {
 		this.playerTextName = playerTextName;
 	}
