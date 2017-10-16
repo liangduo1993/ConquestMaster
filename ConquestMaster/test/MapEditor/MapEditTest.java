@@ -90,8 +90,10 @@ public class MapEditTest {
 		assertEquals(false, map.territories.contains(forgoth));
 		assertEquals(false, map.findTerritory("Rove").getLinks().contains(forgoth));
 	}
+
 	/**
-	 * test class: ConquestMap, function: FindTerritory(), ch
+	 * test class: ConquestMap, function: FindTerritory(), check if a
+	 * territories list has the specific territory.
 	 */
 	@Test
 	public void testFindTerritory() {
