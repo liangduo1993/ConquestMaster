@@ -14,14 +14,17 @@ import javax.swing.JPanel;
 
 import GameConsole.World.Country;
 import GameConsole.World.World;
-
+/**
+ *  The main entrance of the game
+ *
+ */
 public class Game {
 
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<CountryButton>(42);
 	private World world;
 	/**
-	 * Launch the application.
+	 * Launch the game.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
