@@ -794,6 +794,7 @@ public class WindowMain implements ActionListener {
 		nextStage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				if(troopsLeft == 0){
 				gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 
 				if (gameState.firstRound == 1) {
@@ -844,6 +845,7 @@ public class WindowMain implements ActionListener {
 						arrow1.setVisible(false);
 						arrow2.setVisible(false);
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
+						gameState.getCurrPlayer().setHasMoved(false);
 						gameState.setNextPlayer();
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getBonus()));
 						troopsLeft = gameState.getCurrPlayer().getBonus();
@@ -865,7 +867,7 @@ public class WindowMain implements ActionListener {
 					}
 
 				}
-
+				}
 			}
 		});
 
@@ -932,7 +934,7 @@ public class WindowMain implements ActionListener {
 								country2.setText((String) null);
 							}
 						}
-					} else {
+					} else if(!gameState.getCurrPlayer().isHasMoved()){
 						if (gameState.getCountry1() == null) {
 							gameState.setCountry1(countryButton.country);
 							country1.setText(gameState.getCountry1().getName());
@@ -967,6 +969,7 @@ public class WindowMain implements ActionListener {
 									gameState.getCurrPlayer().moveTroops(gameState.getCountry1(),
 											gameState.getCountry2(),
 											Integer.parseInt(comboBox.getSelectedItem().toString()));
+									gameState.getCurrPlayer().setHasMoved(true);
 									gameState.updateCountryLabels();
 									gameState.setCountry1(null);
 									gameState.setCountry2(null);

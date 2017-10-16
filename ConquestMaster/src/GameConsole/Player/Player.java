@@ -37,6 +37,7 @@ public class Player {
 	private GameState game; // the state of the game
 	private JFormattedTextField playerTextName; // the fields at the top that contains the player's name
 	private static int totalCardsExchange=0;
+	private boolean hasMoved = false;
 	
 	public Player(String name, Color color, GameState game) { 
 		this.name = name;
@@ -44,6 +45,14 @@ public class Player {
 		this.game = game;
 	}
 	
+	public boolean isHasMoved() {
+		return hasMoved;
+	}
+
+	public void setHasMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
+
 	public String getName() {
 		return name;
 	}
