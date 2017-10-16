@@ -103,6 +103,10 @@ public class MapEditTest {
 		assertEquals("Kala", forgoth.getContinent().getName());
 	}
 
+	/**
+	 * test class: ConquestMap,function: findContinent(), check if we can find a
+	 * new continent when we add it.
+	 */
 	@Test
 	public void testFindContinent() {
 		Continent kala = map.findContinent("Kala");
@@ -111,6 +115,10 @@ public class MapEditTest {
 		assertEquals(6, kala.getBonus());
 	}
 
+	/**
+	 * test class: ConquestMap, function: buildTerrtoryLicks(), check if we can
+	 * build licks of territories.
+	 */
 	@Test
 	public void testBuildTerritoryLinks() {
 		Territory forgoth = map.findTerritory("Forgoth");
@@ -121,6 +129,11 @@ public class MapEditTest {
 		assertEquals(true, forgoth.getLinks().contains(rove));
 	}
 
+	/**
+	 * test class: ConquestMap, function: updateContinent(), check if the
+	 * continent information is updated or not when we change the continent's
+	 * name and bonus.
+	 */
 	@Test
 	public void testUpdateContinent() {
 		Continent kala = map.findContinent("Kala");
