@@ -14,7 +14,11 @@ import javax.swing.table.DefaultTableModel;
 
 import MapEditor.Model.ConquestMap;
 
-public class TablePanel extends JPanel implements Observer{
+/**
+ * this class is GUI for territories and continents table panels. When doing
+ * some changes of the map, tables will update all the information.
+ */
+public class TablePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	private ConquestMap map;
 	private JTable terTable, contTable;
@@ -31,6 +35,10 @@ public class TablePanel extends JPanel implements Observer{
 		initialize();
 	}
 
+	/**
+	 * TablePanel is as a Observer when some changes occur it updates the
+	 * changed and show it on the table.
+	 */
 	public void update(Observable o, Object args) {
 		if (map.territories.size() > 0) {
 			terNames = new String[map.territories.size()][1];
@@ -47,7 +55,7 @@ public class TablePanel extends JPanel implements Observer{
 					return columnEditables[column];
 				}
 			});
-		}else{
+		} else {
 			terTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			terTable.setModel(new DefaultTableModel(null, new String[] { "Territory" }));
 		}
@@ -65,13 +73,12 @@ public class TablePanel extends JPanel implements Observer{
 					return columnEditables[column];
 				}
 			});
-		}else{
+		} else {
 			contTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			contTable.setModel(new DefaultTableModel(null, new String[] { "Continent" }));
 		}
-		
-		
-		if(map.getMapFilePath() != null)
+
+		if (map.getMapFilePath() != null)
 			setVisible(true);
 		else
 			setVisible(false);
@@ -179,19 +186,33 @@ public class TablePanel extends JPanel implements Observer{
 		});
 		add(contDelBtn);
 	}
-
+	
+	/**
+	 * get the territories' name of the map.
+	 * @return all the territories on the table.
+	 */
 	public Object[][] getTerNames() {
 		return terNames;
 	}
-
+	/**
+	 * any territory that want to be edited, setting it.
+	 * @param terNames return a new territories array of the map.
+	 */
 	public void setTerNames(Object[][] terNames) {
 		this.terNames = terNames;
 	}
-
+	
+	/**
+	 * getting the continents name of a conquest map.
+	 * @return all the continents on the table.
+	 */
 	public Object[][] getContNames() {
 		return contNames;
 	}
-
+	/**
+	 * any continent that wants to be changed, setting it.
+	 * @param contNames return as the new continents array of the map.
+	 */
 	public void setContNames(Object[][] contNames) {
 		this.contNames = contNames;
 	}
