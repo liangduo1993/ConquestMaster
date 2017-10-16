@@ -5,18 +5,16 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import MapEditor.Core.mainFrame;
+import MapEditor.Core.MainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Territory;
 
 public class MapValidateTest {
 	private ConquestMap map;
-	private mainFrame mainFrame;
 	private String path;
 
 	@Before
 	public void setUp() throws Exception {
-		mainFrame = new mainFrame();
 		map = new ConquestMap();
 		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
 		map.load(path);

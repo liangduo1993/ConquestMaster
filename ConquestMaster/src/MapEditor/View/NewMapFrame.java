@@ -1,34 +1,29 @@
 package MapEditor.View;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import MapEditor.Core.mainFrame;
 import MapEditor.Model.ConquestMap;
-import MapEditor.Model.ConquestMap.ScrollOptions;
 import MapEditor.Util.MyStringUtil;
 
+/**
+ * this class is the GUI for Creating a new conquest map.
+ */
 public class NewMapFrame {
-	private final String NEWLINE = "\n";
 	private ConquestMap map;
 	private JFrame frame;
 	private JTextField tAuthor;
 	private JButton imgBtn, confirmBtn, cancelBtn;
 	private JFileChooser fc;
-	private JTextArea jta = mainFrame.lp.log;
 	private JLabel errMsg = new JLabel();
 	private JLabel pathMsg = new JLabel();
 	private JCheckBox warnCheckBox;
@@ -59,8 +54,7 @@ public class NewMapFrame {
 		warnCheckBox = new JCheckBox("");
 		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
 		warnCheckBox.setSelected(true);
-		
-		
+
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
 
@@ -82,10 +76,10 @@ public class NewMapFrame {
 						map.setImageFilePath(path.getAbsolutePath());
 						map.setMapFilePath(MyStringUtil.getMapPath(path));
 						System.out.println(path.getAbsolutePath());
-						jta.append("You have chose a image in the path:" + path.getAbsolutePath() + NEWLINE);
+						LogPanel.addLog("You have chose a image in the path:" + path.getAbsolutePath());
 						pathMsg.setText(path.getAbsolutePath());
 					} else {
-						jta.append("Please choose a validate type of image!" + NEWLINE);
+						LogPanel.addLog("Please choose a validate type of image!");
 						errMsg.setText("Please choose a validate type of image!");
 					}
 				}
@@ -107,7 +101,7 @@ public class NewMapFrame {
 		cancelBtn.setBounds(220 + 30, 150 + 40, 100, 23);
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jta.append("New Map command cancelled by user." + NEWLINE);
+				LogPanel.addLog("New Map command cancelled by user.");
 				frame.setVisible(false);
 			}
 		});
@@ -133,6 +127,12 @@ public class NewMapFrame {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * method to check the validation of input.
+	 * 
+	 * @return true if the author name and file path are valid, otherwise false
+	 *         and show the error message.
+	 */
 	private boolean validateInfo() {
 		if (tAuthor.getText().trim().equals("") || tAuthor.getText() == null) {
 			errMsg.setText("Author cannot be blank!");
@@ -145,6 +145,9 @@ public class NewMapFrame {
 		return true;
 	}
 
+	/**
+	 * once a new map is created set the author name.
+	 */
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
 		map.setScroll(ConquestMap.ScrollOptions.NONE);

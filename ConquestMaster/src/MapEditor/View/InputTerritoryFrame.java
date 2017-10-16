@@ -1,7 +1,6 @@
 package MapEditor.View;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -21,6 +20,9 @@ import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;
 import MapEditor.Util.MyStringUtil;
 
+/**
+ * this class is the GUI for inputing Territory.
+ */
 public class InputTerritoryFrame {
 	private JFrame frmInputTerritory;
 	private JTextField neighbourNames;
@@ -32,12 +34,23 @@ public class InputTerritoryFrame {
 	private Territory changed;
 	private ConquestMap map;
 
+	/**
+	 * construction method receiving Territory name and a conquest map file.
+	 * 
+	 * @param unchangedName
+	 *            territory name
+	 * @param map
+	 *            conquest map file.
+	 */
 	public InputTerritoryFrame(String unchangedName, ConquestMap map) {
 		this.map = map;
 		this.unchanged = map.findTerritory(unchangedName);
 		initialize();
 	}
 
+	/**
+	 * method to initialize the input territory window.
+	 */
 	private void initialize() {
 		frmInputTerritory = new JFrame();
 		frmInputTerritory.setTitle("Input Territory");
@@ -69,15 +82,14 @@ public class InputTerritoryFrame {
 		lblNewLabel.setBounds(53, 330, 61, 15);
 		frmInputTerritory.getContentPane().add(lblNewLabel);
 
-
 		comboBox = new JComboBox<>();
 		comboBox.setBounds(193, 329, 128, 24);
 		Continent[] values = new Continent[map.continents.size() + 1];
 		values[0] = null;
-		for(int index = 1; index < values.length; index++){
+		for (int index = 1; index < values.length; index++) {
 			values[index] = map.continents.get(index - 1);
 		}
-		
+
 		comboBox.setModel(new DefaultComboBoxModel<>(values));
 		frmInputTerritory.getContentPane().add(comboBox);
 
@@ -157,22 +169,51 @@ public class InputTerritoryFrame {
 		frmInputTerritory.setVisible(true);
 	}
 
+	/**
+	 * territory that before editing.
+	 * 
+	 * @return unchanged territory
+	 */
 	public Territory getUnchanged() {
 		return unchanged;
 	}
 
+	/**
+	 * set the unchanged territory.
+	 * 
+	 * @param unchanged
+	 *            original territory information
+	 */
 	public void setUnchanged(Territory unchanged) {
 		this.unchanged = unchanged;
 	}
 
+	/**
+	 * method to get the territory information if the territory has been
+	 * changed.
+	 * 
+	 * @return new territory
+	 */
 	public Territory getChanged() {
 		return changed;
 	}
 
+	/**
+	 * method to set the new territory of the edited terrtory information
+	 * 
+	 * @param changed
+	 *            the edited terrtory
+	 */
 	public void setChanged(Territory changed) {
 		this.changed = changed;
 	}
 
+	/**
+	 * check the editions of changing information of the territory if valid.
+	 * 
+	 * @return true if changing is valid, otherwise false and out put the error
+	 *         message
+	 */
 	private boolean validateInput() {
 		if (!MyStringUtil.hasLength(tName.getText()) || !MyStringUtil.hasLength(tCenterX.getText())
 				|| !MyStringUtil.hasLength(tCenterY.getText())) {
@@ -207,6 +248,5 @@ public class InputTerritoryFrame {
 		}
 		return true;
 	}
-
 
 }

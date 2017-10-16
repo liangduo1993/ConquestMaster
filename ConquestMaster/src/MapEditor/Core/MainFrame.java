@@ -20,20 +20,20 @@ import MapEditor.View.TablePanel;
  * The main entrance of the module, also designed as a controller.
  *
  */
-public class mainFrame {
+public class MainFrame {
 
 	private JFrame frame;
 	private JMenuBar menuBar;
 	public ConquestMap map;
 	public FileChooser fcp;
-	public static LogPanel lp;
+	public LogPanel lp;
 	public TablePanel infoPanel;
 	
 	
 	/**
 	 * Create the application.
 	 */
-	public mainFrame() {
+	public MainFrame() {
 		initialize();
 	}
 
@@ -122,11 +122,12 @@ public class mainFrame {
 	/**
 	 * Launch the application.
 	 */
+	@SuppressWarnings("all")
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mainFrame window = new mainFrame();
+					MainFrame window = new MainFrame();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

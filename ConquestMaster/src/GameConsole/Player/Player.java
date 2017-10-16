@@ -36,7 +36,7 @@ public class Player {
 	private ArrayList<Cards> onhand = new ArrayList<Cards>(); // all of the cards in a player's hand
 	private GameState game; // the state of the game
 	private JFormattedTextField playerTextName; // the fields at the top that contains the player's name
-	private static int totalCardsExchange=0;
+	private static int totalCardsExchange=0; //Record how many times does a player has changed his cards
 	private boolean hasMoved = false;
 	
 	public Player(String name, Color color, GameState game) { 
@@ -262,6 +262,14 @@ public class Player {
 		
 	}
 	
+	public void giveCards(){
+		for (int i=0;i<4;i++){
+			Cards c = new Cards(this);
+			c.addRandomTypeCard();
+			this.onhand.add(c);
+			System.out.println(c);
+		}
+	}
 	
 	public int getBonus() {
 		int firstRound = game.firstRound;
@@ -284,26 +292,13 @@ public class Player {
 		}else{
 		
 		int reward = this.getCountries().size()/3;
-
-		/**-------
-		 * for cards test, add some cards to list "onhand"
-		 */
-		for (int i=0;i<4;i++){
-			Cards c = new Cards(this);
-			c.addRandomTypeCard();
-			this.onhand.add(c);
-			System.out.println(c);
-		}
-		//---------
 		
-		if (this.onhand.size()>=5){
+		while (this.onhand.size()>=5){
 			System.out.println("Must exchange 3 of them");
 			int cardType0 = 0;
 			int cardType1 = 0;
 			int cardType2 = 0;
-			/**
-			 * Determine what will be displayed on the panel 
-			 */
+
 			for (Cards c:this.onhand){
 				if(c.getType()==0){
 					cardType0=cardType0+1;
@@ -335,17 +330,12 @@ public class Player {
 			JComboBox<String> comboBox = new JComboBox<String>(selection);
 			numPanel.add(comboBox);
 
-
-			
 			int result = JOptionPane.showConfirmDialog(null, numPanel, "Use Cards to Exchange Troops", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE);
 			String selected = comboBox.getSelectedItem().toString();
 
 			totalCardsExchange=totalCardsExchange+1;
-			addInfrantry(totalCardsExchange*5);
+			reward=reward+(totalCardsExchange*5);
 			
-			/**
-			 * Remove 3 cards
-			 */	
 			switch(selected){
 			case ("Change 3*Type0"):{
 				int i=0;
@@ -396,7 +386,7 @@ public class Player {
 				while (it.hasNext()) 
 				{
 					Cards c = it.next();
-					if ((c.getType()!=deleted[0]||c.getType()!=deleted[1])&&i!=3) 
+					if ((c.getType()!=deleted[0]&&c.getType()!=deleted[1])&&i!=3) 
 					{
 						System.out.println("j="+j);
 						i++;
@@ -410,14 +400,12 @@ public class Player {
 		}
 			for (Cards c:onhand){System.out.println(c);}
 		}
-		else if(this.onhand.size()>=3){
+		if(this.onhand.size()>=3){
 
 			int cardType0 = 0;
 			int cardType1 = 0;
 			int cardType2 = 0;
-			/**
-			 * Determine what will be displayed on the panel 
-			 */
+
 			for (Cards c:this.onhand){
 				if(c.getType()==0){
 					cardType0=cardType0+1;
@@ -458,11 +446,8 @@ public class Player {
 				String selected = comboBox.getSelectedItem().toString();
 				if(result == JOptionPane.OK_OPTION) {
 				totalCardsExchange=totalCardsExchange+1;
-				addInfrantry(totalCardsExchange*5);
+				reward=reward+(totalCardsExchange*5);
 			
-				/**
-				 * Remove 3 cards
-				 */	
 				switch(selected){
 				case ("Change 3*Type0"):{
 					int i=0;

@@ -12,7 +12,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import GameConsole.Player.Group;
 import GameConsole.Player.Player;
 import GameConsole.Window.WindowMain;
-
+/**
+ * Set up basic states of the game
+ * Current phase, current player
+ *
+ */
 public class GameState {
 	public int firstRound = 1;
 	private Player currPlayer;
@@ -23,7 +27,13 @@ public class GameState {
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
-
+	
+	/**
+	 * constructor method with incoming parameters
+	 * @param win Window frame of the game
+	 * @param path map path on hard driver
+	 * @throws Exception
+	 */
 	public GameState(WindowMain win, String path) throws Exception {
 		this.win = win;
 		this.currPlayer = null; // will set this at the beggining of the turn
@@ -49,9 +59,10 @@ public class GameState {
 																	// just the
 																	// string
 	}
-
-	public void gameStart() { // will start the game setting player 1 as the
-								// current player
+	/**
+	 * will start the game setting player 1 as the current player
+	 */
+	public void gameStart() {		
 		this.currPhase = 0;
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers); // will deal out the cards and
@@ -70,15 +81,24 @@ public class GameState {
 			}
 		}
 	}
-
+	/**
+	 * method to get the current player.
+	 * @return current player
+	 */
 	public Player getCurrPlayer() {
 		return this.currPlayer;
 	}
-
+	/**
+	 * method to get all the players
+	 * @return all players
+	 */
 	public Group getAllPlayers() {
 		return this.allPlayers;
 	}
-
+	/**
+	 * method to get current phase
+	 * @return current phase
+	 */
 	public int getCurrPhase() {
 		return this.currPhase;
 	}
