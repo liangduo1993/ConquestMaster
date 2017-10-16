@@ -26,7 +26,7 @@ public class mainFrame {
 	private JMenuBar menuBar;
 	public ConquestMap map;
 	public FileChooser fcp;
-	public static LogPanel lp;
+	public LogPanel lp;
 	public TablePanel infoPanel;
 	
 	
@@ -122,6 +122,7 @@ public class mainFrame {
 	/**
 	 * Launch the application.
 	 */
+	@SuppressWarnings("all")
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -15,11 +15,9 @@ import java.util.Observable;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import javax.swing.JTextArea;
-
-import MapEditor.Core.mainFrame;
 import MapEditor.Util.MyStringUtil;
 import MapEditor.Util.StringUtil;
+import MapEditor.View.LogPanel;
 
 /**
  * 
@@ -32,7 +30,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		HORIZONTAL, VERTICAL, NONE;
 	}
 
-	private final String NEWLINE = "\n";
 	private String mapFilePath;
 	private String imageFilePath;
 	private ScrollOptions scroll;
@@ -41,7 +38,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	private boolean warn;
 	public ArrayList<Continent> continents = new ArrayList<>();
 	public ArrayList<Territory> territories = new ArrayList<>();
-	private JTextArea log = mainFrame.lp.log;
 
 	/**
 	 * Create a new and empty map. If need to load existing map, please see
@@ -423,8 +419,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			if (ter.getLinks().size() != 0) {
 				for (Territory ter2 : ter.getLinks()) {
 					if (ter2.getLinks().size() == 0 || !ter2.getLinks().contains(ter)) {
-						log.append(ter2.getName() + " has no link with " + ter.getName()
-								+ ", please check your map file!" + NEWLINE);
+						LogPanel.addLog(ter2.getName() + " has no link with " + ter.getName()
+						+ ", please check your map file!");
 						return true;
 					}
 				}
@@ -686,7 +682,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		continent.setName(newName);
 		continent.setBonus(newBonus);
 		changeState();
-
 	}
 
 	/**
@@ -930,7 +925,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 
 		for (String string : probs) {
-			log.append(string + NEWLINE);
+			LogPanel.addLog(string);
 		}
 
 		return false;

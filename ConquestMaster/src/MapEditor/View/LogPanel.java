@@ -11,8 +11,8 @@ import javax.swing.JTextArea;
  */
 public class LogPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	public JTextArea log = new JTextArea();
-
+	public static JTextArea log = new JTextArea();
+	private static final String NEWLINE = "\n";
 	/**
 	 * constructor method, setting the logPanel location.
 	 */
@@ -24,7 +24,10 @@ public class LogPanel extends JPanel {
 		log.setEditable(false);
 		JScrollPane logScrollPane = new JScrollPane(log);
 		add(logScrollPane, BorderLayout.CENTER);
-
+	}
+	
+	public static void addLog(String msg){
+		log.append("Loading map failed!" + NEWLINE);
 	}
 
 }
