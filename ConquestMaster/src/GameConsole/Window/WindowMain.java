@@ -100,14 +100,16 @@ public class WindowMain implements ActionListener {
 				File file = fc.getSelectedFile();
 				String path = file.getAbsolutePath();
 				// tframe1.setVisible(false);
-				gameState = new GameState(this, path);
-				openButton.setVisible(false);
 				this.frame1.remove(openButton);
 				try {
+					gameState = new GameState(this, path);
 					initialize();
-
-				} catch (IOException e1) {
+					openButton.setVisible(false);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");   
 					e1.printStackTrace();
+					this.frame1.dispose();
+					openMapFile();
 				}
 			}
 		}

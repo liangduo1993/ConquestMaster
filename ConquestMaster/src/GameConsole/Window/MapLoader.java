@@ -349,33 +349,130 @@ public class MapLoader {
 		}
 	}
 
-	public static void main(String[] args) {
-		MapLoader map = new MapLoader();
-		try {
-			map.load("C:\\Users\\Liang\\Desktop\\test\\Atlantis.map");
-			System.out.println("=============================");
-
-			// Country t = new Country();
-			// t.setName("China");
-			// t.setXLoc(100);
-			// t.setYLoc(100);
-			// t.setContinent(map.findContinent("Kala"));
-			// t.setLinkNames(new ArrayList<String>());
-			// t.getLinkNames().add("Jer");
-			// t.getLinkNames().add("Rove");
-			// t.getLinkNames().add("Ssag");
-			// map.addCountry(t);
-			// map.buildCountryName(t);
-
-			// Territory t = map.findTerritory("Forgoth");
-			// map.deleteTerritory(t);
-			for (Continent tt : map.continents) {
-//				System.out.println(tt);
+	/**
+	 * check map parameters, if a territory has links. check if a map file has a
+	 * matched image file. check if a map file and its matched image file are in
+	 * the same path. check the territory link information. check if the
+	 * territory list is not empty and it can not reach to other territories.
+	 * 
+	 * @return false if also the check failed
+	 * @see eachTerReachable()
+	 */
+	public boolean validityCheck() {
+		ArrayList<String> probs = new ArrayList<>();
+		if ((this.countries == null) || (this.countries.isEmpty())) {
+			probs.add("Map contains no territories");
+		}
+		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
+			probs.add("Map image is not specified");
+		} else if (getMapDirectory() != null) {
+			if (isDisparateImageFileDirectory()) {
+				probs.add("Map and image files are not located in the same directory");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+		if (hasOneWayLinks()) {
+			probs.add("");
 		}
 
+		if (this.countries.size() > 0 && !eachTerReachable()) {
+			probs.add("There's some teris cannot reach to every other territories!");
+		}
+
+		if (probs.isEmpty()) {
+			return true;
+		}
+
+
+		return false;
+	}
+	
+	/**
+	 * Check whether the current map contains one way link.
+	 * 
+	 * @return Return true if the current map contains one way link, return
+	 *         false if not.
+	 */
+	public boolean hasOneWayLinks() {
+		for (Country ter : this.countries) {
+			if (ter.getBorderingCountries().size() != 0) {
+				for (Country ter2 : ter.getBorderingCountries()) {
+					if (ter2.getBorderingCountries().size() == 0 || !ter2.getBorderingCountries().contains(ter)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
+	/**
+	 * check whether a map contains two different format files including .map
+	 * text file and .bmp image file.
+	 * 
+	 * @return Return true if two different files are matched exactly, other
+	 *         wise return false.
+	 */
+	public boolean isDisparateImageFileDirectory() {
+		if (this.imageFilePath == null) {
+			return false;
+		}
+		if (this.mapFilePath == null) {
+			return false;
+		}
+		File mapDir = new File(this.mapFilePath).getParentFile();
+		File imgDir = new File(this.imageFilePath).getParentFile();
+		return (mapDir != null) && (imgDir != null) && (mapDir.compareTo(imgDir) != 0);
+	}
+
+	
+	/**
+	 * method to check if a territory is board to others in the territories
+	 * list.
+	 * 
+	 * @return true if they are boarded, else return false.
+	 */
+	public boolean eachTerReachable() {
+		clearReach();
+		Country head = this.countries.get(0);
+		DFS(head);
+		int count = 0;
+		for (Country t : this.countries) {
+			if (t.hasReached) {
+				count++;
+			}
+		}
+		clearReach();
+		if (count == this.countries.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * delete the linked relationships among territories.
+	 */
+	private void clearReach() {
+		for (Country t : this.countries) {
+			t.hasReached = false;
+		}
+	}
+
+	/**
+	 * searching all the connections relationship among territories.
+	 * 
+	 * @param head
+	 */
+	private void DFS(Country head) {
+		head.hasReached = true;
+		if (head.getBorderingCountries().size() == 0) {
+			return;
+		}
+		for (Country neighbour : head.getBorderingCountries()) {
+			if (!neighbour.hasReached) {
+				DFS(neighbour);
+			}
+		}
+	}
+	
 }

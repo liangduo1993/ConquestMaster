@@ -1,7 +1,5 @@
 package GameConsole.World;
 
-
-
 import java.io.File;
 import java.io.IOException;
 
@@ -15,7 +13,6 @@ import GameConsole.Player.Group;
 import GameConsole.Player.Player;
 import GameConsole.Window.WindowMain;
 
-
 public class GameState {
 	public int firstRound = 1;
 	private Player currPlayer;
@@ -26,37 +23,45 @@ public class GameState {
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
-	
-	public GameState(WindowMain win, String path) {
+
+	public GameState(WindowMain win, String path) throws Exception {
 		this.win = win;
-		this.currPlayer = null;  // will set this at the beggining of the turn
+		this.currPlayer = null; // will set this at the beggining of the turn
 		this.allPlayers = new Group();
 		this.currPhase = 0;
-		this.world = new World(path); // creating the world
+		this.world = new World(path);
 		this.music = null;
 	}
-	
+
 	public WindowMain getWindow() {
 		return this.win;
 	}
+
 	public String toString() {
 		String retString = "Players playing: \n";
-		for(Player p : this.allPlayers.getPlayers()) {
+		for (Player p : this.allPlayers.getPlayers()) {
 			retString += p.getName() + "\n";
 		}
-		return retString +"\nWorld Info:\n" + world.toString(); // will have other ones but right now just the string
+		return retString + "\nWorld Info:\n" + world.toString(); // will have
+																	// other
+																	// ones but
+																	// right now
+																	// just the
+																	// string
 	}
-	
-	public void gameStart() { // will start the game setting player 1 as the current player
+
+	public void gameStart() { // will start the game setting player 1 as the
+								// current player
 		this.currPhase = 0;
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
-		this.world.startGame(this.allPlayers); // will deal out the cards and initialize countries
+		this.world.startGame(this.allPlayers); // will deal out the cards and
+												// initialize countries
 		this.updateCountryLabels();
 	}
-	
+
 	public void updateCountryLabels() {
-		for(Continent con : this.world.getContinents()) {
-			for(Country cou : con.getCountries()) {
+		for (Continent con : this.world.getContinents()) {
+			for (Country cou : con.getCountries()) {
 				System.out.println(cou.getName());
 				System.out.println(cou.getButton().getClass());
 				System.out.println(cou.getButton().getLabel());
@@ -65,75 +70,77 @@ public class GameState {
 			}
 		}
 	}
-	
+
 	public Player getCurrPlayer() {
 		return this.currPlayer;
 	}
-	
+
 	public Group getAllPlayers() {
 		return this.allPlayers;
 	}
-	
+
 	public int getCurrPhase() {
 		return this.currPhase;
 	}
-	
+
 	public World getWorld() {
 		return this.world;
 	}
-	
+
 	public void setCurrPlayer(Player p1) {
 		this.currPlayer = p1;
 	}
-	
+
 	public void addPlayer(Player p1) {
 		this.allPlayers.addPlayer(p1);
 	}
-	
+
 	public void setCurrPhase(int p) {
 		this.currPhase = p;
 	}
-	
+
 	public Player checkWinner() {
 		boolean won = false;
-		if (this.allPlayers.getPlayers().size() == 1) { // if there is only one player they already win
+		if (this.allPlayers.getPlayers().size() == 1) { // if there is only one
+														// player they already
+														// win
 			return this.allPlayers.getPlayers().get(0);
 		}
-		for(Player p : this.allPlayers.getPlayers()) {
+		for (Player p : this.allPlayers.getPlayers()) {
 			won = this.world.checkIfWorldOwned(p);
-			if(won) {
+			if (won) {
 				return p;
 			}
 		}
 		return null;
 	}
-	
+
 	public void setNextPlayer() {
 		int currPlayerIndex = this.getAllPlayers().getPlayers().indexOf(this.currPlayer);
-		this.currPlayer = this.getAllPlayers().getPlayers().get((currPlayerIndex + 1) % this.getAllPlayers().getPlayers().size());
+		this.currPlayer = this.getAllPlayers().getPlayers()
+				.get((currPlayerIndex + 1) % this.getAllPlayers().getPlayers().size());
 	}
-	
+
 	public void playSound(String filename) {
-	    try{
-	      // from a wave File
-	      File soundFile = new File(filename);
-	      AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-	      this.music = AudioSystem.getClip();
-	      this.music.open(audioIn);
-	      this.music.start();
-	    }
-	    catch (UnsupportedAudioFileException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    } catch (LineUnavailableException e) {
-	      e.printStackTrace();
-	    }
+		try {
+			// from a wave File
+			File soundFile = new File(filename);
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+			this.music = AudioSystem.getClip();
+			this.music.open(audioIn);
+			this.music.start();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
 
 	}
-	
+
 	public void stopCurrentSound() {
-		//this.music.close();
+		// this.music.close();
 	}
 
 	public Country getCountry1() {
@@ -159,7 +166,5 @@ public class GameState {
 	public void setAllPlayers(Group allPlayers) {
 		this.allPlayers = allPlayers;
 	}
-	
-	
-	
+
 }

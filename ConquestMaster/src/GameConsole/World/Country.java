@@ -17,7 +17,9 @@ public class Country {
 	private ArrayList<Country> borderingCountries = new ArrayList<Country>();
 	private ArrayList<String> linkNames = new ArrayList<>();
 	private CountryButton button;
-
+	public boolean hasReached;
+	
+	
 	public Country() {
 	}
 

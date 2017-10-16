@@ -1,6 +1,5 @@
 package GameConsole.World;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -14,33 +13,31 @@ public class World {
 	private ArrayList<Continent> continents;
 	private ArrayList<Card> cards;
 	private ArrayList<Card> deck = new ArrayList<>();
-	private GameState gameState;
 	private MapLoader mapLoader;
 
-	public World(String path) {
+	public World(String path) throws Exception {
 		/*
 		 * Hardcoded countries, cards, and continent. Will hopefully be able to
 		 * programatically read this from json file but in case we don't have
 		 * time to design that just making this.
 		 */
-	  
-	    this.initialWorld();
+
+		this.initialWorld();
 
 		mapLoader = new MapLoader();
-		try {
-			mapLoader.load(path);
-			System.out.println("map load");
-			mapLoader.setWorld(this);
-			
-			for(Continent continent : this.continents){
-              System.out.println("continents:"+continent.getName());
-			  for(Country country : continent.getCountries()){
-			    System.out.println("country:"+country.getName());
-			  }
+		mapLoader.load(path);
+		System.out.println("map load");
+		mapLoader.setWorld(this);
+
+		if (mapLoader.isWarn() && !mapLoader.validityCheck()) {
+			throw new RuntimeException("the map is not valid!");
+		}
+
+		for (Continent continent : this.continents) {
+			System.out.println("continents:" + continent.getName());
+			for (Country country : continent.getCountries()) {
+				System.out.println("country:" + country.getName());
 			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		//
@@ -243,11 +240,10 @@ public class World {
 		// NewGuinea.addBorderingCountry(WesternAustralia);
 		// WesternAustralia.addBorderingCountry(EasternAustralia);
 	}
-	
-	private void initialWorld(){
-	  this.continents = new ArrayList<Continent>();
+
+	private void initialWorld() {
+		this.continents = new ArrayList<Continent>();
 	}
-	
 
 	public String toString() {
 		String retString = "";
@@ -317,7 +313,7 @@ public class World {
 		 */
 		for (Continent con : this.continents) {
 			for (Country cou : con.getCountries()) {
-				Card tempCard = new Card(cou,new Infantry().getStrength());
+				Card tempCard = new Card(cou, new Infantry().getStrength());
 				this.deck.add(tempCard);
 				// count++;
 			}
@@ -372,7 +368,5 @@ public class World {
 	public void setMapLoader(MapLoader mapLoader) {
 		this.mapLoader = mapLoader;
 	}
-	
-	
-	
+
 }
