@@ -15,6 +15,9 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Util.MyStringUtil;
 
+/**
+ * this class is GUI for input continent window.
+ */
 public class InputContinentFrame {
 	private JFrame frmInputcontinent;
 	private JTextField tName, tBonus;
@@ -27,7 +30,13 @@ public class InputContinentFrame {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @param unchangedName
+	 *            continent's name
+	 * @param map
+	 *            conquest map
 	 */
+
 	public InputContinentFrame(String unchangedName, ConquestMap map) {
 		this.map = map;
 		this.unchanged = map.findContinent(unchangedName);
@@ -66,7 +75,6 @@ public class InputContinentFrame {
 		frmInputcontinent.getContentPane().add(tBonus);
 		tBonus.setColumns(10);
 
-		// Confirm Button Event
 		confirmBtn = new JButton("Confirm");
 		confirmBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +104,6 @@ public class InputContinentFrame {
 		confirmBtn.setBounds(71, 302, 93, 23);
 		frmInputcontinent.getContentPane().add(confirmBtn);
 
-		// Cancel Button Event exit Window
 		cancelBtn = new JButton("Cancel");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,6 +121,12 @@ public class InputContinentFrame {
 		frmInputcontinent.setVisible(true);
 	}
 
+	/**
+	 * method to check the input is the specific Integer type and it cannot be
+	 * null.
+	 * 
+	 * @return true if input is valid, otherwise false.
+	 */
 	private boolean validateInput() {
 		if (!MyStringUtil.isNumeric(tBonus.getText())) {
 			errMsg.setText("Bonus must be a Integer!");
@@ -126,6 +139,5 @@ public class InputContinentFrame {
 
 		return true;
 	}
-
 
 }
