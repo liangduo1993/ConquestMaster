@@ -9,11 +9,19 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;
 
-
+/**
+ * 
+ * This class is a test class for class ConquestMap, for the functions which can edit the map.
+ *
+ */
 public class MapEditTest {
 	private ConquestMap map;
 	private String path;
 
+/**
+ * Set up function, to do some initial work. 
+ * @throws Exception If the target map is not valid, it would throw an exception.
+ */
 	@Before
 	public void setUp() throws Exception {
 		map = new ConquestMap();
@@ -21,6 +29,10 @@ public class MapEditTest {
 		map.load(path);
 	}
 
+	/**
+	 * test class: ConquestMap. function: addContinent(). Check if add a new
+	 * continent the size of the continents list is changed or not.
+	 */
 	@Test
 	public void testAddContinent() {
 		Continent newContinent = new Continent("newContinent", 1);
@@ -28,6 +40,11 @@ public class MapEditTest {
 		assertEquals(7, map.continents.size());
 	}
 
+	/**
+	 * test class: ConquestMap. Function: addTerritory(). Check if when adding a
+	 * new territory to the conquest map, the territory list contains the new
+	 * territory.
+	 */
 	@Test
 	public void testAddTerritory() {
 		Territory newTerritory = new Territory();
@@ -38,6 +55,10 @@ public class MapEditTest {
 		assertEquals(true, map.territories.contains(newTerritory));
 	}
 
+	/**
+	 * test class: ConquestMap, function clear(). check when we clear the map,
+	 * if the continent list and the territories list size are 0.
+	 */
 	@Test
 	public void testClear() {
 		map.clear();
@@ -45,11 +66,19 @@ public class MapEditTest {
 		assertEquals(true, map.continents.size() == 0);
 	}
 
+	/**
+	 * test class: ConquestMap, function: countTerritories(). check if the
+	 * specific continent"Kala" has 7 territories.
+	 */
 	@Test
 	public void testCountTerritories() {
 		assertEquals(7, map.countTerritories(map.findContinent("Kala")));
 	}
 
+	/**
+	 * test class: ConquestMap, function: deleteContinent(). Check if there is
+	 * not Continent for territories when deleting the continent "Kala".
+	 */
 	@Test
 	public void testDeleteContinent() {
 		Continent kala = map.findContinent("Kala");
@@ -58,6 +87,10 @@ public class MapEditTest {
 		assertEquals(null, map.findTerritory("Forgoth").getContinent());
 	}
 
+	/**
+	 * test class: ConquestMap, functionL: findTerritory(), check if there is
+	 * the specific territory in the territories list when deleting it.
+	 */
 	@Test
 	public void testDeleteTerritory() {
 		Territory forgoth = map.findTerritory("Forgoth");
@@ -66,6 +99,10 @@ public class MapEditTest {
 		assertEquals(false, map.findTerritory("Rove").getLinks().contains(forgoth));
 	}
 
+	/**
+	 * test class: ConquestMap, function: FindTerritory(), check if a
+	 * territories list has the specific territory.
+	 */
 	@Test
 	public void testFindTerritory() {
 		Territory forgoth = map.findTerritory("Forgoth");
@@ -74,6 +111,10 @@ public class MapEditTest {
 		assertEquals("Kala", forgoth.getContinent().getName());
 	}
 
+	/**
+	 * test class: ConquestMap,function: findContinent(), check if we can find a
+	 * new continent when we add it.
+	 */
 	@Test
 	public void testFindContinent() {
 		Continent kala = map.findContinent("Kala");
@@ -82,7 +123,10 @@ public class MapEditTest {
 		assertEquals(6, kala.getBonus());
 	}
 
-
+	/**
+	 * test class: ConquestMap, function: buildTerrtoryLicks(), check if we can
+	 * build licks of territories.
+	 */
 	@Test
 	public void testBuildTerritoryLinks() {
 		Territory forgoth = map.findTerritory("Forgoth");
@@ -93,6 +137,11 @@ public class MapEditTest {
 		assertEquals(true, forgoth.getLinks().contains(rove));
 	}
 
+	/**
+	 * test class: ConquestMap, function: updateContinent(), check if the
+	 * continent information is updated or not when we change the continent's
+	 * name and bonus.
+	 */
 	@Test
 	public void testUpdateContinent() {
 		Continent kala = map.findContinent("Kala");
