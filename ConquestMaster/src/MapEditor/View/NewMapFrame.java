@@ -21,6 +21,9 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.ConquestMap.ScrollOptions;
 import MapEditor.Util.MyStringUtil;
 
+/**
+ * this class is the GUI for Creating a new conquest map.
+ */
 public class NewMapFrame {
 	private final String NEWLINE = "\n";
 	private ConquestMap map;
@@ -59,8 +62,7 @@ public class NewMapFrame {
 		warnCheckBox = new JCheckBox("");
 		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
 		warnCheckBox.setSelected(true);
-		
-		
+
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
 
@@ -133,6 +135,12 @@ public class NewMapFrame {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * method to check the validation of input.
+	 * 
+	 * @return true if the author name and file path are valid, otherwise false
+	 *         and show the error message.
+	 */
 	private boolean validateInfo() {
 		if (tAuthor.getText().trim().equals("") || tAuthor.getText() == null) {
 			errMsg.setText("Author cannot be blank!");
@@ -145,6 +153,9 @@ public class NewMapFrame {
 		return true;
 	}
 
+	/**
+	 * once a new map is created set the author name.
+	 */
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
 		map.setScroll(ConquestMap.ScrollOptions.NONE);
