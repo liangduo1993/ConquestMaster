@@ -21,6 +21,9 @@ import MapEditor.Model.ConquestMap;
 import MapEditor.Model.ConquestMap.ScrollOptions;
 import MapEditor.Util.MyStringUtil;
 
+/**
+ * this class is GUI for setting conquest map.
+ */
 public class SettingsFrame {
 	private final String NEWLINE = "\n";
 	private ConquestMap map;
@@ -55,18 +58,18 @@ public class SettingsFrame {
 		tAuthor.setBounds(140, 35, 100, 21);
 		tAuthor.setColumns(10);
 		tAuthor.setText(map.getAuthor());
-		
+
 		warnCheckBox = new JCheckBox("");
 		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
 		warnCheckBox.setSelected(map.isWarn());
-		
+
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
 
 		pathMsg.setBounds(40, 210 - 100, 410, 15);
 		pathMsg.setForeground(Color.RED);
 		pathMsg.setText(map.getImageFilePath());
-		
+
 		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
 
@@ -133,6 +136,12 @@ public class SettingsFrame {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * method to check a changed author name is valid.
+	 * 
+	 * @return return true if a author name is not blank and image path is
+	 *         valid, otherwise false and showing the error message.
+	 */
 	private boolean validateInfo() {
 		if (tAuthor.getText().trim().equals("") || tAuthor.getText() == null) {
 			errMsg.setText("Author cannot be blank!");
@@ -144,7 +153,10 @@ public class SettingsFrame {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * once the edition is finished, set new author.
+	 */
 	public void changeSettings() {
 		map.setAuthor(tAuthor.getText().trim());
 		map.setWarn(warnCheckBox.isSelected());
