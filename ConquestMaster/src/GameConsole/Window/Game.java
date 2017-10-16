@@ -1,4 +1,4 @@
-package gameConsole.window;
+package GameConsole.Window;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -12,19 +12,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import gameConsole.world.Country;
-import gameConsole.world.World;
-/**
- *  The main entrance of the game
- *
- */
+import GameConsole.World.Country;
+import GameConsole.World.World;
+
 public class Game {
 
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<CountryButton>(42);
 	private World world;
 	/**
-	 * Launch the game.
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

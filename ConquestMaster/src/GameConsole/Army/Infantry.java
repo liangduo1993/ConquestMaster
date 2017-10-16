@@ -1,4 +1,4 @@
-package gameConsole.army;
+package GameConsole.Army;
 
 
 public class Infantry extends Troop{

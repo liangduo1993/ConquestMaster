@@ -6,16 +6,11 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-/**
- * this class is the GUI for the logpanel, to show the any message when editing a conquest map. 
- */
+
 public class LogPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	public static JTextArea log = new JTextArea();
-	private static final String NEWLINE = "\n";
-	/**
-	 * constructor method, setting the logPanel location.
-	 */
+	public JTextArea log = new JTextArea();
+
 	public LogPanel() {
 		super(new BorderLayout());
 
@@ -24,10 +19,7 @@ public class LogPanel extends JPanel {
 		log.setEditable(false);
 		JScrollPane logScrollPane = new JScrollPane(log);
 		add(logScrollPane, BorderLayout.CENTER);
-	}
-	
-	public static void addLog(String msg){
-		log.append(msg + NEWLINE);
+
 	}
 
 }

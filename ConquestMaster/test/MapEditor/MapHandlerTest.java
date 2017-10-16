@@ -10,26 +10,22 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import MapEditor.Core.MainFrame;
+import MapEditor.Core.mainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 
 public class MapHandlerTest {
 	private ConquestMap map;
+	private mainFrame mainFrame;
 	private String path;
 
 	@Before
 	public void setUp() throws Exception {
+		mainFrame = new mainFrame();
 		map = new ConquestMap();
 		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
 	}
 
-	/**
-	 * test class: ConquestMap, function: ConquestMap.territories().size(), test
-	 * class: Territory, function: getContinent(), test class: Continent, function:
-	 * getName(). check if a map including a specific terrtories list, and if there
-	 * is a specific territory.
-	 */
 	@Test
 	public void testLoad() throws Exception {
 		map.load(path);
@@ -38,10 +34,6 @@ public class MapHandlerTest {
 		assertEquals("Kala", map.findTerritory("Forgoth").getContinent().getName());
 	}
 
-	/**
-	 * test class: ConquestMap, function load(). check if there is a error message
-	 * when we load a invalid map file.
-	 */
 	@Test
 	public void testLoadInvalidMap() {
 		String invalidPath = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis(invalid).map")
@@ -52,11 +44,7 @@ public class MapHandlerTest {
 			assertThat(ex.getMessage(), containsString("didn't pass the validation!"));
 		}
 	}
-	
-	/**
-	 * test class ConquestMap, function: addContinent(), function save().
-	 * check if we can add a new continent and save as a new map file in the local 
-	 */
+
 	@Test
 	public void testSaveString() throws Exception {
 		map.load(path);

@@ -1,4 +1,4 @@
-package gameConsole.window;
+package GameConsole.Window;
 
 
 import java.awt.Color;
@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import gameConsole.player.Player;
-import gameConsole.world.Country;
+import GameConsole.Player.Player;
+import GameConsole.World.Country;
 
 public class CountryButton{
 	public String name;

@@ -1,4 +1,4 @@
-package gameConsole.world;
+package GameConsole.World;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +9,10 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import gameConsole.player.Group;
-import gameConsole.player.Player;
-import gameConsole.window.WindowMain;
-/**
- * Set up basic states of the game
- * Current phase, current player
- *
- */
+import GameConsole.Player.Group;
+import GameConsole.Player.Player;
+import GameConsole.Window.WindowMain;
+
 public class GameState {
 	public int firstRound = 1;
 	private Player currPlayer;
@@ -27,13 +23,7 @@ public class GameState {
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
-	
-	/**
-	 * constructor method with incoming parameters
-	 * @param win window frame of the game
-	 * @param path map path on hard driver
-	 * @throws Exception
-	 */
+
 	public GameState(WindowMain win, String path) throws Exception {
 		this.win = win;
 		this.currPlayer = null; // will set this at the beggining of the turn
@@ -52,17 +42,16 @@ public class GameState {
 		for (Player p : this.allPlayers.getPlayers()) {
 			retString += p.getName() + "\n";
 		}
-		return retString + "\nworld Info:\n" + world.toString(); // will have
+		return retString + "\nWorld Info:\n" + world.toString(); // will have
 																	// other
 																	// ones but
 																	// right now
 																	// just the
 																	// string
 	}
-	/**
-	 * will start the game setting player 1 as the current player
-	 */
-	public void gameStart() {		
+
+	public void gameStart() { // will start the game setting player 1 as the
+								// current player
 		this.currPhase = 0;
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers); // will deal out the cards and
@@ -81,24 +70,15 @@ public class GameState {
 			}
 		}
 	}
-	/**
-	 * method to get the current player.
-	 * @return current player
-	 */
+
 	public Player getCurrPlayer() {
 		return this.currPlayer;
 	}
-	/**
-	 * method to get all the players
-	 * @return all players
-	 */
+
 	public Group getAllPlayers() {
 		return this.allPlayers;
 	}
-	/**
-	 * method to get current phase
-	 * @return current phase
-	 */
+
 	public int getCurrPhase() {
 		return this.currPhase;
 	}

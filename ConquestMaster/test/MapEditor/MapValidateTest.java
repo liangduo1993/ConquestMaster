@@ -5,26 +5,24 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import MapEditor.Core.MainFrame;
+import MapEditor.Core.mainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Territory;
 
 public class MapValidateTest {
 	private ConquestMap map;
+	private mainFrame mainFrame;
 	private String path;
 
 	@Before
 	public void setUp() throws Exception {
+		mainFrame = new mainFrame();
 		map = new ConquestMap();
 		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
 		map.load(path);
 	}
+	
 
-	/**
-	 * test class: ConquestMap, function: hasOneWaylink(). Check if a territory has
-	 * one way link connection, an check when we delete the link connection, the
-	 * link connection is null or not.
-	 */
 	@Test
 	public void testHasOneWayLinks() {
 		Territory forgoth = map.findTerritory("Forgoth");
@@ -34,11 +32,8 @@ public class MapValidateTest {
 		assertEquals(true, map.hasOneWayLinks());
 	}
 
-	/**
-	 * test class: ConquestMap, function eachTerReachable(), check the territories
-	 * of the map is boarding each other when we load a map, check a new territory
-	 * is boarding to each other we want when we add it in the map.
-	 */
+
+	
 	@Test
 	public void testEachTerReachable() {
 		assertEquals(true, map.eachTerReachable());
@@ -48,7 +43,9 @@ public class MapValidateTest {
 		newTerritory.setCont(map.continents.get(0));
 		map.addTerritory(newTerritory);
 		assertEquals(false, map.eachTerReachable());
-
+		
 	}
+
+
 
 }

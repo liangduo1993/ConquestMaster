@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JTextArea;
 
 import MapEditor.Model.ConquestMap;
 import MapEditor.Util.MyStringUtil;
-import MapEditor.View.LogPanel;
 
 /**
  * 
@@ -15,7 +15,9 @@ import MapEditor.View.LogPanel;
  *
  */
 public class FileChooser {
+	private final String NEWLINE = "\n";
 	private ConquestMap map;
+	private JTextArea jta = mainFrame.lp.log;
 	private JFileChooser fc;
 
 	/**
@@ -48,15 +50,16 @@ public class FileChooser {
 		} else {
 			switch (operation) {
 			case "load":
-				LogPanel.addLog("Open command cancelled by user.");
+				jta.append("Open command cancelled by user." + NEWLINE);
 				break;
 			case "saveas":
-				LogPanel.addLog("Save command cancelled by user.");
+				jta.append("Save command cancelled by user." + NEWLINE);
 				break;
 			default:
 				break;
 			}
 		}
+		jta.setCaretPosition(jta.getDocument().getLength());
 	}
 
 
@@ -68,9 +71,10 @@ public class FileChooser {
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.load(MyStringUtil.getMapPath(path));
-			LogPanel.addLog("Map is successfully loaded!");
+			jta.append("Map is successfully loaded!" + NEWLINE);
+			// tablePanel.updateTable();
 		} catch (Exception e) {
-			LogPanel.addLog("Loading map failed!");
+			jta.append("Loading map failed!" + NEWLINE);
 			e.printStackTrace();
 		}
 
@@ -83,12 +87,13 @@ public class FileChooser {
 		if (this.map.getMapFilePath() != null) {
 			try {
 				this.map.save();
-				LogPanel.addLog("Map is successfully saved!");
+				jta.append("Map is successfully saved!" + NEWLINE);
 			} catch (Exception e) {
-				LogPanel.addLog("Save failed!");
+				jta.append("Save failed!" + NEWLINE);
+				e.printStackTrace();
 			}
 		} else {
-			LogPanel.addLog("There's no Map loaded!");
+			jta.append("There's no Map loaded!" + NEWLINE);
 		}
 
 	}
@@ -101,9 +106,9 @@ public class FileChooser {
 		System.out.println(MyStringUtil.getMapPath(path));
 		try {
 			this.map.save(MyStringUtil.getMapPath(path));
-			LogPanel.addLog("Map is successfully saved!");
+			jta.append("Map is successfully saved!" + NEWLINE);
 		} catch (IOException e) {
-			LogPanel.addLog("Save as failed!");
+			jta.append("Save as failed!" + NEWLINE);
 			e.printStackTrace();
 		}
 	}

@@ -1,21 +1,16 @@
-package gameConsole.world;
+package GameConsole.World;
 
 
 import java.util.ArrayList;
 		
-/**
- * 
- * This class create methods to add/remove countries to Continents, get/set Continents bonus and so on
- * the toString method lists the countries on the continent.
- *
- */
+
 public class Continent {
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private int bonus;
 	private String color;
 	private String name;
 	private World world;
-
+	
 	public Continent(String color, String name, int bonus, World world){
 		this.bonus = bonus;
 		this.color = color;
@@ -23,13 +18,8 @@ public class Continent {
 		this.world = world;
 	}
 	
-	/**
-	 * constructor method with incoming parameters.
-	 * 
-	 * @param bonus a continent's bonus after conquest it
-	 * @param name continent name with String type
-	 * 
-	 */
+	
+	
 	public Continent(int bonus, String name) {
 		super();
 		this.bonus = bonus;
@@ -45,18 +35,10 @@ public class Continent {
 		}
 		return retString;
 	}
-	/**
-	 * add a country to Continent
-	 * @param c the country was added
-	 */
 	public void addCountry(Country c){
 		c.setContinent(this);
 		countries.add(c);
 	}
-	/**
-	 * remove a country from Continent
-	 * @param c the country was removed
-	 */
 	public void removeCountry(Country c){
 		for(Country A : countries){
 			if(A.equals(c)){
@@ -92,8 +74,8 @@ public class Continent {
 	public World getWorld(){
 		return world;
 	}
-	/*public player checkIfRuled(){
-		player placeHolder = new player();
+	/*public Player checkIfRuled(){
+		Player placeHolder = new Player();
 		return placeHolder;
 	}*/
 }
