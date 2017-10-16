@@ -6,7 +6,7 @@ import javax.swing.JFrame;
  *  The main entrance of the application
  *
  */
-public class driver extends JFrame{
+public class Driver extends JFrame{
 	/**
 	 * Launch the application.
 	 */
