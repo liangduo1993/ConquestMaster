@@ -1,4 +1,4 @@
-package GameConsole.World;
+package gameConsole.world;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import GameConsole.Player.Group;
-import GameConsole.Player.Player;
-import GameConsole.Window.WindowMain;
+import gameConsole.player.Group;
+import gameConsole.player.Player;
+import gameConsole.window.WindowMain;
 /**
  * Set up basic states of the game
  * Current phase, current player
@@ -30,7 +30,7 @@ public class GameState {
 	
 	/**
 	 * constructor method with incoming parameters
-	 * @param win Window frame of the game
+	 * @param win window frame of the game
 	 * @param path map path on hard driver
 	 * @throws Exception
 	 */
@@ -52,7 +52,7 @@ public class GameState {
 		for (Player p : this.allPlayers.getPlayers()) {
 			retString += p.getName() + "\n";
 		}
-		return retString + "\nWorld Info:\n" + world.toString(); // will have
+		return retString + "\nworld Info:\n" + world.toString(); // will have
 																	// other
 																	// ones but
 																	// right now

@@ -1,6 +1,6 @@
-package GameConsole.World;
+package gameConsole.world;
 
-import GameConsole.Player.Player;
+import gameConsole.player.Player;
 
 public class Card {
 	private Country country;

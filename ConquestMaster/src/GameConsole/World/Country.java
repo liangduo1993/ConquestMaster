@@ -1,11 +1,11 @@
-package GameConsole.World;
+package gameConsole.world;
 
 import java.util.ArrayList;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Army.Troop;
-import GameConsole.Player.Player;
-import GameConsole.Window.CountryButton;
+import gameConsole.army.Infantry;
+import gameConsole.army.Troop;
+import gameConsole.player.Player;
+import gameConsole.window.CountryButton;
 
 public class Country {
 	private Continent continent;
@@ -33,7 +33,7 @@ public class Country {
 	}
 	// public String toString() {
 	// String retString = "Country Name: " + this.name + "\n";
-	// retString += "Player: " + this.player.getName() + "\n";
+	// retString += "player: " + this.player.getName() + "\n";
 	// retString += "Continent: " + this.continent.getName() + "\n";
 	// retString += "Bordering Countries: ";
 	// for(Country c : this.borderingCountries) {

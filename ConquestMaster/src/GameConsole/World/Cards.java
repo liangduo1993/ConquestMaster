@@ -1,8 +1,6 @@
-package GameConsole.World;
+package gameConsole.world;
 
-import java.util.*;
-
-import GameConsole.Player.Player;
+import gameConsole.player.Player;
 
 /**
  * This class defines the Cards that player can exchange to troops
@@ -32,9 +30,9 @@ public class Cards{
 	   
 
 	   /**
-	    * Gives all of the killed Player's cards to their killer
-	    * @param giver Player who was killed
-	    * @param receiver Player who killed giver
+	    * Gives all of the killed player's cards to their killer
+	    * @param giver player who was killed
+	    * @param receiver player who killed giver
 	    */
 	   public void giveCards(Player giver, Player receiver){
 	         receiver.addAllCard(giver.getOnHand());

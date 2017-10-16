@@ -1,13 +1,13 @@
-package GameConsole.World;
+package gameConsole.world;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Player.Group;
-import GameConsole.Player.Player;
-import GameConsole.Window.MapLoader;
+import gameConsole.army.Infantry;
+import gameConsole.player.Group;
+import gameConsole.player.Player;
+import gameConsole.window.MapLoader;
 
 public class World {
 	private ArrayList<Continent> continents;

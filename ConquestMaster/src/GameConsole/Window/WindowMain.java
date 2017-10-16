@@ -1,4 +1,4 @@
-package GameConsole.Window;
+package gameConsole.window;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -32,8 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
-import GameConsole.Player.Player;
-import GameConsole.World.GameState;
+import gameConsole.player.Player;
+import gameConsole.world.GameState;
 
 public class WindowMain implements ActionListener {
 
@@ -128,7 +128,7 @@ public class WindowMain implements ActionListener {
 
 		JPanel resultsScreen = new JPanel();
 		cards.add(mainScreen, "Main Screen");
-		cards.add(playerSelect, "Player Selection");
+		cards.add(playerSelect, "player Selection");
 		cards.add(map, "Game");
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
@@ -142,7 +142,7 @@ public class WindowMain implements ActionListener {
 		startGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cardLayout.show(cards, "Player Selection");
+				cardLayout.show(cards, "player Selection");
 
 			}
 		});
@@ -486,7 +486,7 @@ public class WindowMain implements ActionListener {
 		playerOneText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		playerNamesPanel.add(playerOneText);
 
-		JLabel player1Text = new JLabel("Name of Player 1:");
+		JLabel player1Text = new JLabel("Name of player 1:");
 		player1Text.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerOneText.add(player1Text);
 
@@ -499,7 +499,7 @@ public class WindowMain implements ActionListener {
 		playerTwoText.setBounds(500, 0, 300, 80);
 		playerNamesPanel.add(playerTwoText);
 
-		JLabel player2Text = new JLabel("Name of Player 2:");
+		JLabel player2Text = new JLabel("Name of player 2:");
 		player2Text.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerTwoText.add(player2Text);
 
@@ -512,7 +512,7 @@ public class WindowMain implements ActionListener {
 		playerThreeText.setBounds(0, 120, 300, 80);
 		playerNamesPanel.add(playerThreeText);
 
-		JLabel player3Text = new JLabel("Name of Player 3:");
+		JLabel player3Text = new JLabel("Name of player 3:");
 		player3Text.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerThreeText.add(player3Text);
 
@@ -525,7 +525,7 @@ public class WindowMain implements ActionListener {
 		playerFourText.setBounds(500, 120, 300, 80);
 		playerNamesPanel.add(playerFourText);
 
-		JLabel player4Text = new JLabel("Name of Player 4:");
+		JLabel player4Text = new JLabel("Name of player 4:");
 		player4Text.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerFourText.add(player4Text);
 
@@ -537,7 +537,7 @@ public class WindowMain implements ActionListener {
 		playerFiveText.setBounds(250, 220, 300, 80);
 		playerNamesPanel.add(playerFiveText);
 
-		JLabel player5Text = new JLabel("Name of Player 5:");
+		JLabel player5Text = new JLabel("Name of player 5:");
 		player5Text.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerFiveText.add(player5Text);
 

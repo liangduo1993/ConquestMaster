@@ -1,8 +1,8 @@
-package GameConsole.Player;
+package gameConsole.player;
 
 import java.util.ArrayList;
 
-import GameConsole.World.World;
+import gameConsole.world.World;
 
 
 /**
@@ -23,6 +23,10 @@ public class Group {
 		return players;
 	}
 
+	/**
+	 * To set the players list
+	 * @param players the players list need to be setted
+	 */
 	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
@@ -50,15 +54,18 @@ public class Group {
 	public void setWorld(World world) {
 		this.world = world;
 	}
+
 	public ArrayList<Player> getPlace() {
 		return place;
 	}
 	public void setPlace(ArrayList<Player> place) {
 		this.place = place;
 	}
+
 	public String getGroupName() {
 		return groupName;
 	}
+
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}

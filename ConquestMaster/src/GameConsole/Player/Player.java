@@ -1,4 +1,4 @@
-package GameConsole.Player;
+package gameConsole.player;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -13,14 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Army.Troop;
-import GameConsole.World.Card;
-import GameConsole.World.Cards;
-import GameConsole.World.Continent;
-import GameConsole.World.Country;
-import GameConsole.World.GameState;
-import GameConsole.World.World;
+import gameConsole.army.Infantry;
+import gameConsole.army.Troop;
+import gameConsole.world.Card;
+import gameConsole.world.Cards;
+import gameConsole.world.Continent;
+import gameConsole.world.Country;
+import gameConsole.world.GameState;
+import gameConsole.world.World;
 
 
 /*
@@ -255,7 +255,7 @@ public class Player {
 		JOptionPane.showMessageDialog(null, this.name + " has lost the game!");
 		this.game.getAllPlayers().getPlayers().remove(this);
 		this.game.setNextPlayer();
-		System.out.println("Current Player is at this end game point is " + game.getCurrPlayer().getName() );
+		System.out.println("Current player is at this end game point is " + game.getCurrPlayer().getName() );
 		if (game.checkWinner() == game.getCurrPlayer()) {
 			game.getWindow().initializeEndGame();
 			System.out.println("End game was called");		}
@@ -526,7 +526,7 @@ public class Player {
 			this.loseGame();
 			return 0;
 		}
-		//World world = this.countries.get(0).getContinent().getWorld();
+		//world world = this.countries.get(0).getContinent().getWorld();
 		World world = game.getWorld();
 		System.out.println(world.getContinents().size());
 		

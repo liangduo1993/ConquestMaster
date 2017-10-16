@@ -1,4 +1,4 @@
-package GameConsole.World;
+package gameConsole.world;
 
 
 import java.util.ArrayList;
@@ -92,8 +92,8 @@ public class Continent {
 	public World getWorld(){
 		return world;
 	}
-	/*public Player checkIfRuled(){
-		Player placeHolder = new Player();
+	/*public player checkIfRuled(){
+		player placeHolder = new player();
 		return placeHolder;
 	}*/
 }
