@@ -1,16 +1,12 @@
 package MapEditor;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import static org.hamcrest.CoreMatchers.containsString;
-
-import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import MapEditor.Core.MainFrame;
 import MapEditor.Model.ConquestMap;
 import MapEditor.Model.Continent;
 
