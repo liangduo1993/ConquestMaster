@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -33,6 +34,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import GameConsole.Player.Player;
+import GameConsole.World.Cards;
 import GameConsole.World.GameState;
 
 public class WindowMain implements ActionListener {
@@ -50,8 +52,8 @@ public class WindowMain implements ActionListener {
 	private CardLayout cardLayout;
 	private JFileChooser fc;
 	private JButton openButton;
-	private String mapPath;
 	private JPanel map;
+	private JPanel currentCards;
 
 	public WindowMain() throws IOException {
 		// frame1 = new JFrame();
@@ -106,7 +108,7 @@ public class WindowMain implements ActionListener {
 					initialize();
 					openButton.setVisible(false);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");   
+					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
 					e1.printStackTrace();
 					this.frame1.dispose();
 					openMapFile();
@@ -780,6 +782,13 @@ public class WindowMain implements ActionListener {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
+		
+		 currentCards = new JPanel();
+		map.add(currentCards);
+		currentCards.setBounds(900, 700, 200, 40);
+		currentCards.setBackground(Color.yellow);
+		
+		
 		JPanel nextStage = new JPanel();
 		nextStage.setBackground(Color.RED);
 		nextStage.setBounds(1009, 785, 170, 50);
@@ -796,58 +805,23 @@ public class WindowMain implements ActionListener {
 		nextStage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(troopsLeft == 0){
-				gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
+				if (troopsLeft == 0) {
+					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 
-				if (gameState.firstRound == 1) {
+					if (gameState.firstRound == 1) {
 
-					gameState.setCurrPhase((gameState.getCurrPhase() + 2) % 3);
-					int playerNum = gameState.getAllPlayers().getPlayers().size();
-					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
-						gameState.firstRound++;
-						System.out.println("round +1 !!!");
-					}
+						gameState.setCurrPhase((gameState.getCurrPhase() + 2) % 3);
+						int playerNum = gameState.getAllPlayers().getPlayers().size();
+						if (gameState.getCurrPlayer()
+								.equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
+							gameState.firstRound++;
+							System.out.println("round +1 !!!");
+						}
 
-					arrow0.setVisible(true);
-					arrow1.setVisible(false);
-					arrow2.setVisible(false);
-					gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
-					gameState.setNextPlayer();
-					troopsLeft = gameState.getCurrPlayer().getBonus();
-					numberOfTroops.setText(Integer.toString(troopsLeft));
-					gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
-					gameState.setCountry1(null);
-					gameState.setCountry2(null);
-
-					System.out.println("current player name:" + gameState.getCurrPlayer().getName());
-					System.out.println("current round num:" + gameState.firstRound);
-					System.out.println("current phase:" + gameState.getCurrPhase());
-				}
-
-				if (gameState.firstRound == 2
-						&& gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(0))) {
-					attackStageLabel.setVisible(true);
-					moveStageLabel.setVisible(true);
-					if (gameState.getCurrPhase() == 0) {
-						unitDisplay.setVisible(true);
-						arrow0.setVisible(true);
-						arrow1.setVisible(false);
-						arrow2.setVisible(false);
-					} 
-					gameState.firstRound++;
-				}
-
-				
-				else if (gameState.firstRound != 1) {
-					attackStageLabel.setVisible(true);
-					moveStageLabel.setVisible(true);
-					if (gameState.getCurrPhase() == 0) {
-						unitDisplay.setVisible(true);
 						arrow0.setVisible(true);
 						arrow1.setVisible(false);
 						arrow2.setVisible(false);
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
-						gameState.getCurrPlayer().setHasMoved(false);
 						gameState.setNextPlayer();
 						troopsLeft = gameState.getCurrPlayer().getBonus();
 						numberOfTroops.setText(Integer.toString(troopsLeft));
@@ -855,25 +829,75 @@ public class WindowMain implements ActionListener {
 						gameState.setCountry1(null);
 						gameState.setCountry2(null);
 
-					} else if (gameState.getCurrPhase() == 1) {
-						unitDisplay.setVisible(false);
-						arrow0.setVisible(false);
-						arrow1.setVisible(true);
-						arrow2.setVisible(false);
-						gameState.getCurrPlayer().giveCards();//This is simulation for giving cards to player 20171016 by lz
-					} else {
-						unitDisplay.setVisible(false);
-						arrow0.setVisible(false);
-						arrow1.setVisible(false);
-						arrow2.setVisible(true);
+						System.out.println("current player name:" + gameState.getCurrPlayer().getName());
+						System.out.println("current round num:" + gameState.firstRound);
+						System.out.println("current phase:" + gameState.getCurrPhase());
+					}
+
+					if (gameState.firstRound == 2
+							&& gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(0))) {
+						attackStageLabel.setVisible(true);
+						moveStageLabel.setVisible(true);
+						if (gameState.getCurrPhase() == 0) {
+							unitDisplay.setVisible(true);
+							arrow0.setVisible(true);
+							arrow1.setVisible(false);
+							arrow2.setVisible(false);
+						}
+						gameState.firstRound++;
+					}
+
+					else if (gameState.firstRound != 1) {
+						attackStageLabel.setVisible(true);
+						moveStageLabel.setVisible(true);
+						if (gameState.getCurrPhase() == 0) {
+							unitDisplay.setVisible(true);
+							arrow0.setVisible(true);
+							arrow1.setVisible(false);
+							arrow2.setVisible(false);
+							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
+							gameState.getCurrPlayer().setHasMoved(false);
+							gameState.setNextPlayer();
+							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
+							gameState.setCountry1(null);
+							gameState.setCountry2(null);
+							
+							cardUpdate();
+							troopsLeft = gameState.getCurrPlayer().getBonus();
+							numberOfTroops.setText(Integer.toString(troopsLeft));
+							cardUpdate();
+						} else if (gameState.getCurrPhase() == 1) {
+							unitDisplay.setVisible(false);
+							arrow0.setVisible(false);
+							arrow1.setVisible(true);
+							arrow2.setVisible(false);
+							
+						} else {
+							unitDisplay.setVisible(false);
+							arrow0.setVisible(false);
+							arrow1.setVisible(false);
+							arrow2.setVisible(true);
+							gameState.getCurrPlayer().giveCards();// This is
+							// simulation
+									// for
+									// giving
+									// cards to
+									// player
+									// 20171016
+									// by lz
+						}
 
 					}
 
-				}
+					
+
 				}
 			}
 		});
 
+		
+		
+		
 		for (CountryButton countryButton : g.getButtons()) {
 			// map.add(countryButton.b);
 			countryButton.b.addActionListener(new ActionListener() {
@@ -937,7 +961,7 @@ public class WindowMain implements ActionListener {
 								country2.setText((String) null);
 							}
 						}
-					} else if(!gameState.getCurrPlayer().isHasMoved()){
+					} else if (!gameState.getCurrPlayer().isHasMoved()) {
 						if (gameState.getCountry1() == null) {
 							gameState.setCountry1(countryButton.country);
 							country1.setText(gameState.getCountry1().getName());
@@ -1013,6 +1037,22 @@ public class WindowMain implements ActionListener {
 
 	}
 
+	public void cardUpdate(){
+		Player currentPlayer = gameState.getCurrPlayer();
+		if (currentPlayer != null) {
+			ArrayList<Cards> onHand = currentPlayer.getOnHand();
+			currentCards.removeAll();
+			currentCards.repaint();
+			for (int i = 0; i < onHand.size(); i++) {
+				JLabel card = new JLabel(onHand.get(i).getType() + "");
+				card.setBounds(50 * i, 0, 50, 50);
+				card.setBackground(Color.red);
+				currentCards.add(card);
+				System.out.println("==================");
+			}
+		}
+	}
+	
 	public void initializeEndGame() {
 		playerWonLabell.setText(gameState.getCurrPlayer().getName());
 		cardLayout.show(cards, "Results");
