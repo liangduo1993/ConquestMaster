@@ -386,7 +386,7 @@ public class Player {
 				while (it.hasNext()) 
 				{
 					Cards c = it.next();
-					if ((c.getType()!=deleted[0]||c.getType()!=deleted[1])&&i!=3) 
+					if ((c.getType()!=deleted[0]&&c.getType()!=deleted[1])&&i!=3) 
 					{
 						System.out.println("j="+j);
 						i++;

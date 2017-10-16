@@ -10,7 +10,7 @@ import GameConsole.Player.Player;
  */
 public class Cards{
 
-	   private int type;
+	   private int type; // 0, 1, 2 three types
 	   private Player player;
 	   
 	   public Cards(Player player){
