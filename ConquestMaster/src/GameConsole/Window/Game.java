@@ -89,18 +89,35 @@ public class Game {
 		}
 				
 	}
-	
+
+	/**
+	 * To get the frame
+	 * @return the frame with JPanel type
+	 */
 	public JPanel getFrame(){
 		return frame;
 	}
+
+	/**
+	 * To get the button list
+	 * @return the button list with ArrayList type
+	 */
 	public ArrayList<CountryButton> getButtons(){
 		return buttons;
 	}
 
+	/**
+	 * To get the world where the players are in
+	 * @return the world where the players are in with World type
+	 */
 	public World getWorld() {
 		return world;
 	}
 
+	/**
+	 * To set the world
+	 * @param world the selected world that will be set as the world where the players are in
+	 */
 	public void setWorld(World world) {
 		this.world = world;
 	}

@@ -39,6 +39,10 @@ import GameConsole.Player.Player;
 import GameConsole.World.Cards;
 import GameConsole.World.GameState;
 
+/**
+ * This class is to display the interface of the game where
+ * the player can visually perform game operations.
+ */
 public class WindowMain implements ActionListener, Observer {
 
 	private JFrame frame1;
@@ -57,6 +61,10 @@ public class WindowMain implements ActionListener, Observer {
 	private JPanel map;
 	private JPanel currentCards;
 
+	/**
+	 * Constructor method
+	 * @throws IOException
+	 */
 	public WindowMain() throws IOException {
 		// frame1 = new JFrame();
 		// frame1.setResizable(false);
@@ -78,6 +86,9 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * To open a map file in the main window
+	 */
 	public void openMapFile() {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
@@ -97,6 +108,10 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * Method to listen for action event on openButton
+	 * @param e a object allows  to access the properties of the ActionEvent with ActionEvent type
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == openButton) {
 			int returnVal = fc.showOpenDialog(this.frame1);
@@ -119,6 +134,12 @@ public class WindowMain implements ActionListener, Observer {
 		}
 	}
 
+	/**
+	 * Method to initial the start game interface,
+	 * the player selection window interface,
+	 * and the game play interface
+	 * @throws IOException
+	 */
 	private void initialize() throws IOException {
 
 		cards = new JPanel(new CardLayout());
@@ -1050,6 +1071,9 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * Method to update the hand cards
+	 */
 	public void cardUpdate() {
 		Player currentPlayer = gameState.getCurrPlayer();
 		if (currentPlayer != null) {
@@ -1066,11 +1090,19 @@ public class WindowMain implements ActionListener, Observer {
 		}
 	}
 
+	/**
+	 * Method to initial the interface when the game end
+	 */
 	public void initializeEndGame() {
 		playerWonLabell.setText(gameState.getCurrPlayer().getName());
 		cardLayout.show(cards, "Results");
 	}
 
+	/**
+	 * Method does updates to the view offered to the player
+	 * @param o the observable object with Observable type
+	 * @param arg an argument passed to the notifyObservers method with Object type
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		cardUpdate();
@@ -1078,6 +1110,9 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
+	/**
+	 * Method to connect the observer object to the model object
+	 */
 	public void registerObserver() {
 		if (gameState.getAllPlayers().getPlayers().size() > 0) {
 			for (Player p : gameState.getAllPlayers().getPlayers()) {

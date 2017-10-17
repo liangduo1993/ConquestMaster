@@ -12,6 +12,9 @@ import javax.swing.SwingConstants;
 import GameConsole.Player.Player;
 import GameConsole.World.Country;
 
+/**
+ * This class is attach a button to each country
+ */
 public class CountryButton{
 	public String name;
 	//public BufferedImage image;
@@ -64,6 +67,13 @@ public class CountryButton{
 //	    });
 //	    */
 //	}
+
+	/**
+	 * Constructor method with incoming parameters
+	 * @param i the image with BufferedImage type
+	 * @param name the button name with String type
+	 * @param c the country will be attached with the button with Country type
+	 */
 	public CountryButton(BufferedImage i, String name, Country c){
 		//this.image = i;
 		this.country = c;
@@ -112,8 +122,15 @@ public class CountryButton{
 	    });
 	    */
 	}
-	
-	
+
+
+	/**
+	 * To set the bounds of the button and label
+	 * @param x x coordinate location with int type
+	 * @param y y coordinate location with int type
+	 * @param w the width with int type
+	 * @param h the height with int type
+	 */
 	public void setDoubleBounds(int x, int y, int w, int h) {
 		this.b.setBounds(x, y, w, h);
 		this.label.setBounds(x, y, w, h);
@@ -122,11 +139,19 @@ public class CountryButton{
 	public void fixLabelBounds(int x, int y, int w, int h) {
 		this.label.setBounds(x, y, w, h);
 	}
-	
+
+	/**
+	 * To get the label
+	 * @return the label with JLabel type
+	 */
 	public JLabel getLabel()  {
 		return this.label;
 	}
-	
+
+	/**
+	 * Method to update the troop size on the label
+	 * @param p the player who owns the corresponding country of the button with Player type
+	 */
 	public void updateLabel(Player p) {
 		this.label.setText("" + this.country.getTroops().size());
 		this.label.setForeground(p.getColor());

@@ -13,6 +13,9 @@ import GameConsole.World.Country;
 import GameConsole.World.World;
 import MapEditor.Util.StringUtil;
 
+/**
+ * The class is to load a map to the game
+ */
 public class MapLoader {
 	public static enum ScrollOptions {
 		HORIZONTAL, VERTICAL, NONE;
@@ -28,10 +31,17 @@ public class MapLoader {
 	public ArrayList<Continent> continents = new ArrayList<>();
 	public ArrayList<Country> countries = new ArrayList<>();
 
+	/**
+	 * Constructor method
+	 */
 	public MapLoader() {
 		clear();
 	}
 
+	/**
+	 * To set the world
+	 * @param world the selected world that will be set as the world where the players are in
+	 */
 	public void setWorld(World world){
 	  System.out.println(this.continents.size());
 	  for(Continent continent : this.continents){
@@ -64,6 +74,9 @@ public class MapLoader {
 	// }
 	// }
 
+	/**
+	 * Method to clear the values of the corresponding attributes
+	 */
 	public void clear() {
 		this.mapFilePath = null;
 		this.imageFilePath = null;
@@ -83,6 +96,11 @@ public class MapLoader {
 		return defaultValue;
 	}
 
+	/**
+	 * To find the continent from the continent list
+	 * @param name the continent name
+	 * @return the continent if the continent is found; otherwise return null
+	 */
 	public Continent findContinent(String name) {
 		for (Continent cont : this.continents) {
 			if (name.equalsIgnoreCase(cont.getName())) {
@@ -110,6 +128,11 @@ public class MapLoader {
 		} while (!line.equalsIgnoreCase(head));
 	}
 
+	/**
+	 * To find the country from the country list
+	 * @param name the country name
+	 * @return the country if the country is found; otherwise return null
+	 */
 	public Country findCountry(String name) {
 		for (Country ter : this.countries) {
 			if (name.equalsIgnoreCase(ter.getName())) {
@@ -119,6 +142,10 @@ public class MapLoader {
 		return null;
 	}
 
+	/**
+	 * To get the author
+	 * @return the author with String type
+	 */
 	public final String getAuthor() {
 		return this.author;
 	}
@@ -130,10 +157,18 @@ public class MapLoader {
 		return new File(this.imageFilePath).getName();
 	}
 
+	/**
+	 * To get the image file path
+	 * @return the image file path with String type
+	 */
 	public String getImageFilePath() {
 		return this.imageFilePath;
 	}
 
+	/**
+	 * To get the map directory
+	 * @return the map directory with File type
+	 */
 	public File getMapDirectory() {
 		if (this.mapFilePath == null) {
 			return null;
@@ -141,10 +176,18 @@ public class MapLoader {
 		return new File(this.mapFilePath).getParentFile();
 	}
 
+	/**
+	 * To get the map file path
+	 * @return the map file path with String type
+	 */
 	public String getMapFilePath() {
 		return this.mapFilePath;
 	}
 
+	/**
+	 * To get the map name
+	 * @return the map name with String type
+	 */
 	public String getMapName() {
 		if (this.mapFilePath == null) {
 			return "Untitled Map";
@@ -164,6 +207,11 @@ public class MapLoader {
 		return this.wrap;
 	}
 
+	/**
+	 * Method to load the map
+	 * @param mapFilePath the map file path with String type
+	 * @throws IOException
+	 */
 	public void load(String mapFilePath) throws IOException {
 		clear();
 		this.mapFilePath = mapFilePath;
@@ -173,6 +221,11 @@ public class MapLoader {
 		loadCountries(in);
 	}
 
+	/**
+	 * Method to load the continents
+	 * @param in A Reader object to provide the underlying stream
+	 * @throws IOException
+	 */
 	private void loadContinents(LineNumberReader in) throws IOException {
 		this.continents.clear();
 		for (;;) {
@@ -205,6 +258,11 @@ public class MapLoader {
 
 	}
 
+	/**
+	 * Method to load the map section
+	 * @param in A Reader object to provide the underlying stream
+	 * @throws IOException
+	 */
 	private void loadMapSection(LineNumberReader in) throws IOException {
 		findSection(in, "Map");
 		for (;;) {
@@ -246,6 +304,11 @@ public class MapLoader {
 		}
 	}
 
+	/**
+	 *  Method to load the countries
+	 * @param in A Reader object to provide the underlying stream
+	 * @throws IOException
+	 */
 	private void loadCountries(LineNumberReader in) throws IOException {
 		this.countries.clear();
 		Country ter;
@@ -267,6 +330,10 @@ public class MapLoader {
 		}
 	}
 
+	/**
+	 * Method to build country name
+	 * @param t the selected country that will be built the name with Country type
+	 */
 	public void buildCountryName(Country t) {
 		if (findCountry(t.getName()) != null) {
 			// t.setBorderingCountries(new ArrayList<Country>());
@@ -287,6 +354,12 @@ public class MapLoader {
 		}
 	}
 
+	/**
+	 * Method to parse the country line
+	 * @param line the object that will be parsed
+	 * @return the created country with Country type
+	 * @throws IOException
+	 */
 	private Country parseCountryLine(String line) throws IOException {
 		try {
 			StringTokenizer st = new StringTokenizer(line, ",");
@@ -315,6 +388,10 @@ public class MapLoader {
 		}
 	}
 
+	/**
+	 * To set the author
+	 * @param author the desired author that want to be set with String type
+	 */
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {
 			this.author = author;
@@ -356,7 +433,7 @@ public class MapLoader {
 	 * territory list is not empty and it can not reach to other territories.
 	 * 
 	 * @return false if also the check failed
-	 * @see eachTerReachable()
+	 *
 	 */
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList<>();
