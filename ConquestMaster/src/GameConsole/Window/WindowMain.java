@@ -187,8 +187,7 @@ public class WindowMain implements ActionListener, Observer {
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
-		String os = System.getProperty("os.name").toLowerCase();
-		String path = this.getClass().getClassLoader().getResource("GimpFiles/StartGame.png").getPath().substring(1);
+		String path = this.getClass().getResource("/GimpFiles/StartGame.png").getPath().substring(1);
 		label.setIcon(new ImageIcon(path));
 
 		Scrollbar scrollbar = new Scrollbar();
@@ -670,7 +669,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("");
-		path = this.getClass().getClassLoader().getResource("GimpFiles/arrow.png").getPath().substring(1);
+		path = this.getClass().getResource("/GimpFiles/arrow.png").getPath().substring(1);
 		lblNewLabel_3.setIcon(new ImageIcon(path));
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
@@ -765,7 +764,7 @@ public class WindowMain implements ActionListener, Observer {
 		playerWinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel label_12 = new JLabel("");
-		path = this.getClass().getClassLoader().getResource("GimpFiles/Soldiers.png").getPath().substring(1);
+		path = this.getClass().getResource("/GimpFiles/Soldiers.png").getPath().substring(1);
 		label_12.setIcon(new ImageIcon(path));
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
