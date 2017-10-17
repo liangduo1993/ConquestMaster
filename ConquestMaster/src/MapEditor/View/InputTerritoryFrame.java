@@ -199,10 +199,10 @@ public class InputTerritoryFrame {
 	}
 
 	/**
-	 * method to set the new territory of the edited terrtory information
+	 * method to set the new territory of the edited territory information
 	 * 
 	 * @param changed
-	 *            the edited terrtory
+	 *            the edited territory
 	 */
 	public void setChanged(Territory changed) {
 		this.changed = changed;
