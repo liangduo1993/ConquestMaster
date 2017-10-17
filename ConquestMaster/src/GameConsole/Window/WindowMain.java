@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -37,7 +39,7 @@ import GameConsole.Player.Player;
 import GameConsole.World.Cards;
 import GameConsole.World.GameState;
 
-public class WindowMain implements ActionListener {
+public class WindowMain implements ActionListener,Observer {
 
 	private JFrame frame1;
 	private JPanel cards;
@@ -145,7 +147,6 @@ public class WindowMain implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Player Selection");
-
 			}
 		});
 
@@ -426,6 +427,7 @@ public class WindowMain implements ActionListener {
 					Player p5 = new Player(player5TextField.getText(), Color.yellow, gameState);
 					gameState.addPlayer(p5);
 				}
+				registerObserver();
 				gameState.gameStart();
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText(Integer.toString(troopsLeft));
@@ -465,6 +467,8 @@ public class WindowMain implements ActionListener {
 			}
 		});
 
+		
+		
 		startGamePanel.setLayout(null);
 		startGamePanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		startGamePanel.setBackground(Color.RED);
@@ -1046,10 +1050,9 @@ public class WindowMain implements ActionListener {
 			currentCards.repaint();
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel(onHand.get(i).getType() + "");
-				card.setBounds(50 * i, 0, 50, 50);
+//				card.setBounds(50 * i, 0, 50, 50);
 				card.setBackground(Color.red);
 				currentCards.add(card);
-				System.out.println("==================");
 			}
 		}
 	}
@@ -1057,5 +1060,21 @@ public class WindowMain implements ActionListener {
 	public void initializeEndGame() {
 		playerWonLabell.setText(gameState.getCurrPlayer().getName());
 		cardLayout.show(cards, "Results");
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		cardUpdate();
+		System.out.println("state changed!");
+		
+	}
+	
+	public void registerObserver(){
+		if(gameState.getAllPlayers().getPlayers().size() > 0){
+			for (Player p : gameState.getAllPlayers().getPlayers()) {
+				p.addObserver(this);
+			}
+		}
+		
 	}
 }

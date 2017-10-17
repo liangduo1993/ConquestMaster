@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Observable;
 import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
@@ -26,7 +27,7 @@ import GameConsole.World.World;
  * This class represents all of the data and funcionality that a player would have.
  * All of the actions that a player would do eventually comes back to this class.
  */
-public class Player {
+public class Player extends Observable {
 	private String name;
 	private Color color;
 	private ArrayList<Troop> numTroops = new ArrayList<Troop>(); // all of the
@@ -47,7 +48,7 @@ public class Player {
 	private JFormattedTextField playerTextName; // the fields at the top that
 												// contains the player's name
 	private int totalCardsExchange = 0; // Record how many times does a
-												// player has changed his cards
+										// player has changed his cards
 	private boolean hasMoved = false;
 
 	public Player(String name, Color color, GameState game) {
@@ -399,8 +400,9 @@ public class Player {
 		} else {
 
 			int reward = this.getCountries().size() / 3;
+			boolean isLoop = true;
 
-			while (this.onhand.size() >= 3) {
+			while (this.onhand.size() >= 3 && isLoop) {
 				System.out.println("Must exchange 3 of them");
 				int cardType0 = 0;
 				int cardType1 = 0;
@@ -439,72 +441,79 @@ public class Player {
 
 				if (selection.getSize() > 0) {
 					int result = JOptionPane.showConfirmDialog(null, numPanel, "Use Cards to Exchange Troops",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE);
-					String selected = comboBox.getSelectedItem().toString();
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (result == 1 && this.onhand.size() < 5) {
+						isLoop = false;
+					} else {
 
-					totalCardsExchange = totalCardsExchange + 1;
-					reward = reward + (totalCardsExchange * 5);
+						String selected = comboBox.getSelectedItem().toString();
 
-					switch (selected) {
-					case ("Change 3*Type0"): {
-						int i = 0;
-						Iterator<Cards> it = onhand.iterator();
-						while (it.hasNext()) {
-							Cards c = it.next();
-							if (c.getType() == 0 && i < 3) {
-								it.remove();
-								i++;
+						totalCardsExchange = totalCardsExchange + 1;
+						reward = reward + (totalCardsExchange * 5);
+
+						switch (selected) {
+						case ("Change 3*Type0"): {
+							int i = 0;
+							Iterator<Cards> it = onhand.iterator();
+							while (it.hasNext()) {
+								Cards c = it.next();
+								if (c.getType() == 0 && i < 3) {
+									it.remove();
+									i++;
+								}
+							}
+							break;
+						}
+						case ("Change 3*Type1"): {
+							int i = 0;
+							Iterator<Cards> it = onhand.iterator();
+							while (it.hasNext()) {
+								Cards c = it.next();
+								if (c.getType() == 1 && i < 3) {
+									it.remove();
+									i++;
+								}
 							}
 						}
-						break;
-					}
-					case ("Change 3*Type1"): {
-						int i = 0;
-						Iterator<Cards> it = onhand.iterator();
-						while (it.hasNext()) {
-							Cards c = it.next();
-							if (c.getType() == 1 && i < 3) {
-								it.remove();
-								i++;
+						case ("Change 3*Type2"): {
+							int i = 0;
+							Iterator<Cards> it = onhand.iterator();
+							while (it.hasNext()) {
+								Cards c = it.next();
+								if (c.getType() == 2 && i < 3) {
+									it.remove();
+									i++;
+								}
 							}
+							break;
 						}
-					}
-					case ("Change 3*Type2"): {
-						int i = 0;
-						Iterator<Cards> it = onhand.iterator();
-						while (it.hasNext()) {
-							Cards c = it.next();
-							if (c.getType() == 2 && i < 3) {
-								it.remove();
-								i++;
+						case ("Change 1*Type0&Type1&Type2"): {
+							int i = 0;
+							int j = 0;
+							int[] deleted = { 9, 9, 9 };
+							Iterator<Cards> it = onhand.iterator();
+							while (it.hasNext()) {
+								Cards c = it.next();
+								if ((c.getType() != deleted[0] && c.getType() != deleted[1]) && i != 3) {
+									// System.out.println("j="+j);
+									i++;
+									deleted[j] = c.getType();
+									j++;
+									it.remove();
+								}
 							}
+							break;
 						}
-						break;
-					}
-					case ("Change 1*Type0&Type1&Type2"): {
-						int i = 0;
-						int j = 0;
-						int[] deleted = { 9, 9, 9 };
-						Iterator<Cards> it = onhand.iterator();
-						while (it.hasNext()) {
-							Cards c = it.next();
-							if ((c.getType() != deleted[0] && c.getType() != deleted[1]) && i != 3) {
-								// System.out.println("j="+j);
-								i++;
-								deleted[j] = c.getType();
-								j++;
-								it.remove();
-							}
 						}
-						break;
+						System.out.println("after change===========");
+						for (Cards c : onhand) {
+							System.out.println(c);
+						}
+						System.out.println("after change===========");
+						setChanged();
+						notifyObservers();
 					}
-					}
-					System.out.println("after change===========");
-					for (Cards c : onhand) {
-						System.out.println(c);
-					}
-					System.out.println("after change===========");
-				}else
+				} else
 					break;
 			}
 			// if(this.onhand.size()>=3){
@@ -648,8 +657,8 @@ public class Player {
 						owned = false;
 						// break;
 					}
-					//System.out.println(cou.getPlayer().getName());
-					//System.out.println(this.name);
+					// System.out.println(cou.getPlayer().getName());
+					// System.out.println(this.name);
 				}
 				System.out.println(con.getName());
 				if (owned) {
