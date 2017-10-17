@@ -2,10 +2,14 @@ package MapEditor;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import MapEditor.Model.ConquestMap;
+import MapEditor.Model.Continent;
 import MapEditor.Model.Territory;
 
 /**
@@ -61,6 +65,28 @@ public class MapValidateTest {
 		map.addTerritory(newTerritory);
 		assertEquals(false, map.eachTerReachable());
 
+	}
+	
+	/**
+	 * test class: ConquestMap, function eachTerInContReachable(), check the
+	 * territories of the map is boarding each other when given a target continent, check a
+	 * new territory is boarding to each other we want when we add it in the
+	 * map.
+	 */
+	@Test
+	public void testEachTerInContReachable() {
+		Continent kala = map.findContinent("Kala");
+		assertEquals(true, map.eachTerInContReachable(kala));
+		Territory newTerritory = new Territory();
+		newTerritory.setName("newTerritory");
+		newTerritory.setCenter(1, 1);
+		newTerritory.setContinent(kala);
+		ArrayList<Territory> neighList = new ArrayList<>();
+		neighList.add(map.findTerritory("Clokan"));
+		neighList.add(map.findTerritory("Horkan"));
+		newTerritory.setLinks(neighList);
+		map.addTerritory(newTerritory);
+		assertEquals(false, map.eachTerInContReachable(kala));
 	}
 
 }

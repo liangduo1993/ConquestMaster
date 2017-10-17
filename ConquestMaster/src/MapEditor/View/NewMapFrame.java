@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +25,6 @@ public class NewMapFrame {
 	private JFileChooser fc;
 	private JLabel errMsg = new JLabel();
 	private JLabel pathMsg = new JLabel();
-	private JCheckBox warnCheckBox;
 
 	/**
 	 * Create the application.
@@ -51,9 +49,6 @@ public class NewMapFrame {
 		tAuthor.setBounds(140, 35, 100, 21);
 		tAuthor.setColumns(10);
 
-//		warnCheckBox = new JCheckBox("");
-//		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
-//		warnCheckBox.setSelected(true);
 
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
@@ -114,15 +109,10 @@ public class NewMapFrame {
 		frame.getContentPane().add(imgBtn);
 		frame.getContentPane().add(confirmBtn);
 		frame.getContentPane().add(cancelBtn);
-		//frame.getContentPane().add(warnCheckBox);
 
 		JLabel lblNewLabel = new JLabel("Author:");
 		lblNewLabel.setBounds(40, 40, 54, 15);
 		frame.getContentPane().add(lblNewLabel);
-//
-//		JLabel lblNewLabel_3 = new JLabel("Warn:");
-//		lblNewLabel_3.setBounds(40, 126 - 50, 54, 15);
-//		frame.getContentPane().add(lblNewLabel_3);
 
 		frame.setVisible(true);
 	}
