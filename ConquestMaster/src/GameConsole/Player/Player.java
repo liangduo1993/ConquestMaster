@@ -403,7 +403,7 @@ public class Player extends Observable {
 			boolean isLoop = true;
 
 			while (this.onhand.size() >= 3 && isLoop) {
-				System.out.println("Must exchange 3 of them");
+				//System.out.println("Must exchange 3 of them");
 				int cardType0 = 0;
 				int cardType1 = 0;
 				int cardType2 = 0;
@@ -442,7 +442,8 @@ public class Player extends Observable {
 				if (selection.getSize() > 0) {
 					int result = JOptionPane.showConfirmDialog(null, numPanel, "Use Cards to Exchange Troops",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					if (result == 1 && this.onhand.size() < 5) {
+					if (result == 1){}
+					else if(this.onhand.size() < 5) {
 						isLoop = false;
 					} else {
 

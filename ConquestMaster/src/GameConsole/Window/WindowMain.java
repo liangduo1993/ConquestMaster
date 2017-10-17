@@ -1047,13 +1047,14 @@ public class WindowMain implements ActionListener,Observer {
 		if (currentPlayer != null) {
 			ArrayList<Cards> onHand = currentPlayer.getOnHand();
 			currentCards.removeAll();
-			currentCards.repaint();
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel(onHand.get(i).getType() + "");
 //				card.setBounds(50 * i, 0, 50, 50);
-				card.setBackground(Color.red);
+//				card.setBackground(Color.red);
 				currentCards.add(card);
 			}
+			System.out.println("there's " + onHand.size() + " cards!");
+			currentCards.repaint();
 		}
 	}
 	
