@@ -42,18 +42,6 @@ public class Country {
 		this.yLoc = 0;
 		this.button = null;
 	}
-	// public String toString() {
-	// String retString = "Country Name: " + this.name + "\n";
-	// retString += "Player: " + this.player.getName() + "\n";
-	// retString += "Continent: " + this.continent.getName() + "\n";
-	// retString += "Bordering Countries: ";
-	// for(Country c : this.borderingCountries) {
-	// retString += c.getName() + ", ";
-	// }
-	// retString += "Number of troops: " + this.troops.size();
-	// retString += "\n\n";
-	// return retString;
-	// }
 
 	/**
 	 * To set the continent that will contain the country

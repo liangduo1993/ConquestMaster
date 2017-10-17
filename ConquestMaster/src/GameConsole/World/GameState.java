@@ -56,12 +56,7 @@ public class GameState {
 		for (Player p : this.allPlayers.getPlayers()) {
 			retString += p.getName() + "\n";
 		}
-		return retString + "\nWorld Info:\n" + world.toString(); // will have
-		// other
-		// ones but
-		// right now
-		// just the
-		// string
+		return retString + "\nWorld Info:\n" + world.toString(); 
 	}
 	/**
 	 * will start the game setting player 1 as the current player
@@ -69,8 +64,7 @@ public class GameState {
 	public void gameStart() {
 		this.currPhase = 0;
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
-		this.world.startGame(this.allPlayers); // will deal out the cards and
-		// initialize countries
+		this.world.startGame(this.allPlayers);
 		this.updateCountryLabels();
 	}
 
@@ -171,27 +165,6 @@ public class GameState {
 				.get((currPlayerIndex + 1) % this.getAllPlayers().getPlayers().size());
 	}
 
-	public void playSound(String filename) {
-		try {
-			// from a wave File
-			File soundFile = new File(filename);
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			this.music = AudioSystem.getClip();
-			this.music.open(audioIn);
-			this.music.start();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void stopCurrentSound() {
-		// this.music.close();
-	}
 
 	/**
 	 * To get a country

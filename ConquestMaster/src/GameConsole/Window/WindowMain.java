@@ -67,22 +67,6 @@ public class WindowMain implements ActionListener, Observer {
 	 * @throws IOException
 	 */
 	public WindowMain() throws IOException {
-		// frame1 = new JFrame();
-		// frame1.setResizable(false);
-		// //gameState.playSound("music\\intro_music.wav");
-		// frame1.setTitle("Risk - The Game of Global Domination");
-		// frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
-		// frame1.setBounds(100, 100, 1200, 900);
-		// frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame1.getContentPane().setLayout(new CardLayout(0, 0));
-		// fc = new JFileChooser();
-		// openButton = new JButton("Open Map", null);
-		// openButton.addActionListener(this);
-		// openButton.setBounds(400, 400, 250, 100);
-		//
-		// this.frame1.add(openButton, BorderLayout.PAGE_START);
-		// frame1.setVisible(true);
-
 		this.openMapFile();
 
 	}
@@ -93,7 +77,6 @@ public class WindowMain implements ActionListener, Observer {
 	public void openMapFile() {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
-		// gameState.playSound("music\\intro_music.wav");
 		frame1.setTitle("Risk - The Game of Global Domination");
 		frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame1.setBounds(100, 100, 1200, 900);
@@ -122,7 +105,6 @@ public class WindowMain implements ActionListener, Observer {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
 				String path = file.getAbsolutePath();
-				// tframe1.setVisible(false);
 				this.frame1.remove(openButton);
 				try {
 					gameState = new GameState(this, path);
@@ -145,7 +127,6 @@ public class WindowMain implements ActionListener, Observer {
 	 * @throws IOException
 	 */
 	private void initialize() throws IOException {
-
 		cards = new JPanel(new CardLayout());
 		cards.setBounds(100, 100, 1200, 900);
 
@@ -164,7 +145,6 @@ public class WindowMain implements ActionListener, Observer {
 
 		mainScreen.setBackground(Color.LIGHT_GRAY);
 		mainScreen.setLayout(null);
-		// frame1.getContentPane().add(mainScreen, "name_21718623405784");
 
 		this.cardLayout = (CardLayout) cards.getLayout();
 		JPanel startGame = new JPanel();
@@ -209,18 +189,12 @@ public class WindowMain implements ActionListener, Observer {
 		mainScreen.add(label);
 		String os = System.getProperty("os.name").toLowerCase();
 		String path = this.getClass().getClassLoader().getResource("GimpFiles/StartGame.png").getPath().substring(1);
-		// if (os.contains("mac")) {
-		// label.setIcon(new ImageIcon("GimpFiles/StartGame.png"));
-		// } else {
-		// label.setIcon(new ImageIcon("GimpFiles\\StartGame.png"));
-		// }
 		label.setIcon(new ImageIcon(path));
 
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);
 		mainScreen.add(scrollbar);
 		playerSelect.setBackground(Color.LIGHT_GRAY);
-		// frame1.getContentPane().add(playerSelect, "UnknownPlyer");
 		playerSelect.setLayout(null);
 		JPanel playerQuestion = new JPanel();
 		playerQuestion.setLayout(null);
@@ -583,10 +557,8 @@ public class WindowMain implements ActionListener, Observer {
 		map.setLayout(null);
 
 		JLabel labelPlayer = new JLabel("");
-		// labelPlayer.setIcon(new ImageIcon("GimpFiles\\Map.png"));
 		MapLoader mapLoader = gameState.getWorld().getMapLoader();
 		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
-		// labelPlayer.setBounds(0, 30, 1194, 831);
 		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
 		map.add(labelPlayer);
 
@@ -698,11 +670,6 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("");
-		// if (os.contains("mac")) {
-		// lblNewLabel_3.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		// } else {
-		// lblNewLabel_3.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		// }
 		path = this.getClass().getClassLoader().getResource("GimpFiles/arrow.png").getPath().substring(1);
 		lblNewLabel_3.setIcon(new ImageIcon(path));
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
@@ -714,11 +681,6 @@ public class WindowMain implements ActionListener, Observer {
 		arrow1.setBackground(Color.LIGHT_GRAY);
 
 		JLabel label_7 = new JLabel("");
-		// if (os.contains("mac")) {
-		// label_7.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		// } else {
-		// label_7.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		// }
 		label_7.setIcon(new ImageIcon(path));
 		label_7.setBounds(0, 0, 30, 30);
 		arrow1.add(label_7);
@@ -729,11 +691,6 @@ public class WindowMain implements ActionListener, Observer {
 		map.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
-		// if (os.contains("mac")) {
-		// label_8.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		// } else {
-		// label_8.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		// }
 		label_8.setIcon(new ImageIcon(path));
 
 		label_8.setBounds(0, 0, 30, 30);
@@ -763,7 +720,6 @@ public class WindowMain implements ActionListener, Observer {
 		Country1Label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country1Display.add(Country1Label);
 
-		// JLabel label_13 = new JLabel((String) null);
 		country1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country1Display.add(country1);
 
@@ -776,7 +732,6 @@ public class WindowMain implements ActionListener, Observer {
 		Country2Label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country2Display.add(Country2Label);
 
-		// JLabel label_14 = new JLabel((String) null);
 		country2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country2Display.add(country2);
 
@@ -810,11 +765,6 @@ public class WindowMain implements ActionListener, Observer {
 		playerWinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel label_12 = new JLabel("");
-//		if (os.contains("mac")) {
-//			label_12.setIcon(new ImageIcon("GimpFiles/Soldiers.png"));
-//		} else {
-//			label_12.setIcon(new ImageIcon("GimpFiles\\Soldiers.png"));
-//		}
 		path = this.getClass().getClassLoader().getResource("GimpFiles/Soldiers.png").getPath().substring(1);
 		label_12.setIcon(new ImageIcon(path));
 		label_12.setBounds(300, 400, 600, 321);
@@ -902,14 +852,6 @@ public class WindowMain implements ActionListener, Observer {
 						arrow1.setVisible(false);
 						arrow2.setVisible(false);
 
-						// int playerNum =
-						// gameState.getAllPlayers().getPlayers().size();
-						// if (gameState.getCurrPlayer()
-						// .equals(gameState.getAllPlayers().getPlayers().get(playerNum
-						// - 1))) {
-						// gameState.firstRound++;
-						// System.out.println("round +1 !!!");
-						// }
 						Player currentPlayer = gameState.getCurrPlayer();
 
 						if (currentPlayer == countryButton.country.getPlayer() && currentPlayer.getInitTroop() > 0) {
@@ -964,9 +906,6 @@ public class WindowMain implements ActionListener, Observer {
 									&& gameState.getCountry1() == null) {
 								if (countryButton.country.getTroops().size() > 1) {
 									gameState.setCountry1(countryButton.country);
-									// JOptionPane.showMessageDialog(countryButton.b,
-									// "Country1 is " +
-									// gameState.getCountry1().getName());
 									country1.setText(gameState.getCountry1().getName());
 									cancelCountryButton.setVisible(true);
 									cancelCountryButton.setEnabled(true);
@@ -983,16 +922,7 @@ public class WindowMain implements ActionListener, Observer {
 									cancelCountryButton.setVisible(false);
 									cancelCountryButton.setEnabled(false);
 									country2.setText(gameState.getCountry2().getName());
-									// JOptionPane.showMessageDialog(countryButton.b,
-									// "Country2 is " +
-									// gameState.getCountry2().getName());
 									gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
-									// if
-									// (gameState.getCountry2().getPlayer().getCountries().size()
-									// == 0){
-									// gameState.getCountry2().getPlayer().getPlayerTextName().setVisible(false);
-									// gameState.getAllPlayers().getPlayers().remove(gameState.getCountry2().getPlayer());
-									// }
 									gameState.updateCountryLabels();
 									gameState.setCountry1(null);
 									gameState.setCountry2(null);
@@ -1071,14 +1001,6 @@ public class WindowMain implements ActionListener, Observer {
 			});
 		}
 
-		// gameState.getWorld().getContinents().get(0).getCountries().get(0).getButton().b.addMouseListener(new
-		// MouseAdapter() {
-		// @Override
-		// public void mouseClicked(MouseEvent e) {
-		// System.out.println(gameState.getWorld().getContinents().get(0).getCountries().get(0).getName());
-		//
-		// }
-		// });
 
 	}
 
@@ -1093,7 +1015,6 @@ public class WindowMain implements ActionListener, Observer {
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel(onHand.get(i).getType() + "");
 				card.setBounds(20 * i + 20, 0, 20, 20);
-				// card.setBackground(Color.red);
 				currentCards.add(card);
 			}
 			System.out.println("there's " + currentCards.getComponentCount() + " cards!");

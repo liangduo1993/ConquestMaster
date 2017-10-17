@@ -150,8 +150,4 @@ public class Continent {
 	public World getWorld(){
 		return world;
 	}
-	/*public Player checkIfRuled(){
-		Player placeHolder = new Player();
-		return placeHolder;
-	}*/
 }
