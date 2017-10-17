@@ -40,8 +40,8 @@ import GameConsole.World.Cards;
 import GameConsole.World.GameState;
 
 /**
- * This class is to display the interface of the game where
- * the player can visually perform game operations.
+ * This class is to display the interface of the game where the player can
+ * visually perform game operations.
  */
 public class WindowMain implements ActionListener, Observer {
 
@@ -63,6 +63,7 @@ public class WindowMain implements ActionListener, Observer {
 
 	/**
 	 * Constructor method
+	 * 
 	 * @throws IOException
 	 */
 	public WindowMain() throws IOException {
@@ -110,7 +111,10 @@ public class WindowMain implements ActionListener, Observer {
 
 	/**
 	 * Method to listen for action event on openButton
-	 * @param e a object allows  to access the properties of the ActionEvent with ActionEvent type
+	 * 
+	 * @param e
+	 *            a object allows to access the properties of the ActionEvent
+	 *            with ActionEvent type
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == openButton) {
@@ -135,9 +139,9 @@ public class WindowMain implements ActionListener, Observer {
 	}
 
 	/**
-	 * Method to initial the start game interface,
-	 * the player selection window interface,
-	 * and the game play interface
+	 * Method to initial the start game interface, the player selection window
+	 * interface, and the game play interface
+	 * 
 	 * @throws IOException
 	 */
 	private void initialize() throws IOException {
@@ -204,11 +208,13 @@ public class WindowMain implements ActionListener, Observer {
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
 		String os = System.getProperty("os.name").toLowerCase();
-		if (os.contains("mac")) {
-			label.setIcon(new ImageIcon("GimpFiles/StartGame.png"));
-		} else {
-			label.setIcon(new ImageIcon("GimpFiles\\StartGame.png"));
-		}
+		String path = this.getClass().getClassLoader().getResource("GimpFiles/StartGame.png").getPath().substring(1);
+		// if (os.contains("mac")) {
+		// label.setIcon(new ImageIcon("GimpFiles/StartGame.png"));
+		// } else {
+		// label.setIcon(new ImageIcon("GimpFiles\\StartGame.png"));
+		// }
+		label.setIcon(new ImageIcon(path));
 
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);
@@ -692,11 +698,13 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("");
-		if (os.contains("mac")) {
-			lblNewLabel_3.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		} else {
-			lblNewLabel_3.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		}
+		// if (os.contains("mac")) {
+		// lblNewLabel_3.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		// } else {
+		// lblNewLabel_3.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		// }
+		path = this.getClass().getClassLoader().getResource("GimpFiles/arrow.png").getPath().substring(1);
+		lblNewLabel_3.setIcon(new ImageIcon(path));
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
@@ -706,11 +714,12 @@ public class WindowMain implements ActionListener, Observer {
 		arrow1.setBackground(Color.LIGHT_GRAY);
 
 		JLabel label_7 = new JLabel("");
-		if (os.contains("mac")) {
-			label_7.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		} else {
-			label_7.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		}
+		// if (os.contains("mac")) {
+		// label_7.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		// } else {
+		// label_7.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		// }
+		label_7.setIcon(new ImageIcon(path));
 		label_7.setBounds(0, 0, 30, 30);
 		arrow1.add(label_7);
 
@@ -720,11 +729,12 @@ public class WindowMain implements ActionListener, Observer {
 		map.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
-		if (os.contains("mac")) {
-			label_8.setIcon(new ImageIcon("GimpFiles/arrow.png"));
-		} else {
-			label_8.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
-		}
+		// if (os.contains("mac")) {
+		// label_8.setIcon(new ImageIcon("GimpFiles/arrow.png"));
+		// } else {
+		// label_8.setIcon(new ImageIcon("GimpFiles\\arrow.png"));
+		// }
+		label_8.setIcon(new ImageIcon(path));
 
 		label_8.setBounds(0, 0, 30, 30);
 		arrow2.add(label_8);
@@ -800,12 +810,13 @@ public class WindowMain implements ActionListener, Observer {
 		playerWinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel label_12 = new JLabel("");
-		if (os.contains("mac")) {
-			label_12.setIcon(new ImageIcon("GimpFiles/Soldiers.png"));
-		} else {
-			label_12.setIcon(new ImageIcon("GimpFiles\\Soldiers.png"));
-		}
-
+//		if (os.contains("mac")) {
+//			label_12.setIcon(new ImageIcon("GimpFiles/Soldiers.png"));
+//		} else {
+//			label_12.setIcon(new ImageIcon("GimpFiles\\Soldiers.png"));
+//		}
+		path = this.getClass().getClassLoader().getResource("GimpFiles/Soldiers.png").getPath().substring(1);
+		label_12.setIcon(new ImageIcon(path));
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
@@ -1100,8 +1111,12 @@ public class WindowMain implements ActionListener, Observer {
 
 	/**
 	 * Method does updates to the view offered to the player
-	 * @param o the observable object with Observable type
-	 * @param arg an argument passed to the notifyObservers method with Object type
+	 * 
+	 * @param o
+	 *            the observable object with Observable type
+	 * @param arg
+	 *            an argument passed to the notifyObservers method with Object
+	 *            type
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
