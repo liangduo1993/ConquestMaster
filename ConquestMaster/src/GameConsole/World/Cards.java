@@ -36,7 +36,7 @@ public class Cards{
 	    * @param giver Player who was killed
 	    * @param receiver Player who killed giver
 	    */
-	   public void giveCards(Player giver, Player receiver){
+	   public void handOverCards(Player giver, Player receiver){
 	         receiver.addAllCard(giver.getOnHand());
 	   }
 
