@@ -1,7 +1,5 @@
 package GameConsole.World;
 
-import java.util.*;
-
 import GameConsole.Player.Player;
 
 /**

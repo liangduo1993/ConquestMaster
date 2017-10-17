@@ -17,56 +17,9 @@ import GameConsole.World.Country;
  */
 public class CountryButton{
 	public String name;
-	//public BufferedImage image;
 	public JButton b;
 	public Country country;
 	private JLabel label;
-	
-//	public CountryButton(BufferedImage i, String name, Country c){
-//		this.image = i;
-//		this.country = c;
-//		c.setButton(this);
-//		this.name = name;
-//		
-//		this.label = new JLabel(1 + ""); // defining the label that will say the number of troops
-//		this.label.setHorizontalAlignment(SwingConstants.CENTER);
-//		this.label.setForeground(Color.RED);
-//		this.label.setFont(new Font("Dialog", Font.PLAIN, 20));
-//		
-//		this.b = new JButton(new ImageIcon(image)) {
-//	        @Override
-//	        public boolean contains(int x, int y) {
-//	            Rectangle viewRect = getBounds();
-//	            Insets insets = getInsets();
-//	            viewRect.x = insets.left;
-//	            viewRect.y = insets.top;
-//	            viewRect.width -= insets.left + insets.right;
-//	            viewRect.height -= insets.top + insets.bottom;
-//	            Rectangle iconR = new Rectangle();
-//	            SwingUtilities.layoutCompoundLabel(this, this.getFontMetrics(this.getFont()), this.getText(), this.getIcon(),
-//	                    this.getVerticalAlignment(), this.getHorizontalAlignment(), this.getVerticalTextPosition(),
-//	                    this.getHorizontalTextPosition(), viewRect, iconR, new Rectangle(), this.getIconTextGap());
-//	            if (!iconR.contains(x, y)) {
-//	                return false;
-//	            }
-//	            x -= iconR.x;
-//	            y -= iconR.y;
-//	            Color c = new Color(image.getRGB(x, y), true);
-//	            return c.getAlpha() != 0 && (c.getRed() < 255 || c.getGreen() < 255 || c.getBlue() < 255);
-//	        }
-//	    };
-//	    b.setOpaque(false);
-//	    b.setContentAreaFilled(false);
-//	    b.setBorderPainted(false);
-//	    /*
-//	    b.addActionListener(new ActionListener(){
-//	    	@Override
-//            public void actionPerformed(ActionEvent e) {
-//                JOptionPane.showMessageDialog(b, "You clicked on the " + country.getName() + " button");
-//            }
-//	    });
-//	    */
-//	}
 
 	/**
 	 * Constructor method with incoming parameters
@@ -75,7 +28,6 @@ public class CountryButton{
 	 * @param c the country will be attached with the button with Country type
 	 */
 	public CountryButton(BufferedImage i, String name, Country c){
-		//this.image = i;
 		this.country = c;
 		c.setButton(this);
 		this.name = name;
@@ -84,43 +36,13 @@ public class CountryButton{
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);
 		this.label.setForeground(Color.RED);
 		this.label.setFont(new Font("Dialog", Font.PLAIN, 20));
-		//label.setBounds(c.getXLoc(), c.getYLoc(), 20, 20);
-		//label.setBounds(100, 100, 20, 20);
 		
 		this.b = new JButton() {
-//	        @Override
-//	        public boolean contains(int x, int y) {
-//	            Rectangle viewRect = getBounds();
-//	            Insets insets = getInsets();
-//	            viewRect.x = insets.left;
-//	            viewRect.y = insets.top;
-//	            viewRect.width -= insets.left + insets.right;
-//	            viewRect.height -= insets.top + insets.bottom;
-//	            Rectangle iconR = new Rectangle();
-//	            SwingUtilities.layoutCompoundLabel(this, this.getFontMetrics(this.getFont()), this.getText(), this.getIcon(),
-//	                    this.getVerticalAlignment(), this.getHorizontalAlignment(), this.getVerticalTextPosition(),
-//	                    this.getHorizontalTextPosition(), viewRect, iconR, new Rectangle(), this.getIconTextGap());
-//	            if (!iconR.contains(x, y)) {
-//	                return false;
-//	            }
-//	            x -= iconR.x;
-//	            y -= iconR.y;
-//	            Color c = new Color(i.getRGB(x, y), true);
-//	            return c.getAlpha() != 0 && (c.getRed() < 255 || c.getGreen() < 255 || c.getBlue() < 255);
-//	        }
+			private static final long serialVersionUID = 1L;
 	    };
 	    b.setOpaque(false);
 	    b.setContentAreaFilled(false);
 	    b.setBorderPainted(false);
-//	    b.setText("i am a button");
-	    /*
-	    b.addActionListener(new ActionListener(){
-	    	@Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(b, "You clicked on the " + country.getName() + " button");
-            }
-	    });
-	    */
 	}
 
 

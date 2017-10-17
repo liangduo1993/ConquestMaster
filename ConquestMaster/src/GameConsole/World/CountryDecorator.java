@@ -5,7 +5,7 @@ import GameConsole.Player.Player;
 /**
  * This class handles the troop associated with its number, the player and the corresponding country
  */
-public class Card {
+public class CountryDecorator {
 	private Country country;
 	private int numStars;
 	private Player player;
@@ -15,7 +15,7 @@ public class Card {
 	 * @param country the country with Country type
 	 * @param numStars the number the troop with int type
 	 */
-	public Card(Country country, int numStars){
+	public CountryDecorator(Country country, int numStars){
 		this.country = country;
 		this.numStars = numStars;
 		player = null;

@@ -21,7 +21,6 @@ public class MapLoader {
 		HORIZONTAL, VERTICAL, NONE;
 	}
 
-	private final String newline = "\n";
 	private String mapFilePath;
 	private String imageFilePath;
 	private ScrollOptions scroll;
@@ -49,30 +48,6 @@ public class MapLoader {
 	  }
 	}
 	
-	// public boolean addContinent(Continent cont) {
-	// if (findContinent(cont.getName()) == null) {
-	// this.continents.add(cont);
-	// return true;
-	// }
-	// return false;
-	// }
-	//
-	// public void addCountry(Country ter) {
-	// if (findCountry(ter.getName()) == null) {
-	// this.countries.add(ter);
-	//
-	// ArrayList<String> linkNames = ter.getLinkNames();
-	// if (linkNames.size() > 0) {
-	// for (String name : linkNames) {
-	// Country neighbour = findCountry(name);
-	// if (neighbour != null) {
-	// neighbour.getLinkNames().add(ter.getName());
-	// buildCountryName(neighbour);
-	// }
-	// }
-	// }
-	// }
-	// }
 
 	/**
 	 * Method to clear the values of the corresponding attributes
@@ -236,9 +211,6 @@ public class MapLoader {
 			if (!line.trim().equals("")) {
 				if (line.startsWith("[")) {
 					if (line.equalsIgnoreCase("[Territories]")) {
-						for (Continent c : this.continents) {
-//							System.out.println(c.getName());
-						}
 						return;
 					}
 					throw new IOException("[Territories] Section expected; found " + line);
@@ -336,7 +308,6 @@ public class MapLoader {
 	 */
 	public void buildCountryName(Country t) {
 		if (findCountry(t.getName()) != null) {
-			// t.setBorderingCountries(new ArrayList<Country>());
 			if (t.getLinkNames().size() > 0) {
 				for (String linkName : t.getLinkNames()) {
 					Country link = findCountry(linkName);
@@ -344,12 +315,6 @@ public class MapLoader {
 						t.addBorderingCountry(link);
 					}
 				}
-			//	System.out.println(t.getName() + "'s link: =============");
-//				for (Country neighbour : t.getBorderingCountries()) {
-//					System.out.println(neighbour.getName());
-//				}
-			//	System.out.println("===================");
-
 			}
 		}
 	}
@@ -369,16 +334,6 @@ public class MapLoader {
 			ter.setYLoc(Integer.parseInt(st.nextToken().trim()));
 			String name = st.nextToken().trim();
 			ter.setContinent(findContinent(name));
-
-			// if ((ter.getName() == null) || (ter.getName().length() < 0)) {
-			// throw new Exception("name not found");
-			// }
-			// if (ter.getContinent() == null) {
-			// throw new Exception("continent not found");
-			// }
-			// if ((ter.getXLoc() == -1) || (ter.getYLoc() == -1)) {
-			// throw new Exception("invalid coordinates");
-			// }
 			while (st.hasMoreTokens()) {
 				ter.getLinkNames().add(st.nextToken().trim());
 			}

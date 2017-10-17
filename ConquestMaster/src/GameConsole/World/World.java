@@ -14,8 +14,8 @@ import GameConsole.Window.MapLoader;
  */
 public class World {
 	private ArrayList<Continent> continents;
-	private ArrayList<Card> cards;
-	private ArrayList<Card> deck = new ArrayList<>();
+	private ArrayList<CountryDecorator> cards;
+	private ArrayList<CountryDecorator> deck = new ArrayList<>();
 	private MapLoader mapLoader;
 
 	/**
@@ -24,12 +24,6 @@ public class World {
 	 * @throws Exception
 	 */
 	public World(String path) throws Exception {
-		/*
-		 * Hardcoded countries, cards, and continent. Will hopefully be able to
-		 * programatically read this from json file but in case we don't have
-		 * time to design that just making this.
-		 */
-
 		this.initialWorld();
 
 		mapLoader = new MapLoader();
@@ -99,7 +93,7 @@ public class World {
 	 * Add a card to the hand card list
 	 * @param c the card that will be added to the hand card list with Card type
 	 */
-	public void addToCards(Card c) {
+	public void addToCards(CountryDecorator c) {
 		cards.add(c);
 	}
 
@@ -107,8 +101,8 @@ public class World {
 	 *Remove a card from the hand card list
 	 * @param c the selected card that will be removed from the hand card list with Card type
 	 */
-	public void removeFromCards(Card c) {
-		for (Card A : cards) {
+	public void removeFromCards(CountryDecorator c) {
+		for (CountryDecorator A : cards) {
 			if (A.equals(c)) {
 				cards.remove(A);
 				break;
@@ -120,7 +114,7 @@ public class World {
 	 * To get the cards list
 	 * @return the cards list with ArrayList type
 	 */
-	public ArrayList<Card> getCards() {
+	public ArrayList<CountryDecorator> getCards() {
 		return cards;
 	}
 
@@ -128,7 +122,7 @@ public class World {
 	 * To add the card to the deck
 	 * @param c the card will be added to the deck with Card type
 	 */
-	public void addToDeck(Card c) {
+	public void addToDeck(CountryDecorator c) {
 		deck.add(c);
 	}
 
@@ -136,8 +130,8 @@ public class World {
 	 * To remove the card from the deck
 	 * @param c the selected card will be remove from the deck with Card type
 	 */
-	public void removeFromDeck(Card c) {
-		for (Card A : deck) {
+	public void removeFromDeck(CountryDecorator c) {
+		for (CountryDecorator A : deck) {
 			if (A.equals(c)) {
 				deck.remove(A);
 				break;
@@ -149,7 +143,7 @@ public class World {
 	 * To get deck
 	 * @return the deck with ArrayList type
 	 */
-	public ArrayList<Card> getDeck() {
+	public ArrayList<CountryDecorator> getDeck() {
 		return deck;
 	}
 
@@ -158,15 +152,13 @@ public class World {
 	 * @param players the group of players who will participate in the game with Group type
 	 */
 	public void startGame(Group players) {
-
-		int count = players.getPlayers().size();
 		/*
 		 * Creating a card for every country, giving it a country and a star
 		 * amount from 1 - 3
 		 */
 		for (Continent con : this.continents) {
 			for (Country cou : con.getCountries()) {
-				Card tempCard = new Card(cou, new Infantry().getStrength());
+				CountryDecorator tempCard = new CountryDecorator(cou, new Infantry().getStrength());
 				this.deck.add(tempCard);
 				// count++;
 			}
@@ -187,7 +179,7 @@ public class World {
 		 * that country.
 		 */
 		for (Player p : players.getPlayers()) {
-			for (Card c : p.getHand()) {
+			for (CountryDecorator c : p.getHand()) {
 				c.getCountry().setPlayer(p);
 				c.getCountry().addInfrantry(c.getNumStars());
 				p.addInfrantry(c.getNumStars());
