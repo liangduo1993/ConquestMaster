@@ -51,9 +51,9 @@ public class NewMapFrame {
 		tAuthor.setBounds(140, 35, 100, 21);
 		tAuthor.setColumns(10);
 
-		warnCheckBox = new JCheckBox("");
-		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
-		warnCheckBox.setSelected(true);
+//		warnCheckBox = new JCheckBox("");
+//		warnCheckBox.setBounds(140, 121 - 50, 21, 21);
+//		warnCheckBox.setSelected(true);
 
 		JLabel lblNewLabel_1 = new JLabel("ImagePath:");
 		lblNewLabel_1.setBounds(40, 247, 100, 15);
@@ -114,15 +114,15 @@ public class NewMapFrame {
 		frame.getContentPane().add(imgBtn);
 		frame.getContentPane().add(confirmBtn);
 		frame.getContentPane().add(cancelBtn);
-		frame.getContentPane().add(warnCheckBox);
+		//frame.getContentPane().add(warnCheckBox);
 
 		JLabel lblNewLabel = new JLabel("Author:");
 		lblNewLabel.setBounds(40, 40, 54, 15);
 		frame.getContentPane().add(lblNewLabel);
-
-		JLabel lblNewLabel_3 = new JLabel("Warn:");
-		lblNewLabel_3.setBounds(40, 126 - 50, 54, 15);
-		frame.getContentPane().add(lblNewLabel_3);
+//
+//		JLabel lblNewLabel_3 = new JLabel("Warn:");
+//		lblNewLabel_3.setBounds(40, 126 - 50, 54, 15);
+//		frame.getContentPane().add(lblNewLabel_3);
 
 		frame.setVisible(true);
 	}
@@ -151,7 +151,7 @@ public class NewMapFrame {
 	public void mapNew() {
 		map.setAuthor(tAuthor.getText().trim());
 		map.setScroll(ConquestMap.ScrollOptions.NONE);
-		map.setWarn(warnCheckBox.isSelected());
+		map.setWarn(true);
 		map.setWrap(false);
 	}
 

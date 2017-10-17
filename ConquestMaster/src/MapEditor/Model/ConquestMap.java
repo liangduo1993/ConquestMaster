@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Observable;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -420,7 +421,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 				for (Territory ter2 : ter.getLinks()) {
 					if (ter2.getLinks().size() == 0 || !ter2.getLinks().contains(ter)) {
 						LogPanel.addLog(ter2.getName() + " has no link with " + ter.getName()
-						+ ", please check your map file!");
+								+ ", please check your map file!");
 						return true;
 					}
 				}
@@ -488,11 +489,11 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		loadContinents(in);
 		loadTerritories(in);
 		changeState();
-//
-//		if (!validityCheck()) {
-//			clear();
-//			throw new RuntimeException("didn't pass the validation!");
-//		}
+		//
+		// if (!validityCheck()) {
+		// clear();
+		// throw new RuntimeException("didn't pass the validation!");
+		// }
 	}
 
 	/**
@@ -919,6 +920,12 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		if (this.territories.size() > 0 && !eachTerReachable()) {
 			probs.add("There's some teris cannot reach to every other territories!");
 		}
+		
+		for(Continent c: this.continents){
+			if (!eachTerInContReachable(c)) {
+				probs.add(c.getName() + " territories cannot reach to every other territories!");
+			}
+		}
 
 		if (probs.isEmpty()) {
 			return true;
@@ -958,6 +965,40 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	}
 
 	/**
+	 * method to check if a territory is board to others in the target
+	 * continent. Also see the function eachTerReachable().
+	 * 
+	 * @return true if they are boarded, else return false.
+	 */
+	public boolean eachTerInContReachable(Continent continent) {
+		clearReach();
+		List<Territory> ters = new ArrayList<>();
+		for (Territory t : this.territories) {
+			if (t.getContinent().equals(continent)) {
+				ters.add(t);
+			}
+		}
+		int count = 0;
+		if (ters.size() > 0) {
+			Territory head = ters.get(0);
+			DFSForCont(head, continent);
+			for (Territory t : this.territories) {
+				if (t.hasReached) {
+					count++;
+				}
+			}
+		}
+		clearReach();
+		System.out.println(count + " countries can connect to each other ");
+		System.out.println("With total of " + ters.size() + " countries!");
+		if (count == ters.size()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * delete the linked relationships among territories.
 	 */
 	private void clearReach() {
@@ -979,6 +1020,23 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		for (Territory neighbour : head.getLinks()) {
 			if (!neighbour.hasReached) {
 				DFS(neighbour);
+			}
+		}
+	}
+
+	/**
+	 * searching all the connections relationship among target continent.
+	 * 
+	 * @param head
+	 */
+	private void DFSForCont(Territory head, Continent continent) {
+		head.hasReached = true;
+		if (head.getLinks().size() == 0) {
+			return;
+		}
+		for (Territory neighbour : head.getLinks()) {
+			if (neighbour.getContinent().equals(continent) && !neighbour.hasReached) {
+				DFSForCont(neighbour, continent);
 			}
 		}
 	}
