@@ -50,7 +50,7 @@ public class Player extends Observable {
 	private int totalCardsExchange = 0; // Record how many times does a
 										// player has changed his cards
 	private boolean hasMoved = false;
-
+	private int initTroop;
 
 	/**
 	 * Constructor method
@@ -86,6 +86,16 @@ public class Player extends Observable {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	
+	
+	public int getInitTroop() {
+		return initTroop;
+	}
+
+	public void setInitTroop(int initTroop) {
+		this.initTroop = initTroop;
 	}
 
 	/**
