@@ -1,14 +1,5 @@
 package GameConsole.World;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import GameConsole.Player.Group;
 import GameConsole.Player.Player;
 import GameConsole.Window.WindowMain;
@@ -23,7 +14,6 @@ public class GameState {
 	private Group allPlayers;
 	private int currPhase; // 0 beggining, 1 attack, 2 move
 	private World world;
-	private Clip music;
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
@@ -40,7 +30,6 @@ public class GameState {
 		this.allPlayers = new Group();
 		this.currPhase = 0;
 		this.world = new World(path);
-		this.music = null;
 	}
 
 	/**
