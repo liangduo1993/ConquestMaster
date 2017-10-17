@@ -39,7 +39,11 @@ public class Cards{
 	   public void giveCards(Player giver, Player receiver){
 	         receiver.addAllCard(giver.getOnHand());
 	   }
-	   
+
+		/**
+		 * To get the type of the hand card
+		 * @return the type of the hand card with int type
+		 */
 	   public int getType()
 	   {
 	      return type;
