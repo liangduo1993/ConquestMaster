@@ -791,6 +791,7 @@ public class WindowMain implements ActionListener,Observer {
 		map.add(currentCards);
 		currentCards.setBounds(900, 700, 200, 40);
 		currentCards.setBackground(Color.yellow);
+		currentCards.setLayout(null);
 		
 		
 		JPanel nextStage = new JPanel();
@@ -1049,11 +1050,11 @@ public class WindowMain implements ActionListener,Observer {
 			currentCards.removeAll();
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel(onHand.get(i).getType() + "");
-//				card.setBounds(50 * i, 0, 50, 50);
+				card.setBounds(20 * i + 20, 0, 20, 20);
 //				card.setBackground(Color.red);
 				currentCards.add(card);
 			}
-			System.out.println("there's " + onHand.size() + " cards!");
+			System.out.println("there's " + currentCards.getComponentCount() + " cards!");
 			currentCards.repaint();
 		}
 	}
