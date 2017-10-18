@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import GameConsole.Player.Group;
-import GameConsole.Player.Player;
-import GameConsole.Window.WindowMain;
-import GameConsole.World.GameState;
+import GameConsole.Core.GameState;
+import GameConsole.Core.Group;
+import GameConsole.Model.Player.Player;
+import GameConsole.View.WindowMain;
 
 public class GameStateTest {
 	private GameState state;

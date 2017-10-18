@@ -1,7 +1,9 @@
-package GameConsole.World;
+package GameConsole.Model.Domain;
 
 
 import java.util.ArrayList;
+
+import GameConsole.Core.World;
 
 /**
  *

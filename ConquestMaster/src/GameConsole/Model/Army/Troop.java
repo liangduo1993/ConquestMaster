@@ -1,15 +1,15 @@
-package GameConsole.Army;
+package GameConsole.Model.Army;
 
 /**
  * This class handles the infantry and manage the corresponding operations of the class
  */
-public class Infantry extends Troop{
+public class Troop extends AbstractTroop{
 	private int strength;
 
 	/**
 	 * Constructor method
 	 */
-	public Infantry() {
+	public Troop() {
 		this.strength = 1;  // all infrantry have strength of one
 	}
 

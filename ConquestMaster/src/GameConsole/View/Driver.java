@@ -1,4 +1,4 @@
-package GameConsole.Window;
+package GameConsole.View;
 
 
 import javax.swing.JFrame;

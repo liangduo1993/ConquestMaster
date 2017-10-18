@@ -1,8 +1,9 @@
-package GameConsole.World;
+package GameConsole.Core;
 
-import GameConsole.Player.Group;
-import GameConsole.Player.Player;
-import GameConsole.Window.WindowMain;
+import GameConsole.Model.Domain.Continent;
+import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Player.Player;
+import GameConsole.View.WindowMain;
 /**
  * Set up basic states of the game
  * Current phase, current player

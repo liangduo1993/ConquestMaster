@@ -1,4 +1,4 @@
-package GameConsole.Player;
+package GameConsole.Model.Player;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -14,14 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Army.Troop;
-import GameConsole.World.CountryDecorator;
-import GameConsole.World.Cards;
-import GameConsole.World.Continent;
-import GameConsole.World.Country;
-import GameConsole.World.GameState;
-import GameConsole.World.World;
+import GameConsole.Model.Army.Troop;
+import GameConsole.Model.Domain.Card;
+import GameConsole.Model.Domain.Continent;
+import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.Core.GameState;
+import GameConsole.Core.World;
+import GameConsole.Model.Army.AbstractTroop;
 
 /**
  * This class represents all of the data and funcionality that a player would
@@ -31,10 +31,10 @@ import GameConsole.World.World;
 public class Player extends Observable {
 	private String name;
 	private Color color;
-	private ArrayList<Troop> numTroops = new ArrayList<Troop>();
+	private ArrayList<AbstractTroop> numTroops = new ArrayList<AbstractTroop>();
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
-	private ArrayList<Cards> onhand = new ArrayList<Cards>();
+	private ArrayList<Card> onhand = new ArrayList<Card>();
 	private GameState game; // the state of the game
 	private JFormattedTextField playerTextName;
 	private int totalCardsExchange = 0;
@@ -141,7 +141,7 @@ public class Player extends Observable {
 	 * 
 	 * @return the player's troops list with ArrayList type
 	 */
-	public ArrayList<Troop> getNumTroops() {
+	public ArrayList<AbstractTroop> getNumTroops() {
 		return numTroops;
 	}
 
@@ -151,7 +151,7 @@ public class Player extends Observable {
 	 * @param numTroops
 	 *            the desired player's troops list with ArrayList type
 	 */
-	public void setNumTroops(ArrayList<Troop> numTroops) {
+	public void setNumTroops(ArrayList<AbstractTroop> numTroops) {
 		this.numTroops = numTroops;
 	}
 
@@ -200,7 +200,7 @@ public class Player extends Observable {
 	 * 
 	 * @return the player's hand cards list with ArrayList type
 	 */
-	public ArrayList<Cards> getOnHand() {
+	public ArrayList<Card> getOnHand() {
 		return onhand;
 	}
 
@@ -209,7 +209,7 @@ public class Player extends Observable {
 	 * 
 	 * @param cards
 	 */
-	public void addCard(Cards cards) {
+	public void addCard(Card cards) {
 		this.onhand.add(cards);
 	}
 
@@ -218,7 +218,7 @@ public class Player extends Observable {
 	 * 
 	 * @param onhand
 	 */
-	public void addAllCard(ArrayList<Cards> onhand) {
+	public void addAllCard(ArrayList<Card> onhand) {
 		this.onhand.addAll(onhand);
 	}
 
@@ -449,7 +449,7 @@ public class Player extends Observable {
 	 */
 	public void giveCards() {
 		for (int i = 0; i < 4; i++) {
-			Cards c = new Cards(this);
+			Card c = new Card(this);
 			c.addRandomTypeCard();
 			this.onhand.add(c);
 			System.out.println(c);
@@ -488,7 +488,7 @@ public class Player extends Observable {
 				int cardType1 = 0;
 				int cardType2 = 0;
 
-				for (Cards c : this.onhand) {
+				for (Card c : this.onhand) {
 					if (c.getType() == 0) {
 						cardType0 = cardType0 + 1;
 					}
@@ -535,9 +535,9 @@ public class Player extends Observable {
 						switch (selected) {
 						case ("Change 3*Type0"): {
 							int i = 0;
-							Iterator<Cards> it = onhand.iterator();
+							Iterator<Card> it = onhand.iterator();
 							while (it.hasNext()) {
-								Cards c = it.next();
+								Card c = it.next();
 								if (c.getType() == 0 && i < 3) {
 									it.remove();
 									i++;
@@ -547,9 +547,9 @@ public class Player extends Observable {
 						}
 						case ("Change 3*Type1"): {
 							int i = 0;
-							Iterator<Cards> it = onhand.iterator();
+							Iterator<Card> it = onhand.iterator();
 							while (it.hasNext()) {
-								Cards c = it.next();
+								Card c = it.next();
 								if (c.getType() == 1 && i < 3) {
 									it.remove();
 									i++;
@@ -558,9 +558,9 @@ public class Player extends Observable {
 						}
 						case ("Change 3*Type2"): {
 							int i = 0;
-							Iterator<Cards> it = onhand.iterator();
+							Iterator<Card> it = onhand.iterator();
 							while (it.hasNext()) {
-								Cards c = it.next();
+								Card c = it.next();
 								if (c.getType() == 2 && i < 3) {
 									it.remove();
 									i++;
@@ -572,9 +572,9 @@ public class Player extends Observable {
 							int i = 0;
 							int j = 0;
 							int[] deleted = { 9, 9, 9 };
-							Iterator<Cards> it = onhand.iterator();
+							Iterator<Card> it = onhand.iterator();
 							while (it.hasNext()) {
-								Cards c = it.next();
+								Card c = it.next();
 								if ((c.getType() != deleted[0] && c.getType() != deleted[1]) && i != 3) {
 									// System.out.println("j="+j);
 									i++;
@@ -587,7 +587,7 @@ public class Player extends Observable {
 						}
 						}
 						System.out.println("after change===========");
-						for (Cards c : onhand) {
+						for (Card c : onhand) {
 							System.out.println(c);
 						}
 						System.out.println("after change===========");
@@ -636,7 +636,7 @@ public class Player extends Observable {
 	 */
 	public void addInfrantry(int numTroops) {
 		for (int i = 0; i < numTroops; i++) {
-			Infantry temp = new Infantry();
+			Troop temp = new Troop();
 			this.numTroops.add(temp);
 		}
 	}

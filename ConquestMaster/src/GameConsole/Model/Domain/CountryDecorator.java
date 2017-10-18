@@ -1,6 +1,6 @@
-package GameConsole.World;
+package GameConsole.Model.Domain;
 
-import GameConsole.Player.Player;
+import GameConsole.Model.Player.Player;
 
 /**
  * This class handles the troop associated with its number, the player and the corresponding country

@@ -1,4 +1,4 @@
-package GameConsole.Window;
+package GameConsole.View;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -35,32 +35,29 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
-import GameConsole.Player.Player;
-import GameConsole.World.Cards;
-import GameConsole.World.GameState;
+import GameConsole.Core.GameState;
+import GameConsole.Core.MapLoader;
+import GameConsole.Model.Domain.Card;
+import GameConsole.Model.Player.Player;
 
 /**
  * This class is to display the interface of the game where the player can
  * visually perform game operations.
  */
 public class WindowMain implements ActionListener, Observer {
-
 	private JFrame frame1;
-	private JPanel cards;
-	private JTextField player1TextField;
-	private JTextField player2TextField;
-	private JTextField player3TextField;
-	private JTextField player4TextField;
-	private JTextField player5TextField;
-	private GameState gameState;
-	private int troopsLeft;
-	private JLabel playerWonLabell;
+	private JPanel cards; // card lay out panel for whole frame
+	private JPanel cardPanel;
 	private CardLayout cardLayout;
-	private JFileChooser fc;
+	private JPanel mapPanel;
 	private JButton openButton;
-	private JPanel map;
-	private JPanel currentCards;
+	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
+	private JLabel playerWonLabell;
 
+	private GameState gameState;
+	private JFileChooser fc;
+	private int troopsLeft;
+	
 	/**
 	 * Constructor method
 	 * 
@@ -133,13 +130,13 @@ public class WindowMain implements ActionListener, Observer {
 		cards.setVisible(true);
 		JPanel mainScreen = new JPanel();
 		JPanel playerSelect = new JPanel();
-		map = new JPanel();
-		map.setBackground(Color.LIGHT_GRAY);
+		mapPanel = new JPanel();
+		mapPanel.setBackground(Color.LIGHT_GRAY);
 
 		JPanel resultsScreen = new JPanel();
 		cards.add(mainScreen, "Main Screen");
 		cards.add(playerSelect, "Player Selection");
-		cards.add(map, "Game");
+		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
 
@@ -384,7 +381,7 @@ public class WindowMain implements ActionListener, Observer {
 		cancelCountryButton.setBackground(Color.RED);
 		cancelCountryButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cancelCountryButton.setBounds(371, 775, 124, 60);
-		map.add(cancelCountryButton);
+		mapPanel.add(cancelCountryButton);
 
 		cancelCountryButton.addActionListener(new ActionListener() {
 			@Override
@@ -398,7 +395,7 @@ public class WindowMain implements ActionListener, Observer {
 			}
 		});
 
-		Game g = new Game(map, gameState.getWorld());
+		Game g = new Game(mapPanel, gameState.getWorld());
 		System.out.println("button nums: " + g.getButtons().size());
 
 		startGamePanel.addMouseListener(new MouseAdapter() {
@@ -552,17 +549,17 @@ public class WindowMain implements ActionListener, Observer {
 		player5TextField.setColumns(10);
 		playerFiveText.add(player5TextField);
 		this.playerWonLabell = new JLabel("playerName");
-		map.setLayout(null);
+		mapPanel.setLayout(null);
 
 		JLabel labelPlayer = new JLabel("");
 		MapLoader mapLoader = gameState.getWorld().getMapLoader();
 		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
 		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
-		map.add(labelPlayer);
+		mapPanel.add(labelPlayer);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 1200, 30);
-		map.add(menuBar);
+		mapPanel.add(menuBar);
 
 		JMenu mnNewMenu = new JMenu("Game");
 		menuBar.add(mnNewMenu);
@@ -581,7 +578,7 @@ public class WindowMain implements ActionListener, Observer {
 		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player1Name.setEditable(false);
 		player1Name.setBounds(100, 40, 175, 60);
-		map.add(player1Name);
+		mapPanel.add(player1Name);
 
 		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player2Name.setForeground(Color.MAGENTA);
@@ -589,7 +586,7 @@ public class WindowMain implements ActionListener, Observer {
 		player2Name.setEditable(false);
 		player2Name.setBackground(Color.LIGHT_GRAY);
 		player2Name.setBounds(300, 40, 175, 60);
-		map.add(player2Name);
+		mapPanel.add(player2Name);
 
 		player3Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player3Name.setForeground(Color.GREEN);
@@ -597,7 +594,7 @@ public class WindowMain implements ActionListener, Observer {
 		player3Name.setEditable(false);
 		player3Name.setBackground(Color.LIGHT_GRAY);
 		player3Name.setBounds(500, 40, 175, 60);
-		map.add(player3Name);
+		mapPanel.add(player3Name);
 
 		player4Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player4Name.setForeground(Color.WHITE);
@@ -605,7 +602,7 @@ public class WindowMain implements ActionListener, Observer {
 		player4Name.setEditable(false);
 		player4Name.setBackground(Color.LIGHT_GRAY);
 		player4Name.setBounds(700, 40, 175, 60);
-		map.add(player4Name);
+		mapPanel.add(player4Name);
 
 		player5Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player5Name.setForeground(Color.YELLOW);
@@ -613,7 +610,7 @@ public class WindowMain implements ActionListener, Observer {
 		player5Name.setEditable(false);
 		player5Name.setBackground(Color.LIGHT_GRAY);
 		player5Name.setBounds(900, 40, 175, 60);
-		map.add(player5Name);
+		mapPanel.add(player5Name);
 
 		JPanel arrow0 = new JPanel();
 		JPanel arrow1 = new JPanel();
@@ -630,7 +627,7 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
 		panel_15.setBounds(780, 765, 200, 31);
-		map.add(panel_15);
+		mapPanel.add(panel_15);
 		panel_15.setLayout(null);
 
 		JLabel obtainTroopLabel = new JLabel("Obtain Troops Stage");
@@ -641,7 +638,7 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel panel_16 = new JPanel();
 		panel_16.setBackground(Color.LIGHT_GRAY);
 		panel_16.setBounds(780, 795, 200, 31);
-		map.add(panel_16);
+		mapPanel.add(panel_16);
 		panel_16.setLayout(null);
 
 		JLabel attackStageLabel = new JLabel("Attack Stage");
@@ -653,7 +650,7 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel panel_17 = new JPanel();
 		panel_17.setBackground(Color.LIGHT_GRAY);
 		panel_17.setBounds(780, 825, 200, 31);
-		map.add(panel_17);
+		mapPanel.add(panel_17);
 		panel_17.setLayout(null);
 
 		JLabel moveStageLabel = new JLabel("Move Stage");
@@ -664,7 +661,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		arrow0.setBackground(Color.LIGHT_GRAY);
 		arrow0.setBounds(740, 765, 30, 30);
-		map.add(arrow0);
+		mapPanel.add(arrow0);
 		arrow0.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -673,7 +670,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0.add(lblNewLabel_3);
 
 		arrow1.setBounds(740, 795, 30, 30);
-		map.add(arrow1);
+		mapPanel.add(arrow1);
 		arrow1.setLayout(null);
 		arrow1.setBackground(Color.LIGHT_GRAY);
 
@@ -685,7 +682,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow2.setLayout(null);
 		arrow2.setBackground(Color.LIGHT_GRAY);
 		arrow2.setBounds(740, 825, 30, 30);
-		map.add(arrow2);
+		mapPanel.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
 		label_8.setIcon(new ImageIcon("resources/GimpFiles/arrow.png"));
@@ -695,7 +692,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		unitDisplay.setBackground(Color.LIGHT_GRAY);
 		unitDisplay.setBounds(510, 765, 220, 30);
-		map.add(unitDisplay);
+		mapPanel.add(unitDisplay);
 		unitDisplay.setLayout(null);
 
 		JLabel troopRemainingLabel = new JLabel("Troops Remaining: ");
@@ -710,7 +707,7 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel Country1Display = new JPanel();
 		Country1Display.setOpaque(false);
 		Country1Display.setBounds(30, 765, 320, 35);
-		map.add(Country1Display);
+		mapPanel.add(Country1Display);
 
 		JLabel Country1Label = new JLabel("Country 1:");
 		Country1Label.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -723,7 +720,7 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel Country2Display = new JPanel();
 		Country2Display.setOpaque(false);
 		Country2Display.setBounds(30, 812, 320, 35);
-		map.add(Country2Display);
+		mapPanel.add(Country2Display);
 
 		JLabel Country2Label = new JLabel("Country 2:");
 		Country2Label.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -766,16 +763,16 @@ public class WindowMain implements ActionListener, Observer {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
-		currentCards = new JPanel();
-		map.add(currentCards);
-		currentCards.setBounds(900, 700, 200, 40);
-		currentCards.setBackground(Color.yellow);
-		currentCards.setLayout(null);
+		cardPanel = new JPanel();
+		mapPanel.add(cardPanel);
+		cardPanel.setBounds(900, 700, 200, 40);
+		cardPanel.setBackground(Color.yellow);
+		cardPanel.setLayout(null);
 
 		JPanel nextStage = new JPanel();
 		nextStage.setBackground(Color.RED);
 		nextStage.setBounds(1009, 785, 170, 50);
-		map.add(nextStage);
+		mapPanel.add(nextStage);
 		nextStage.setLayout(null);
 
 		JLabel nextStageLabel = new JLabel("Next Stage");
@@ -997,7 +994,6 @@ public class WindowMain implements ActionListener, Observer {
 			});
 		}
 
-
 	}
 
 	/**
@@ -1006,15 +1002,15 @@ public class WindowMain implements ActionListener, Observer {
 	public void cardUpdate() {
 		Player currentPlayer = gameState.getCurrPlayer();
 		if (currentPlayer != null) {
-			ArrayList<Cards> onHand = currentPlayer.getOnHand();
-			currentCards.removeAll();
+			ArrayList<Card> onHand = currentPlayer.getOnHand();
+			cardPanel.removeAll();
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel(onHand.get(i).getType() + "");
 				card.setBounds(20 * i + 20, 0, 20, 20);
-				currentCards.add(card);
+				cardPanel.add(card);
 			}
-			System.out.println("there's " + currentCards.getComponentCount() + " cards!");
-			currentCards.repaint();
+			System.out.println("there's " + cardPanel.getComponentCount() + " cards!");
+			cardPanel.repaint();
 		}
 	}
 

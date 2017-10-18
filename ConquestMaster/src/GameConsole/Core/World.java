@@ -1,20 +1,20 @@
-package GameConsole.World;
+package GameConsole.Core;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Player.Group;
-import GameConsole.Player.Player;
-import GameConsole.Window.MapLoader;
+import GameConsole.Model.Army.Troop;
+import GameConsole.Model.Domain.Continent;
+import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.Model.Player.Player;
 
 /**
  * This class handles with world the player are in and mange the corresponding behaviors
  */
 public class World {
-	private ArrayList<Continent> continents;
-	private ArrayList<CountryDecorator> cards;
+	private ArrayList<Continent> continents = new ArrayList<Continent>();
 	private ArrayList<CountryDecorator> deck = new ArrayList<>();
 	private MapLoader mapLoader;
 
@@ -24,8 +24,6 @@ public class World {
 	 * @throws Exception
 	 */
 	public World(String path) throws Exception {
-		this.initialWorld();
-
 		mapLoader = new MapLoader();
 		mapLoader.load(path);
 		System.out.println("map load");
@@ -41,16 +39,8 @@ public class World {
 				System.out.println("country:" + country.getName());
 			}
 		}
-
-
 	}
 
-	/**
-	 * Method to initila the world the player are in
-	 */
-	private void initialWorld() {
-		this.continents = new ArrayList<Continent>();
-	}
 
 	public String toString() {
 		String retString = "";
@@ -89,34 +79,6 @@ public class World {
 		return continents;
 	}
 
-	/**
-	 * Add a card to the hand card list
-	 * @param c the card that will be added to the hand card list with Card type
-	 */
-	public void addToCards(CountryDecorator c) {
-		cards.add(c);
-	}
-
-	/**
-	 *Remove a card from the hand card list
-	 * @param c the selected card that will be removed from the hand card list with Card type
-	 */
-	public void removeFromCards(CountryDecorator c) {
-		for (CountryDecorator A : cards) {
-			if (A.equals(c)) {
-				cards.remove(A);
-				break;
-			}
-		}
-	}
-
-	/**
-	 * To get the cards list
-	 * @return the cards list with ArrayList type
-	 */
-	public ArrayList<CountryDecorator> getCards() {
-		return cards;
-	}
 
 	/**
 	 * To add the card to the deck
@@ -158,7 +120,7 @@ public class World {
 		 */
 		for (Continent con : this.continents) {
 			for (Country cou : con.getCountries()) {
-				CountryDecorator tempCard = new CountryDecorator(cou, new Infantry().getStrength());
+				CountryDecorator tempCard = new CountryDecorator(cou, new Troop().getStrength());
 				this.deck.add(tempCard);
 				// count++;
 			}

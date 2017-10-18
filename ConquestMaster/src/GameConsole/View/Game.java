@@ -1,4 +1,4 @@
-package GameConsole.Window;
+package GameConsole.View;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import GameConsole.World.Country;
-import GameConsole.World.World;
+import GameConsole.Core.MapLoader;
+import GameConsole.Core.World;
+import GameConsole.Model.Domain.Country;
 /**
  *  The main entrance of the game
  *

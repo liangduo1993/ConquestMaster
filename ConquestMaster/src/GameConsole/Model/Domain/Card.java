@@ -1,17 +1,17 @@
-package GameConsole.World;
+package GameConsole.Model.Domain;
 
-import GameConsole.Player.Player;
+import GameConsole.Model.Player.Player;
 
 /**
  * This class defines the Cards that player can exchange to troops
  *
  */
-public class Cards{
+public class Card{
 
 	   private int type; // 0, 1, 2 three types
 	   private Player player;
 	   
-	   public Cards(Player player){
+	   public Card(Player player){
 	      this.player = player;
 	   }
 	   

@@ -1,11 +1,11 @@
-package GameConsole.World;
+package GameConsole.Model.Domain;
 
 import java.util.ArrayList;
 
-import GameConsole.Army.Infantry;
-import GameConsole.Army.Troop;
-import GameConsole.Player.Player;
-import GameConsole.Window.CountryButton;
+import GameConsole.Model.Army.Troop;
+import GameConsole.Model.Army.AbstractTroop;
+import GameConsole.Model.Player.Player;
+import GameConsole.View.CountryButton;
 
 /**
  * This class is to handle the information of country and manage various
@@ -14,7 +14,7 @@ import GameConsole.Window.CountryButton;
 public class Country {
 	private Continent continent;
 	private Player player;
-	private ArrayList<Troop> troops = new ArrayList<Troop>();
+	private ArrayList<AbstractTroop> troops = new ArrayList<AbstractTroop>();
 	private String name;
 	private int xLoc;
 	private int yLoc;
@@ -96,7 +96,7 @@ public class Country {
 	 * To add the troop to the continent
 	 * @param t the troop need to be added with Troop type
 	 */
-	public void addTroop(Troop t) {
+	public void addTroop(AbstractTroop t) {
 		troops.add(t);
 	}
 
@@ -106,7 +106,7 @@ public class Country {
 	 */
 	public void addInfrantry(int numTroops) {
 		for (int i = 0; i < numTroops; i++) {
-			Infantry temp = new Infantry();
+			Troop temp = new Troop();
 			this.troops.add(temp);
 		}
 	}
@@ -127,7 +127,7 @@ public class Country {
 	 * To get the troop list from the country
 	 * @return the troop list with ArrayList type
 	 */
-	public ArrayList<Troop> getTroops() {
+	public ArrayList<AbstractTroop> getTroops() {
 		return troops;
 	}
 

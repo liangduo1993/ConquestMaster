@@ -1,4 +1,4 @@
-package GameConsole.Window;
+package GameConsole.Core;
 
 import java.io.EOFException;
 import java.io.File;
@@ -8,9 +8,8 @@ import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import GameConsole.World.Continent;
-import GameConsole.World.Country;
-import GameConsole.World.World;
+import GameConsole.Model.Domain.Continent;
+import GameConsole.Model.Domain.Country;
 import MapEditor.Util.StringUtil;
 
 /**
