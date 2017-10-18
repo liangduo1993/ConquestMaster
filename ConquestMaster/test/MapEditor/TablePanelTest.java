@@ -18,7 +18,6 @@ import MapEditor.View.TablePanel;
  */
 public class TablePanelTest {
 	private ConquestMap map;
-	private String path;
 	private TablePanel table;
 
 	/**
@@ -30,8 +29,7 @@ public class TablePanelTest {
 	@Before
 	public void setUp() throws Exception {
 		map = new ConquestMap();
-		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
-		map.load(path);
+		map.load("resources/ConquestMaps/Atlantis.map");
 		table = new TablePanel(map);
 		map.addObserver(table);
 	}

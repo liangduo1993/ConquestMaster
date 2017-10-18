@@ -187,8 +187,7 @@ public class WindowMain implements ActionListener, Observer {
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
-		String path = this.getClass().getResource("/GimpFiles/StartGame.png").getPath().substring(1);
-		label.setIcon(new ImageIcon(path));
+		label.setIcon(new ImageIcon("resources/GimpFiles/StartGame.png"));
 
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);
@@ -669,8 +668,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0.setLayout(null);
 
 		JLabel lblNewLabel_3 = new JLabel("");
-		path = this.getClass().getResource("/GimpFiles/arrow.png").getPath().substring(1);
-		lblNewLabel_3.setIcon(new ImageIcon(path));
+		lblNewLabel_3.setIcon(new ImageIcon("resources/GimpFiles/arrow.png"));
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
@@ -680,7 +678,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow1.setBackground(Color.LIGHT_GRAY);
 
 		JLabel label_7 = new JLabel("");
-		label_7.setIcon(new ImageIcon(path));
+		label_7.setIcon(new ImageIcon("resources/GimpFiles/arrow.png"));
 		label_7.setBounds(0, 0, 30, 30);
 		arrow1.add(label_7);
 
@@ -690,7 +688,7 @@ public class WindowMain implements ActionListener, Observer {
 		map.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
-		label_8.setIcon(new ImageIcon(path));
+		label_8.setIcon(new ImageIcon("resources/GimpFiles/arrow.png"));
 
 		label_8.setBounds(0, 0, 30, 30);
 		arrow2.add(label_8);
@@ -764,8 +762,7 @@ public class WindowMain implements ActionListener, Observer {
 		playerWinTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		JLabel label_12 = new JLabel("");
-		path = this.getClass().getResource("/GimpFiles/Soldiers.png").getPath().substring(1);
-		label_12.setIcon(new ImageIcon(path));
+		label_12.setIcon(new ImageIcon("resources/GimpFiles/Soldiers.png"));
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 

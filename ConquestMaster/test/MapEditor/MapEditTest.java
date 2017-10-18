@@ -16,7 +16,6 @@ import MapEditor.Model.Territory;
  */
 public class MapEditTest {
 	private ConquestMap map;
-	private String path;
 
 /**
  * Set up function, to do some initial work. 
@@ -25,8 +24,7 @@ public class MapEditTest {
 	@Before
 	public void setUp() throws Exception {
 		map = new ConquestMap();
-		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
-		map.load(path);
+		map.load("resources/ConquestMaps/Atlantis.map");
 	}
 
 	/**

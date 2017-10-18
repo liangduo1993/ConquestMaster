@@ -17,7 +17,6 @@ import MapEditor.Model.Continent;
  */
 public class MapHandlerTest {
 	private ConquestMap map;
-	private String path;
 
 	/**
 	 * Set up function, to do some initial work.
@@ -28,7 +27,6 @@ public class MapHandlerTest {
 	@Before
 	public void setUp() throws Exception {
 		map = new ConquestMap();
-		path = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis.map").getPath().substring(1);
 	}
 
 	/**
@@ -39,7 +37,7 @@ public class MapHandlerTest {
 	 */
 	@Test
 	public void testLoad() throws Exception {
-		map.load(path);
+		map.load("resources/ConquestMaps/Atlantis.map");
 		assertEquals(42, map.territories.size());
 		assertEquals(2, map.findTerritory("Forgoth").getLinks().size());
 		assertEquals("Kala", map.findTerritory("Forgoth").getContinent().getName());
@@ -51,10 +49,8 @@ public class MapHandlerTest {
 	 */
 	@Test
 	public void testLoadInvalidMap() {
-		String invalidPath = this.getClass().getClassLoader().getResource("ConquestMaps/Atlantis(invalid).map")
-				.getPath().substring(1);
 		try {
-			map.load(invalidPath);
+			map.load("resources/ConquestMaps/Atlantis(invalid).map");
 		} catch (Exception ex) {
 			assertThat(ex.getMessage(), containsString("didn't pass the validation!"));
 		}
@@ -66,7 +62,7 @@ public class MapHandlerTest {
 	 */
 	@Test
 	public void testSaveString() throws Exception {
-		map.load(path);
+		map.load("resources/ConquestMaps/Atlantis.map");
 		map.addContinent(new Continent("newContinent", 1));
 		map.save("f:\\1.map");
 	}
