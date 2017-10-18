@@ -14,9 +14,13 @@ import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 import GameConsole.View.WindowMain;
 
+/**
+ * this class is a test class for class Country
+ */
 public class CountryTest {
 	private Country country;
 	private ArrayList<AbstractTroop> troops;
+
 	@Before
 	public void setUp() throws Exception {
 		country = new Country();
@@ -24,11 +28,14 @@ public class CountryTest {
 		country.addInfrantry(3);
 	}
 
+	/**
+	 * test class: Country, function: getTroops(). Check if the continent have
+	 * the same troop as the expected result.
+	 */
 	@Test
 	public void testAddTroop() {
-		assertEquals(3,country.getTroops().size());
-		
-		
+		assertEquals(3, country.getTroops().size());
+
 	}
 
 }

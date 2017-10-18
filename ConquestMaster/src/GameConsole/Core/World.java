@@ -19,7 +19,7 @@ public class World {
 	private MapLoader mapLoader;
 
 	/**
-	 * Contruction method
+	 * Construction method
 	 * @param path a passing parameter with String type
 	 * @throws Exception
 	 */
@@ -41,7 +41,7 @@ public class World {
 		}
 	}
 
-
+	
 	public String toString() {
 		String retString = "";
 		for (Continent c : this.continents) {

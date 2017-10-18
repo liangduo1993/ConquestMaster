@@ -13,46 +13,60 @@ import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 import GameConsole.View.WindowMain;
 
+/**
+ * this class is a test class for testing if player owns the corresponding
+ * counties and can correctly get bonus from initial phase.
+ */
 public class PlayerTest {
 	private Player player;
 	private GameState state;
 	private Group group;
 	private WindowMain window;
+
+	/**
+	 * setUp initial game, loading a new map and adding new players.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		//set gamestate
-		//set group
+		// set gamestate
+		// set group
 		group = new Group();
 		window = new WindowMain();
 		ArrayList<Player> players = new ArrayList<Player>();
-		
-		for(int i = 0 ; i < 3 ;++i){
-			players.add(new Player(null , null, null));
+
+		for (int i = 0; i < 3; ++i) {
+			players.add(new Player(null, null, null));
 		}
-		
+
 		group.setPlayers(players);
 		System.out.println(group.getPlayers().size());
-		
-		state = new GameState(window , "resources/ConquestMaps/Atlantis.map");
+
+		state = new GameState(window, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
-		
-		
-		//set player
-		player = new Player("testPlayer" , null , state);
+
+		// set player
+		player = new Player("testPlayer", null, state);
 		ArrayList<Country> temp = new ArrayList<Country>();
-		for(int i = 0 ; i < 14 ;++i){
+		for (int i = 0; i < 14; ++i) {
 			temp.add(new Country());
 		}
 		player.setCountries(temp);
 
 	}
 
+	/**
+	 * test class: player, function: getBonus(). check the new game have the
+	 * correctly corresponding players. check if player can get the bonus in the
+	 * initial phase.
+	 */
 	@Test
 	public void testGetBonus() {
-		System.out.println("gamestate:"+ state.getAllPlayers().getPlayers().size());
+		System.out.println("gamestate:" + state.getAllPlayers().getPlayers().size());
 		System.out.println(player.getCountries().size());
 		System.out.println(player.getBonus());
-		assertEquals(21,player.getBonus());
+		assertEquals(21, player.getBonus());
 	}
 
 }
