@@ -118,7 +118,7 @@ public class Country {
 	 */
 	public void removeTroops(int numToRemove) {
 		for (int i = 0; i < numToRemove; i++) { // removing the troops from the
-			// attacking country
+												// attacking country
 			this.troops.remove(this.troops.size() - 1);
 		}
 	}

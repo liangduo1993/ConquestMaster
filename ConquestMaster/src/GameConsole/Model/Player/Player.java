@@ -576,7 +576,6 @@ public class Player extends Observable {
 							while (it.hasNext()) {
 								Card c = it.next();
 								if ((c.getType() != deleted[0] && c.getType() != deleted[1]) && i != 3) {
-									// System.out.println("j="+j);
 									i++;
 									deleted[j] = c.getType();
 									j++;

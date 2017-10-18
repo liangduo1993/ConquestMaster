@@ -297,7 +297,6 @@ public class MapLoader {
 		}
 		for (Country t : this.countries) {
 			buildCountryName(t);
-//			System.out.println(t);
 		}
 	}
 

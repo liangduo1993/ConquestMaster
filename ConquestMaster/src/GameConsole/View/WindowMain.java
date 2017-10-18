@@ -836,7 +836,6 @@ public class WindowMain implements ActionListener, Observer {
 		});
 
 		for (CountryButton countryButton : g.getButtons()) {
-			// map.add(countryButton.b);
 			countryButton.b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

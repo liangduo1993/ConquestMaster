@@ -122,7 +122,6 @@ public class World {
 			for (Country cou : con.getCountries()) {
 				CountryDecorator tempCard = new CountryDecorator(cou, new Troop().getStrength());
 				this.deck.add(tempCard);
-				// count++;
 			}
 		}
 
