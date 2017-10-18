@@ -1,4 +1,4 @@
-package MapEditor;
+package MapEditorTest;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;

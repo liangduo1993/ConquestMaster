@@ -1,4 +1,4 @@
-package GameConsole;
+package GameConsoleTest;
 
 import static org.junit.Assert.assertEquals;
 

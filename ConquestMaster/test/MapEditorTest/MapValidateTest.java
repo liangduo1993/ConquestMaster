@@ -1,4 +1,4 @@
-package MapEditor;
+package MapEditorTest;
 
 import static org.junit.Assert.assertEquals;
 

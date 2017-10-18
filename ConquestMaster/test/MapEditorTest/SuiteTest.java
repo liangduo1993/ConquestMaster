@@ -1,4 +1,4 @@
-package GameConsole;
+package MapEditorTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,12 +10,11 @@ import org.junit.runners.Suite;
  *
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ 
-		CountryTest.class, //
-		GroupTest.class, //
-		PlayerTest.class,//
-		GameStateTest.class,//
-		CardsTest.class
+@Suite.SuiteClasses({ MapEditTest.class, //
+		MapHandlerTest.class, //
+		MapValidateTest.class, //
+		MyStringUtilTest.class, //
+		TablePanelTest.class//
 })
 public class SuiteTest {
 
