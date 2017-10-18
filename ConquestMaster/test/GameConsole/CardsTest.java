@@ -6,12 +6,17 @@ import java.awt.Color;
 
 import org.junit.Test;
 
+import GameConsole.World.Continent;
+import GameConsole.World.World;
 import GameConsole.World.Cards;
+import GameConsole.World.GameState;
+import GameConsole.World.Country;
 import GameConsole.Player.Player;
+import GameConsole.Player.Group;
 
 /**
  * 
- * This class is a test class for class Cards and the actions toward cards.
+ * This class is a test class for class Cards and method getBonus().
  *
  */
 public class CardsTest {
@@ -41,6 +46,42 @@ public class CardsTest {
 		Cards c = new Cards(receiver);
 		c.handOverCards(giver,receiver);
 		assertEquals(sum, receiver.getOnHand().size());
+		
+	}
+	
+	/**
+	* test class: Player. function: getBonus(). Check if the return of 
+	* getBonus will correct in every cases.
+	 * @throws Exception 
+	*/
+	@Test
+	public void testgetBonus() throws Exception{
+		String path = "resources/ConquestMaps/Atlantis.map";
+		World w	= new World(path);
+		Continent con = new Continent(0, "C");
+		GameState gs = new GameState(null, path);
+		Group group = new Group();
+		Country cou = new Country();
+		Player p1 = new Player("a", Color.cyan, gs);
+		Player p2 = new Player("b", Color.cyan, gs);
+		w.addContinent(con);
+		group.addPlayer(p1);
+		group.addPlayer(p2);
+		gs.setAllPlayers(group);
+		cou.setPlayer(p1);
+		for (int i=0;i<5;i++){
+			con.addCountry(cou);
+			p1.addCountry(cou);
+		}
+		
+		int rewardatR1=p1.getBonus();
+		assertEquals(35, rewardatR1);
+		
+		/*
+		gs.firstRound = 2;
+		int rewardatR2 = p1.getBonus();
+		assertEquals(20, rewardatR2);
+		*/
 		
 	}
 
