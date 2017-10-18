@@ -1,0 +1,11 @@
+GameConsole.Core
+GameConsole.Model.Army
+GameConsole.Model.Domain
+GameConsole.Model.Player
+GameConsole.View
+GameConsoleTest
+MapEditor.Core
+MapEditor.Model
+MapEditor.Util
+MapEditor.View
+MapEditorTest
