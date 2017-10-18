@@ -24,27 +24,32 @@ import GameConsole.World.GameState;
 import GameConsole.World.World;
 
 /**
- * This class represents all of the data and funcionality that a player would have.
- * All of the actions that a player would do eventually comes back to this class.
+ * This class represents all of the data and funcionality that a player would
+ * have. All of the actions that a player would do eventually comes back to this
+ * class.
  */
 public class Player extends Observable {
 	private String name;
 	private Color color;
-	private ArrayList<Troop> numTroops = new ArrayList<Troop>(); 
-	private ArrayList<Country> countries = new ArrayList<Country>(); 
-	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>(); 
-	private ArrayList<Cards> onhand = new ArrayList<Cards>(); 
+	private ArrayList<Troop> numTroops = new ArrayList<Troop>();
+	private ArrayList<Country> countries = new ArrayList<Country>();
+	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
+	private ArrayList<Cards> onhand = new ArrayList<Cards>();
 	private GameState game; // the state of the game
-	private JFormattedTextField playerTextName; 
-	private int totalCardsExchange = 0; 
+	private JFormattedTextField playerTextName;
+	private int totalCardsExchange = 0;
 	private boolean hasMoved = false;
 	private int initTroop;
 
 	/**
 	 * Constructor method
-	 * @param name the player name with String type
-	 * @param color the color of the player with Color type
-	 * @param game the game state with GameState type
+	 * 
+	 * @param name
+	 *            the player name with String type
+	 * @param color
+	 *            the color of the player with Color type
+	 * @param game
+	 *            the game state with GameState type
 	 */
 	public Player(String name, Color color, GameState game) {
 		this.name = name;
@@ -54,6 +59,7 @@ public class Player extends Observable {
 
 	/**
 	 * To check whether the player has moved the troop or not
+	 * 
 	 * @return true if the palyer has moved otherwise return flase
 	 */
 	public boolean isHasMoved() {
@@ -62,7 +68,10 @@ public class Player extends Observable {
 
 	/**
 	 * To set the status that the player has moved the troop or not
-	 * @param hasMoved the status that the player has moved the troop or not with boolean type
+	 * 
+	 * @param hasMoved
+	 *            the status that the player has moved the troop or not with
+	 *            boolean type
 	 */
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
@@ -70,23 +79,27 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player name
+	 * 
 	 * @return the player name with String type
 	 */
 	public String getName() {
 		return name;
 	}
 
-	
 	/**
 	 * To get the init troop nums
+	 * 
 	 * @return the init troop nums
 	 */
 	public int getInitTroop() {
 		return initTroop;
 	}
+
 	/**
 	 * To set the init troop nums
-	 * @param initTroop the init troop nums
+	 * 
+	 * @param initTroop
+	 *            the init troop nums
 	 */
 	public void setInitTroop(int initTroop) {
 		this.initTroop = initTroop;
@@ -94,7 +107,10 @@ public class Player extends Observable {
 
 	/**
 	 * To set the player name
-	 * @param name the desired the player name that want to be set with String type
+	 * 
+	 * @param name
+	 *            the desired the player name that want to be set with String
+	 *            type
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -102,6 +118,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player's color
+	 * 
 	 * @return the player color with Color type
 	 */
 	public Color getColor() {
@@ -110,7 +127,10 @@ public class Player extends Observable {
 
 	/**
 	 * To set the player's color
-	 * @param color the desired the player color that want to be set with Color type
+	 * 
+	 * @param color
+	 *            the desired the player color that want to be set with Color
+	 *            type
 	 */
 	public void setColor(Color color) {
 		this.color = color;
@@ -118,6 +138,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player's troops list
+	 * 
 	 * @return the player's troops list with ArrayList type
 	 */
 	public ArrayList<Troop> getNumTroops() {
@@ -126,7 +147,9 @@ public class Player extends Observable {
 
 	/**
 	 * To set the player's troops list
-	 * @param numTroops the desired player's troops list with ArrayList type
+	 * 
+	 * @param numTroops
+	 *            the desired player's troops list with ArrayList type
 	 */
 	public void setNumTroops(ArrayList<Troop> numTroops) {
 		this.numTroops = numTroops;
@@ -134,6 +157,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player's countries list
+	 * 
 	 * @return the player's countries list with ArrayList type
 	 */
 	public ArrayList<Country> getCountries() {
@@ -142,7 +166,10 @@ public class Player extends Observable {
 
 	/**
 	 * To set the countries list to belong to the player
-	 * @param countries the countries list desired to be set to belong to the player with ArrayList type
+	 * 
+	 * @param countries
+	 *            the countries list desired to be set to belong to the player
+	 *            with ArrayList type
 	 */
 	public void setCountries(ArrayList<Country> countries) {
 		this.countries = countries;
@@ -150,7 +177,8 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player's hand cards list
-	 * @return the player's hand cards list with  ArrayList type
+	 * 
+	 * @return the player's hand cards list with ArrayList type
 	 */
 	public ArrayList<CountryDecorator> getHand() {
 		return hand;
@@ -158,7 +186,10 @@ public class Player extends Observable {
 
 	/**
 	 * To set the player's hand cards list
-	 * @param hand the hand cards list desired to be set to belong to the player with ArrayList type
+	 * 
+	 * @param hand
+	 *            the hand cards list desired to be set to belong to the player
+	 *            with ArrayList type
 	 */
 	public void setHand(ArrayList<CountryDecorator> hand) {
 		this.hand = hand;
@@ -166,7 +197,8 @@ public class Player extends Observable {
 
 	/**
 	 * To get the player's hand cards list
-	 * @return the player's hand cards list with  ArrayList type
+	 * 
+	 * @return the player's hand cards list with ArrayList type
 	 */
 	public ArrayList<Cards> getOnHand() {
 		return onhand;
@@ -174,6 +206,7 @@ public class Player extends Observable {
 
 	/**
 	 * Add a certain type of card to player
+	 * 
 	 * @param cards
 	 */
 	public void addCard(Cards cards) {
@@ -182,6 +215,7 @@ public class Player extends Observable {
 
 	/**
 	 * Add all cards of the given player to receive player
+	 * 
 	 * @param onhand
 	 */
 	public void addAllCard(ArrayList<Cards> onhand) {
@@ -190,6 +224,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the game state
+	 * 
 	 * @return the game state with GameState type
 	 */
 	public GameState getGame() {
@@ -198,7 +233,9 @@ public class Player extends Observable {
 
 	/**
 	 * To set the game state
-	 * @param g the desired game state wanted to be set with Gamestate type
+	 * 
+	 * @param g
+	 *            the desired game state wanted to be set with Gamestate type
 	 */
 	public void setgame(GameState g) {
 		this.game = g;
@@ -206,7 +243,9 @@ public class Player extends Observable {
 
 	/**
 	 * To check if the country is belong to the player
-	 * @param countryName the country name with String type
+	 * 
+	 * @param countryName
+	 *            the country name with String type
 	 * @return country if the player owns the country otherwise return null
 	 */
 	public Country checkIfOwned(String countryName) {
@@ -220,16 +259,20 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * This class will take in a country as well as the country it is going to attack.
-	 * It will return the object of the country it wants to attack if the player is allowed to
-	 * attack that country
-	 * @param origin the country that selected with Country type
-	 * @param countryName the country name with String type
-	 * @return country if the country is able to perform attack otherwise return null
+	 * This class will take in a country as well as the country it is going to
+	 * attack. It will return the object of the country it wants to attack if
+	 * the player is allowed to attack that country
+	 * 
+	 * @param origin
+	 *            the country that selected with Country type
+	 * @param countryName
+	 *            the country name with String type
+	 * @return country if the country is able to perform attack otherwise return
+	 *         null
 	 */
 	public Country checkIfCanAttack(Country origin, String countryName) {
 
-		if ((this.checkIfOwned(countryName) != null) || (origin.getTroops().size() == 1)) { 
+		if ((this.checkIfOwned(countryName) != null) || (origin.getTroops().size() == 1)) {
 			return null;
 		}
 
@@ -244,12 +287,16 @@ public class Player extends Observable {
 
 	/**
 	 * To check the selected country is able to move the troop to another
-	 * @param origin the selected country with Country type
-	 * @param countryName the country name with String type
-	 * @return country with Country type if the selected country is able move troop otherwise return null
+	 * 
+	 * @param origin
+	 *            the selected country with Country type
+	 * @param countryName
+	 *            the country name with String type
+	 * @return country with Country type if the selected country is able move
+	 *         troop otherwise return null
 	 */
 	public Country checkIfCanMove(Country origin, String countryName) {
-		if ((this.checkIfOwned(countryName) == null) || (origin.getTroops().size() == 1)) { 
+		if ((this.checkIfOwned(countryName) == null) || (origin.getTroops().size() == 1)) {
 			return null;
 		}
 
@@ -264,15 +311,19 @@ public class Player extends Observable {
 
 	/**
 	 * To perform attack action
-	 * @param c1 the selected country to perform attack action with Country type
-	 * @param c2 the selected target to be attacked with Country type
+	 * 
+	 * @param c1
+	 *            the selected country to perform attack action with Country
+	 *            type
+	 * @param c2
+	 *            the selected target to be attacked with Country type
 	 */
 	public void attack(Country c1, Country c2) {
-		Random rand = new Random(); 
+		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
-		ArrayList<Integer> defendRoll = new ArrayList<Integer>(); 
+		ArrayList<Integer> defendRoll = new ArrayList<Integer>();
 
-		for (int i = 0; i < Math.min(c1.getTroops().size() - 1, 3); i++) { 
+		for (int i = 0; i < Math.min(c1.getTroops().size() - 1, 3); i++) {
 			if (c1.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
 				attackRoll.add(tempInt);
@@ -281,7 +332,7 @@ public class Player extends Observable {
 				attackRoll.add(tempInt);
 			}
 		}
-		for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) { 
+		for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
 			if (c2.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
 				defendRoll.add(tempInt);
@@ -308,19 +359,19 @@ public class Player extends Observable {
 		}
 		JOptionPane.showMessageDialog(null, diceString);
 
-		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) { 
+		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
 			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
-				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1); 
-				c2.getTroops().remove(c2.getTroops().size() - 1); 
+				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
+				c2.getTroops().remove(c2.getTroops().size() - 1);
 			} else { // if defender won
-				this.numTroops.remove(this.numTroops.size() - 1); 
-				c1.getTroops().remove(c1.getTroops().size() - 1); 
+				this.numTroops.remove(this.numTroops.size() - 1);
+				c1.getTroops().remove(c1.getTroops().size() - 1);
 			}
-			attackRoll.remove((Integer) Collections.max(attackRoll)); 
-			defendRoll.remove((Integer) Collections.max(defendRoll)); 
+			attackRoll.remove((Integer) Collections.max(attackRoll));
+			defendRoll.remove((Integer) Collections.max(defendRoll));
 		}
 
-		if (c2.getTroops().size() == 0) { 
+		if (c2.getTroops().size() == 0) {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
@@ -343,14 +394,16 @@ public class Player extends Observable {
 				moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 			}
 			moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
-			c2.addInfrantry(moveNum); 
+			c2.addInfrantry(moveNum);
 			c1.removeTroops(moveNum); // removing troops from the origin country
 		}
 	}
 
 	/**
 	 * To remove troop from troop list
-	 * @param numToRemove the number the troops that need to be removed with int type
+	 * 
+	 * @param numToRemove
+	 *            the number the troops that need to be removed with int type
 	 */
 	public void removeTroops(int numToRemove) {
 		for (int i = 0; i < numToRemove; i++) {
@@ -360,9 +413,15 @@ public class Player extends Observable {
 
 	/**
 	 * To perform move troop action
-	 * @param c1 the selected country to perform move troops action with Country type
-	 * @param c2 the selected target country to receive the moved troop with Country type
-	 * @param toMove the number of the troops that need to be moved
+	 * 
+	 * @param c1
+	 *            the selected country to perform move troops action with
+	 *            Country type
+	 * @param c2
+	 *            the selected target country to receive the moved troop with
+	 *            Country type
+	 * @param toMove
+	 *            the number of the troops that need to be moved
 	 */
 	public void moveTroops(Country c1, Country c2, int toMove) {
 		c1.removeTroops(toMove);
@@ -370,7 +429,8 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * Method to claim the player fails and remove the player from the players list
+	 * Method to claim the player fails and remove the player from the players
+	 * list
 	 */
 	public void loseGame() {
 		JOptionPane.showMessageDialog(null, this.name + " has lost the game!");
@@ -398,6 +458,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the initial army bonus in the setup phase
+	 * 
 	 * @return the number of the got armies
 	 */
 	public int getBonus() {
@@ -418,6 +479,8 @@ public class Player extends Observable {
 		} else {
 
 			int reward = this.getCountries().size() / 3;
+			if (reward < 3)
+				reward = 3;
 			boolean isLoop = true;
 
 			while (this.onhand.size() >= 3 && isLoop) {
@@ -542,20 +605,23 @@ public class Player extends Observable {
 			World world = game.getWorld();
 			System.out.println(world.getContinents().size());
 
-			for (Continent con : world.getContinents()) {
-				owned = true;
-				for (Country cou : con.getCountries()) {
-					if (!(cou.getPlayer().equals(this))) {
-						owned = false;
-						// break;
+			if (world.getContinents().size() > 0) {
+				for (Continent con : world.getContinents()) {
+					owned = true;
+					for (Country cou : con.getCountries()) {
+						System.out.println(cou.getName());
+						System.out.println(cou.getPlayer());
+						if (!(cou.getPlayer().equals(this))) {
+							owned = false;
+							break;
+						}
+					}
+					System.out.println(con.getName());
+					if (owned) {
+						reward += con.getBonus();
 					}
 				}
-				System.out.println(con.getName());
-				if (owned) {
-					reward += con.getBonus();
-				}
 			}
-
 			System.out.println("reward " + reward);
 			System.out.println("size " + this.countries.size());
 			return reward;
@@ -564,7 +630,9 @@ public class Player extends Observable {
 
 	/**
 	 * To add the troop to the troop list
-	 * @param numTroops the number of the troop that need to be added
+	 * 
+	 * @param numTroops
+	 *            the number of the troop that need to be added
 	 */
 	public void addInfrantry(int numTroops) {
 		for (int i = 0; i < numTroops; i++) {
@@ -575,7 +643,9 @@ public class Player extends Observable {
 
 	/**
 	 * To add a country to the player's countries list
-	 * @param c a country that need to be added with Country type
+	 * 
+	 * @param c
+	 *            a country that need to be added with Country type
 	 */
 	public void addCountry(Country c) {
 		this.countries.add(c);
@@ -583,7 +653,9 @@ public class Player extends Observable {
 
 	/**
 	 * To remove a country from the player's countries list
-	 * @param c a country that need to be removed with Country type
+	 * 
+	 * @param c
+	 *            a country that need to be removed with Country type
 	 */
 	public void removeCountry(Country c) {
 		this.countries.remove(c);
@@ -591,6 +663,7 @@ public class Player extends Observable {
 
 	/**
 	 * To get the playerName in the text
+	 * 
 	 * @return playertextname with JFormattedTextField type
 	 */
 	public JFormattedTextField getPlayerTextName() {
@@ -599,7 +672,9 @@ public class Player extends Observable {
 
 	/**
 	 * To set the playerTextName
-	 * @param playerTextName the playerTextName need to be set
+	 * 
+	 * @param playerTextName
+	 *            the playerTextName need to be set
 	 */
 	public void setPlayerTextName(JFormattedTextField playerTextName) {
 		this.playerTextName = playerTextName;
