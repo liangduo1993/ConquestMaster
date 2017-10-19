@@ -3,16 +3,12 @@ package GameConsoleTest;
 /**
  * this class is a test class for class GameState. Check if we can correctly get current state of a game.
  */
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import GameConsole.Core.GameState;
-import GameConsole.Core.Group;
-import GameConsole.Model.Player.Player;
 import GameConsole.View.WindowMain;
 
 public class GameStateTest {

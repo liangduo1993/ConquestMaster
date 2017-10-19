@@ -1,22 +1,19 @@
 package GameConsoleTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import GameConsole.Core.GameState;
-import GameConsole.Core.Group;
 import GameConsole.Model.Army.AbstractTroop;
 import GameConsole.Model.Domain.Country;
-import GameConsole.Model.Player.Player;
-import GameConsole.View.WindowMain;
 
 /**
  * this class is a test class for class Country
  */
+@SuppressWarnings("all")
 public class CountryTest {
 	private Country country;
 	private ArrayList<AbstractTroop> troops;
