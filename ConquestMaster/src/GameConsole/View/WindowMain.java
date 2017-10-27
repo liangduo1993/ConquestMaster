@@ -53,11 +53,12 @@ public class WindowMain implements ActionListener, Observer {
 	private JButton openButton;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
 	private JLabel playerWonLabell;
+	private LogPanel lp = LogPanel.getInstance();
 
 	private GameState gameState;
 	private JFileChooser fc;
 	private int troopsLeft;
-	
+
 	/**
 	 * Constructor method
 	 * 
@@ -395,13 +396,17 @@ public class WindowMain implements ActionListener, Observer {
 			}
 		});
 
-		Game g = new Game(mapPanel, gameState.getWorld());
+		MapDisplayer g = new MapDisplayer(mapPanel, gameState.getWorld());
 		System.out.println("button nums: " + g.getButtons().size());
 
 		startGamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
+				frame1.setBounds(100, 100, 1400, 900);
+				lp.setBounds(1200, 0, 200, 900);
+				lp.setBackground(Color.white);
+				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
 					gameState.addPlayer(p1);
@@ -463,7 +468,7 @@ public class WindowMain implements ActionListener, Observer {
 				}
 				JOptionPane.showMessageDialog(null,
 						"It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
-
+				lp.addLog("It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
 			}
 		});
 
@@ -765,8 +770,8 @@ public class WindowMain implements ActionListener, Observer {
 
 		cardPanel = new JPanel();
 		mapPanel.add(cardPanel);
-		cardPanel.setBounds(900, 700, 200, 40);
-		cardPanel.setBackground(Color.yellow);
+		cardPanel.setBounds(800, 700, 300, 40);
+		cardPanel.setBackground(Color.LIGHT_GRAY);
 		cardPanel.setLayout(null);
 
 		JPanel nextStage = new JPanel();
@@ -848,10 +853,12 @@ public class WindowMain implements ActionListener, Observer {
 
 						if (currentPlayer == countryButton.country.getPlayer() && currentPlayer.getInitTroop() > 0) {
 							currentPlayer.setInitTroop(currentPlayer.getInitTroop() - 1);
-							countryButton.country.addInfrantry(1);
+							currentPlayer.addInfantry(countryButton.country);
+							// countryButton.country.addInfrantry(1);
 							gameState.updateCountryLabels();
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
+							lp.addLog("That country does not belong to you.");
 							return;
 						}
 
@@ -883,15 +890,18 @@ public class WindowMain implements ActionListener, Observer {
 					} else if (gameState.firstRound > 1) {
 						if (gameState.getCurrPhase() == 0) {
 							System.out.println("click on button!");
+							Player currentPlayer = gameState.getCurrPlayer();
 							if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0) {
 								troopsLeft--;
-								countryButton.country.addInfrantry(1);
+								currentPlayer.addInfantry(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
 							} else if (troopsLeft == 0) {
 								JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
+								lp.addLog("Out of troops to add");
 							} else {
 								JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
+								lp.addLog("That country does not belong to you.");
 							}
 						} else if (gameState.getCurrPhase() == 1) {
 							if (countryButton.country.getPlayer() == gameState.getCurrPlayer()
@@ -905,6 +915,7 @@ public class WindowMain implements ActionListener, Observer {
 									gameState.setCountry1(null);
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Country does not have enough troops to attack");
+									lp.addLog("Country does not have enough troops to attack");
 									country1.setText((String) null);
 								}
 							} else if (countryButton.country.getPlayer() != gameState.getCurrPlayer()
@@ -923,6 +934,7 @@ public class WindowMain implements ActionListener, Observer {
 								} else {
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Countries are not adjacent, select the second country again.");
+									lp.addLog("Countries are not adjacent, select the second country again.");
 									gameState.setCountry2(null);
 									country2.setText((String) null);
 								}
@@ -935,6 +947,8 @@ public class WindowMain implements ActionListener, Observer {
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Troops cannot be moved from here because "
 													+ gameState.getCountry1().getName() + " only has 1 troop.");
+									lp.addLog("Troops cannot be moved from here because "
+											+ gameState.getCountry1().getName() + " only has 1 troop.");
 									gameState.setCountry1(null);
 									country1.setText((String) null);
 								} else {
@@ -970,6 +984,7 @@ public class WindowMain implements ActionListener, Observer {
 										country2.setText((String) null);
 									} else {
 										JOptionPane.showMessageDialog(countryButton.b, "Move was cancelled.");
+										lp.addLog("Move was cancelled.");
 										gameState.setCountry1(null);
 										gameState.setCountry2(null);
 										country1.setText((String) null);
@@ -978,6 +993,7 @@ public class WindowMain implements ActionListener, Observer {
 								} else {
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Countries are not adjacent, select the second country again.");
+									lp.addLog("Countries are not adjacent, select the second country again.");
 									gameState.setCountry2(null);
 									country2.setText((String) null);
 								}
@@ -1004,8 +1020,21 @@ public class WindowMain implements ActionListener, Observer {
 			ArrayList<Card> onHand = currentPlayer.getOnHand();
 			cardPanel.removeAll();
 			for (int i = 0; i < onHand.size(); i++) {
-				JLabel card = new JLabel(onHand.get(i).getType() + "");
-				card.setBounds(20 * i + 20, 0, 20, 20);
+				JLabel card = new JLabel();
+				// label.setIcon(new
+				// ImageIcon("resources/GimpFiles/StartGame.png"));
+				switch (onHand.get(i).getType()) {
+				case 0:
+					card.setIcon(new ImageIcon("resources/CardImages/type1.png"));
+					break;
+				case 1:
+					card.setIcon(new ImageIcon("resources/CardImages/type2.png"));
+					break;
+				case 2:
+					card.setIcon(new ImageIcon("resources/CardImages/type3.png"));
+					break;
+				}
+				card.setBounds(80 * i - 40 + 40, 0, 60, 40);
 				cardPanel.add(card);
 			}
 			System.out.println("there's " + cardPanel.getComponentCount() + " cards!");

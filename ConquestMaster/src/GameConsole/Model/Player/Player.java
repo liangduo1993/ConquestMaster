@@ -183,6 +183,18 @@ public class Player extends Observable {
 	public ArrayList<CountryDecorator> getHand() {
 		return hand;
 	}
+	
+	/**
+	 * To add an infantry for target country of current player
+	 * 
+	 * @param c the target country
+	 */
+	public void addInfantry(Country c){
+		if(countries.contains(c)){
+			c.addInfrantry(1);
+		}
+	}
+	
 
 	/**
 	 * To set the player's hand cards list

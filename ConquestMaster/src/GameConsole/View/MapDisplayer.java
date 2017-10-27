@@ -15,7 +15,7 @@ import GameConsole.Model.Domain.Country;
  *  The main entrance of the game
  *
  */
-public class Game {
+public class MapDisplayer {
 
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<CountryButton>(42);
@@ -25,7 +25,7 @@ public class Game {
 	 * Create the application.
 	 * @throws IOException
 	 */
-	public Game(JPanel map, World world) throws IOException {
+	public MapDisplayer(JPanel map, World world) throws IOException {
 		initialize(map, world);
 	}
 

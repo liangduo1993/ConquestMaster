@@ -920,8 +920,8 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		if (this.territories.size() > 0 && !eachTerReachable()) {
 			probs.add("There's some teris cannot reach to every other territories!");
 		}
-		
-		for(Continent c: this.continents){
+
+		for (Continent c : this.continents) {
 			if (!eachTerInContReachable(c)) {
 				probs.add(c.getName() + " territories cannot reach to every other territories!");
 			}
@@ -990,7 +990,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 		clearReach();
 		System.out.println(count + " countries can connect to each other ");
-		System.out.println("With total of " + ters.size() + " countries!");
+		System.out.println("Inside " + continent.getName() + " there're " + ters.size() + " countries!");
 		if (count == ters.size()) {
 			return true;
 		} else {
