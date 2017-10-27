@@ -193,6 +193,8 @@ public class Player extends Observable {
 		if(countries.contains(c)){
 			c.addInfrantry(1);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 
