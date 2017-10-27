@@ -1,5 +1,7 @@
 package GameConsole.Core;
 
+import java.util.Observable;
+
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;

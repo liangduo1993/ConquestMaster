@@ -1,49 +1,34 @@
 package GameConsole.View;
 
-import java.awt.EventQueue;
-import java.awt.ScrollPane;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
-public class DomiInfoPanel {
+import GameConsole.Core.GameState;
+import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Player.Player;
 
-	private JFrame frame;
+public class DomiInfoPanel extends JPanel implements Observer {
+	private static final long serialVersionUID = 1L;
 
-	private JTable table_11;
-	private JTable table_12;
-	private JTable table_13;
+	private ArrayList<JScrollPane> tables = new ArrayList<>();
+	private int playerNum;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DomiInfoPanel window = new DomiInfoPanel();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private GameState state;
 
 	/**
 	 * Create the application.
 	 */
-	public DomiInfoPanel() {
+	public DomiInfoPanel(GameState state) {
+		this.state = state;
+		playerNum = state.getAllPlayers().getPlayers().size();
 		initialize();
 	}
 
@@ -51,93 +36,71 @@ public class DomiInfoPanel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 346, 533);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("player1");
-		lblNewLabel.setBounds(36, 55, 54, 15);
-		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("player2");
-		lblNewLabel_1.setBounds(36, 214, 54, 15);
-		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("player3");
-		lblNewLabel_2.setBounds(36, 387, 54, 15);
-		panel.add(lblNewLabel_2);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(157, 26, 149, 76);
-		panel.add(scrollPane);
-		
-		table_11 = new JTable();
-		table_11.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"New column", "New column"
-			}
-		));
-		scrollPane.setViewportView(table_11);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(157, 191, 149, 83);
-		panel.add(scrollPane_1);
-		
-		table_12 = new JTable();
-		table_12.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"New column", "New column"
-			}
-		));
-		scrollPane_1.setViewportView(table_12);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(157, 369, 149, 83);
-		panel.add(scrollPane_2);
-		
-		table_13 = new JTable();
-		table_13.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"New column", "New column"
-			}
-		));
-		scrollPane_2.setViewportView(table_13);
+		this.setBounds(100, 100, 350, 650);
 
-		
+		this.setLayout(null);
 
+		System.out.println("!!!!!!!!!!!" + playerNum);
 
-}
+		for (int i = 0; i < playerNum; i++) {
+			JLabel newLabel = new JLabel(state.getAllPlayers().getPlayers().get(i).getName());
+			newLabel.setBounds(10, 55 + 150 * i, 54, 15);
+			this.add(newLabel);
+		}
+
+		for (int i = 0; i < playerNum; i++) {
+
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(60, 26 + 170 * i, 250, 140);
+			this.add(scrollPane);
+
+			Player cur = state.getAllPlayers().getPlayers().get(i);
+			ArrayList<Country> countries = cur.getCountries();
+			System.out.println(countries);
+			Object[][] model = new Object[countries.size()][3];
+			for (int row = 0; row < countries.size(); row++) {
+				model[row][0] = countries.get(row).getName();
+				model[row][1] = countries.get(row).getTroops().size();
+				model[row][2] = countries.get(row).getContinent().getName();
+			}
+
+			JTable table_11 = new JTable();
+			table_11.setModel(new DefaultTableModel(model, new String[] { "CountryName", "TroopNum", "Continent" }) {
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			});
+			scrollPane.setViewportView(table_11);
+			tables.add(scrollPane);
+		}
+
+		for (JScrollPane jTable : tables) {
+			this.add(jTable);
+
+		}
+
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		for (int i = 0; i < playerNum; i++) {
+			Player cur = state.getAllPlayers().getPlayers().get(i);
+			ArrayList<Country> countries = cur.getCountries();
+			Object[][] model = new Object[countries.size()][3];
+			for (int row = 0; row < countries.size(); row++) {
+				model[row][0] = countries.get(row).getName();
+				model[row][1] = countries.get(row).getTroops().size();
+				model[row][2] = countries.get(row).getContinent().getName();
+			}
+			JScrollPane scrollPane = tables.get(i);
+			JTable table_11 = new JTable();
+			table_11.setModel(new DefaultTableModel(model, new String[] { "CountryName", "TroopNum", "Continent" }) {
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			});
+			scrollPane.setViewportView(table_11);
+		}
+
+	}
 }

@@ -409,6 +409,11 @@ public class Player extends Observable {
 			c2.addInfrantry(moveNum);
 			c1.removeTroops(moveNum); // removing troops from the origin country
 		}
+		
+		
+		
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -438,6 +443,8 @@ public class Player extends Observable {
 	public void moveTroops(Country c1, Country c2, int toMove) {
 		c1.removeTroops(toMove);
 		c2.addInfrantry(toMove);
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
@@ -660,6 +667,8 @@ public class Player extends Observable {
 	 */
 	public void addCountry(Country c) {
 		this.countries.add(c);
+		setChanged();
+		notifyObservers();
 	}
 
 	/**
