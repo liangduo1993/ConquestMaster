@@ -770,7 +770,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		cardPanel = new JPanel();
 		mapPanel.add(cardPanel);
-		cardPanel.setBounds(800, 700, 300, 40);
+		cardPanel.setBounds(200, 700, 800, 40);
 		cardPanel.setBackground(Color.LIGHT_GRAY);
 		cardPanel.setLayout(null);
 
