@@ -37,7 +37,6 @@ import javax.swing.border.LineBorder;
 
 import GameConsole.Core.GameState;
 import GameConsole.Core.MapLoader;
-import GameConsole.Core.World;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
@@ -221,9 +220,9 @@ public class WindowMain implements ActionListener, Observer {
 		JPanel playerThreeText = new JPanel();
 		playerThreeText.setBackground(Color.GREEN);
 		JPanel playerFourText = new JPanel();
-		playerFourText.setBackground(Color.WHITE);
+		playerFourText.setBackground(Color.blue);
 		JPanel playerFiveText = new JPanel();
-		playerFiveText.setBackground(Color.YELLOW);
+		playerFiveText.setBackground(Color.red);
 		playerOneText.setVisible(false);
 		playerTwoText.setVisible(false);
 		playerThreeText.setVisible(false);
@@ -440,7 +439,7 @@ public class WindowMain implements ActionListener, Observer {
 
 				
 				cRatioPanel = new ConquestRatio(gameState);
-				cRatioPanel.setBounds(100, 150 - 30, gameState.getWorld().getDeck().size() * 10, 30);
+				cRatioPanel.setBounds(100, 150 - 10, gameState.getWorld().getDeck().size() * 10, 25);
 				mapPanel.add(cRatioPanel);
 				
 				registerObserver();
@@ -619,7 +618,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(player3Name);
 
 		player4Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player4Name.setForeground(Color.WHITE);
+		player4Name.setForeground(Color.blue);
 		player4Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		player4Name.setEditable(false);
 		player4Name.setBackground(Color.LIGHT_GRAY);
@@ -627,7 +626,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(player4Name);
 
 		player5Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player5Name.setForeground(Color.YELLOW);
+		player5Name.setForeground(Color.red);
 		player5Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		player5Name.setEditable(false);
 		player5Name.setBackground(Color.LIGHT_GRAY);
