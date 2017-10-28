@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -393,7 +394,7 @@ public class WindowMain implements ActionListener, Observer {
 		cancelCountryButton.setEnabled(false);
 		cancelCountryButton.setBackground(Color.RED);
 		cancelCountryButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cancelCountryButton.setBounds(371, buttonImage.getHeight() + 250, 124, 60);
+		cancelCountryButton.setBounds(371 + 40, buttonImage.getHeight() + 250, 124, 60);
 		mapPanel.add(cancelCountryButton);
 
 		cancelCountryButton.addActionListener(new ActionListener() {
@@ -676,7 +677,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel panel_16 = new JPanel();
 		panel_16.setBackground(Color.LIGHT_GRAY);
-		panel_16.setBounds(680, buttonImage.getHeight() + 290 - yM, 200, 31);
+		panel_16.setBounds(680, buttonImage.getHeight() + 280 - yM, 200, 31);
 		mapPanel.add(panel_16);
 		panel_16.setLayout(null);
 
@@ -688,7 +689,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel panel_17 = new JPanel();
 		panel_17.setBackground(Color.LIGHT_GRAY);
-		panel_17.setBounds(680, buttonImage.getHeight() + 340 - yM, 200, 31);
+		panel_17.setBounds(680, buttonImage.getHeight() + 320 - yM, 200, 31);
 		mapPanel.add(panel_17);
 		panel_17.setLayout(null);
 
@@ -708,7 +709,7 @@ public class WindowMain implements ActionListener, Observer {
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
-		arrow1.setBounds(640, buttonImage.getHeight() + 290 - yM, 30, 30);
+		arrow1.setBounds(640, buttonImage.getHeight() + 280 - yM, 30, 30);
 		mapPanel.add(arrow1);
 		arrow1.setLayout(null);
 		arrow1.setBackground(Color.LIGHT_GRAY);
@@ -720,7 +721,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		arrow2.setLayout(null);
 		arrow2.setBackground(Color.LIGHT_GRAY);
-		arrow2.setBounds(640, buttonImage.getHeight() + 340 - yM, 30, 30);
+		arrow2.setBounds(640, buttonImage.getHeight() + 320 - yM, 30, 30);
 		mapPanel.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
@@ -745,20 +746,20 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel Country1Display = new JPanel();
 		Country1Display.setOpaque(false);
-		Country1Display.setBounds(0, buttonImage.getHeight() + 240 - yM, 320, 35);
+		Country1Display.setBounds(100, buttonImage.getHeight() + 240 - yM, 300, 35);
 		mapPanel.add(Country1Display);
 
 		JLabel Country1Label = new JLabel("Country 1:");
-		Country1Label.setAlignmentY(Component.TOP_ALIGNMENT);
+		//Country1Label.setAlignmentY(Component.TOP_ALIGNMENT);
 		Country1Label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country1Display.add(Country1Label);
-
 		country1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		country1.setHorizontalAlignment(SwingConstants.LEADING);
 		Country1Display.add(country1);
-
+		Country1Display.setLayout(new GridLayout(1, 2));
 		JPanel Country2Display = new JPanel();
 		Country2Display.setOpaque(false);
-		Country2Display.setBounds(0, buttonImage.getHeight() + 290 - yM, 320, 35);
+		Country2Display.setBounds(100, buttonImage.getHeight() + 290 - yM, 300, 35);
 		mapPanel.add(Country2Display);
 
 		JLabel Country2Label = new JLabel("Country 2:");
@@ -766,8 +767,9 @@ public class WindowMain implements ActionListener, Observer {
 		Country2Display.add(Country2Label);
 
 		country2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		country2.setHorizontalAlignment(SwingConstants.LEADING);
 		Country2Display.add(country2);
-
+		Country2Display.setLayout(new GridLayout(1, 2));
 		resultsScreen.setBackground(Color.LIGHT_GRAY);
 
 		resultsScreen.setLayout(null);
