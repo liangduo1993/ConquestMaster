@@ -439,7 +439,8 @@ public class WindowMain implements ActionListener, Observer {
 				registerObserver();
 				
 				conquestRatio cRatioPanel = new conquestRatio();
-				cRatioPanel.setBounds(0, 100, 1000, 100);
+				//É÷ÖØÐÞ¸Äbouns
+				cRatioPanel.setBounds(0, 150, 520, 30);
 				mapPanel.add(cRatioPanel);
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText(Integer.toString(troopsLeft));
