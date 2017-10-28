@@ -1,15 +1,12 @@
 package GameConsole.View;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +24,7 @@ public class MapDisplayer {
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<>();
 	private World world;
+	private BufferedImage buttonImage;
 
 	/**
 	 * Create the application.
@@ -50,7 +48,7 @@ public class MapDisplayer {
 		MapLoader mapLoader = world.getMapLoader();
 		this.world = world;
 		int countryNum = mapLoader.countries.size();
-		BufferedImage buttonImage = ImageIO.read(new File(mapLoader.getImageFilePath()));
+		buttonImage = ImageIO.read(new File(mapLoader.getImageFilePath()));
 		JLabel mapLoc = new JLabel();
 		mapLoc.setIcon(new ImageIcon(buttonImage));
 		mapLoc.setBounds(0, 0, buttonImage.getWidth(), buttonImage.getHeight());
@@ -63,7 +61,7 @@ public class MapDisplayer {
 			CountryButton countryButton = new CountryButton(buttonImage, buttonName, country);
 			int x = country.getXLoc();
 			int y = country.getYLoc();
-			countryButton.setDoubleBounds(x - 20, y - 12, 50, 20);
+			countryButton.setDoubleBounds(x - 20 - 3, y - 12, 50, 20);
 			frame.add(countryButton.getLabel());
 			frame.add(countryButton.b);
 			buttons.add(countryButton);
@@ -110,4 +108,14 @@ public class MapDisplayer {
 		this.world = world;
 	}
 
+	public BufferedImage getButtonImage() {
+		return buttonImage;
+	}
+
+	public void setButtonImage(BufferedImage buttonImage) {
+		this.buttonImage = buttonImage;
+	}
+
+	
+	
 }

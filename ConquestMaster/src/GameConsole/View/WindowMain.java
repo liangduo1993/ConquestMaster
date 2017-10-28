@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +59,8 @@ public class WindowMain implements ActionListener, Observer {
 	private JLabel playerWonLabell;
 	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
-
+	private BufferedImage buttonImage;
+	
 	private GameState gameState;
 	private JFileChooser fc;
 	private int troopsLeft;
@@ -380,12 +382,18 @@ public class WindowMain implements ActionListener, Observer {
 		JLabel country1 = new JLabel((String) null);
 		JLabel country2 = new JLabel((String) null);
 
+
+		MapDisplayer g = new MapDisplayer(mapPanel, gameState.getWorld());
+		this.buttonImage = g.getButtonImage();
+		System.out.println("button nums: " + g.getButtons().size());
+
+
 		JButton cancelCountryButton = new JButton("Cancel\r\n");
 		cancelCountryButton.setVisible(false);
 		cancelCountryButton.setEnabled(false);
 		cancelCountryButton.setBackground(Color.RED);
 		cancelCountryButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		cancelCountryButton.setBounds(371, 775, 124, 60);
+		cancelCountryButton.setBounds(371, buttonImage.getHeight() + 250, 124, 60);
 		mapPanel.add(cancelCountryButton);
 
 		cancelCountryButton.addActionListener(new ActionListener() {
@@ -399,16 +407,14 @@ public class WindowMain implements ActionListener, Observer {
 				cancelCountryButton.setVisible(false);
 			}
 		});
-
-		MapDisplayer g = new MapDisplayer(mapPanel, gameState.getWorld());
-		System.out.println("button nums: " + g.getButtons().size());
-
+		
+		
 		startGamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
-				frame1.setBounds(100, 100, 1700, 900);
-				lp.setBounds(1500, 30, 200, 900);
+				frame1.setBounds(100, 100, 700 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
+				lp.setBounds(buttonImage.getWidth() + 500, 30, 200, 900);
 				lp.setBackground(Color.white);
 
 				JMenuBar menuBar = new JMenuBar();
@@ -455,7 +461,7 @@ public class WindowMain implements ActionListener, Observer {
 				// mapPanel.add(domiInfoPanel);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 				JScrollPane mainScroll = new JScrollPane();
-				mainScroll.setBounds(1100, 150 - 40, 380, 550);
+				mainScroll.setBounds(buttonImage.getWidth() + 110, 150, 370, buttonImage.getHeight());
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
 				
@@ -649,6 +655,9 @@ public class WindowMain implements ActionListener, Observer {
 
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
+		int yM = 30;
+		int xM = 30;
+		
 		unitDisplay.setVisible(true);
 		arrow0.setVisible(true);
 		arrow1.setVisible(false);
@@ -656,7 +665,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
-		panel_15.setBounds(780, 765, 200, 31);
+		panel_15.setBounds(680, buttonImage.getHeight() + 240 - yM, 200, 31);
 		mapPanel.add(panel_15);
 		panel_15.setLayout(null);
 
@@ -667,7 +676,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel panel_16 = new JPanel();
 		panel_16.setBackground(Color.LIGHT_GRAY);
-		panel_16.setBounds(780, 795, 200, 31);
+		panel_16.setBounds(680, buttonImage.getHeight() + 290 - yM, 200, 31);
 		mapPanel.add(panel_16);
 		panel_16.setLayout(null);
 
@@ -679,7 +688,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel panel_17 = new JPanel();
 		panel_17.setBackground(Color.LIGHT_GRAY);
-		panel_17.setBounds(780, 825, 200, 31);
+		panel_17.setBounds(680, buttonImage.getHeight() + 340 - yM, 200, 31);
 		mapPanel.add(panel_17);
 		panel_17.setLayout(null);
 
@@ -690,7 +699,7 @@ public class WindowMain implements ActionListener, Observer {
 		moveStageLabel.setVisible(false);
 
 		arrow0.setBackground(Color.LIGHT_GRAY);
-		arrow0.setBounds(740, 765, 30, 30);
+		arrow0.setBounds(640, buttonImage.getHeight() + 240 - yM, 30, 30);
 		mapPanel.add(arrow0);
 		arrow0.setLayout(null);
 
@@ -699,7 +708,7 @@ public class WindowMain implements ActionListener, Observer {
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
-		arrow1.setBounds(740, 795, 30, 30);
+		arrow1.setBounds(640, buttonImage.getHeight() + 290 - yM, 30, 30);
 		mapPanel.add(arrow1);
 		arrow1.setLayout(null);
 		arrow1.setBackground(Color.LIGHT_GRAY);
@@ -711,7 +720,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		arrow2.setLayout(null);
 		arrow2.setBackground(Color.LIGHT_GRAY);
-		arrow2.setBounds(740, 825, 30, 30);
+		arrow2.setBounds(640, buttonImage.getHeight() + 340 - yM, 30, 30);
 		mapPanel.add(arrow2);
 
 		JLabel label_8 = new JLabel("");
@@ -721,7 +730,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow2.add(label_8);
 
 		unitDisplay.setBackground(Color.LIGHT_GRAY);
-		unitDisplay.setBounds(510, 765, 220, 30);
+		unitDisplay.setBounds(410, buttonImage.getHeight() + 240 - yM, 220, 30);
 		mapPanel.add(unitDisplay);
 		unitDisplay.setLayout(null);
 
@@ -736,7 +745,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel Country1Display = new JPanel();
 		Country1Display.setOpaque(false);
-		Country1Display.setBounds(30, 765, 320, 35);
+		Country1Display.setBounds(0, buttonImage.getHeight() + 240 - yM, 320, 35);
 		mapPanel.add(Country1Display);
 
 		JLabel Country1Label = new JLabel("Country 1:");
@@ -749,7 +758,7 @@ public class WindowMain implements ActionListener, Observer {
 
 		JPanel Country2Display = new JPanel();
 		Country2Display.setOpaque(false);
-		Country2Display.setBounds(30, 812, 320, 35);
+		Country2Display.setBounds(0, buttonImage.getHeight() + 290 - yM, 320, 35);
 		mapPanel.add(Country2Display);
 
 		JLabel Country2Label = new JLabel("Country 2:");
@@ -795,13 +804,13 @@ public class WindowMain implements ActionListener, Observer {
 
 		cardPanel = new JPanel();
 		mapPanel.add(cardPanel);
-		cardPanel.setBounds(200, 700, 800, 40);
+		cardPanel.setBounds(100, buttonImage.getHeight() + 170 - 10, 900, 40);
 		cardPanel.setBackground(Color.LIGHT_GRAY);
 		cardPanel.setLayout(null);
 
 		JPanel nextStage = new JPanel();
 		nextStage.setBackground(Color.RED);
-		nextStage.setBounds(1009, 785, 170, 50);
+		nextStage.setBounds(900 + 40, buttonImage.getHeight() + 300 - yM, 170, 50);
 		mapPanel.add(nextStage);
 		nextStage.setLayout(null);
 
