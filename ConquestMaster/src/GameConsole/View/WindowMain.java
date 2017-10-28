@@ -413,8 +413,8 @@ public class WindowMain implements ActionListener, Observer {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
-				frame1.setBounds(100, 100, 700 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
-				lp.setBounds(buttonImage.getWidth() + 500, 30, 200, 900);
+				frame1.setBounds(100, 100, 750 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
+				lp.setBounds(buttonImage.getWidth() + 550, 30, 200, 850);
 				lp.setBackground(Color.white);
 
 				JMenuBar menuBar = new JMenuBar();
@@ -461,7 +461,7 @@ public class WindowMain implements ActionListener, Observer {
 				// mapPanel.add(domiInfoPanel);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 				JScrollPane mainScroll = new JScrollPane();
-				mainScroll.setBounds(buttonImage.getWidth() + 110, 150, 370, buttonImage.getHeight());
+				mainScroll.setBounds(buttonImage.getWidth() + 130, 150, 380, buttonImage.getHeight());
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
 				
