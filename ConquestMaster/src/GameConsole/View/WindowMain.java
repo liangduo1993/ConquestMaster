@@ -37,6 +37,7 @@ import javax.swing.border.LineBorder;
 
 import GameConsole.Core.GameState;
 import GameConsole.Core.MapLoader;
+import GameConsole.Core.World;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
@@ -54,6 +55,7 @@ public class WindowMain implements ActionListener, Observer {
 	private JButton openButton;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
 	private JLabel playerWonLabell;
+	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
 
 	private GameState gameState;
@@ -407,7 +409,7 @@ public class WindowMain implements ActionListener, Observer {
 				frame1.setBounds(100, 100, 1400, 900);
 				lp.setBounds(1200, 0, 200, 900);
 				lp.setBackground(Color.white);
-				
+
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
@@ -423,25 +425,28 @@ public class WindowMain implements ActionListener, Observer {
 					gameState.addPlayer(p3);
 				}
 				if (playerFourText.isVisible()) {
-					Player p4 = new Player(player4TextField.getText(), Color.white, gameState);
+					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState);
 					gameState.addPlayer(p4);
 				}
 				if (playerFiveText.isVisible()) {
-					Player p5 = new Player(player5TextField.getText(), Color.yellow, gameState);
+					Player p5 = new Player(player5TextField.getText(), Color.red, gameState);
 					gameState.addPlayer(p5);
 				}
 				gameState.gameStart();
-				
+
 				domiInfoPanel = new DomiInfoPanel(gameState);
-				domiInfoPanel.setBounds(800, 30, 350, 650);
-				mapPanel.add(domiInfoPanel);			
+				domiInfoPanel.setBounds(800, 150, 350, 400);
+				mapPanel.add(domiInfoPanel);
+
+				
+				cRatioPanel = new ConquestRatio(gameState);
+				cRatioPanel.setBounds(100, 150 - 30, gameState.getWorld().getDeck().size() * 10, 30);
+				mapPanel.add(cRatioPanel);
 				
 				registerObserver();
+
 				
-				conquestRatio cRatioPanel = new conquestRatio();
-				//É÷ÖØÐÞ¸Äbouns
-				cRatioPanel.setBounds(0, 150, 520, 30);
-				mapPanel.add(cRatioPanel);
+
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText(Integer.toString(troopsLeft));
 				for (Player p : gameState.getAllPlayers().getPlayers()) {
@@ -786,8 +791,6 @@ public class WindowMain implements ActionListener, Observer {
 		cardPanel.setBackground(Color.LIGHT_GRAY);
 		cardPanel.setLayout(null);
 
-	
-		
 		JPanel nextStage = new JPanel();
 		nextStage.setBackground(Color.RED);
 		nextStage.setBounds(1009, 785, 170, 50);
@@ -1088,6 +1091,7 @@ public class WindowMain implements ActionListener, Observer {
 			for (Player p : gameState.getAllPlayers().getPlayers()) {
 				p.addObserver(domiInfoPanel);
 				p.addObserver(this);
+				p.addObserver(cRatioPanel);
 			}
 		}
 

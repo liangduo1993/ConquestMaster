@@ -2,6 +2,8 @@ package GameConsole.View;
 
 import java.awt.BorderLayout;
 import java.awt.Insets;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,7 +11,7 @@ import javax.swing.JTextArea;
 /**
  * this class is the GUI for the logpanel, to show the any message when editing a conquest map. 
  */
-public class LogPanel extends JPanel {
+public class LogPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	public JTextArea log = new JTextArea();
 	private final String NEWLINE = "\n";
@@ -35,6 +37,11 @@ public class LogPanel extends JPanel {
 	
 	public void addLog(String msg){
 		log.append(msg + NEWLINE);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
 	}
 
 }

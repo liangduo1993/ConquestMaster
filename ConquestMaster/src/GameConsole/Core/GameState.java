@@ -1,7 +1,5 @@
 package GameConsole.Core;
 
-import java.util.Observable;
-
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
@@ -20,7 +18,7 @@ public class GameState {
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
-
+	
 	/**
 	 * constructor method with incoming parameters
 	 * @param win Window frame of the game
