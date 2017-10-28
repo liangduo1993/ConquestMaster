@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import GameConsole.Core.GameState;
@@ -36,15 +35,13 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setBounds(100, 100, 350, 650);
-
+		this.setBounds(100, 100, 350, playerNum * 180);
 		this.setLayout(null);
-
-		System.out.println("!!!!!!!!!!!" + playerNum);
+		
 
 		for (int i = 0; i < playerNum; i++) {
 			JLabel newLabel = new JLabel(state.getAllPlayers().getPlayers().get(i).getName());
-			newLabel.setBounds(10, 55 + 150 * i, 54, 15);
+			newLabel.setBounds(10, 55 + 170 * i, 54, 15);
 			this.add(newLabel);
 		}
 

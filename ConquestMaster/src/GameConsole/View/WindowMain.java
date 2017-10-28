@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -433,10 +436,16 @@ public class WindowMain implements ActionListener, Observer {
 				}
 				gameState.gameStart();
 
+				
 				domiInfoPanel = new DomiInfoPanel(gameState);
-				domiInfoPanel.setBounds(800, 150, 350, 400);
-				mapPanel.add(domiInfoPanel);
-
+				// domiInfoPanel.setBounds(0, 0, domiInfoPanel.getWidth(),
+				// domiInfoPanel.getHeight());
+				// mapPanel.add(domiInfoPanel);
+				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
+				JScrollPane mainScroll = new JScrollPane();
+				mainScroll.setBounds(800, 150 - 20, 380, 550);
+				mainScroll.setViewportView(domiInfoPanel);
+				mapPanel.add(mainScroll);
 				
 				cRatioPanel = new ConquestRatio(gameState);
 				cRatioPanel.setBounds(100, 150 - 10, gameState.getWorld().getDeck().size() * 10, 25);
