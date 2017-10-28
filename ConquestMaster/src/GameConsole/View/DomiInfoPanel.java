@@ -63,6 +63,8 @@ public class DomiInfoPanel extends JPanel implements Observer {
 
 			JTable table_11 = new JTable();
 			table_11.setModel(new DefaultTableModel(model, new String[] { "CountryName", "TroopNum", "Continent" }) {
+				private static final long serialVersionUID = 1L;
+
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
@@ -92,6 +94,8 @@ public class DomiInfoPanel extends JPanel implements Observer {
 			JScrollPane scrollPane = tables.get(i);
 			JTable table_11 = new JTable();
 			table_11.setModel(new DefaultTableModel(model, new String[] { "CountryName", "TroopNum", "Continent" }) {
+				private static final long serialVersionUID = 1L;
+
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}

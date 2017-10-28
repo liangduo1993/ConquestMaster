@@ -32,7 +32,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -408,8 +407,8 @@ public class WindowMain implements ActionListener, Observer {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
-				frame1.setBounds(100, 100, 1400, 900);
-				lp.setBounds(1200, 0, 200, 900);
+				frame1.setBounds(100, 100, 1700, 900);
+				lp.setBounds(1500, 0, 200, 900);
 				lp.setBackground(Color.white);
 
 				mapPanel.add(lp);
@@ -443,12 +442,12 @@ public class WindowMain implements ActionListener, Observer {
 				// mapPanel.add(domiInfoPanel);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 				JScrollPane mainScroll = new JScrollPane();
-				mainScroll.setBounds(800, 150 - 20, 380, 550);
+				mainScroll.setBounds(1100, 150 - 20, 380, 550);
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
 				
 				cRatioPanel = new ConquestRatio(gameState);
-				cRatioPanel.setBounds(100, 150 - 10, gameState.getWorld().getDeck().size() * 10, 25);
+				cRatioPanel.setBounds(100, 150 - 10, gameState.getWorld().getDeck().size() * ConquestRatio.ratio, 25);
 				mapPanel.add(cRatioPanel);
 				
 				registerObserver();

@@ -23,7 +23,7 @@ public class ConquestRatio extends JPanel implements Observer {
 	private GameState state;
 	private int playerNum;
 	private ArrayList<JLabel> lable = new ArrayList<>();
-
+	public static final int ratio = 15;
 	/**
 	 * constructor method, conquestRatio extends JPanel and input parameters.
 	 */
@@ -31,13 +31,13 @@ public class ConquestRatio extends JPanel implements Observer {
 		this.state = state;
 		playerNum = state.getAllPlayers().getPlayers().size();
 		this.setLayout(null);
-		this.setBounds(0, 0, state.getWorld().getDeck().size() * 10, 25);
+		this.setBounds(0, 0, state.getWorld().getDeck().size() * ratio, 25);
 		System.out.println(this.getBounds());
 		int loc = 0;
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			int oldLoc = loc;
-			loc += 10 * cur.getCountries().size();
+			loc += ratio * cur.getCountries().size();
 			JLabel lb1 = new JLabel(cur.getCountries().size() + "");
 			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 25);
 			lb1.setBackground(cur.getColor());
@@ -59,8 +59,8 @@ public class ConquestRatio extends JPanel implements Observer {
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			g.setColor(cur.getColor());
-			g.fillRect(loc, 0, 10 * cur.getCountries().size(), 25);
-			loc += 10 * cur.getCountries().size();
+			g.fillRect(loc, 0, ratio * cur.getCountries().size(), 25);
+			loc += ratio * cur.getCountries().size();
 		}
 		g.setColor(color);
 	}
@@ -71,12 +71,10 @@ public class ConquestRatio extends JPanel implements Observer {
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			int oldLoc = loc;
-			loc += 10 * cur.getCountries().size();
+			loc += ratio * cur.getCountries().size();
 			JLabel lb1 = lable.get(i);
 			lb1.setText("" + cur.getCountries().size());
 			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 25);
-			System.out.println("//=====================");
-			System.out.println("current loctions:" + lb1.getBounds());
 		}
 		this.repaint();
 	}
