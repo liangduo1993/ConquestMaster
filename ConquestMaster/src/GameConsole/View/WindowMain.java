@@ -408,9 +408,22 @@ public class WindowMain implements ActionListener, Observer {
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
 				frame1.setBounds(100, 100, 1700, 900);
-				lp.setBounds(1500, 0, 200, 900);
+				lp.setBounds(1500, 30, 200, 900);
 				lp.setBackground(Color.white);
 
+				JMenuBar menuBar = new JMenuBar();
+				menuBar.setBounds(0, 0, frame1.getWidth(), 30);
+				mapPanel.add(menuBar);
+				JMenu mnNewMenu = new JMenu("Game");
+				menuBar.add(mnNewMenu);
+				JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
+				mntmNewMenuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						System.exit(0);
+					}
+				});
+				mnNewMenu.add(mntmNewMenuItem);
+				
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
@@ -442,12 +455,12 @@ public class WindowMain implements ActionListener, Observer {
 				// mapPanel.add(domiInfoPanel);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 				JScrollPane mainScroll = new JScrollPane();
-				mainScroll.setBounds(1100, 150 - 20, 380, 550);
+				mainScroll.setBounds(1100, 150 - 40, 380, 550);
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
 				
 				cRatioPanel = new ConquestRatio(gameState);
-				cRatioPanel.setBounds(100, 150 - 10, gameState.getWorld().getDeck().size() * ConquestRatio.ratio, 25);
+				cRatioPanel.setBounds(100, 150 - 40, gameState.getWorld().getDeck().size() * ConquestRatio.ratio, 20);
 				mapPanel.add(cRatioPanel);
 				
 				registerObserver();
@@ -580,26 +593,14 @@ public class WindowMain implements ActionListener, Observer {
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
-		JLabel labelPlayer = new JLabel("");
-		MapLoader mapLoader = gameState.getWorld().getMapLoader();
-		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
-		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
-		mapPanel.add(labelPlayer);
+//		JLabel labelPlayer = new JLabel("");
+//		MapLoader mapLoader = gameState.getWorld().getMapLoader();
+//		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
+//		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
+//		mapPanel.add(labelPlayer);
 
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 1200, 30);
-		mapPanel.add(menuBar);
+	
 
-		JMenu mnNewMenu = new JMenu("Game");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
 
 		player1Name.setBackground(Color.LIGHT_GRAY);
 		player1Name.setForeground(Color.CYAN);

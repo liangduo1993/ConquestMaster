@@ -39,7 +39,7 @@ public class ConquestRatio extends JPanel implements Observer {
 			int oldLoc = loc;
 			loc += ratio * cur.getCountries().size();
 			JLabel lb1 = new JLabel(cur.getCountries().size() + "");
-			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 25);
+			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 20);
 			lb1.setBackground(cur.getColor());
 			lb1.setOpaque(true);
 			this.add(lb1);
@@ -59,7 +59,7 @@ public class ConquestRatio extends JPanel implements Observer {
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			g.setColor(cur.getColor());
-			g.fillRect(loc, 0, ratio * cur.getCountries().size(), 25);
+			g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
 			loc += ratio * cur.getCountries().size();
 		}
 		g.setColor(color);
@@ -74,7 +74,7 @@ public class ConquestRatio extends JPanel implements Observer {
 			loc += ratio * cur.getCountries().size();
 			JLabel lb1 = lable.get(i);
 			lb1.setText("" + cur.getCountries().size());
-			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 25);
+			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 20);
 		}
 		this.repaint();
 	}
