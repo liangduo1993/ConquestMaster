@@ -40,6 +40,7 @@ public class Player extends Observable {
 	private int totalCardsExchange = 0;
 	private boolean hasMoved = false;
 	private int initTroop;
+	private boolean isConquered = false;
 
 	/**
 	 * Constructor method
@@ -237,6 +238,14 @@ public class Player extends Observable {
 	}
 
 	/**
+	 * Indicate whether player conquered at least one country
+	 * @param _isCQ true if conquered one or more countries
+	 */
+	public void isConquered(boolean _isCQ){
+		this.isConquered=_isCQ;
+	}
+	
+	/**
 	 * To get the game state
 	 * 
 	 * @return the game state with GameState type
@@ -389,6 +398,7 @@ public class Player extends Observable {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
+			this.isConquered(true);
 
 			int moveNum = 0;
 			JPanel numPanel = new JPanel();
@@ -469,11 +479,12 @@ public class Player extends Observable {
 	 * To give the player the hand cards
 	 */
 	public void giveCards() {
-		for (int i = 0; i < 4; i++) {
+		if(this.isConquered==true){
 			Card c = new Card(this);
 			c.addRandomTypeCard();
 			this.onhand.add(c);
 			System.out.println(c);
+			this.isConquered=false;
 		}
 	}
 
