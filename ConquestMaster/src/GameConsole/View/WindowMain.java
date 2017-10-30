@@ -813,6 +813,8 @@ public class WindowMain implements ActionListener, Observer {
 		nextStage.setBounds(900 + 40, buttonImage.getHeight() + 300 - yM, 170, 50);
 		mapPanel.add(nextStage);
 		nextStage.setLayout(null);
+		
+		
 
 		JLabel nextStageLabel = new JLabel("Next Stage");
 		nextStageLabel.setForeground(Color.WHITE);
@@ -820,59 +822,6 @@ public class WindowMain implements ActionListener, Observer {
 		nextStageLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		nextStageLabel.setBounds(0, 0, 170, 50);
 		nextStage.add(nextStageLabel);
-
-//		nextStage.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent arg0) {
-//				if (troopsLeft == 0) {
-//					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
-//
-//					int playerNum = gameState.getAllPlayers().getPlayers().size();
-//					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
-//						gameState.firstRound++;
-//						System.out.println("round +1 !!!");
-//					}
-//
-//					if (gameState.firstRound > 1) {
-//						attackStageLabel.setVisible(true);
-//						moveStageLabel.setVisible(true);
-//						if (gameState.getCurrPhase() == 0) {
-//							unitDisplay.setVisible(true);
-//							arrow0.setVisible(true);
-//							arrow1.setVisible(false);
-//							arrow2.setVisible(false);
-//							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
-//							gameState.getCurrPlayer().setHasMoved(false);
-//							gameState.setNextPlayer();
-//
-//							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
-//							gameState.setCountry1(null);
-//							gameState.setCountry2(null);
-//
-//							cardUpdate();
-//							troopsLeft = gameState.getCurrPlayer().getBonus();
-//							numberOfTroops.setText(Integer.toString(troopsLeft));
-//							cardUpdate();
-//						} else if (gameState.getCurrPhase() == 1) {
-//							unitDisplay.setVisible(false);
-//							arrow0.setVisible(false);
-//							arrow1.setVisible(true);
-//							arrow2.setVisible(false);
-//
-//						} else {
-//							unitDisplay.setVisible(false);
-//							arrow0.setVisible(false);
-//							arrow1.setVisible(false);
-//							arrow2.setVisible(true);
-//							gameState.getCurrPlayer().giveCards();// This is
-//							cardUpdate();
-//						}
-//
-//					}
-//
-//				}
-//			}
-//		});
 
 		nextStage.addActionListener(new ActionListener() {
 			
