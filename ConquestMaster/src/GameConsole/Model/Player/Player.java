@@ -382,7 +382,7 @@ public class Player extends Observable {
 		numdice1.add(list2);
 		int message2 = -1;
 		while(message2 != JOptionPane.OK_OPTION) {
-			JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 
