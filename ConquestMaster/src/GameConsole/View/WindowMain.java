@@ -856,13 +856,14 @@ public class WindowMain implements ActionListener, Observer {
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
 							cardUpdate();
-						} else if (gameState.getCurrPhase() == 1) {
+						} else if (gameState.getCurrPhase() == 1 && gameState.getCurrPlayer().checkIfCanAttack()) {
 							unitDisplay.setVisible(false);
 							arrow0.setVisible(false);
 							arrow1.setVisible(true);
 							arrow2.setVisible(false);
 
 						} else {
+							gameState.setCurrPhase(2);
 							unitDisplay.setVisible(false);
 							arrow0.setVisible(false);
 							arrow1.setVisible(false);
@@ -965,8 +966,9 @@ public class WindowMain implements ActionListener, Observer {
 									cancelCountryButton.setEnabled(false);
 									country2.setText(gameState.getCountry2().getName());
 									gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
-									nextStage.doClick(100);
-									
+									if(!gameState.getCurrPlayer().checkIfCanAttack()){
+										nextStage.doClick();
+									}
 									gameState.updateCountryLabels();
 									gameState.setCountry1(null);
 									gameState.setCountry2(null);

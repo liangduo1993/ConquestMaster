@@ -184,20 +184,20 @@ public class Player extends Observable {
 	public ArrayList<CountryDecorator> getHand() {
 		return hand;
 	}
-	
+
 	/**
 	 * To add an infantry for target country of current player
 	 * 
-	 * @param c the target country
+	 * @param c
+	 *            the target country
 	 */
-	public void addInfantry(Country c){
-		if(countries.contains(c)){
+	public void addInfantry(Country c) {
+		if (countries.contains(c)) {
 			c.addInfrantry(1);
 		}
 		setChanged();
 		notifyObservers();
 	}
-	
 
 	/**
 	 * To set the player's hand cards list
@@ -239,12 +239,14 @@ public class Player extends Observable {
 
 	/**
 	 * Indicate whether player conquered at least one country
-	 * @param _isCQ true if conquered one or more countries
+	 * 
+	 * @param _isCQ
+	 *            true if conquered one or more countries
 	 */
-	public void isConquered(boolean _isCQ){
-		this.isConquered=_isCQ;
+	public void isConquered(boolean _isCQ) {
+		this.isConquered = _isCQ;
 	}
-	
+
 	/**
 	 * To get the game state
 	 * 
@@ -286,26 +288,29 @@ public class Player extends Observable {
 	 * attack. It will return the object of the country it wants to attack if
 	 * the player is allowed to attack that country
 	 * 
-	 * @param origin
-	 *            the country that selected with Country type
-	 * @param countryName
-	 *            the country name with String type
-	 * @return country if the country is able to perform attack otherwise return
-	 *         null
 	 */
-	public Country checkIfCanAttack(Country origin, String countryName) {
-
-		if ((this.checkIfOwned(countryName) != null) || (origin.getTroops().size() == 1)) {
-			return null;
-		}
-
-		for (Country c1 : origin.getBorderingCountries()) {
-			if (c1.getName().equals(countryName)) {
-				return c1;
+	public boolean checkIfCanAttack() {
+		ArrayList<Country> canAttackCountrys = new ArrayList<>();
+		boolean flag = true;
+		for (Country c : this.countries) {
+			if (c.getTroops().size() > 1) {
+				flag = false;
+				canAttackCountrys.add(c);
 			}
 		}
+		if (flag)
+			return false;
 
-		return null;
+		for (Country c : canAttackCountrys) {
+			for (Country neighCountry : c.getBorderingCountries()) {
+				if (neighCountry.getPlayer() != this) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
 	}
 
 	/**
@@ -355,8 +360,9 @@ public class Player extends Observable {
 		JComboBox<String> list1 = new JComboBox<>(select1);
 		numdice1.add(list1);
 		int message1 = -1;
-		while(message1 != JOptionPane.OK_OPTION) {
-			message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		while (message1 != JOptionPane.OK_OPTION) {
+			message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
 
@@ -381,14 +387,13 @@ public class Player extends Observable {
 		JComboBox<String> list2 = new JComboBox<>(select2);
 		numdice1.add(list2);
 		int message2 = -1;
-		while(message2 != JOptionPane.OK_OPTION) {
-			message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		while (message2 != JOptionPane.OK_OPTION) {
+			message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 
-
-
-//		for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
+		// for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
 		for (int i = 0; i < decision2; i++) {
 			if (c2.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
@@ -400,7 +405,7 @@ public class Player extends Observable {
 		}
 		String diceString = "Attacker rolled:\n";
 		for (int i = 0; i < attackRoll.size(); i++) {
-//			if (i != Math.min(c1.getTroops().size(), 3) - 1) {
+			// if (i != Math.min(c1.getTroops().size(), 3) - 1) {
 			if (i != decision1 - 1) {
 				diceString += attackRoll.get(i) + ", ";
 			} else {
@@ -409,7 +414,7 @@ public class Player extends Observable {
 		}
 		diceString += "\nDefender rolled:\n";
 		for (int i = 0; i < defendRoll.size(); i++) {
-//			if (i != Math.min(c2.getTroops().size(), 2) - 1) {
+			// if (i != Math.min(c2.getTroops().size(), 2) - 1) {
 			if (i != decision2 - 1) {
 				diceString += defendRoll.get(i) + ", ";
 			} else {
@@ -457,9 +462,7 @@ public class Player extends Observable {
 			c2.addInfrantry(moveNum);
 			c1.removeTroops(moveNum); // removing troops from the origin country
 		}
-		
-		
-		
+
 		setChanged();
 		notifyObservers();
 	}
@@ -515,12 +518,12 @@ public class Player extends Observable {
 	 * To give the player the hand cards
 	 */
 	public void giveCards() {
-		if(this.isConquered==true){
+		if (this.isConquered == true) {
 			Card c = new Card(this);
 			c.addRandomTypeCard();
 			this.onhand.add(c);
 			System.out.println(c);
-			this.isConquered=false;
+			this.isConquered = false;
 		}
 	}
 
