@@ -3,7 +3,6 @@ package GameConsole.View;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,7 +38,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import GameConsole.Core.GameState;
-import GameConsole.Core.MapLoader;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
@@ -61,6 +58,7 @@ public class WindowMain implements ActionListener, Observer {
 	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
 	private BufferedImage buttonImage;
+	private JButton nextStage;
 	
 	private GameState gameState;
 	private JFileChooser fc;
@@ -810,7 +808,7 @@ public class WindowMain implements ActionListener, Observer {
 		cardPanel.setBackground(Color.LIGHT_GRAY);
 		cardPanel.setLayout(null);
 
-		JPanel nextStage = new JPanel();
+		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
 		nextStage.setBounds(900 + 40, buttonImage.getHeight() + 300 - yM, 170, 50);
 		mapPanel.add(nextStage);
@@ -823,9 +821,63 @@ public class WindowMain implements ActionListener, Observer {
 		nextStageLabel.setBounds(0, 0, 170, 50);
 		nextStage.add(nextStageLabel);
 
-		nextStage.addMouseListener(new MouseAdapter() {
+//		nextStage.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent arg0) {
+//				if (troopsLeft == 0) {
+//					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
+//
+//					int playerNum = gameState.getAllPlayers().getPlayers().size();
+//					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
+//						gameState.firstRound++;
+//						System.out.println("round +1 !!!");
+//					}
+//
+//					if (gameState.firstRound > 1) {
+//						attackStageLabel.setVisible(true);
+//						moveStageLabel.setVisible(true);
+//						if (gameState.getCurrPhase() == 0) {
+//							unitDisplay.setVisible(true);
+//							arrow0.setVisible(true);
+//							arrow1.setVisible(false);
+//							arrow2.setVisible(false);
+//							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
+//							gameState.getCurrPlayer().setHasMoved(false);
+//							gameState.setNextPlayer();
+//
+//							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
+//							gameState.setCountry1(null);
+//							gameState.setCountry2(null);
+//
+//							cardUpdate();
+//							troopsLeft = gameState.getCurrPlayer().getBonus();
+//							numberOfTroops.setText(Integer.toString(troopsLeft));
+//							cardUpdate();
+//						} else if (gameState.getCurrPhase() == 1) {
+//							unitDisplay.setVisible(false);
+//							arrow0.setVisible(false);
+//							arrow1.setVisible(true);
+//							arrow2.setVisible(false);
+//
+//						} else {
+//							unitDisplay.setVisible(false);
+//							arrow0.setVisible(false);
+//							arrow1.setVisible(false);
+//							arrow2.setVisible(true);
+//							gameState.getCurrPlayer().giveCards();// This is
+//							cardUpdate();
+//						}
+//
+//					}
+//
+//				}
+//			}
+//		});
+
+		nextStage.addActionListener(new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				if (troopsLeft == 0) {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 
@@ -873,9 +925,11 @@ public class WindowMain implements ActionListener, Observer {
 					}
 
 				}
+			
+				
 			}
 		});
-
+		
 		for (CountryButton countryButton : g.getButtons()) {
 			countryButton.b.addActionListener(new ActionListener() {
 				@Override
@@ -962,6 +1016,8 @@ public class WindowMain implements ActionListener, Observer {
 									cancelCountryButton.setEnabled(false);
 									country2.setText(gameState.getCountry2().getName());
 									gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
+									nextStage.doClick(100);
+									
 									gameState.updateCountryLabels();
 									gameState.setCountry1(null);
 									gameState.setCountry2(null);

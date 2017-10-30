@@ -374,7 +374,7 @@ public class Player extends Observable {
 
 		numdice1.remove(label);
 		numdice1.remove(list1);
-		
+
 		numdice1.add(new JLabel("Defender selects how many dice to roll"));
 		DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
 		for (int i = 1; i <= Math.min(c2.getTroops().size(), 2); i++) {
