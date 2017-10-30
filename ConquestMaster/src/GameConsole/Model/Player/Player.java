@@ -345,8 +345,24 @@ public class Player extends Observable {
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
 		ArrayList<Integer> defendRoll = new ArrayList<Integer>();
+		JPanel numdice1 = new JPanel();
+		JLabel label = new JLabel("Attacker selects how many dice to roll");
+		numdice1.add(label);
+		DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
+		for (int i = 1; i <= Math.min(c1.getTroops().size() - 1, 3); i++) {
+			select1.addElement(Integer.toString(i));
+		}
+		JComboBox<String> list1 = new JComboBox<>(select1);
+		numdice1.add(list1);
+		int message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int decision1 = 0;
+		if(message1 == JOptionPane.OK_OPTION) {
+			decision1 = Integer.parseInt(list1.getSelectedItem().toString());
+		} else {
+			JOptionPane.showMessageDialog(null, "Attacker canceled the decision");
+		}
 
-		for (int i = 0; i < Math.min(c1.getTroops().size() - 1, 3); i++) {
+		for (int i = 0; i < decision1; i++) {
 			if (c1.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
 				attackRoll.add(tempInt);
@@ -355,7 +371,27 @@ public class Player extends Observable {
 				attackRoll.add(tempInt);
 			}
 		}
-		for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
+
+		numdice1.remove(label);
+		numdice1.remove(list1);
+		
+		numdice1.add(new JLabel("Defender selects how many dice to roll"));
+		DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
+		for (int i = 1; i <= Math.min(c2.getTroops().size(), 2); i++) {
+			select2.addElement(Integer.toString(i));
+		}
+		JComboBox<String> list2 = new JComboBox<>(select2);
+		numdice1.add(list2);
+		int message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int decision2 = 0;
+		if(message2 == JOptionPane.OK_OPTION) {
+			decision2 = Integer.parseInt(list2.getSelectedItem().toString());
+		}
+
+
+
+//		for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
+		for (int i = 0; i < decision2; i++) {
 			if (c2.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
 				defendRoll.add(tempInt);
@@ -366,7 +402,8 @@ public class Player extends Observable {
 		}
 		String diceString = "Attacker rolled:\n";
 		for (int i = 0; i < attackRoll.size(); i++) {
-			if (i != Math.min(c1.getTroops().size(), 3) - 1) {
+//			if (i != Math.min(c1.getTroops().size(), 3) - 1) {
+			if (i != decision1 - 1) {
 				diceString += attackRoll.get(i) + ", ";
 			} else {
 				diceString += attackRoll.get(i);
@@ -374,7 +411,8 @@ public class Player extends Observable {
 		}
 		diceString += "\nDefender rolled:\n";
 		for (int i = 0; i < defendRoll.size(); i++) {
-			if (i != Math.min(c2.getTroops().size(), 2) - 1) {
+//			if (i != Math.min(c2.getTroops().size(), 2) - 1) {
+			if (i != decision2 - 1) {
 				diceString += defendRoll.get(i) + ", ";
 			} else {
 				diceString += defendRoll.get(i) + "\n";
