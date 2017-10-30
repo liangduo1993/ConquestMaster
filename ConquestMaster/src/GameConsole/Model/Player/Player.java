@@ -354,13 +354,11 @@ public class Player extends Observable {
 		}
 		JComboBox<String> list1 = new JComboBox<>(select1);
 		numdice1.add(list1);
-		int message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-		int decision1 = 0;
-		if(message1 == JOptionPane.OK_OPTION) {
-			decision1 = Integer.parseInt(list1.getSelectedItem().toString());
-		} else {
-			JOptionPane.showMessageDialog(null, "Attacker canceled the decision");
+		int message1 = -1;
+		while(message1 != JOptionPane.OK_OPTION) {
+			message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		}
+		int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
 
 		for (int i = 0; i < decision1; i++) {
 			if (c1.getPlayer().getName().equals("Sam")) {
@@ -382,11 +380,11 @@ public class Player extends Observable {
 		}
 		JComboBox<String> list2 = new JComboBox<>(select2);
 		numdice1.add(list2);
-		int message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-		int decision2 = 0;
-		if(message2 == JOptionPane.OK_OPTION) {
-			decision2 = Integer.parseInt(list2.getSelectedItem().toString());
+		int message2 = -1;
+		while(message2 != JOptionPane.OK_OPTION) {
+			JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 		}
+		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 
 
 
