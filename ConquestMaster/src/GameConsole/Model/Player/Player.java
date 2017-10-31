@@ -533,6 +533,7 @@ public class Player extends Observable {
 			Card c = new Card(this);
 			c.addRandomTypeCard();
 			this.onhand.add(c);
+			lp.addLog(this.name + " gets a card!");
 			System.out.println(c);
 			this.isConquered = false;
 		}
