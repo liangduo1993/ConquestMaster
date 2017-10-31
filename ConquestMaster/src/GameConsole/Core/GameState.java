@@ -13,7 +13,7 @@ import GameConsole.View.WindowMain;
  *
  */
 public class GameState extends Observable{
-	public int firstRound = 1;
+	private int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
 	private int currPhase; // 0 beggining, 1 attack, 2 move
@@ -45,6 +45,8 @@ public class GameState extends Observable{
 		return this.win;
 	}
 
+	
+	
 	public String toString() {
 		String retString = "Players playing: \n";
 		for (Player p : this.allPlayers.getPlayers()) {
@@ -100,6 +102,14 @@ public class GameState extends Observable{
 	}
 
 	/**
+	 * method to get current phase
+	 * @return current phase with int type
+	 */
+	public int getFirstRound() {
+		return this.firstRound;
+	}
+	
+	/**
 	 * To get world the players are in
 	 * @return the world the players are in with World type
 	 */
@@ -133,6 +143,17 @@ public class GameState extends Observable{
 		notifyObservers();
 	}
 
+	/**
+	 * To set the first round number
+	 * @param p the round that will be set with int type
+	 */
+	public void setFirstRound(int p){
+		this.firstRound = p;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
 	/**
 	 * To check is there a player a winner
 	 * @return the player if the player is winner otherwise return null

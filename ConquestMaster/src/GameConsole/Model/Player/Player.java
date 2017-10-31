@@ -537,7 +537,7 @@ public class Player extends Observable {
 	 * @return the number of the got armies
 	 */
 	public int getBonus() {
-		int firstRound = game.firstRound;
+		int firstRound = game.getFirstRound();
 		if (firstRound == 1) {
 			if (game.getAllPlayers().getPlayers().size() == 2) {
 				return 40 - this.getCountries().size();
