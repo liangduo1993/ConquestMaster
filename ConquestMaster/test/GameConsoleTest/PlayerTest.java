@@ -68,5 +68,22 @@ public class PlayerTest {
 		System.out.println(player.getBonus());
 		assertEquals(21, player.getBonus());
 	}
+	
+	/**
+	 * test class: player, function: moveTroops(). check the valid move after player
+	 * conquered a country
+	 * 
+	 */
+	@Test
+	public void testMoveTroops() {
+		
+		Country c1 = player.getCountries().get(0);
+		Country c2 = player.getCountries().get(1);
+		c1.addInfrantry(5);
+		c2.addInfrantry(4);
+		player.moveTroops(c1, c2, 2);
+		assertEquals(3, c1.getTroops().size());
+		assertEquals(6, c2.getTroops().size());
+	}
 
 }
