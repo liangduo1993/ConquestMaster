@@ -503,6 +503,7 @@ public class Player extends Observable {
 	public void moveTroops(Country c1, Country c2, int toMove) {
 		c1.removeTroops(toMove);
 		c2.addInfrantry(toMove);
+		lp.addLog(this.getName() + " moves " + toMove + " troops from " + c1.getName() + " to " + c2.getName());
 		setChanged();
 		notifyObservers();
 	}
@@ -611,6 +612,7 @@ public class Player extends Observable {
 
 						totalCardsExchange = totalCardsExchange + 1;
 						reward = reward + (totalCardsExchange * 5);
+						lp.addLog(this.getName() + " changes cards for " + (totalCardsExchange * 5) + " troops!");
 
 						switch (selected) {
 						case ("Change 3*Type0"): {
@@ -703,6 +705,7 @@ public class Player extends Observable {
 			}
 			System.out.println("reward " + reward);
 			System.out.println("size " + this.countries.size());
+			lp.addLog(this.getName() + " gets total of " + reward + " troops!");
 			return reward;
 		}
 	}
