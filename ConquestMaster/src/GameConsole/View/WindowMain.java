@@ -15,8 +15,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -102,8 +104,8 @@ public class WindowMain implements ActionListener, Observer {
 	 * Method to listen for action event on openButton
 	 * 
 	 * @param e
-	 *            a object allows to access the properties of the ActionEvent
-	 *            with ActionEvent type
+	 *            a object allows to access the properties of the ActionEvent with
+	 *            ActionEvent type
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == openButton) {
@@ -923,7 +925,110 @@ public class WindowMain implements ActionListener, Observer {
 									cancelCountryButton.setVisible(false);
 									cancelCountryButton.setEnabled(false);
 									country2.setText(gameState.getCountry2().getName());
-									gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
+
+									if (gameState.getCountry1().getPlayer() == gameState.getCurrPlayer()
+											&& gameState.getCountry2().getPlayer() != gameState.getCurrPlayer()) {
+										Random rand = new Random();
+										ArrayList<Integer> attackRoll = new ArrayList<Integer>();
+										ArrayList<Integer> defendRoll = new ArrayList<Integer>();
+										JPanel numdice1 = new JPanel();
+										JLabel label = new JLabel("Attacker selects how many dice to roll");
+										numdice1.add(label);
+										DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
+										for (int i = 1; i <= Math.min(gameState.getCountry1().getTroops().size() - 1,
+												3); i++) {
+											select1.addElement(Integer.toString(i));
+										}
+										JComboBox<String> list1 = new JComboBox<>(select1);
+										numdice1.add(list1);
+										int message1 = -1;
+										while (message1 != JOptionPane.OK_OPTION) {
+											message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
+													JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+										}
+										int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
+										lp.addLog("Attacker chooses " + decision1 + " dices!");
+
+										for (int i = 0; i < decision1; i++) {
+											if (gameState.getCountry1().getPlayer().getName().equals("Sam")) {
+												Integer tempInt = new Integer(rand.nextInt(1) + 1);
+												attackRoll.add(tempInt);
+											} else {
+												Integer tempInt = new Integer(rand.nextInt(6) + 1);
+												attackRoll.add(tempInt);
+											}
+										}
+
+										numdice1.remove(label);
+										numdice1.remove(list1);
+
+										numdice1.add(new JLabel("Defender selects how many dice to roll"));
+										DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
+										for (int i = 1; i <= Math.min(gameState.getCountry2().getTroops().size(),
+												2); i++) {
+											select2.addElement(Integer.toString(i));
+										}
+										JComboBox<String> list2 = new JComboBox<>(select2);
+										numdice1.add(list2);
+										int message2 = -1;
+										while (message2 != JOptionPane.OK_OPTION) {
+											message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
+													JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+										}
+										int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
+										lp.addLog("Defender chooses " + decision2 + " dices!");
+
+										for (int i = 0; i < decision2; i++) {
+											if (gameState.getCountry2().getPlayer().getName().equals("Sam")) {
+												Integer tempInt = new Integer(rand.nextInt(1) + 1);
+												defendRoll.add(tempInt);
+											} else {
+												Integer tempInt = new Integer(rand.nextInt(6) + 1);
+												defendRoll.add(tempInt);
+											}
+										}
+										String diceString = "Attacker rolled:\n";
+										for (int i = 0; i < attackRoll.size(); i++) {
+											if (i != decision1 - 1) {
+												diceString += attackRoll.get(i) + ", ";
+											} else {
+												diceString += attackRoll.get(i);
+											}
+										}
+										diceString += "\nDefender rolled:\n";
+										for (int i = 0; i < defendRoll.size(); i++) {
+											if (i != decision2 - 1) {
+												diceString += defendRoll.get(i) + ", ";
+											} else {
+												diceString += defendRoll.get(i) + "\n";
+											}
+										}
+										lp.addLog(diceString);
+										JOptionPane.showMessageDialog(null, diceString);
+
+										while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
+											if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
+												gameState.getCountry2().getPlayer().getNumTroops().remove(
+														gameState.getCountry2().getPlayer().getNumTroops().size() - 1);
+												gameState.getCountry2().getTroops()
+														.remove(gameState.getCountry2().getTroops().size() - 1);
+												lp.addLog("Attacker won!");
+											} else { // if defender won
+												gameState.getCurrPlayer().getNumTroops()
+														.remove(gameState.getCurrPlayer().getNumTroops().size() - 1);
+												gameState.getCountry1().getTroops()
+														.remove(gameState.getCountry1().getTroops().size() - 1);
+												lp.addLog("Defender won!");
+											}
+											attackRoll.remove((Integer) Collections.max(attackRoll));
+											defendRoll.remove((Integer) Collections.max(defendRoll));
+										}
+
+										gameState.getCurrPlayer().attack(gameState.getCountry1(),
+												gameState.getCountry2());
+
+									}
+
 									if (!gameState.getCurrPlayer().checkIfCanAttack()) {
 										nextStage.doClick();
 									}
@@ -1041,8 +1146,7 @@ public class WindowMain implements ActionListener, Observer {
 	 * @param o
 	 *            the observable object with Observable type
 	 * @param arg
-	 *            an argument passed to the notifyObservers method with Object
-	 *            type
+	 *            an argument passed to the notifyObservers method with Object type
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
