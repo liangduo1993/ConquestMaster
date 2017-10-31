@@ -66,6 +66,7 @@ public class GameState extends Observable{
 		this.world.startGame(this.allPlayers);
 		this.updateCountryLabels();
 		lp.addLog("The game is started!");
+		lp.addLog("It is the Startup phase!");
 	}
 
 	/**

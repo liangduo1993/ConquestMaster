@@ -413,7 +413,7 @@ public class WindowMain implements ActionListener, Observer {
 			public void mouseClicked(MouseEvent arg0) {
 				cardLayout.show(cards, "Game");
 				frame1.setBounds(100, 100, 750 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
-				lp.setBounds(buttonImage.getWidth() + 550, 30, 200, 850);
+				lp.setBounds(buttonImage.getWidth() + 550, 30, 200, frame1.getHeight() - 100);
 				lp.setBackground(Color.white);
 
 				JMenuBar menuBar = new JMenuBar();
@@ -503,9 +503,7 @@ public class WindowMain implements ActionListener, Observer {
 						player5Name.setVisible(true);
 					}
 				}
-//				JOptionPane.showMessageDialog(null,
-//						"It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
-				lp.addLog("It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
+				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 			}
 		});
 
@@ -823,7 +821,7 @@ public class WindowMain implements ActionListener, Observer {
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
-							lp.addLog("It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
+							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
@@ -864,6 +862,7 @@ public class WindowMain implements ActionListener, Observer {
 							currentPlayer.setInitTroop(currentPlayer.getInitTroop() - 1);
 							currentPlayer.addInfantry(countryButton.country);
 							gameState.updateCountryLabels();
+							lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
 							lp.addLog("That country does not belong to you.");
@@ -872,6 +871,7 @@ public class WindowMain implements ActionListener, Observer {
 
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 						gameState.setNextPlayer();
+						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
 						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 						gameState.setCountry1(null);
@@ -904,6 +904,7 @@ public class WindowMain implements ActionListener, Observer {
 								currentPlayer.addInfantry(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
+								lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
 							} else if (troopsLeft == 0) {
 								JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
 								lp.addLog("Out of troops to add");
@@ -1106,7 +1107,7 @@ public class WindowMain implements ActionListener, Observer {
 			arrow1.setVisible(false);
 			arrow2.setVisible(false);
 			obtainTroopLabel.setText("Startup phase");
-			lp.addLog("It is the Startup phase!");
+			
 		} else {
 			attackStageLabel.setVisible(true);
 			moveStageLabel.setVisible(true);
