@@ -503,8 +503,8 @@ public class WindowMain implements ActionListener, Observer {
 						player5Name.setVisible(true);
 					}
 				}
-				JOptionPane.showMessageDialog(null,
-						"It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
+//				JOptionPane.showMessageDialog(null,
+//						"It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
 				lp.addLog("It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
 			}
 		});
@@ -823,7 +823,7 @@ public class WindowMain implements ActionListener, Observer {
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
-
+							lp.addLog("It is the beggining of " + gameState.getCurrPlayer().getName() + "'s turn!");
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
@@ -1106,6 +1106,7 @@ public class WindowMain implements ActionListener, Observer {
 			arrow1.setVisible(false);
 			arrow2.setVisible(false);
 			obtainTroopLabel.setText("Startup phase");
+			lp.addLog("It is the Startup phase!");
 		} else {
 			attackStageLabel.setVisible(true);
 			moveStageLabel.setVisible(true);
@@ -1116,14 +1117,17 @@ public class WindowMain implements ActionListener, Observer {
 				arrow0.setVisible(true);
 				arrow1.setVisible(false);
 				arrow2.setVisible(false);
+				lp.addLog("It is the Reinforcement phase!");
 			} else if (gameState.getCurrPhase() == 1) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(true);
 				arrow2.setVisible(false);
+				lp.addLog("It is the Attack phase!");
 			} else if (gameState.getCurrPhase() == 2) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(false);
 				arrow2.setVisible(true);
+				lp.addLog("It is the Fortification phase!");
 			}
 		}
 	}

@@ -300,8 +300,10 @@ public class Player extends Observable {
 				canAttackCountrys.add(c);
 			}
 		}
-		if (flag)
+		if (flag){
+			lp.addLog("There's no country can attack, automatically end Attack phase!");
 			return false;
+		}
 
 		for (Country c : canAttackCountrys) {
 			for (Country neighCountry : c.getBorderingCountries()) {
@@ -311,7 +313,7 @@ public class Player extends Observable {
 			}
 
 		}
-
+		lp.addLog("There's no country can attack, automatically end Attack phase!");
 		return false;
 	}
 
@@ -368,7 +370,7 @@ public class Player extends Observable {
 					JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
-		lp.addLog(this.getName() + "chooses " + decision1 + " dices!");
+		lp.addLog("Attacker chooses " + decision1 + " dices!");
 
 		for (int i = 0; i < decision1; i++) {
 			if (c1.getPlayer().getName().equals("Sam")) {
@@ -396,6 +398,7 @@ public class Player extends Observable {
 					JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
+		lp.addLog("Defender chooses " + decision2 + " dices!");
 
 		for (int i = 0; i < decision2; i++) {
 			if (c2.getPlayer().getName().equals("Sam")) {
@@ -423,14 +426,17 @@ public class Player extends Observable {
 			}
 		}
 		JOptionPane.showMessageDialog(null, diceString);
+		lp.addLog(diceString);
 
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
 			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
 				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
 				c2.getTroops().remove(c2.getTroops().size() - 1);
+				lp.addLog("Attacker won!");
 			} else { // if defender won
 				this.numTroops.remove(this.numTroops.size() - 1);
 				c1.getTroops().remove(c1.getTroops().size() - 1);
+				lp.addLog("Defender won!");
 			}
 			attackRoll.remove((Integer) Collections.max(attackRoll));
 			defendRoll.remove((Integer) Collections.max(defendRoll));
@@ -446,6 +452,7 @@ public class Player extends Observable {
 			JPanel numPanel = new JPanel();
 			numPanel.add(new JLabel("Congrats you conquered " + c2.getName() + " with " + c1.getName()
 					+ ". How many troops would you like to add?"));
+			lp.addLog("Congrats " + this.getName() + " conquered " + c2.getName() + " with " + c1.getName());
 			DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
 			for (int i = 1; i < c1.getTroops().size(); i++) {
 				selection.addElement(Integer.toString(i));
@@ -462,6 +469,7 @@ public class Player extends Observable {
 			moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 			c2.addInfrantry(moveNum);
 			c1.removeTroops(moveNum); // removing troops from the origin country
+			lp.addLog(this.getName() + " leaves " + moveNum + " troops!");
 		}
 
 		setChanged();
