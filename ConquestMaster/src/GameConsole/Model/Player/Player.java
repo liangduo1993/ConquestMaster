@@ -351,7 +351,7 @@ public class Player extends Observable {
 	 *            the selected target to be attacked with Country type
 	 */
 	public void attack(Country c1, Country c2) {
-		lp.addLog(this.getName() + "is attacking!");
+		lp.addLog(c1.getName() + " is attacking " + c2.getName() +"!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
 		ArrayList<Integer> defendRoll = new ArrayList<Integer>();
@@ -425,8 +425,8 @@ public class Player extends Observable {
 				diceString += defendRoll.get(i) + "\n";
 			}
 		}
-		JOptionPane.showMessageDialog(null, diceString);
 		lp.addLog(diceString);
+		JOptionPane.showMessageDialog(null, diceString);
 
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
 			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {

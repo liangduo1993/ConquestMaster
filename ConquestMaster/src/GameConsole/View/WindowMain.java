@@ -1059,8 +1059,11 @@ public class WindowMain implements ActionListener, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		if(o instanceof Player){
 		cardViewUpdate();
+		}else if(o instanceof GameState){
 		phaseViewUpdate();
+		}
 		System.out.println("state changed!");
 
 	}
