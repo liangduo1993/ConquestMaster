@@ -90,7 +90,7 @@ public class CardsTest {
 		int rewardatR1 = p1.getBonus();
 		assertEquals(39, rewardatR1);
 
-		gs.firstRound = 2;
+		gs.setFirstRound(2); 
 		int rewardatR2 = p1.getBonus();
 		assertEquals(3, rewardatR2);
 

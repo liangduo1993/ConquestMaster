@@ -685,7 +685,7 @@ public class Player extends Observable {
 					for (Country cou : con.getCountries()) {
 						System.out.println(cou.getName());
 						System.out.println(cou.getPlayer());
-						if (!(cou.getPlayer().equals(this))) {
+						if (cou.getPlayer()== null || !(cou.getPlayer().equals(this))) {
 							owned = false;
 							break;
 						}

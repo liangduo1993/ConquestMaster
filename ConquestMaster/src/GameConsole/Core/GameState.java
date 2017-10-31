@@ -13,7 +13,7 @@ import GameConsole.View.WindowMain;
  *
  */
 public class GameState extends Observable{
-	private int firstRound;
+	private int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
 	private int currPhase; // 0 beggining, 1 attack, 2 move
