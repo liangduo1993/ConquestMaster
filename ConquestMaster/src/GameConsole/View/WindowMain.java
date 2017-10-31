@@ -806,17 +806,8 @@ public class WindowMain implements ActionListener, Observer {
 			public void actionPerformed(ActionEvent e) {
 				if (troopsLeft == 0) {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
-
-//					int playerNum = gameState.getAllPlayers().getPlayers().size();
-//					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
-//						gameState.setFirstRound(gameState.getFirstRound() + 1);
-//						System.out.println("round +1 !!!");
-//					}
-
 					if (gameState.getFirstRound() > 1) {
-
 						if (gameState.getCurrPhase() == 0) {
-							//unitDisplay.setVisible(true);
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
@@ -831,23 +822,15 @@ public class WindowMain implements ActionListener, Observer {
 							numberOfTroops.setText(Integer.toString(troopsLeft));
 							cardViewUpdate();
 						}
-						
 						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
-							//unitDisplay.setVisible(false);
 							gameState.setCurrPhase(2);
 						}
-						
 						if (gameState.getCurrPhase() == 2) {
-							//gameState.setCurrPhase(2);
-							//unitDisplay.setVisible(false);
 							gameState.getCurrPlayer().giveCards();
 							cardViewUpdate();
 						}
-
 					}
-
 				}
-
 			}
 		});
 
