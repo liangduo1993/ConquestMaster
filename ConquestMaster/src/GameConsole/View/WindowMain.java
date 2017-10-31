@@ -591,7 +591,6 @@ public class WindowMain implements ActionListener, Observer {
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
-
 		player1Name.setBackground(Color.LIGHT_GRAY);
 		player1Name.setForeground(Color.CYAN);
 		player1Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -635,7 +634,7 @@ public class WindowMain implements ActionListener, Observer {
 		arrow0 = new JPanel();
 		arrow1 = new JPanel();
 		arrow2 = new JPanel();
-		 unitDisplay = new JPanel();
+		unitDisplay = new JPanel();
 
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -808,20 +807,21 @@ public class WindowMain implements ActionListener, Observer {
 				if (troopsLeft == 0) {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 
-					int playerNum = gameState.getAllPlayers().getPlayers().size();
-					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
-						gameState.setFirstRound(gameState.getFirstRound() + 1);
-						System.out.println("round +1 !!!");
-					}
+//					int playerNum = gameState.getAllPlayers().getPlayers().size();
+//					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
+//						gameState.setFirstRound(gameState.getFirstRound() + 1);
+//						System.out.println("round +1 !!!");
+//					}
 
 					if (gameState.getFirstRound() > 1) {
 
 						if (gameState.getCurrPhase() == 0) {
-							unitDisplay.setVisible(true);
+							//unitDisplay.setVisible(true);
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
+							lp.addLog("It is the Reinforcement phase!");
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
@@ -830,12 +830,16 @@ public class WindowMain implements ActionListener, Observer {
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
 							cardViewUpdate();
-						} else if (gameState.getCurrPhase() == 1 && gameState.getCurrPlayer().checkIfCanAttack()) {
-							unitDisplay.setVisible(false);
-
-						} else {
+						}
+						
+						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
+							//unitDisplay.setVisible(false);
 							gameState.setCurrPhase(2);
-							unitDisplay.setVisible(false);
+						}
+						
+						if (gameState.getCurrPhase() == 2) {
+							//gameState.setCurrPhase(2);
+							//unitDisplay.setVisible(false);
 							gameState.getCurrPlayer().giveCards();
 							cardViewUpdate();
 						}
@@ -888,6 +892,8 @@ public class WindowMain implements ActionListener, Observer {
 						}
 						if (isFinished) {
 							gameState.setFirstRound(gameState.getFirstRound() + 1);
+							lp.addLog("It is the Reinforcement phase!");
+
 							System.out.println("round +1 !!!");
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
@@ -1023,8 +1029,6 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
-
-
 	/**
 	 * Method to initial the interface when the game end
 	 */
@@ -1047,8 +1051,7 @@ public class WindowMain implements ActionListener, Observer {
 		}
 		gameState.addObserver(this);
 	}
-	
-	
+
 	/**
 	 * Method does updates to the view offered to the player
 	 * 
@@ -1060,10 +1063,10 @@ public class WindowMain implements ActionListener, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof Player){
-		cardViewUpdate();
-		}else if(o instanceof GameState){
-		phaseViewUpdate();
+		if (o instanceof Player) {
+			cardViewUpdate();
+		} else if (o instanceof GameState) {
+			phaseViewUpdate();
 		}
 		System.out.println("state changed!");
 
@@ -1097,8 +1100,7 @@ public class WindowMain implements ActionListener, Observer {
 			cardPanel.repaint();
 		}
 	}
-	
-	
+
 	/**
 	 * Method to update the phase view
 	 */
@@ -1111,7 +1113,8 @@ public class WindowMain implements ActionListener, Observer {
 			arrow1.setVisible(false);
 			arrow2.setVisible(false);
 			obtainTroopLabel.setText("Startup phase");
-			
+			unitDisplay.setVisible(true);
+
 		} else {
 			attackStageLabel.setVisible(true);
 			moveStageLabel.setVisible(true);
@@ -1122,20 +1125,21 @@ public class WindowMain implements ActionListener, Observer {
 				arrow0.setVisible(true);
 				arrow1.setVisible(false);
 				arrow2.setVisible(false);
-				lp.addLog("It is the Reinforcement phase!");
+				unitDisplay.setVisible(true);
 			} else if (gameState.getCurrPhase() == 1) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(true);
 				arrow2.setVisible(false);
+				unitDisplay.setVisible(false);
 				lp.addLog("It is the Attack phase!");
 			} else if (gameState.getCurrPhase() == 2) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(false);
 				arrow2.setVisible(true);
+				unitDisplay.setVisible(false);
 				lp.addLog("It is the Fortification phase!");
 			}
 		}
 	}
 
-	
 }
