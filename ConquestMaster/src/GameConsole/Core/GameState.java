@@ -46,7 +46,9 @@ public class GameState extends Observable{
 	}
 
 	
-	
+	/**
+	 * The override toString function.
+	 */
 	public String toString() {
 		String retString = "Players playing: \n";
 		for (Player p : this.allPlayers.getPlayers()) {

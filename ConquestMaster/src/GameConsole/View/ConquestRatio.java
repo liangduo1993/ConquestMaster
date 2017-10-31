@@ -65,6 +65,9 @@ public class ConquestRatio extends JPanel implements Observer {
 		g.setColor(color);
 	}
 
+	/**
+	 * The override update function for Observer
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		int loc = 0;

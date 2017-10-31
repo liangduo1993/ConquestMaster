@@ -397,7 +397,6 @@ public class Player extends Observable {
 		}
 		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 
-		// for (int i = 0; i < Math.min(c2.getTroops().size(), 2); i++) {
 		for (int i = 0; i < decision2; i++) {
 			if (c2.getPlayer().getName().equals("Sam")) {
 				Integer tempInt = new Integer(rand.nextInt(1) + 1);
@@ -409,7 +408,6 @@ public class Player extends Observable {
 		}
 		String diceString = "Attacker rolled:\n";
 		for (int i = 0; i < attackRoll.size(); i++) {
-			// if (i != Math.min(c1.getTroops().size(), 3) - 1) {
 			if (i != decision1 - 1) {
 				diceString += attackRoll.get(i) + ", ";
 			} else {
@@ -418,7 +416,6 @@ public class Player extends Observable {
 		}
 		diceString += "\nDefender rolled:\n";
 		for (int i = 0; i < defendRoll.size(); i++) {
-			// if (i != Math.min(c2.getTroops().size(), 2) - 1) {
 			if (i != decision2 - 1) {
 				diceString += defendRoll.get(i) + ", ";
 			} else {

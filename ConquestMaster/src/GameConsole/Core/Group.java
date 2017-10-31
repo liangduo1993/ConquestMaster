@@ -11,7 +11,6 @@ import GameConsole.Model.Player.Player;
 public class Group {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private World world;
-	private ArrayList<Player> place = new ArrayList<Player>();
 	private String groupName;
 
 	/**
@@ -53,12 +52,7 @@ public class Group {
 	public void setWorld(World world) {
 		this.world = world;
 	}
-	public ArrayList<Player> getPlace() {
-		return place;
-	}
-	public void setPlace(ArrayList<Player> place) {
-		this.place = place;
-	}
+
 
 	/**
 	 * To get the group name

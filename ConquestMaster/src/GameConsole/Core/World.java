@@ -41,7 +41,9 @@ public class World {
 		}
 	}
 
-	
+	/**
+	 * The override toString function
+	 */
 	public String toString() {
 		String retString = "";
 		for (Continent c : this.continents) {

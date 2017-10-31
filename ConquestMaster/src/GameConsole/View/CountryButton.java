@@ -58,6 +58,13 @@ public class CountryButton{
 		this.label.setBounds(x, y, w, h);
 	}
 	
+	/**
+	 * Reset the values of bound
+	 * @param x x coordinate location with int type
+	 * @param y y coordinate location with int type
+	 * @param w the width with int type
+	 * @param h the height with int type
+	 */
 	public void fixLabelBounds(int x, int y, int w, int h) {
 		this.label.setBounds(x, y, w, h);
 	}

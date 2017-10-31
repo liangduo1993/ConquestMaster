@@ -2,22 +2,20 @@ package GameConsole.View;
 
 import java.awt.BorderLayout;
 import java.awt.Insets;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 /**
- * this class is the GUI for the logpanel, to show the any message when editing a conquest map. 
+ * this class is the GUI for the logpanel, to show the any message when editing a conquest map. The LogPanel is Singleton
  */
-public class LogPanel extends JPanel implements Observer {
+public class LogPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public JTextArea log = new JTextArea();
 	private final String NEWLINE = "\n";
 	private static LogPanel newInstance = new LogPanel();
 	/**
-	 * constructor method, setting the logPanel location.
+	 * private constructor method, setting the logPanel location.
 	 */
 	private LogPanel() {
 		super(new BorderLayout());
@@ -29,19 +27,22 @@ public class LogPanel extends JPanel implements Observer {
 		add(logScrollPane, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * To get the only instance of the class
+	 * @return The singleton instance of the class
+	 */
 	public static LogPanel getInstance(){
 		if(newInstance == null)
 			newInstance =  new LogPanel();
 		return newInstance;
 	}
 	
+	/**
+	 * The method to attach a log to the panel
+	 * @param msg The input log message
+	 */
 	public void addLog(String msg){
 		log.append(msg + NEWLINE);
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		
 	}
 
 }

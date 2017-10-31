@@ -20,7 +20,6 @@ import GameConsole.Model.Domain.Country;
  *
  */
 public class MapDisplayer {
-
 	private JPanel frame;
 	private ArrayList<CountryButton> buttons = new ArrayList<>();
 	private World world;
@@ -108,10 +107,18 @@ public class MapDisplayer {
 		this.world = world;
 	}
 
+	/**
+	 * Return the current button image
+	 * @return The current button image
+	 */
 	public BufferedImage getButtonImage() {
 		return buttonImage;
 	}
 
+	/**
+	 * To set the button image
+	 * @param buttonImage The input button image
+	 */
 	public void setButtonImage(BufferedImage buttonImage) {
 		this.buttonImage = buttonImage;
 	}

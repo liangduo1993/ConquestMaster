@@ -61,7 +61,8 @@ public class WindowMain implements ActionListener, Observer {
 	private JButton nextStage;
 	private JPanel arrow0, arrow1, arrow2;
 	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
-	
+	private JPanel unitDisplay;
+
 	private GameState gameState;
 	private JFileChooser fc;
 	private int troopsLeft;
@@ -383,11 +384,9 @@ public class WindowMain implements ActionListener, Observer {
 		JLabel country1 = new JLabel((String) null);
 		JLabel country2 = new JLabel((String) null);
 
-
 		MapDisplayer g = new MapDisplayer(mapPanel, gameState.getWorld());
 		this.buttonImage = g.getButtonImage();
 		System.out.println("button nums: " + g.getButtons().size());
-
 
 		JButton cancelCountryButton = new JButton("Cancel\r\n");
 		cancelCountryButton.setVisible(false);
@@ -408,8 +407,7 @@ public class WindowMain implements ActionListener, Observer {
 				cancelCountryButton.setVisible(false);
 			}
 		});
-		
-		
+
 		startGamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -430,7 +428,7 @@ public class WindowMain implements ActionListener, Observer {
 					}
 				});
 				mnNewMenu.add(mntmNewMenuItem);
-				
+
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
@@ -455,24 +453,19 @@ public class WindowMain implements ActionListener, Observer {
 				}
 				gameState.gameStart();
 
-				
 				domiInfoPanel = new DomiInfoPanel(gameState);
-				// domiInfoPanel.setBounds(0, 0, domiInfoPanel.getWidth(),
-				// domiInfoPanel.getHeight());
-				// mapPanel.add(domiInfoPanel);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 				JScrollPane mainScroll = new JScrollPane();
 				mainScroll.setBounds(buttonImage.getWidth() + 130, 150, 380, buttonImage.getHeight());
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
-				
+
 				cRatioPanel = new ConquestRatio(gameState);
 				cRatioPanel.setBounds(100, 150 - 40, gameState.getWorld().getDeck().size() * ConquestRatio.ratio, 20);
 				mapPanel.add(cRatioPanel);
-				
+
 				registerObserver();
 				phaseViewUpdate();
-				
 
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText(Integer.toString(troopsLeft));
@@ -600,14 +593,6 @@ public class WindowMain implements ActionListener, Observer {
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
-//		JLabel labelPlayer = new JLabel("");
-//		MapLoader mapLoader = gameState.getWorld().getMapLoader();
-//		labelPlayer.setIcon(new ImageIcon(ImageIO.read(new File(mapLoader.getImageFilePath()))));
-//		labelPlayer.setBounds(100, 200, labelPlayer.getIcon().getIconWidth(), labelPlayer.getIcon().getIconHeight());
-//		mapPanel.add(labelPlayer);
-
-	
-
 
 		player1Name.setBackground(Color.LIGHT_GRAY);
 		player1Name.setForeground(Color.CYAN);
@@ -649,20 +634,16 @@ public class WindowMain implements ActionListener, Observer {
 		player5Name.setBounds(900, 40, 175, 60);
 		mapPanel.add(player5Name);
 
-		 arrow0 = new JPanel();
-		 arrow1 = new JPanel();
-		 arrow2 = new JPanel();
-		JPanel unitDisplay = new JPanel();
+		arrow0 = new JPanel();
+		arrow1 = new JPanel();
+		arrow2 = new JPanel();
+		 unitDisplay = new JPanel();
 
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		int yM = 30;
-		int xM = 30;
-		
+
 		unitDisplay.setVisible(true);
-//		arrow0.setVisible(true);
-//		arrow1.setVisible(false);
-//		arrow2.setVisible(false);
 
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
@@ -670,7 +651,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_15);
 		panel_15.setLayout(null);
 
-		 obtainTroopLabel = new JLabel("");
+		obtainTroopLabel = new JLabel("");
 		obtainTroopLabel.setBounds(0, 0, 200, 31);
 		panel_15.add(obtainTroopLabel);
 		obtainTroopLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -681,7 +662,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_16);
 		panel_16.setLayout(null);
 
-		 attackStageLabel = new JLabel("");
+		attackStageLabel = new JLabel("");
 		attackStageLabel.setBounds(0, 0, 200, 31);
 		panel_16.add(attackStageLabel);
 		attackStageLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -693,7 +674,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_17);
 		panel_17.setLayout(null);
 
-		 moveStageLabel = new JLabel("");
+		moveStageLabel = new JLabel("");
 		moveStageLabel.setBounds(0, 0, 200, 31);
 		panel_17.add(moveStageLabel);
 		moveStageLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -750,7 +731,6 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(Country1Display);
 
 		JLabel Country1Label = new JLabel("Country 1:");
-		//Country1Label.setAlignmentY(Component.TOP_ALIGNMENT);
 		Country1Label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Country1Display.add(Country1Label);
 		country1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -815,8 +795,6 @@ public class WindowMain implements ActionListener, Observer {
 		nextStage.setBounds(900 + 40, buttonImage.getHeight() + 300 - yM, 170, 50);
 		mapPanel.add(nextStage);
 		nextStage.setLayout(null);
-		
-		
 
 		JLabel nextStageLabel = new JLabel("Next Stage");
 		nextStageLabel.setForeground(Color.WHITE);
@@ -826,7 +804,7 @@ public class WindowMain implements ActionListener, Observer {
 		nextStage.add(nextStageLabel);
 
 		nextStage.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (troopsLeft == 0) {
@@ -839,12 +817,9 @@ public class WindowMain implements ActionListener, Observer {
 					}
 
 					if (gameState.getFirstRound() > 1) {
-						
+
 						if (gameState.getCurrPhase() == 0) {
 							unitDisplay.setVisible(true);
-//							arrow0.setVisible(true);
-//							arrow1.setVisible(false);
-//							arrow2.setVisible(false);
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
@@ -859,28 +834,21 @@ public class WindowMain implements ActionListener, Observer {
 							cardViewUpdate();
 						} else if (gameState.getCurrPhase() == 1 && gameState.getCurrPlayer().checkIfCanAttack()) {
 							unitDisplay.setVisible(false);
-//							arrow0.setVisible(false);
-//							arrow1.setVisible(true);
-//							arrow2.setVisible(false);
 
 						} else {
 							gameState.setCurrPhase(2);
 							unitDisplay.setVisible(false);
-//							arrow0.setVisible(false);
-//							arrow1.setVisible(false);
-//							arrow2.setVisible(true);
-							gameState.getCurrPlayer().giveCards();// This is
+							gameState.getCurrPlayer().giveCards();
 							cardViewUpdate();
 						}
 
 					}
 
 				}
-			
-				
+
 			}
 		});
-		
+
 		for (CountryButton countryButton : g.getButtons()) {
 			countryButton.b.addActionListener(new ActionListener() {
 				@Override
@@ -895,7 +863,6 @@ public class WindowMain implements ActionListener, Observer {
 						if (currentPlayer == countryButton.country.getPlayer() && currentPlayer.getInitTroop() > 0) {
 							currentPlayer.setInitTroop(currentPlayer.getInitTroop() - 1);
 							currentPlayer.addInfantry(countryButton.country);
-							// countryButton.country.addInfrantry(1);
 							gameState.updateCountryLabels();
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
@@ -967,7 +934,7 @@ public class WindowMain implements ActionListener, Observer {
 									cancelCountryButton.setEnabled(false);
 									country2.setText(gameState.getCountry2().getName());
 									gameState.getCurrPlayer().attack(gameState.getCountry1(), gameState.getCountry2());
-									if(!gameState.getCurrPlayer().checkIfCanAttack()){
+									if (!gameState.getCurrPlayer().checkIfCanAttack()) {
 										nextStage.doClick();
 									}
 									gameState.updateCountryLabels();
@@ -1055,8 +1022,50 @@ public class WindowMain implements ActionListener, Observer {
 
 	}
 
+
+
 	/**
-	 * Method to update the hand cards
+	 * Method to initial the interface when the game end
+	 */
+	public void initializeEndGame() {
+		playerWonLabell.setText(gameState.getCurrPlayer().getName());
+		cardLayout.show(cards, "Results");
+	}
+
+	/**
+	 * Method to connect the observer object to the model object
+	 */
+	public void registerObserver() {
+		if (gameState.getAllPlayers().getPlayers().size() > 0) {
+			for (Player p : gameState.getAllPlayers().getPlayers()) {
+				p.addObserver(domiInfoPanel);
+				p.addObserver(this);
+				p.addObserver(cRatioPanel);
+			}
+		}
+		gameState.addObserver(this);
+	}
+	
+	
+	/**
+	 * Method does updates to the view offered to the player
+	 * 
+	 * @param o
+	 *            the observable object with Observable type
+	 * @param arg
+	 *            an argument passed to the notifyObservers method with Object
+	 *            type
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		cardViewUpdate();
+		phaseViewUpdate();
+		System.out.println("state changed!");
+
+	}
+
+	/**
+	 * Method to update the hand cards view
 	 */
 	public void cardViewUpdate() {
 		Player currentPlayer = gameState.getCurrPlayer();
@@ -1065,8 +1074,6 @@ public class WindowMain implements ActionListener, Observer {
 			cardPanel.removeAll();
 			for (int i = 0; i < onHand.size(); i++) {
 				JLabel card = new JLabel();
-				// label.setIcon(new
-				// ImageIcon("resources/GimpFiles/StartGame.png"));
 				switch (onHand.get(i).getType()) {
 				case 0:
 					card.setIcon(new ImageIcon("resources/CardImages/type1.png"));
@@ -1085,37 +1092,13 @@ public class WindowMain implements ActionListener, Observer {
 			cardPanel.repaint();
 		}
 	}
-
-	/**
-	 * Method to initial the interface when the game end
-	 */
-	public void initializeEndGame() {
-		playerWonLabell.setText(gameState.getCurrPlayer().getName());
-		cardLayout.show(cards, "Results");
-	}
-
-	/**
-	 * Method does updates to the view offered to the player
-	 * 
-	 * @param o
-	 *            the observable object with Observable type
-	 * @param arg
-	 *            an argument passed to the notifyObservers method with Object
-	 *            type
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-		cardViewUpdate();
-		phaseViewUpdate();
-		System.out.println("state changed!");
-
-	}
-
 	
-//	private JPanel arrow0, arrow1, arrow2;
-//	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
+	
+	/**
+	 * Method to update the phase view
+	 */
 	private void phaseViewUpdate() {
-		if(gameState.getFirstRound() == 1){
+		if (gameState.getFirstRound() == 1) {
 			obtainTroopLabel.setVisible(true);
 			attackStageLabel.setVisible(false);
 			moveStageLabel.setVisible(false);
@@ -1123,21 +1106,21 @@ public class WindowMain implements ActionListener, Observer {
 			arrow1.setVisible(false);
 			arrow2.setVisible(false);
 			obtainTroopLabel.setText("Startup phase");
-		}else{
+		} else {
 			attackStageLabel.setVisible(true);
 			moveStageLabel.setVisible(true);
 			obtainTroopLabel.setText("Reinforcement phase");
 			attackStageLabel.setText("Attack phase");
 			moveStageLabel.setText("Fortification phase");
-			if(gameState.getCurrPhase() == 0){
+			if (gameState.getCurrPhase() == 0) {
 				arrow0.setVisible(true);
 				arrow1.setVisible(false);
 				arrow2.setVisible(false);
-			}else if(gameState.getCurrPhase() == 1){
+			} else if (gameState.getCurrPhase() == 1) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(true);
 				arrow2.setVisible(false);
-			}else if(gameState.getCurrPhase() == 2){
+			} else if (gameState.getCurrPhase() == 2) {
 				arrow0.setVisible(false);
 				arrow1.setVisible(false);
 				arrow2.setVisible(true);
@@ -1145,18 +1128,5 @@ public class WindowMain implements ActionListener, Observer {
 		}
 	}
 
-	/**
-	 * Method to connect the observer object to the model object
-	 */
-	public void registerObserver() {
-		if (gameState.getAllPlayers().getPlayers().size() > 0) {
-			for (Player p : gameState.getAllPlayers().getPlayers()) {
-				p.addObserver(domiInfoPanel);
-				p.addObserver(this);
-				p.addObserver(cRatioPanel);
-			}
-		}
-		gameState.addObserver(this);
-
-	}
+	
 }

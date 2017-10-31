@@ -16,10 +16,8 @@ import GameConsole.Model.Player.Player;
 
 public class DomiInfoPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
-
 	private ArrayList<JScrollPane> tables = new ArrayList<>();
 	private int playerNum;
-
 	private GameState state;
 
 	/**
@@ -80,6 +78,9 @@ public class DomiInfoPanel extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * The override update function for Observer, would refresh the panel when the state is changed
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		for (int i = 0; i < playerNum; i++) {

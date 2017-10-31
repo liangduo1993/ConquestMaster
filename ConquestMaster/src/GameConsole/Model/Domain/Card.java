@@ -12,10 +12,17 @@ public class Card {
 	private int type; // 0, 1, 2 three types
 	private Player player;
 
+	/**
+	 * The constructor of the class
+	 * @param player The owner of the card
+	 */
 	public Card(Player player) {
 		this.player = player;
 	}
 
+	/**
+	 * The override toString function
+	 */
 	public String toString() {
 		return "This is a " + type + " card";
 

@@ -62,6 +62,12 @@ public class MapLoader {
 		this.countries.clear();
 	}
 
+	/**
+	 * The method which convert ScrollOptions from a input String
+	 * @param option The input String
+	 * @param defaultValue The default output ScrollOptions type
+	 * @return
+	 */
 	private ScrollOptions convertScrollOptionsString(String option, ScrollOptions defaultValue) {
 		try {
 			return ScrollOptions.valueOf(option.toUpperCase());
@@ -124,6 +130,10 @@ public class MapLoader {
 		return this.author;
 	}
 
+	/**
+	 * The method to get the image file name.
+	 * @return The image file name
+	 */
 	public String getImageFileName() {
 		if (this.imageFilePath == null) {
 			return "";
@@ -169,14 +179,26 @@ public class MapLoader {
 		return new File(this.mapFilePath).getName();
 	}
 
+	/**
+	 * Return the Scroll Options type
+	 * @return The current Scroll Options type
+	 */
 	public final ScrollOptions getScroll() {
 		return this.scroll;
 	}
 
+	/**
+	 * Return whether the map needs to be warned if the map is not valid
+	 * @return The boolean whether the map needed to be vertified
+	 */
 	public final boolean isWarn() {
 		return this.warn;
 	}
 
+	/**
+	 * Return whether the map is wrap
+	 * @return The boolean of whether the map is wrap
+	 */
 	public final boolean isWrap() {
 		return this.wrap;
 	}
@@ -351,28 +373,46 @@ public class MapLoader {
 		}
 	}
 
+	/**
+	 * To set the image file path
+	 * @param imageFilePath The target image file path
+	 */
 	public void setImageFilePath(String imageFilePath) {
 		if (!StringUtil.equal(this.imageFilePath, imageFilePath)) {
 			this.imageFilePath = imageFilePath;
 		}
 	}
-
+	/**
+	 * To set the map file path
+	 * @param mapFilePath The target map file path
+	 */
 	public void setMapFilePath(String mapFilePath) {
 		this.mapFilePath = mapFilePath;
 	}
 
+	/**
+	 * To set map Scroll Options 
+	 * @param scroll The target Scroll Options
+	 */
 	public final void setScroll(ScrollOptions scroll) {
 		if (this.scroll != scroll) {
 			this.scroll = scroll;
 		}
 	}
 
+	/**
+	 * To set whether the map needs to be warned
+	 * @param warn Whether the map needs to be warned
+	 */
 	public final void setWarn(boolean warn) {
 		if (warn != this.warn) {
 			this.warn = warn;
 		}
 	}
-
+	/**
+	 * To set whether the map needs to wrap
+	 * @param wrap Whether the map needs to wrap
+	 */
 	public final void setWrap(boolean wrap) {
 		if (wrap != this.wrap) {
 			this.wrap = wrap;
