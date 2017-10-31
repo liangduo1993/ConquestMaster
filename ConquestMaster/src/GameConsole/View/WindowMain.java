@@ -1030,6 +1030,7 @@ public class WindowMain implements ActionListener, Observer {
 	 */
 	public void initializeEndGame() {
 		playerWonLabell.setText(gameState.getCurrPlayer().getName());
+		lp.addLog(gameState.getCurrPlayer().getName() + " has won the game!");
 		cardLayout.show(cards, "Results");
 	}
 
