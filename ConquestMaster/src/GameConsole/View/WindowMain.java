@@ -59,6 +59,8 @@ public class WindowMain implements ActionListener, Observer {
 	private LogPanel lp = LogPanel.getInstance();
 	private BufferedImage buttonImage;
 	private JButton nextStage;
+	private JPanel arrow0, arrow1, arrow2;
+	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
 	
 	private GameState gameState;
 	private JFileChooser fc;
@@ -469,7 +471,7 @@ public class WindowMain implements ActionListener, Observer {
 				mapPanel.add(cRatioPanel);
 				
 				registerObserver();
-
+				phaseViewUpdate();
 				
 
 				troopsLeft = gameState.getCurrPlayer().getBonus();
@@ -647,9 +649,9 @@ public class WindowMain implements ActionListener, Observer {
 		player5Name.setBounds(900, 40, 175, 60);
 		mapPanel.add(player5Name);
 
-		JPanel arrow0 = new JPanel();
-		JPanel arrow1 = new JPanel();
-		JPanel arrow2 = new JPanel();
+		 arrow0 = new JPanel();
+		 arrow1 = new JPanel();
+		 arrow2 = new JPanel();
 		JPanel unitDisplay = new JPanel();
 
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -658,9 +660,9 @@ public class WindowMain implements ActionListener, Observer {
 		int xM = 30;
 		
 		unitDisplay.setVisible(true);
-		arrow0.setVisible(true);
-		arrow1.setVisible(false);
-		arrow2.setVisible(false);
+//		arrow0.setVisible(true);
+//		arrow1.setVisible(false);
+//		arrow2.setVisible(false);
 
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
@@ -668,7 +670,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_15);
 		panel_15.setLayout(null);
 
-		JLabel obtainTroopLabel = new JLabel("Obtain Troops Stage");
+		 obtainTroopLabel = new JLabel("");
 		obtainTroopLabel.setBounds(0, 0, 200, 31);
 		panel_15.add(obtainTroopLabel);
 		obtainTroopLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -679,7 +681,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_16);
 		panel_16.setLayout(null);
 
-		JLabel attackStageLabel = new JLabel("Attack Stage");
+		 attackStageLabel = new JLabel("");
 		attackStageLabel.setBounds(0, 0, 200, 31);
 		panel_16.add(attackStageLabel);
 		attackStageLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -691,7 +693,7 @@ public class WindowMain implements ActionListener, Observer {
 		mapPanel.add(panel_17);
 		panel_17.setLayout(null);
 
-		JLabel moveStageLabel = new JLabel("Move Stage");
+		 moveStageLabel = new JLabel("");
 		moveStageLabel.setBounds(0, 0, 200, 31);
 		panel_17.add(moveStageLabel);
 		moveStageLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -832,18 +834,17 @@ public class WindowMain implements ActionListener, Observer {
 
 					int playerNum = gameState.getAllPlayers().getPlayers().size();
 					if (gameState.getCurrPlayer().equals(gameState.getAllPlayers().getPlayers().get(playerNum - 1))) {
-						gameState.firstRound++;
+						gameState.setFirstRound(gameState.getFirstRound() + 1);
 						System.out.println("round +1 !!!");
 					}
 
-					if (gameState.firstRound > 1) {
-						attackStageLabel.setVisible(true);
-						moveStageLabel.setVisible(true);
+					if (gameState.getFirstRound() > 1) {
+						
 						if (gameState.getCurrPhase() == 0) {
 							unitDisplay.setVisible(true);
-							arrow0.setVisible(true);
-							arrow1.setVisible(false);
-							arrow2.setVisible(false);
+//							arrow0.setVisible(true);
+//							arrow1.setVisible(false);
+//							arrow2.setVisible(false);
 							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
@@ -852,24 +853,24 @@ public class WindowMain implements ActionListener, Observer {
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
 
-							cardUpdate();
+							cardViewUpdate();
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
-							cardUpdate();
+							cardViewUpdate();
 						} else if (gameState.getCurrPhase() == 1 && gameState.getCurrPlayer().checkIfCanAttack()) {
 							unitDisplay.setVisible(false);
-							arrow0.setVisible(false);
-							arrow1.setVisible(true);
-							arrow2.setVisible(false);
+//							arrow0.setVisible(false);
+//							arrow1.setVisible(true);
+//							arrow2.setVisible(false);
 
 						} else {
 							gameState.setCurrPhase(2);
 							unitDisplay.setVisible(false);
-							arrow0.setVisible(false);
-							arrow1.setVisible(false);
-							arrow2.setVisible(true);
+//							arrow0.setVisible(false);
+//							arrow1.setVisible(false);
+//							arrow2.setVisible(true);
 							gameState.getCurrPlayer().giveCards();// This is
-							cardUpdate();
+							cardViewUpdate();
 						}
 
 					}
@@ -884,7 +885,7 @@ public class WindowMain implements ActionListener, Observer {
 			countryButton.b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (gameState.firstRound == 1) {
+					if (gameState.getFirstRound() == 1) {
 						arrow0.setVisible(true);
 						arrow1.setVisible(false);
 						arrow2.setVisible(false);
@@ -910,7 +911,7 @@ public class WindowMain implements ActionListener, Observer {
 						gameState.setCountry2(null);
 
 						System.out.println("current player name:" + gameState.getCurrPlayer().getName());
-						System.out.println("current round num:" + gameState.firstRound);
+						System.out.println("current round num:" + gameState.getFirstRound());
 						System.out.println("current phase:" + gameState.getCurrPhase());
 
 						boolean isFinished = true;
@@ -919,7 +920,7 @@ public class WindowMain implements ActionListener, Observer {
 								isFinished = false;
 						}
 						if (isFinished) {
-							gameState.firstRound++;
+							gameState.setFirstRound(gameState.getFirstRound() + 1);
 							System.out.println("round +1 !!!");
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
@@ -927,7 +928,7 @@ public class WindowMain implements ActionListener, Observer {
 							moveStageLabel.setVisible(true);
 						}
 
-					} else if (gameState.firstRound > 1) {
+					} else if (gameState.getFirstRound() > 1) {
 						if (gameState.getCurrPhase() == 0) {
 							System.out.println("click on button!");
 							Player currentPlayer = gameState.getCurrPlayer();
@@ -1057,7 +1058,7 @@ public class WindowMain implements ActionListener, Observer {
 	/**
 	 * Method to update the hand cards
 	 */
-	public void cardUpdate() {
+	public void cardViewUpdate() {
 		Player currentPlayer = gameState.getCurrPlayer();
 		if (currentPlayer != null) {
 			ArrayList<Card> onHand = currentPlayer.getOnHand();
@@ -1104,9 +1105,44 @@ public class WindowMain implements ActionListener, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		cardUpdate();
+		cardViewUpdate();
+		phaseViewUpdate();
 		System.out.println("state changed!");
 
+	}
+
+	
+//	private JPanel arrow0, arrow1, arrow2;
+//	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
+	private void phaseViewUpdate() {
+		if(gameState.getFirstRound() == 1){
+			obtainTroopLabel.setVisible(true);
+			attackStageLabel.setVisible(false);
+			moveStageLabel.setVisible(false);
+			arrow0.setVisible(true);
+			arrow1.setVisible(false);
+			arrow2.setVisible(false);
+			obtainTroopLabel.setText("Startup phase");
+		}else{
+			attackStageLabel.setVisible(true);
+			moveStageLabel.setVisible(true);
+			obtainTroopLabel.setText("Reinforcement phase");
+			attackStageLabel.setText("Attack phase");
+			moveStageLabel.setText("Fortification phase");
+			if(gameState.getCurrPhase() == 0){
+				arrow0.setVisible(true);
+				arrow1.setVisible(false);
+				arrow2.setVisible(false);
+			}else if(gameState.getCurrPhase() == 1){
+				arrow0.setVisible(false);
+				arrow1.setVisible(true);
+				arrow2.setVisible(false);
+			}else if(gameState.getCurrPhase() == 2){
+				arrow0.setVisible(false);
+				arrow1.setVisible(false);
+				arrow2.setVisible(true);
+			}
+		}
 	}
 
 	/**
@@ -1120,6 +1156,7 @@ public class WindowMain implements ActionListener, Observer {
 				p.addObserver(cRatioPanel);
 			}
 		}
+		gameState.addObserver(this);
 
 	}
 }

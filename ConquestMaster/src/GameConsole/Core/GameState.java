@@ -13,7 +13,7 @@ import GameConsole.View.WindowMain;
  *
  */
 public class GameState extends Observable{
-	private int firstRound = 1;
+	private int firstRound;
 	private Player currPlayer;
 	private Group allPlayers;
 	private int currPhase; // 0 beggining, 1 attack, 2 move
@@ -59,6 +59,7 @@ public class GameState extends Observable{
 	 */
 	public void gameStart() {
 		this.currPhase = 0;
+		this.setFirstRound(1);
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers);
 		this.updateCountryLabels();
