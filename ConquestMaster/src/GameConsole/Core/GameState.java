@@ -1,15 +1,18 @@
 package GameConsole.Core;
 
+import java.util.Observable;
+
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.View.LogPanel;
 import GameConsole.View.WindowMain;
 /**
  * Set up basic states of the game
  * Current phase, current player
  *
  */
-public class GameState {
+public class GameState extends Observable{
 	public int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
@@ -18,6 +21,7 @@ public class GameState {
 	private Country country1;
 	private Country country2;
 	private WindowMain win;
+	private LogPanel lp = LogPanel.getInstance();
 	
 	/**
 	 * constructor method with incoming parameters
@@ -56,6 +60,7 @@ public class GameState {
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers);
 		this.updateCountryLabels();
+		lp.addLog("The game is started!");
 	}
 
 	/**
@@ -124,6 +129,8 @@ public class GameState {
 	 */
 	public void setCurrPhase(int p) {
 		this.currPhase = p;
+		setChanged();
+		notifyObservers();
 	}
 
 	/**

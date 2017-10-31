@@ -19,6 +19,7 @@ import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.View.LogPanel;
 import GameConsole.Core.GameState;
 import GameConsole.Core.World;
 import GameConsole.Model.Army.AbstractTroop;
@@ -41,6 +42,7 @@ public class Player extends Observable {
 	private boolean hasMoved = false;
 	private int initTroop;
 	private boolean isConquered = false;
+	private LogPanel lp = LogPanel.getInstance();
 
 	/**
 	 * Constructor method
@@ -347,6 +349,7 @@ public class Player extends Observable {
 	 *            the selected target to be attacked with Country type
 	 */
 	public void attack(Country c1, Country c2) {
+		lp.addLog(this.getName() + "is attacking!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
 		ArrayList<Integer> defendRoll = new ArrayList<Integer>();
@@ -365,6 +368,7 @@ public class Player extends Observable {
 					JOptionPane.QUESTION_MESSAGE);
 		}
 		int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
+		lp.addLog(this.getName() + "chooses " + decision1 + " dices!");
 
 		for (int i = 0; i < decision1; i++) {
 			if (c1.getPlayer().getName().equals("Sam")) {
