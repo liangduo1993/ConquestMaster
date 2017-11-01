@@ -15,10 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -928,9 +926,6 @@ public class WindowMain implements ActionListener, Observer {
 
 									if (gameState.getCountry1().getPlayer() == gameState.getCurrPlayer()
 											&& gameState.getCountry2().getPlayer() != gameState.getCurrPlayer()) {
-										Random rand = new Random();
-										ArrayList<Integer> attackRoll = new ArrayList<Integer>();
-										ArrayList<Integer> defendRoll = new ArrayList<Integer>();
 										JPanel numdice1 = new JPanel();
 										JLabel label = new JLabel("Attacker selects how many dice to roll");
 										numdice1.add(label);
@@ -948,16 +943,6 @@ public class WindowMain implements ActionListener, Observer {
 										}
 										int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
 										lp.addLog("Attacker chooses " + decision1 + " dices!");
-
-										for (int i = 0; i < decision1; i++) {
-											if (gameState.getCountry1().getPlayer().getName().equals("Sam")) {
-												Integer tempInt = new Integer(rand.nextInt(1) + 1);
-												attackRoll.add(tempInt);
-											} else {
-												Integer tempInt = new Integer(rand.nextInt(6) + 1);
-												attackRoll.add(tempInt);
-											}
-										}
 
 										numdice1.remove(label);
 										numdice1.remove(list1);
@@ -978,55 +963,39 @@ public class WindowMain implements ActionListener, Observer {
 										int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 										lp.addLog("Defender chooses " + decision2 + " dices!");
 
-										for (int i = 0; i < decision2; i++) {
-											if (gameState.getCountry2().getPlayer().getName().equals("Sam")) {
-												Integer tempInt = new Integer(rand.nextInt(1) + 1);
-												defendRoll.add(tempInt);
-											} else {
-												Integer tempInt = new Integer(rand.nextInt(6) + 1);
-												defendRoll.add(tempInt);
+										try {
+											if(gameState.getCurrPlayer().attack(gameState.getCountry1(),
+													gameState.getCountry2(), decision1, decision2)){
+												int moveNum = 0;
+												JPanel numPanel = new JPanel();
+												numPanel.add(new JLabel("Congrats you conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName()
+														+ ". How many troops would you like to add?"));
+												lp.addLog("Congrats " + gameState.getCurrPlayer().getName() + " conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName());
+												DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
+												for (int i = 1; i < gameState.getCountry1().getTroops().size(); i++) {
+													selection.addElement(Integer.toString(i));
+												}
+												JComboBox<String> comboBox = new JComboBox<String>(selection);
+												numPanel.add(comboBox);
+												int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
+														JOptionPane.QUESTION_MESSAGE);
+												if (result == JOptionPane.CANCEL_OPTION) {
+													moveNum = 1; // if they cancel it will just move one
+												} else {
+													moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
+												}
+												moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
+												gameState.getCountry2().addInfrantry(moveNum);
+												gameState.getCountry1().removeTroops(moveNum); // removing troops from the origin country
+												lp.addLog(gameState.getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
+												
+												if(gameState.getCurrPlayer().checkWinGame()){
+													initializeEndGame();
+												}
 											}
+										} catch (Exception e1) {
+											lp.addLog(e1.getMessage());
 										}
-										String diceString = "Attacker rolled:\n";
-										for (int i = 0; i < attackRoll.size(); i++) {
-											if (i != decision1 - 1) {
-												diceString += attackRoll.get(i) + ", ";
-											} else {
-												diceString += attackRoll.get(i);
-											}
-										}
-										diceString += "\nDefender rolled:\n";
-										for (int i = 0; i < defendRoll.size(); i++) {
-											if (i != decision2 - 1) {
-												diceString += defendRoll.get(i) + ", ";
-											} else {
-												diceString += defendRoll.get(i) + "\n";
-											}
-										}
-										lp.addLog(diceString);
-										JOptionPane.showMessageDialog(null, diceString);
-
-										while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
-											if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
-												gameState.getCountry2().getPlayer().getNumTroops().remove(
-														gameState.getCountry2().getPlayer().getNumTroops().size() - 1);
-												gameState.getCountry2().getTroops()
-														.remove(gameState.getCountry2().getTroops().size() - 1);
-												lp.addLog("Attacker won!");
-											} else { // if defender won
-												gameState.getCurrPlayer().getNumTroops()
-														.remove(gameState.getCurrPlayer().getNumTroops().size() - 1);
-												gameState.getCountry1().getTroops()
-														.remove(gameState.getCountry1().getTroops().size() - 1);
-												lp.addLog("Defender won!");
-											}
-											attackRoll.remove((Integer) Collections.max(attackRoll));
-											defendRoll.remove((Integer) Collections.max(defendRoll));
-										}
-
-										gameState.getCurrPlayer().attack(gameState.getCountry1(),
-												gameState.getCountry2());
-
 									}
 
 									if (!gameState.getCurrPlayer().checkIfCanAttack()) {
