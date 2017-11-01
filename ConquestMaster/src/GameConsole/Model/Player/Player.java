@@ -14,15 +14,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import GameConsole.Core.GameState;
+import GameConsole.Core.World;
+import GameConsole.Model.Army.AbstractTroop;
 import GameConsole.Model.Army.Troop;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Domain.CountryDecorator;
 import GameConsole.View.LogPanel;
-import GameConsole.Core.GameState;
-import GameConsole.Core.World;
-import GameConsole.Model.Army.AbstractTroop;
 
 /**
  * This class represents all of the data and funcionality that a player would
@@ -73,8 +73,8 @@ public class Player extends Observable {
 	 * To set the status that the player has moved the troop or not
 	 * 
 	 * @param hasMoved
-	 *            the status that the player has moved the troop or not with boolean
-	 *            type
+	 *            the status that the player has moved the troop or not with
+	 *            boolean type
 	 */
 	public void setHasMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
@@ -112,7 +112,8 @@ public class Player extends Observable {
 	 * To set the player name
 	 * 
 	 * @param name
-	 *            the desired the player name that want to be set with String type
+	 *            the desired the player name that want to be set with String
+	 *            type
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -131,7 +132,8 @@ public class Player extends Observable {
 	 * To set the player's color
 	 * 
 	 * @param color
-	 *            the desired the player color that want to be set with Color type
+	 *            the desired the player color that want to be set with Color
+	 *            type
 	 */
 	public void setColor(Color color) {
 		this.color = color;
@@ -169,8 +171,8 @@ public class Player extends Observable {
 	 * To set the countries list to belong to the player
 	 * 
 	 * @param countries
-	 *            the countries list desired to be set to belong to the player with
-	 *            ArrayList type
+	 *            the countries list desired to be set to belong to the player
+	 *            with ArrayList type
 	 */
 	public void setCountries(ArrayList<Country> countries) {
 		this.countries = countries;
@@ -203,8 +205,8 @@ public class Player extends Observable {
 	 * To set the player's hand cards list
 	 * 
 	 * @param hand
-	 *            the hand cards list desired to be set to belong to the player with
-	 *            ArrayList type
+	 *            the hand cards list desired to be set to belong to the player
+	 *            with ArrayList type
 	 */
 	public void setHand(ArrayList<CountryDecorator> hand) {
 		this.hand = hand;
@@ -285,8 +287,8 @@ public class Player extends Observable {
 
 	/**
 	 * This class will take in a country as well as the country it is going to
-	 * attack. It will return the object of the country it wants to attack if the
-	 * player is allowed to attack that country
+	 * attack. It will return the object of the country it wants to attack if
+	 * the player is allowed to attack that country
 	 * 
 	 */
 	public boolean checkIfCanAttack() {
@@ -322,8 +324,8 @@ public class Player extends Observable {
 	 *            the selected country with Country type
 	 * @param countryName
 	 *            the country name with String type
-	 * @return country with Country type if the selected country is able move troop
-	 *         otherwise return null
+	 * @return country with Country type if the selected country is able move
+	 *         troop otherwise return null
 	 */
 	public Country checkIfCanMove(Country origin, String countryName) {
 		if ((this.checkIfOwned(countryName) == null) || (origin.getTroops().size() == 1)) {
@@ -343,137 +345,73 @@ public class Player extends Observable {
 	 * To perform attack action
 	 * 
 	 * @param c1
-	 *            the selected country to perform attack action with Country type
+	 *            the selected country to perform attack action with Country
+	 *            type
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public void attack(Country c1, Country c2) {
+	public boolean attack(Country c1, Country c2, int decision1, int decision2) throws Exception {
+		if(c1.getPlayer() != this || c2.getPlayer() == this){
+			throw new RuntimeException("The attacker and defender is not right!");
+		}
+		
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
-		// Random rand = new Random();
-		// ArrayList<Integer> attackRoll = new ArrayList<Integer>();
-		// ArrayList<Integer> defendRoll = new ArrayList<Integer>();
-		// JPanel numdice1 = new JPanel();
-		// JLabel label = new JLabel("Attacker selects how many dice to roll");
-		// numdice1.add(label);
-		// DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
-		// for (int i = 1; i <= Math.min(c1.getTroops().size() - 1, 3); i++) {
-		// select1.addElement(Integer.toString(i));
-		// }
-		// JComboBox<String> list1 = new JComboBox<>(select1);
-		// numdice1.add(list1);
-		// int message1 = -1;
-		// while (message1 != JOptionPane.OK_OPTION) {
-		// message1 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
-		// JOptionPane.OK_CANCEL_OPTION,
-		// JOptionPane.QUESTION_MESSAGE);
-		// }
-		// int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
-		// lp.addLog("Attacker chooses " + decision1 + " dices!");
-		//
-		// for (int i = 0; i < decision1; i++) {
-		// if (c1.getPlayer().getName().equals("Sam")) {
-		// Integer tempInt = new Integer(rand.nextInt(1) + 1);
-		// attackRoll.add(tempInt);
-		// } else {
-		// Integer tempInt = new Integer(rand.nextInt(6) + 1);
-		// attackRoll.add(tempInt);
-		// }
-		// }
-		//
-		// numdice1.remove(label);
-		// numdice1.remove(list1);
-		//
-		// numdice1.add(new JLabel("Defender selects how many dice to roll"));
-		// DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
-		// for (int i = 1; i <= Math.min(c2.getTroops().size(), 2); i++) {
-		// select2.addElement(Integer.toString(i));
-		// }
-		// JComboBox<String> list2 = new JComboBox<>(select2);
-		// numdice1.add(list2);
-		// int message2 = -1;
-		// while (message2 != JOptionPane.OK_OPTION) {
-		// message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
-		// JOptionPane.OK_CANCEL_OPTION,
-		// JOptionPane.QUESTION_MESSAGE);
-		// }
-		// int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
-		// lp.addLog("Defender chooses " + decision2 + " dices!");
-		//
-		// for (int i = 0; i < decision2; i++) {
-		// if (c2.getPlayer().getName().equals("Sam")) {
-		// Integer tempInt = new Integer(rand.nextInt(1) + 1);
-		// defendRoll.add(tempInt);
-		// } else {
-		// Integer tempInt = new Integer(rand.nextInt(6) + 1);
-		// defendRoll.add(tempInt);
-		// }
-		// }
-		// String diceString = "Attacker rolled:\n";
-		// for (int i = 0; i < attackRoll.size(); i++) {
-		// if (i != decision1 - 1) {
-		// diceString += attackRoll.get(i) + ", ";
-		// } else {
-		// diceString += attackRoll.get(i);
-		// }
-		// }
-		// diceString += "\nDefender rolled:\n";
-		// for (int i = 0; i < defendRoll.size(); i++) {
-		// if (i != decision2 - 1) {
-		// diceString += defendRoll.get(i) + ", ";
-		// } else {
-		// diceString += defendRoll.get(i) + "\n";
-		// }
-		// }
-		// lp.addLog(diceString);
-		// JOptionPane.showMessageDialog(null, diceString);
-		//
-		// while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
-		// if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
-		// c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() -
-		// 1);
-		// c2.getTroops().remove(c2.getTroops().size() - 1);
-		// lp.addLog("Attacker won!");
-		// } else { // if defender won
-		// this.numTroops.remove(this.numTroops.size() - 1);
-		// c1.getTroops().remove(c1.getTroops().size() - 1);
-		// lp.addLog("Defender won!");
-		// }
-		// attackRoll.remove((Integer) Collections.max(attackRoll));
-		// defendRoll.remove((Integer) Collections.max(defendRoll));
-		// }
+		Random rand = new Random();
+		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
+		ArrayList<Integer> defendRoll = new ArrayList<Integer>();
+		for (int i = 0; i < decision1; i++) {
+			Integer tempInt = new Integer(rand.nextInt(6) + 1);
+			attackRoll.add(tempInt);
+		}
+		for (int i = 0; i < decision2; i++) {
+			Integer tempInt = new Integer(rand.nextInt(6) + 1);
+			defendRoll.add(tempInt);
+		}
+		String diceString = "Attacker rolled:\n";
+		for (int i = 0; i < attackRoll.size(); i++) {
+			if (i != decision1 - 1) {
+				diceString += attackRoll.get(i) + ", ";
+			} else {
+				diceString += attackRoll.get(i);
+			}
+		}
+		diceString += "\nDefender rolled:\n";
+		for (int i = 0; i < defendRoll.size(); i++) {
+			if (i != decision2 - 1) {
+				diceString += defendRoll.get(i) + ", ";
+			} else {
+				diceString += defendRoll.get(i) + "\n";
+			}
+		}
+		lp.addLog(diceString);
+		JOptionPane.showMessageDialog(null, diceString);
+
+		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
+			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
+				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
+				c2.getTroops().remove(c2.getTroops().size() - 1);
+				lp.addLog("Attacker won!");
+			} else { // if defender won
+				this.numTroops.remove(this.numTroops.size() - 1);
+				c1.getTroops().remove(c1.getTroops().size() - 1);
+				lp.addLog("Defender won!");
+			}
+			attackRoll.remove((Integer) Collections.max(attackRoll));
+			defendRoll.remove((Integer) Collections.max(defendRoll));
+		}
 
 		if (c2.getTroops().size() == 0) {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
 			this.isConquered(true);
-
-			int moveNum = 0;
-			JPanel numPanel = new JPanel();
-			numPanel.add(new JLabel("Congrats you conquered " + c2.getName() + " with " + c1.getName()
-					+ ". How many troops would you like to add?"));
-			lp.addLog("Congrats " + this.getName() + " conquered " + c2.getName() + " with " + c1.getName());
-			DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-			for (int i = 1; i < c1.getTroops().size(); i++) {
-				selection.addElement(Integer.toString(i));
-			}
-			JComboBox<String> comboBox = new JComboBox<String>(selection);
-			numPanel.add(comboBox);
-			int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE);
-			if (result == JOptionPane.CANCEL_OPTION) {
-				moveNum = 1; // if they cancel it will just move one
-			} else {
-				moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
-			}
-			moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
-			c2.addInfrantry(moveNum);
-			c1.removeTroops(moveNum); // removing troops from the origin country
-			lp.addLog(this.getName() + " leaves " + moveNum + " troops!");
+			setChanged();
+			notifyObservers();
+			return true;
 		}
-
 		setChanged();
 		notifyObservers();
+		return false;
 	}
 
 	/**
@@ -492,8 +430,8 @@ public class Player extends Observable {
 	 * To perform move troop action
 	 * 
 	 * @param c1
-	 *            the selected country to perform move troops action with Country
-	 *            type
+	 *            the selected country to perform move troops action with
+	 *            Country type
 	 * @param c2
 	 *            the selected target country to receive the moved troop with
 	 *            Country type
@@ -509,7 +447,8 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * Method to claim the player fails and remove the player from the players list
+	 * Method to claim the player fails and remove the player from the players
+	 * list
 	 */
 	public void loseGame() {
 		JOptionPane.showMessageDialog(null, this.name + " has lost the game!");
@@ -524,6 +463,12 @@ public class Player extends Observable {
 
 	}
 
+	public boolean checkWinGame(){
+		if(this.countries.size() == game.getWorld().getDeck().size())
+			return true;
+		return false;
+	}
+	
 	/**
 	 * To give the player the hand cards
 	 */
