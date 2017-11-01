@@ -76,7 +76,6 @@ public class PlayerTest {
 	 */
 	@Test
 	public void testMoveTroops() {
-		
 		Country c1 = player.getCountries().get(0);
 		Country c2 = player.getCountries().get(1);
 		c1.addInfrantry(5);
