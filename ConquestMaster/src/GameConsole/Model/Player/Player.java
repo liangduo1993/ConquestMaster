@@ -2,7 +2,6 @@ package GameConsole.Model.Player;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Random;
@@ -16,8 +15,6 @@ import javax.swing.JPanel;
 
 import GameConsole.Core.GameState;
 import GameConsole.Core.World;
-import GameConsole.Model.Army.AbstractTroop;
-import GameConsole.Model.Army.Troop;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
@@ -32,7 +29,7 @@ import GameConsole.View.LogPanel;
 public class Player extends Observable {
 	private String name;
 	private Color color;
-	private ArrayList<AbstractTroop> numTroops = new ArrayList<AbstractTroop>();
+	//private ArrayList<AbstractTroop> numTroops = new ArrayList<AbstractTroop>();
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
 	private ArrayList<Card> onhand = new ArrayList<Card>();
@@ -139,24 +136,9 @@ public class Player extends Observable {
 		this.color = color;
 	}
 
-	/**
-	 * To get the player's troops list
-	 * 
-	 * @return the player's troops list with ArrayList type
-	 */
-	public ArrayList<AbstractTroop> getNumTroops() {
-		return numTroops;
-	}
 
-	/**
-	 * To set the player's troops list
-	 * 
-	 * @param numTroops
-	 *            the desired player's troops list with ArrayList type
-	 */
-	public void setNumTroops(ArrayList<AbstractTroop> numTroops) {
-		this.numTroops = numTroops;
-	}
+
+
 
 	/**
 	 * To get the player's countries list
@@ -412,7 +394,7 @@ public class Player extends Observable {
 				c2.getTroops().remove(c2.getTroops().size() - 1);
 				lp.addLog("Attacker won!" + "\n");
 			}else{
-				this.numTroops.remove(this.numTroops.size() - 1);
+				//this.numTroops.remove(this.numTroops.size() - 1);
 				c1.getTroops().remove(c1.getTroops().size() - 1);
 				lp.addLog("Defender won!" + "\n");
 			}
@@ -444,17 +426,7 @@ public class Player extends Observable {
 		return false;
 	}
 
-	/**
-	 * To remove troop from troop list
-	 * 
-	 * @param numToRemove
-	 *            the number the troops that need to be removed with int type
-	 */
-	public void removeTroops(int numToRemove) {
-		for (int i = 0; i < numToRemove; i++) {
-			this.numTroops.remove(this.numTroops.size() - 1);
-		}
-	}
+
 
 	/**
 	 * To perform move troop action
@@ -686,18 +658,7 @@ public class Player extends Observable {
 		}
 	}
 
-	/**
-	 * To add the troop to the troop list
-	 * 
-	 * @param numTroops
-	 *            the number of the troop that need to be added
-	 */
-	public void addInfrantry(int numTroops) {
-		for (int i = 0; i < numTroops; i++) {
-			Troop temp = new Troop();
-			this.numTroops.add(temp);
-		}
-	}
+
 
 	/**
 	 * To add a country to the player's countries list
