@@ -116,12 +116,15 @@ public class PlayerTest {
 	@Test
 	public void testAttack() {
 		Country c1 = player.getCountries().get(0);
+		c1.setPlayer(player);
 		Country c2 = player2.getCountries().get(0);
+		c2.setPlayer(player2);
 		
 		try {
 			player.attack(c1, c2, 1, 1);
 		} catch (Exception ex) {
-			assertThat(ex.getMessage(), containsString("The attacker and defender is not right!"));
+			System.out.println(ex.getMessage());
+			assertNotEquals(ex.getMessage(), "The attacker and defender is not right!");
 		}
 	}
 	
