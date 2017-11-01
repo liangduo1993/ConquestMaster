@@ -145,7 +145,7 @@ public class World {
 			for (CountryDecorator c : p.getHand()) {
 				c.getCountry().setPlayer(p);
 				c.getCountry().addInfrantry(c.getNumStars());
-				p.addInfrantry(c.getNumStars());
+			//	p.addInfrantry(c.getNumStars());
 				p.addCountry(c.getCountry());
 			}
 			p.getHand().clear(); // putting it back in the deck

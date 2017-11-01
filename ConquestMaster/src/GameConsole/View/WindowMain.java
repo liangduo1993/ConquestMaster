@@ -930,8 +930,8 @@ public class WindowMain implements ActionListener, Observer {
 										JLabel label = new JLabel("Attacker selects how many dice to roll");
 										numdice1.add(label);
 										DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
-										for (int i = 1; i <= Math.min(gameState.getCountry1().getTroops().size() - 1,
-												3); i++) {
+										for (int i = Math.min(gameState.getCountry1().getTroops().size() - 1,
+												3); i >=1 ; i--) {
 											select1.addElement(Integer.toString(i));
 										}
 										JComboBox<String> list1 = new JComboBox<>(select1);
@@ -966,13 +966,14 @@ public class WindowMain implements ActionListener, Observer {
 										try {
 											if(gameState.getCurrPlayer().attack(gameState.getCountry1(),
 													gameState.getCountry2(), decision1, decision2)){
+												System.out.println("conquest!!!!!");
 												int moveNum = 0;
 												JPanel numPanel = new JPanel();
 												numPanel.add(new JLabel("Congrats you conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName()
 														+ ". How many troops would you like to add?"));
 												lp.addLog("Congrats " + gameState.getCurrPlayer().getName() + " conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName());
 												DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-												for (int i = 1; i < gameState.getCountry1().getTroops().size(); i++) {
+												for (int i = gameState.getCountry1().getTroops().size() - 1; i >=1 ; i--) {
 													selection.addElement(Integer.toString(i));
 												}
 												JComboBox<String> comboBox = new JComboBox<String>(selection);
@@ -994,6 +995,7 @@ public class WindowMain implements ActionListener, Observer {
 												}
 											}
 										} catch (Exception e1) {
+											e1.printStackTrace();
 											lp.addLog(e1.getMessage());
 										}
 									}
