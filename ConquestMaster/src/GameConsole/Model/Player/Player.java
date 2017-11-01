@@ -380,37 +380,67 @@ public class Player extends Observable {
 			if (i != decision2 - 1) {
 				diceString += defendRoll.get(i) + ", ";
 			} else {
-				diceString += defendRoll.get(i) + "\n";
+				diceString += defendRoll.get(i);
 			}
 		}
 		lp.addLog(diceString);
 		JOptionPane.showMessageDialog(null, diceString);
 
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
-			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
-				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
+			int attackMax = 0; 
+			int attackIndex = 0;
+			for(int i = 0; i < attackRoll.size(); i++){
+				if(attackRoll.get(i) > attackMax){
+					attackMax = attackRoll.get(i);
+					attackIndex = i;
+				}
+			}
+			attackRoll.remove(attackIndex);
+			
+			int defendMax = 0; 
+			int defendIndex = 0;
+			for(int i = 0; i < defendRoll.size(); i++){
+				if(defendRoll.get(i) > defendMax){
+					defendMax = defendRoll.get(i);
+					defendIndex = i;
+				}
+			}
+			defendRoll.remove(defendIndex);
+			
+			if(attackMax > defendMax){
+				//c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
 				c2.getTroops().remove(c2.getTroops().size() - 1);
-				lp.addLog("Attacker won!");
-			} else { // if defender won
+				lp.addLog("Attacker won!" + "\n");
+			}else{
 				this.numTroops.remove(this.numTroops.size() - 1);
 				c1.getTroops().remove(c1.getTroops().size() - 1);
-				lp.addLog("Defender won!");
+				lp.addLog("Defender won!" + "\n");
 			}
-			attackRoll.remove((Integer) Collections.max(attackRoll));
-			defendRoll.remove((Integer) Collections.max(defendRoll));
+			
+//			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
+//				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
+//				c2.getTroops().remove(c2.getTroops().size() - 1);
+//				lp.addLog("Attacker won!" + "\n");
+//			} else { // if defender won
+//				this.numTroops.remove(this.numTroops.size() - 1);
+//				c1.getTroops().remove(c1.getTroops().size() - 1);
+//				lp.addLog("Defender won!" + "\n");
+//			}
+//			attackRoll.remove((Integer) Collections.max(attackRoll));
+//			defendRoll.remove((Integer) Collections.max(defendRoll));
 		}
 
+		setChanged();
+		notifyObservers();
+		
 		if (c2.getTroops().size() == 0) {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
 			this.isConquered(true);
-			setChanged();
-			notifyObservers();
 			return true;
 		}
-		setChanged();
-		notifyObservers();
+		
 		return false;
 	}
 
