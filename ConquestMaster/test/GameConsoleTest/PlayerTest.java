@@ -84,5 +84,20 @@ public class PlayerTest {
 		assertEquals(3, c1.getTroops().size());
 		assertEquals(6, c2.getTroops().size());
 	}
+	
+	/**
+	 * test class: player, function: loseGame(). check the end of the game
+	 * when a player became the only player
+	 * 
+	 */
+	@Test
+	public void testLoseGame() {
+		for (int i=1; i<group.getPlayers().size();i++){
+			group.getPlayers().remove(i);
+		}
+		state.setCurrPlayer(group.getPlayers().get(0));
+		assertEquals(state.checkWinner(), state.getCurrPlayer());
+	}
+	
 
 }
