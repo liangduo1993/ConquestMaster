@@ -1,5 +1,6 @@
 package GameConsoleTest;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import GameConsole.View.WindowMain;
  */
 public class PlayerTest {
 	private Player player;
+	private Player player2;
 	private GameState state;
 	private Group group;
 	private WindowMain window;
@@ -53,11 +55,19 @@ public class PlayerTest {
 			temp.add(new Country());
 		}
 		player.setCountries(temp);
+		
+		// set player2
+		player2 = new Player("testPlayerDefender", null, state);
+		ArrayList<Country> temp2 = new ArrayList<Country>();
+		for (int i = 0; i < 2; ++i) {
+			temp2.add(new Country());
+		}
+		player2.setCountries(temp2);
 
 	}
 
 	/**
-	 * test class: player, function: getBonus(). check the new game have the
+	 * test class: Player, function: getBonus(). check the new game have the
 	 * correctly corresponding players. check if player can get the bonus in the
 	 * initial phase.
 	 */
@@ -70,7 +80,7 @@ public class PlayerTest {
 	}
 	
 	/**
-	 * test class: player, function: moveTroops(). check the valid move after player
+	 * test class: Player, function: moveTroops(). check the valid move after player
 	 * conquered a country
 	 * 
 	 */
@@ -86,7 +96,7 @@ public class PlayerTest {
 	}
 	
 	/**
-	 * test class: player, function: loseGame(). check the end of the game
+	 * test class: Player, function: loseGame(). check the end of the game
 	 * when a player became the only player
 	 * 
 	 */
@@ -97,6 +107,22 @@ public class PlayerTest {
 		}
 		state.setCurrPlayer(group.getPlayers().get(0));
 		assertEquals(state.checkWinner(), state.getCurrPlayer());
+	}
+	
+	/**
+	 * test class: Player, function attack(). check if the attacker and
+	 * defender are valid.
+	 */
+	@Test
+	public void testAttack() {
+		Country c1 = player.getCountries().get(0);
+		Country c2 = player2.getCountries().get(0);
+		
+		try {
+			player.attack(c1, c2, 1, 1);
+		} catch (Exception ex) {
+			assertThat(ex.getMessage(), containsString("The attacker and defender is not right!"));
+		}
 	}
 	
 
