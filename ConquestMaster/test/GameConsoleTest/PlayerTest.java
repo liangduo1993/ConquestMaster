@@ -21,6 +21,7 @@ import GameConsole.View.WindowMain;
 public class PlayerTest {
 	private Player player;
 	private Player player2;
+	private Player player3;
 	private GameState state;
 	private Group group;
 	private WindowMain window;
@@ -38,12 +39,14 @@ public class PlayerTest {
 		window = new WindowMain();
 		ArrayList<Player> players = new ArrayList<Player>();
 
+		/*
 		for (int i = 0; i < 3; ++i) {
 			players.add(new Player(null, null, null));
 		}
 
 		group.setPlayers(players);
 		System.out.println(group.getPlayers().size());
+		*/
 
 		state = new GameState(window, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
@@ -63,7 +66,18 @@ public class PlayerTest {
 			temp2.add(new Country());
 		}
 		player2.setCountries(temp2);
+		
+		// set player3
+		player3 = new Player("testPlayer3", null, state);
+		ArrayList<Country> temp3 = new ArrayList<Country>();
+		for (int i = 0; i < 2; ++i) {
+			temp3.add(new Country());
+		}
+		player3.setCountries(temp3);
 
+		group.addPlayer(player);
+		group.addPlayer(player2);
+		group.addPlayer(player3);
 	}
 
 	/**
@@ -96,12 +110,26 @@ public class PlayerTest {
 	}
 	
 	/**
-	 * test class: Player, function: loseGame(). check the end of the game
-	 * when a player became the only player
+	 * test class: Player, function: loseGame(). check when one player loses
+	 * all the countries
 	 * 
 	 */
 	@Test
 	public void testLoseGame() {
+		player.getCountries().removeAll(player.getCountries());
+		assertEquals(0, player.getCountries().size());
+		state.setCurrPlayer(player2);
+		player.loseGame();
+		assertEquals(2, state.getAllPlayers().getPlayers().size());
+	}
+	
+	/**
+	 * test class: Player. check the end of the game
+	 * when a player became the only player
+	 * 
+	 */
+	@Test
+	public void testWinGame() {
 		for (int i=1; i<group.getPlayers().size();i++){
 			group.getPlayers().remove(i);
 		}
