@@ -39,15 +39,6 @@ public class PlayerTest {
 		window = new WindowMain();
 		ArrayList<Player> players = new ArrayList<Player>();
 
-		/*
-		for (int i = 0; i < 3; ++i) {
-			players.add(new Player(null, null, null));
-		}
-
-		group.setPlayers(players);
-		System.out.println(group.getPlayers().size());
-		*/
-
 		state = new GameState(window, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
 
