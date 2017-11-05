@@ -17,7 +17,7 @@ import MapEditor.Model.Territory;
  * check whether the map is valid when loading & saveing map.
  *
  */
-public class MapValidateTest {
+public class MapLoaderTest {
 	private ConquestMap map;
 
 	/**

@@ -16,7 +16,8 @@ import org.junit.runners.Suite;
 		PlayerTest.class,//
 		GameStateTest.class,//
 		CardsTest.class,//
-		MapValidateTest.class
+		MapLoaderTest.class,
+		DriverTest.class
 })
 public class SuiteTest {
 
