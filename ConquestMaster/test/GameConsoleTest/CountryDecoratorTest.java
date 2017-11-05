@@ -15,7 +15,7 @@ public class CountryDecoratorTest {
 	 * number the troop of a country
 	 */
 	@Test
-	public void getNumStarsTest() {
+	public void testGetNumStars() {
 
 	}
 

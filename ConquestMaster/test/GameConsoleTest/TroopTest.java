@@ -15,7 +15,7 @@ public class TroopTest {
 	 * Troop test
 	 */
 	@Test
-	public void Test() {
+	public void test() {
 		
 	}
 

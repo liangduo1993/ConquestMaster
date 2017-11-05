@@ -14,7 +14,7 @@ public class WindowMainTest {
 	 * test openMapFile() in main window
 	 */
 	@Test
-	public void openMapFileTest() {
+	public void testopenMapFile() {
 
 	}
 

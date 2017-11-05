@@ -15,7 +15,7 @@ public class WorldTest {
 	 * Construction method World();
 	 */
 	@Test
-	public void World() {
+	public void testWorld() {
 
 	}
 

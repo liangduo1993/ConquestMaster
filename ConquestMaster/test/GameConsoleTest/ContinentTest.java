@@ -15,7 +15,7 @@ public class ContinentTest {
 	 * 
 	 */
 	@Test
-	public void addCountryTest() {
+	public void testAddCountry() {
 
 	}
 

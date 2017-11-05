@@ -14,7 +14,7 @@ import MapEditor.Model.Territory;
  * This class is a test class for class ConquestMap, for the functions which can edit the map.
  *
  */
-public class MapEditTest {
+public class ConquestMapTest {
 	private ConquestMap map;
 
 /**
