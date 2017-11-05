@@ -17,7 +17,19 @@ import org.junit.runners.Suite;
 		GameStateTest.class,//
 		CardsTest.class,//
 		MapLoaderTest.class,
-		DriverTest.class
+		DriverTest.class,
+		WorldTest.class,
+		AbstractTroopTest.class,
+		TroopTest.class,
+		ContinentTest.class,
+		CountryDecoratorTest.class,
+		ConquestRatioTest.class,
+		CountryButtonTest.class,
+		DomiInfoPanelTest.class,
+		LogPanelTest.class,
+		MapDisplayerTest.class,
+		WindowMainTest.class
+		
 })
 public class SuiteTest {
 
