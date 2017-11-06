@@ -12,8 +12,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
 		ConquestMapTest.class, //
-		MapHandlerTest.class, //
-		MapValidateTest.class, //
 		MyStringUtilTest.class, //
 		TablePanelTest.class,//
 		ContinentTest.class,//

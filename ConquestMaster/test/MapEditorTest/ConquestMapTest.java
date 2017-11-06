@@ -1,6 +1,10 @@
 package MapEditorTest;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,16 +21,17 @@ import MapEditor.Model.Territory;
 public class ConquestMapTest {
 	private ConquestMap map;
 
-/**
- * Set up function, to do some initial work. 
- * @throws Exception If the target map is not valid, it would throw an exception.
- */
+	/**
+	 * Set up function, to do some initial work.
+	 * 
+	 * @throws Exception
+	 *             If the target map is not valid, it would throw an exception.
+	 */
 	@Before
 	public void setUp() throws Exception {
 		map = new ConquestMap();
 		map.load("resources/ConquestMaps/Atlantis.map");
 	}
-
 	/**
 	 * test class: ConquestMap. function: addContinent(). Check if add a new
 	 * continent the size of the continents list is changed or not.
@@ -147,5 +152,99 @@ public class ConquestMapTest {
 		assertEquals("newKala", kala.getName());
 		assertEquals(1, kala.getBonus());
 	}
+
+		/**
+		 * test class: ConquestMap, function: ConquestMap.territories().size(), test
+		 * class: Territory, function: getContinent(), test class: Continent,
+		 * function: getName(). check if a map including a specific terrtories list,
+		 * and if there is a specific territory.
+		 */
+		@Test
+		public void testLoad() throws Exception {
+			map.load("resources/ConquestMaps/Atlantis.map");
+			assertEquals(42, map.territories.size());
+			assertEquals(2, map.findTerritory("Forgoth").getLinks().size());
+			assertEquals("Kala", map.findTerritory("Forgoth").getContinent().getName());
+		}
+
+		/**
+		 * test class: ConquestMap, function load(). check if there is a error
+		 * message when we load a invalid map file.
+		 */
+		@Test
+		public void testLoadInvalidMap() {
+			try {
+				map.load("resources/ConquestMaps/Atlantis(invalid).map");
+			} catch (Exception ex) {
+				assertThat(ex.getMessage(), containsString("didn't pass the validation!"));
+			}
+		}
+
+		/**
+		 * test class ConquestMap, function: addContinent(), function save(). check
+		 * if we can add a new continent and save as a new map file in the local
+		 */
+		@Test
+		public void testSaveString() throws Exception {
+			map.load("resources/ConquestMaps/Atlantis.map");
+			map.addContinent(new Continent("newContinent", 1));
+			map.save("f:\\1.map");
+		}
+
+
+		/**
+		 * test class: ConquestMap, function: hasOneWaylink(). Check if a territory
+		 * has one way link connection, an check when we delete the link connection,
+		 * the link connection is null or not.
+		 */
+		@Test
+		public void testHasOneWayLinks() {
+			Territory forgoth = map.findTerritory("Forgoth");
+			Territory rove = map.findTerritory("Rove");
+			assertEquals(false, map.hasOneWayLinks());
+			forgoth.getLinks().remove(rove);
+			assertEquals(true, map.hasOneWayLinks());
+		}
+
+		/**
+		 * test class: ConquestMap, function eachTerReachable(), check the
+		 * territories of the map is boarding each other when we load a map, check a
+		 * new territory is boarding to each other we want when we add it in the
+		 * map.
+		 */
+		@Test
+		public void testEachTerReachable() {
+			assertEquals(true, map.eachTerReachable());
+			Territory newTerritory = new Territory();
+			newTerritory.setName("newTerritory");
+			newTerritory.setCenter(1, 1);
+			newTerritory.setCont(map.continents.get(0));
+			map.addTerritory(newTerritory);
+			assertEquals(false, map.eachTerReachable());
+
+		}
+		
+		/**
+		 * test class: ConquestMap, function eachTerInContReachable(), check the
+		 * territories of the map is boarding each other when given a target continent, check a
+		 * new territory is boarding to each other we want when we add it in the
+		 * map.
+		 */
+		@Test
+		public void testEachTerInContReachable() {
+			Continent kala = map.findContinent("Kala");
+			assertEquals(true, map.eachTerInContReachable(kala));
+			Territory newTerritory = new Territory();
+			newTerritory.setName("newTerritory");
+			newTerritory.setCenter(1, 1);
+			newTerritory.setContinent(kala);
+			ArrayList<Territory> neighList = new ArrayList<>();
+			neighList.add(map.findTerritory("Clokan"));
+			neighList.add(map.findTerritory("Horkan"));
+			newTerritory.setLinks(neighList);
+			map.addTerritory(newTerritory);
+			assertEquals(false, map.eachTerInContReachable(kala));
+		}
+
 
 }
