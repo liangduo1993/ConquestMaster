@@ -8,12 +8,12 @@ import GameConsole.Model.Player.Player;
 import GameConsole.View.CardExchangeView;
 import GameConsole.View.LogPanel;
 import GameConsole.View.WindowMain;
+
 /**
- * Set up basic states of the game
- * Current phase, current player
+ * Set up basic states of the game Current phase, current player
  *
  */
-public class GameState extends Observable{
+public class GameState extends Observable {
 	private int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
@@ -23,11 +23,14 @@ public class GameState extends Observable{
 	private Country country2;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
-	
+
 	/**
 	 * constructor method with incoming parameters
-	 * @param win Window frame of the game
-	 * @param path map path on hard driver
+	 * 
+	 * @param win
+	 *            Window frame of the game
+	 * @param path
+	 *            map path on hard driver
 	 * @throws Exception
 	 */
 	public GameState(WindowMain win, String path) throws Exception {
@@ -40,13 +43,13 @@ public class GameState extends Observable{
 
 	/**
 	 * To get window
+	 * 
 	 * @return window with WindowMain type
 	 */
 	public WindowMain getWindow() {
 		return this.win;
 	}
 
-	
 	/**
 	 * The override toString function.
 	 */
@@ -55,8 +58,9 @@ public class GameState extends Observable{
 		for (Player p : this.allPlayers.getPlayers()) {
 			retString += p.getName() + "\n";
 		}
-		return retString + "\nWorld Info:\n" + world.toString(); 
+		return retString + "\nWorld Info:\n" + world.toString();
 	}
+
 	/**
 	 * will start the game setting player 1 as the current player
 	 */
@@ -84,22 +88,28 @@ public class GameState extends Observable{
 			}
 		}
 	}
+
 	/**
 	 * method to get the current player.
+	 * 
 	 * @return current player with Player type
 	 */
 	public Player getCurrPlayer() {
 		return this.currPlayer;
 	}
+
 	/**
 	 * method to get all the players
+	 * 
 	 * @return all players with Group type
 	 */
 	public Group getAllPlayers() {
 		return this.allPlayers;
 	}
+
 	/**
 	 * method to get current phase
+	 * 
 	 * @return current phase with int type
 	 */
 	public int getCurrPhase() {
@@ -108,14 +118,16 @@ public class GameState extends Observable{
 
 	/**
 	 * method to get current phase
+	 * 
 	 * @return current phase with int type
 	 */
 	public int getFirstRound() {
 		return this.firstRound;
 	}
-	
+
 	/**
 	 * To get world the players are in
+	 * 
 	 * @return the world the players are in with World type
 	 */
 	public World getWorld() {
@@ -124,7 +136,10 @@ public class GameState extends Observable{
 
 	/**
 	 * To set current player
-	 * @param p1 the player that will be set as the current player with Player type
+	 * 
+	 * @param p1
+	 *            the player that will be set as the current player with Player
+	 *            type
 	 */
 	public void setCurrPlayer(Player p1) {
 		this.currPlayer = p1;
@@ -132,7 +147,10 @@ public class GameState extends Observable{
 
 	/**
 	 * To add a player to the player group
-	 * @param p1 a player that will be added to the player group with Player type
+	 * 
+	 * @param p1
+	 *            a player that will be added to the player group with Player
+	 *            type
 	 */
 	public void addPlayer(Player p1) {
 		this.allPlayers.addPlayer(p1);
@@ -140,28 +158,32 @@ public class GameState extends Observable{
 
 	/**
 	 * To set the current game phase
-	 * @param p the phase that will be set with int type
+	 * 
+	 * @param p
+	 *            the phase that will be set with int type
 	 */
 	public void setCurrPhase(int p) {
 		this.currPhase = p;
 		setChanged();
 		notifyObservers();
-		
+
 	}
 
 	/**
 	 * To set the first round number
-	 * @param p the round that will be set with int type
+	 * 
+	 * @param p
+	 *            the round that will be set with int type
 	 */
-	public void setFirstRound(int p){
+	public void setFirstRound(int p) {
 		this.firstRound = p;
 		setChanged();
 		notifyObservers();
 	}
-	
-	
+
 	/**
 	 * To check is there a player a winner
+	 * 
 	 * @return the player if the player is winner otherwise return null
 	 */
 	public Player checkWinner() {
@@ -191,9 +213,9 @@ public class GameState extends Observable{
 		notifyObservers();
 	}
 
-
 	/**
 	 * To get a country
+	 * 
 	 * @return country with Country type
 	 */
 	public Country getCountry1() {
@@ -202,7 +224,9 @@ public class GameState extends Observable{
 
 	/**
 	 * To set a country
-	 * @param country1 the desired country that will be set
+	 * 
+	 * @param country1
+	 *            the desired country that will be set
 	 */
 	public void setCountry1(Country country1) {
 		this.country1 = country1;
@@ -210,6 +234,7 @@ public class GameState extends Observable{
 
 	/**
 	 * To get a country
+	 * 
 	 * @return country with Country type
 	 */
 	public Country getCountry2() {
@@ -218,16 +243,19 @@ public class GameState extends Observable{
 
 	/**
 	 * To set a country
-	 * @param country2 the desired country that will be set with Country type
+	 * 
+	 * @param country2
+	 *            the desired country that will be set with Country type
 	 */
 	public void setCountry2(Country country2) {
 		this.country2 = country2;
 	}
 
-
 	/**
 	 * To set a world
-	 * @param world the desired world that will be set with World type
+	 * 
+	 * @param world
+	 *            the desired world that will be set with World type
 	 */
 	public void setWorld(World world) {
 		this.world = world;
@@ -235,11 +263,12 @@ public class GameState extends Observable{
 
 	/**
 	 * To set all players
-	 * @param allPlayers a desired group of players that need to be set
+	 * 
+	 * @param allPlayers
+	 *            a desired group of players that need to be set
 	 */
 	public void setAllPlayers(Group allPlayers) {
 		this.allPlayers = allPlayers;
 	}
 
 }
-
