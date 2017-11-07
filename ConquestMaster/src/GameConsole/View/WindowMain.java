@@ -585,7 +585,6 @@ public class WindowMain implements ActionListener{
 		 numberOfTroops = new JLabel("0");
 		unitDisplay = new JPanel();
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		//numberOfTroops.setText(Integer.toString(troopsLeft));
 
 		int yM = 30;
 
@@ -990,10 +989,4 @@ public class WindowMain implements ActionListener{
 		}
 		gameState.addObserver(phaseView);
 	}
-
-	
-	
-
-
-
 }

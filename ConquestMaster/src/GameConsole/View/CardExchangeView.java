@@ -1,6 +1,5 @@
 package GameConsole.View;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,8 +7,6 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;

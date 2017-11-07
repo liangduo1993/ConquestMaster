@@ -14,19 +14,30 @@ import javax.swing.SwingConstants;
 
 import GameConsole.Core.GameState;
 
+/**
+ * This class is the GUI for the Phase View Panel, showing the current phase of
+ * conquest game and current player
+ */
 public class PhaseView implements Observer {
 	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
 	private JPanel arrow0, arrow1, arrow2;
 	private GameState gameState;
 	private WindowMain win;
-	
+
 	public JPanel phasePanel;
 	public JPanel namePanel;
-	public JFormattedTextField player1Name,player2Name,player3Name,player4Name,player5Name ;
-	
-	
+	public JFormattedTextField player1Name, player2Name, player3Name, player4Name, player5Name;
+
 	private LogPanel lp = LogPanel.getInstance();
-	
+
+	/**
+	 * constructor method initialize phase view panel
+	 * 
+	 * @param state
+	 *            current phase of game
+	 * @param win
+	 *            mainWindow of GameConsole
+	 */
 	public PhaseView(GameState state, WindowMain win) {
 		this.gameState = state;
 		this.win = win;
@@ -37,8 +48,7 @@ public class PhaseView implements Observer {
 		phasePanel.setVisible(true);
 		phasePanel.setBackground(Color.LIGHT_GRAY);
 		phasePanel.setLayout(null);
-		
-		
+
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
 
@@ -81,7 +91,7 @@ public class PhaseView implements Observer {
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
-		arrow1.setBounds(0 , 40, 30, 30);
+		arrow1.setBounds(0, 40, 30, 30);
 		arrow1.setLayout(null);
 		arrow1.setBackground(Color.LIGHT_GRAY);
 
@@ -107,38 +117,38 @@ public class PhaseView implements Observer {
 		arrow1.setVisible(false);
 		arrow2.setVisible(false);
 		obtainTroopLabel.setText("Startup phase");
-		
+
 		phasePanel.add(arrow0);
 		phasePanel.add(arrow1);
 		phasePanel.add(arrow2);
 		phasePanel.add(panel_15);
 		phasePanel.add(panel_16);
 		phasePanel.add(panel_17);
-		
+
 		namePanel = new JPanel();
 		namePanel.setLayout(null);
 		namePanel.setVisible(true);
 		namePanel.setBackground(Color.LIGHT_GRAY);
-		
-		
-		 player1Name = new JFormattedTextField();
+
+		player1Name = new JFormattedTextField();
 		player1Name.setVisible(false);
 		player1Name.setBackground(Color.GRAY);
-		 player2Name = new JFormattedTextField();
+		player2Name = new JFormattedTextField();
 		player2Name.setVisible(false);
-		 player3Name = new JFormattedTextField();
+		player3Name = new JFormattedTextField();
 		player3Name.setVisible(false);
-		 player4Name = new JFormattedTextField();
+		player4Name = new JFormattedTextField();
 		player4Name.setVisible(false);
-		 player5Name = new JFormattedTextField();
+		player5Name = new JFormattedTextField();
 		player5Name.setVisible(false);
-		
+
 		player1Name.setBackground(Color.LIGHT_GRAY);
 		player1Name.setForeground(Color.CYAN);
 		player1Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player1Name.setEditable(false);
-		player1Name.setBounds(0, 0, 175, 60);;
+		player1Name.setBounds(0, 0, 175, 60);
+		;
 
 		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player2Name.setForeground(Color.MAGENTA);
@@ -167,15 +177,14 @@ public class PhaseView implements Observer {
 		player5Name.setEditable(false);
 		player5Name.setBackground(Color.LIGHT_GRAY);
 		player5Name.setBounds(800, 0, 175, 60);
-		
-		
+
 		namePanel.add(player1Name);
 		namePanel.add(player2Name);
 		namePanel.add(player3Name);
 		namePanel.add(player4Name);
 		namePanel.add(player5Name);
 	}
-	
+
 	/**
 	 * Method to update the phase view
 	 */
@@ -217,5 +226,5 @@ public class PhaseView implements Observer {
 			}
 		}
 	}
-	
+
 }
