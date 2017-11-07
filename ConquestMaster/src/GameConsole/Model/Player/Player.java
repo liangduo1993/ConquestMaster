@@ -29,7 +29,6 @@ import GameConsole.View.LogPanel;
 public class Player extends Observable {
 	private String name;
 	private Color color;
-	//private ArrayList<AbstractTroop> numTroops = new ArrayList<AbstractTroop>();
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
 	private ArrayList<Card> onhand = new ArrayList<Card>();
