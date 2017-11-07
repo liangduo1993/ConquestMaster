@@ -22,7 +22,6 @@ public class CardExchangeView   implements Observer {
 		this.gameState = state;
 		this.frame = new JFrame();
 		this.frame.setBounds(300, 500, 900, 100);
-		//this.frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		this.frame.setLayout(null);
 		this.frame.setResizable(false);
 	}
@@ -61,7 +60,6 @@ public class CardExchangeView   implements Observer {
 			}
 				
 			System.out.println("there's " + this.frame.getContentPane().getComponentCount() + " cards!");
-			//JOptionPane.showMessageDialog(null,	"there's " + this.frame.getContentPane().getComponentCount() + " cards!");
 			this.frame.repaint();
 		}
 		}else

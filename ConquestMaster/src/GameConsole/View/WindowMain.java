@@ -454,7 +454,6 @@ public class WindowMain implements ActionListener{
 				mapPanel.add(cRatioPanel);
 
 				registerObserver();
-//				phaseViewUpdate();
 
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText("" + troopsLeft);
@@ -675,10 +674,6 @@ public class WindowMain implements ActionListener{
 		resultsScreen.add(label_12);
 
 		cardPanel = new CardExchangeView(this.gameState);
-		//mapPanel.add(cardPanel);
-//		cardPanel.setBounds(100, buttonImage.getHeight() + 170 - 10, 900, 40);
-//		cardPanel.setBackground(Color.LIGHT_GRAY);
-//		cardPanel.setLayout(null);
 
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
@@ -710,20 +705,15 @@ public class WindowMain implements ActionListener{
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
 
-//							cardPanel = new CardExchangeObserver(gameState);
-//							gameState.getCurrPlayer().addObserver(cardPanel);
 							
-							//cardViewUpdate();
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
-							//cardViewUpdate();
 						}
 						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
 							gameState.setCurrPhase(2);
 						}
 						if (gameState.getCurrPhase() == 2) {
 							gameState.getCurrPlayer().giveCards();
-							//cardViewUpdate();
 						}
 					}
 				}
@@ -735,9 +725,6 @@ public class WindowMain implements ActionListener{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (gameState.getFirstRound() == 1) {
-//						arrow0.setVisible(true);
-//						arrow1.setVisible(false);
-//						arrow2.setVisible(false);
 
 						Player currentPlayer = gameState.getCurrPlayer();
 
@@ -756,7 +743,6 @@ public class WindowMain implements ActionListener{
 						gameState.setNextPlayer();
 						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
-//						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 						gameState.setCountry1(null);
 						gameState.setCountry2(null);
 
@@ -771,15 +757,11 @@ public class WindowMain implements ActionListener{
 						}
 						if (isFinished) {
 							gameState.setFirstRound(gameState.getFirstRound() + 1);
-//							cardPanel = new CardExchangeObserver(gameState);
-//							gameState.getCurrPlayer().addObserver(cardPanel);
 							lp.addLog("It is the Reinforcement phase!");
 
 							System.out.println("round +1 !!!");
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
-//							attackStageLabel.setVisible(true);
-//							moveStageLabel.setVisible(true);
 						}
 
 					} else if (gameState.getFirstRound() > 1) {
@@ -1002,13 +984,11 @@ public class WindowMain implements ActionListener{
 		if (gameState.getAllPlayers().getPlayers().size() > 0) {
 			for (Player p : gameState.getAllPlayers().getPlayers()) {
 				p.addObserver(domiInfoPanel);
-				//p.addObserver(this);
 				p.addObserver(cardPanel);
 				p.addObserver(cRatioPanel);
 			}
 		}
 		gameState.addObserver(phaseView);
-		//gameState.addObserver(cardPanel);
 	}
 
 	

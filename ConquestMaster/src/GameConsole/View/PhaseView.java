@@ -39,10 +39,9 @@ public class PhaseView implements Observer {
 		phasePanel.setLayout(null);
 		
 		
-		//int yM = 30;
 		JPanel panel_15 = new JPanel();
 		panel_15.setBackground(Color.LIGHT_GRAY);
-//		panel_15.setBounds(680, win.buttonImage.getHeight() + 240 - yM, 200, 31);
+
 		panel_15.setBounds(40, 0, 200, 31);
 		panel_15.setLayout(null);
 
@@ -53,7 +52,6 @@ public class PhaseView implements Observer {
 
 		JPanel panel_16 = new JPanel();
 		panel_16.setBackground(Color.LIGHT_GRAY);
-//		panel_16.setBounds(680, win.buttonImage.getHeight() + 280 - yM, 200, 31);
 		panel_16.setBounds(40, 40, 200, 31);
 		panel_16.setLayout(null);
 
@@ -65,7 +63,6 @@ public class PhaseView implements Observer {
 
 		JPanel panel_17 = new JPanel();
 		panel_17.setBackground(Color.LIGHT_GRAY);
-//		panel_17.setBounds(680, win.buttonImage.getHeight() + 320 - yM, 200, 31);
 		panel_17.setBounds(40, 80, 200, 31);
 		panel_17.setLayout(null);
 
@@ -76,7 +73,6 @@ public class PhaseView implements Observer {
 		moveStageLabel.setVisible(false);
 
 		arrow0.setBackground(Color.LIGHT_GRAY);
-//		arrow0.setBounds(640, win.buttonImage.getHeight() + 240 - yM, 30, 30);
 		arrow0.setBounds(0, 0, 30, 30);
 		arrow0.setLayout(null);
 
@@ -85,7 +81,6 @@ public class PhaseView implements Observer {
 		lblNewLabel_3.setBounds(0, 0, 30, 30);
 		arrow0.add(lblNewLabel_3);
 
-//		arrow1.setBounds(640, win.buttonImage.getHeight() + 280 - yM, 30, 30);
 		arrow1.setBounds(0 , 40, 30, 30);
 		arrow1.setLayout(null);
 		arrow1.setBackground(Color.LIGHT_GRAY);
@@ -97,7 +92,6 @@ public class PhaseView implements Observer {
 
 		arrow2.setLayout(null);
 		arrow2.setBackground(Color.LIGHT_GRAY);
-//		arrow2.setBounds(640, win.buttonImage.getHeight() + 320 - yM, 30, 30);
 		arrow2.setBounds(0, 80, 30, 30);
 
 		JLabel label_8 = new JLabel("");
@@ -121,7 +115,6 @@ public class PhaseView implements Observer {
 		phasePanel.add(panel_16);
 		phasePanel.add(panel_17);
 		
-		//=================================
 		namePanel = new JPanel();
 		namePanel.setLayout(null);
 		namePanel.setVisible(true);
@@ -145,8 +138,7 @@ public class PhaseView implements Observer {
 		player1Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player1Name.setEditable(false);
-		player1Name.setBounds(0, 0, 175, 60);
-		//mapPanel.add(player1Name);
+		player1Name.setBounds(0, 0, 175, 60);;
 
 		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player2Name.setForeground(Color.MAGENTA);
@@ -154,7 +146,6 @@ public class PhaseView implements Observer {
 		player2Name.setEditable(false);
 		player2Name.setBackground(Color.LIGHT_GRAY);
 		player2Name.setBounds(200, 0, 175, 60);
-		//mapPanel.add(player2Name);
 
 		player3Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player3Name.setForeground(Color.GREEN);
@@ -162,7 +153,6 @@ public class PhaseView implements Observer {
 		player3Name.setEditable(false);
 		player3Name.setBackground(Color.LIGHT_GRAY);
 		player3Name.setBounds(400, 0, 175, 60);
-		//mapPanel.add(player3Name);
 
 		player4Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player4Name.setForeground(Color.blue);
@@ -170,7 +160,6 @@ public class PhaseView implements Observer {
 		player4Name.setEditable(false);
 		player4Name.setBackground(Color.LIGHT_GRAY);
 		player4Name.setBounds(600, 0, 175, 60);
-		//mapPanel.add(player4Name);
 
 		player5Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player5Name.setForeground(Color.red);
@@ -178,7 +167,6 @@ public class PhaseView implements Observer {
 		player5Name.setEditable(false);
 		player5Name.setBackground(Color.LIGHT_GRAY);
 		player5Name.setBounds(800, 0, 175, 60);
-		//mapPanel.add(player5Name);
 		
 		
 		namePanel.add(player1Name);
