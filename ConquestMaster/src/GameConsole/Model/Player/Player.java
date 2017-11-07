@@ -453,7 +453,6 @@ public class Player extends Observable {
 	 * list
 	 */
 	public void loseGame() {
-		//JOptionPane.showMessageDialog(null, this.name + " has lost the game!");
 		lp.addLog(this.name + " has lost the game!");
 		this.game.getAllPlayers().getPlayers().remove(this);
 		this.game.setNextPlayer();
