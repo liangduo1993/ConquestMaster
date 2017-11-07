@@ -791,7 +791,7 @@ public class WindowMain implements ActionListener{
 								currentPlayer.reinforce(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
-								lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
+								lp.addLog(currentPlayer.getName() + " reinforces one troop to " + countryButton.name);
 							} else if (troopsLeft == 0) {
 								JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
 								lp.addLog("Out of troops to add");
