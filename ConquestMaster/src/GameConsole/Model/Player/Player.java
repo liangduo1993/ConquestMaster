@@ -182,6 +182,7 @@ public class Player extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
 
 	/**
 	 * To set the player's hand cards list
@@ -427,6 +428,19 @@ public class Player extends Observable {
 	}
 
 
+	/**
+	 * To add an infantry for target country of current player
+	 * 
+	 * @param c
+	 *            the target country
+	 */
+	public void reinforce(Country c) {
+		if (countries.contains(c)) {
+			c.addInfrantry(1);
+		}
+		setChanged();
+		notifyObservers();
+	}
 
 	/**
 	 * To perform move troop action

@@ -788,7 +788,7 @@ public class WindowMain implements ActionListener{
 							Player currentPlayer = gameState.getCurrPlayer();
 							if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0) {
 								troopsLeft--;
-								currentPlayer.addInfantry(countryButton.country);
+								currentPlayer.reinforce(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
 								lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
