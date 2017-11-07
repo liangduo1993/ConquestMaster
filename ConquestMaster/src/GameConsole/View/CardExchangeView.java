@@ -24,6 +24,7 @@ public class CardExchangeView   implements Observer {
 		this.frame.setBounds(300, 500, 900, 100);
 		//this.frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		this.frame.setLayout(null);
+		this.frame.setResizable(false);
 	}
 	
 	/**

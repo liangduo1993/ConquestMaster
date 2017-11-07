@@ -146,7 +146,8 @@ public class WindowMain implements ActionListener{
 		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
-
+		phaseView = new PhaseView(gameState, this);
+		
 		mainScreen.setBackground(Color.LIGHT_GRAY);
 		mainScreen.setLayout(null);
 
@@ -367,17 +368,7 @@ public class WindowMain implements ActionListener{
 		cancelPanel.add(cancelLabel);
 		JPanel startGamePanel = new JPanel();
 
-		JFormattedTextField player1Name = new JFormattedTextField();
-		player1Name.setVisible(false);
-		player1Name.setBackground(Color.GRAY);
-		JFormattedTextField player2Name = new JFormattedTextField();
-		player2Name.setVisible(false);
-		JFormattedTextField player3Name = new JFormattedTextField();
-		player3Name.setVisible(false);
-		JFormattedTextField player4Name = new JFormattedTextField();
-		player4Name.setVisible(false);
-		JFormattedTextField player5Name = new JFormattedTextField();
-		player5Name.setVisible(false);
+		
 		
 		JLabel country1 = new JLabel((String) null);
 		JLabel country2 = new JLabel((String) null);
@@ -476,30 +467,30 @@ public class WindowMain implements ActionListener{
 				if (gameState.getAllPlayers().getPlayers().size() > 0) { // Display
 																			// the
 					if (gameState.getAllPlayers().getPlayers().size() > 0) {
-						player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
-						gameState.getAllPlayers().getPlayers().get(0).setPlayerTextName(player1Name);
-						player1Name.setVisible(true);
-						player1Name.setBackground(Color.GRAY);
+						phaseView.player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
+						gameState.getAllPlayers().getPlayers().get(0).setPlayerTextName(phaseView.player1Name);
+						phaseView.player1Name.setVisible(true);
+						phaseView.player1Name.setBackground(Color.GRAY);
 					}
 					if (gameState.getAllPlayers().getPlayers().size() > 1) {
-						player2Name.setText(gameState.getAllPlayers().getPlayers().get(1).getName());
-						gameState.getAllPlayers().getPlayers().get(1).setPlayerTextName(player2Name);
-						player2Name.setVisible(true);
+						phaseView.player2Name.setText(gameState.getAllPlayers().getPlayers().get(1).getName());
+						gameState.getAllPlayers().getPlayers().get(1).setPlayerTextName(phaseView.player2Name);
+						phaseView.player2Name.setVisible(true);
 					}
 					if (gameState.getAllPlayers().getPlayers().size() > 2) {
-						player3Name.setText(gameState.getAllPlayers().getPlayers().get(2).getName());
-						gameState.getAllPlayers().getPlayers().get(2).setPlayerTextName(player3Name);
-						player3Name.setVisible(true);
+						phaseView.player3Name.setText(gameState.getAllPlayers().getPlayers().get(2).getName());
+						gameState.getAllPlayers().getPlayers().get(2).setPlayerTextName(phaseView.player3Name);
+						phaseView.player3Name.setVisible(true);
 					}
 					if (gameState.getAllPlayers().getPlayers().size() > 3) {
-						player4Name.setText(gameState.getAllPlayers().getPlayers().get(3).getName());
-						gameState.getAllPlayers().getPlayers().get(3).setPlayerTextName(player4Name);
-						player4Name.setVisible(true);
+						phaseView.player4Name.setText(gameState.getAllPlayers().getPlayers().get(3).getName());
+						gameState.getAllPlayers().getPlayers().get(3).setPlayerTextName(phaseView.player4Name);
+						phaseView.player4Name.setVisible(true);
 					}
 					if (gameState.getAllPlayers().getPlayers().size() > 4) {
-						player5Name.setText(gameState.getAllPlayers().getPlayers().get(4).getName());
-						gameState.getAllPlayers().getPlayers().get(4).setPlayerTextName(player5Name);
-						player5Name.setVisible(true);
+						phaseView.player5Name.setText(gameState.getAllPlayers().getPlayers().get(4).getName());
+						gameState.getAllPlayers().getPlayers().get(4).setPlayerTextName(phaseView.player5Name);
+						phaseView.player5Name.setVisible(true);
 					}
 				}
 				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
@@ -590,45 +581,7 @@ public class WindowMain implements ActionListener{
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
-		player1Name.setBackground(Color.LIGHT_GRAY);
-		player1Name.setForeground(Color.CYAN);
-		player1Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player1Name.setEditable(false);
-		player1Name.setBounds(100, 40, 175, 60);
-		mapPanel.add(player1Name);
-
-		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player2Name.setForeground(Color.MAGENTA);
-		player2Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		player2Name.setEditable(false);
-		player2Name.setBackground(Color.LIGHT_GRAY);
-		player2Name.setBounds(300, 40, 175, 60);
-		mapPanel.add(player2Name);
-
-		player3Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player3Name.setForeground(Color.GREEN);
-		player3Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		player3Name.setEditable(false);
-		player3Name.setBackground(Color.LIGHT_GRAY);
-		player3Name.setBounds(500, 40, 175, 60);
-		mapPanel.add(player3Name);
-
-		player4Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player4Name.setForeground(Color.blue);
-		player4Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		player4Name.setEditable(false);
-		player4Name.setBackground(Color.LIGHT_GRAY);
-		player4Name.setBounds(700, 40, 175, 60);
-		mapPanel.add(player4Name);
-
-		player5Name.setHorizontalAlignment(SwingConstants.CENTER);
-		player5Name.setForeground(Color.red);
-		player5Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		player5Name.setEditable(false);
-		player5Name.setBackground(Color.LIGHT_GRAY);
-		player5Name.setBounds(900, 40, 175, 60);
-		mapPanel.add(player5Name);
+		
 
 		 numberOfTroops = new JLabel("0");
 		unitDisplay = new JPanel();
@@ -639,10 +592,15 @@ public class WindowMain implements ActionListener{
 
 		unitDisplay.setVisible(true);
 		
-		phaseView = new PhaseView(gameState, this);
+	
 		phaseView.phasePanel.setBounds(640, buttonImage.getHeight() + 240 - yM, 250, 250);
 		mapPanel.add(phaseView.phasePanel);
 
+		
+		phaseView.namePanel.setBounds(100, 40, 975, 60);
+		mapPanel.add(phaseView.namePanel);
+		
+		
 		unitDisplay.setBackground(Color.LIGHT_GRAY);
 		unitDisplay.setBounds(410, buttonImage.getHeight() + 240 - yM, 220, 30);
 		mapPanel.add(unitDisplay);
@@ -748,7 +706,7 @@ public class WindowMain implements ActionListener{
 							gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 							lp.addLog("It is the Reinforcement phase!");
-							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
+							
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
 
@@ -798,7 +756,7 @@ public class WindowMain implements ActionListener{
 						gameState.setNextPlayer();
 						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
-						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
+//						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 						gameState.setCountry1(null);
 						gameState.setCountry2(null);
 

@@ -6,9 +6,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import GameConsole.Core.GameState;
 
@@ -19,6 +21,9 @@ public class PhaseView implements Observer {
 	private WindowMain win;
 	
 	public JPanel phasePanel;
+	public JPanel namePanel;
+	public JFormattedTextField player1Name,player2Name,player3Name,player4Name,player5Name ;
+	
 	
 	private LogPanel lp = LogPanel.getInstance();
 	
@@ -108,7 +113,6 @@ public class PhaseView implements Observer {
 		arrow1.setVisible(false);
 		arrow2.setVisible(false);
 		obtainTroopLabel.setText("Startup phase");
-		win.unitDisplay.setVisible(true);
 		
 		phasePanel.add(arrow0);
 		phasePanel.add(arrow1);
@@ -116,12 +120,79 @@ public class PhaseView implements Observer {
 		phasePanel.add(panel_15);
 		phasePanel.add(panel_16);
 		phasePanel.add(panel_17);
+		
+		//=================================
+		namePanel = new JPanel();
+		namePanel.setLayout(null);
+		namePanel.setVisible(true);
+		namePanel.setBackground(Color.LIGHT_GRAY);
+		
+		
+		 player1Name = new JFormattedTextField();
+		player1Name.setVisible(false);
+		player1Name.setBackground(Color.GRAY);
+		 player2Name = new JFormattedTextField();
+		player2Name.setVisible(false);
+		 player3Name = new JFormattedTextField();
+		player3Name.setVisible(false);
+		 player4Name = new JFormattedTextField();
+		player4Name.setVisible(false);
+		 player5Name = new JFormattedTextField();
+		player5Name.setVisible(false);
+		
+		player1Name.setBackground(Color.LIGHT_GRAY);
+		player1Name.setForeground(Color.CYAN);
+		player1Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
+		player1Name.setEditable(false);
+		player1Name.setBounds(0, 0, 175, 60);
+		//mapPanel.add(player1Name);
+
+		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
+		player2Name.setForeground(Color.MAGENTA);
+		player2Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		player2Name.setEditable(false);
+		player2Name.setBackground(Color.LIGHT_GRAY);
+		player2Name.setBounds(200, 0, 175, 60);
+		//mapPanel.add(player2Name);
+
+		player3Name.setHorizontalAlignment(SwingConstants.CENTER);
+		player3Name.setForeground(Color.GREEN);
+		player3Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		player3Name.setEditable(false);
+		player3Name.setBackground(Color.LIGHT_GRAY);
+		player3Name.setBounds(400, 0, 175, 60);
+		//mapPanel.add(player3Name);
+
+		player4Name.setHorizontalAlignment(SwingConstants.CENTER);
+		player4Name.setForeground(Color.blue);
+		player4Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		player4Name.setEditable(false);
+		player4Name.setBackground(Color.LIGHT_GRAY);
+		player4Name.setBounds(600, 0, 175, 60);
+		//mapPanel.add(player4Name);
+
+		player5Name.setHorizontalAlignment(SwingConstants.CENTER);
+		player5Name.setForeground(Color.red);
+		player5Name.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		player5Name.setEditable(false);
+		player5Name.setBackground(Color.LIGHT_GRAY);
+		player5Name.setBounds(800, 0, 175, 60);
+		//mapPanel.add(player5Name);
+		
+		
+		namePanel.add(player1Name);
+		namePanel.add(player2Name);
+		namePanel.add(player3Name);
+		namePanel.add(player4Name);
+		namePanel.add(player5Name);
 	}
 	
 	/**
 	 * Method to update the phase view
 	 */
 	public void update(Observable o, Object arg) {
+		gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 		if (gameState.getFirstRound() == 1) {
 			obtainTroopLabel.setVisible(true);
 			attackStageLabel.setVisible(false);
