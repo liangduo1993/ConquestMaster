@@ -695,7 +695,6 @@ public class WindowMain implements ActionListener{
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 					if (gameState.getFirstRound() > 1) {
 						if (gameState.getCurrPhase() == 0) {
-							gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 							gameState.getCurrPlayer().setHasMoved(false);
 							gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
@@ -738,7 +737,7 @@ public class WindowMain implements ActionListener{
 							return;
 						}
 
-						gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.LIGHT_GRAY);
+						
 						gameState.setNextPlayer();
 						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));

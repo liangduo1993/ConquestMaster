@@ -7,12 +7,12 @@ import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import GameConsole.Core.GameState;
+import GameConsole.Model.Player.Player;
 
 /**
  * This class is the GUI for the Phase View Panel, showing the current phase of
@@ -189,6 +189,9 @@ public class PhaseView implements Observer {
 	 * Method to update the phase view
 	 */
 	public void update(Observable o, Object arg) {
+		for(Player p: gameState.getAllPlayers().getPlayers()){
+			p.getPlayerTextName().setBackground(Color.LIGHT_GRAY);
+		}
 		gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 		if (gameState.getFirstRound() == 1) {
 			obtainTroopLabel.setVisible(true);
