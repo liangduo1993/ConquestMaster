@@ -9,16 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import GameConsole.Core.GameState;
-import GameConsole.View.WindowMain;
 
 public class GameStateTest {
 	private GameState state;
-	private WindowMain window;
 
 	@Before
 	public void setUp() throws Exception {
-		window = new WindowMain();
-		state = new GameState(window, "resources/ConquestMaps/Atlantis.map");
+		state = new GameState(null, "resources/ConquestMaps/Atlantis.map");
 
 	}
 

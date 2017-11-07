@@ -1,7 +1,7 @@
 package GameConsoleTest;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,6 @@ import GameConsole.Core.GameState;
 import GameConsole.Core.Group;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
-import GameConsole.View.WindowMain;
 
 /**
  * this class is a test class for testing if player owns the corresponding
@@ -24,7 +23,6 @@ public class PlayerTest {
 	private Player player3;
 	private GameState state;
 	private Group group;
-	private WindowMain window;
 
 	/**
 	 * setUp initial game, loading a new map and adding new players.
@@ -36,10 +34,9 @@ public class PlayerTest {
 		// set gamestate
 		// set group
 		group = new Group();
-		window = new WindowMain();
 		ArrayList<Player> players = new ArrayList<Player>();
 
-		state = new GameState(window, "resources/ConquestMaps/Atlantis.map");
+		state = new GameState(null, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
 
 		// set player
