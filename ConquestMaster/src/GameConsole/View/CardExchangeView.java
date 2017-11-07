@@ -14,11 +14,11 @@ import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
-public class CardExchangeObserver   implements Observer {
+public class CardExchangeView   implements Observer {
 	private GameState gameState;
 	private JFrame frame;
 	
-	public CardExchangeObserver(GameState state) {
+	public CardExchangeView(GameState state) {
 		this.gameState = state;
 		this.frame = new JFrame();
 		this.frame.setBounds(300, 500, 900, 100);

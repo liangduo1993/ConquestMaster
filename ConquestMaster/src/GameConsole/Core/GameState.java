@@ -5,7 +5,7 @@ import java.util.Observable;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
-import GameConsole.View.CardExchangeObserver;
+import GameConsole.View.CardExchangeView;
 import GameConsole.View.LogPanel;
 import GameConsole.View.WindowMain;
 /**
@@ -187,6 +187,8 @@ public class GameState extends Observable{
 		int currPlayerIndex = this.getAllPlayers().getPlayers().indexOf(this.currPlayer);
 		this.currPlayer = this.getAllPlayers().getPlayers()
 				.get((currPlayerIndex + 1) % this.getAllPlayers().getPlayers().size());
+		setChanged();
+		notifyObservers();
 	}
 
 
