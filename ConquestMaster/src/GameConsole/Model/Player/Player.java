@@ -390,26 +390,13 @@ public class Player extends Observable {
 			defendRoll.remove(defendIndex);
 			
 			if(attackMax > defendMax){
-				//c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
+
 				c2.getTroops().remove(c2.getTroops().size() - 1);
 				lp.addLog("Attacker won!" + "\n");
 			}else{
-				//this.numTroops.remove(this.numTroops.size() - 1);
 				c1.getTroops().remove(c1.getTroops().size() - 1);
 				lp.addLog("Defender won!" + "\n");
 			}
-			
-//			if (Collections.max(attackRoll) > Collections.max(defendRoll)) {
-//				c2.getPlayer().getNumTroops().remove(c2.getPlayer().getNumTroops().size() - 1);
-//				c2.getTroops().remove(c2.getTroops().size() - 1);
-//				lp.addLog("Attacker won!" + "\n");
-//			} else { // if defender won
-//				this.numTroops.remove(this.numTroops.size() - 1);
-//				c1.getTroops().remove(c1.getTroops().size() - 1);
-//				lp.addLog("Defender won!" + "\n");
-//			}
-//			attackRoll.remove((Integer) Collections.max(attackRoll));
-//			defendRoll.remove((Integer) Collections.max(defendRoll));
 		}
 
 		setChanged();
