@@ -32,7 +32,7 @@ public class Player extends Observable {
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
 	private ArrayList<Card> onhand = new ArrayList<Card>();
-	private GameState game; // the state of the game
+	private GameState game; 
 	private JFormattedTextField playerTextName;
 	private int totalCardsExchange = 0;
 	private boolean hasMoved = false;
@@ -366,7 +366,6 @@ public class Player extends Observable {
 			}
 		}
 		lp.addLog(diceString);
-		//JOptionPane.showMessageDialog(null, diceString);
 
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
 			int attackMax = 0; 

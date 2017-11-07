@@ -10,7 +10,7 @@ public class Troop extends AbstractTroop{
 	 * Constructor method
 	 */
 	public Troop() {
-		this.strength = 1;  // all infrantry have strength of one
+		this.strength = 1;  
 	}
 
 	/**

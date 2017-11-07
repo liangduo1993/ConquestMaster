@@ -16,7 +16,7 @@ public class GameState extends Observable {
 	private int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
-	private int currPhase; // 0 beggining, 1 attack, 2 move
+	private int currPhase; 
 	private World world;
 	private Country country1;
 	private Country country2;
@@ -34,7 +34,7 @@ public class GameState extends Observable {
 	 */
 	public GameState(WindowMain win, String path) throws Exception {
 		this.win = win;
-		this.currPlayer = null; // will set this at the beggining of the turn
+		this.currPlayer = null;
 		this.allPlayers = new Group();
 		this.currPhase = 0;
 		this.world = new World(path);
@@ -187,9 +187,7 @@ public class GameState extends Observable {
 	 */
 	public Player checkWinner() {
 		boolean won = false;
-		if (this.allPlayers.getPlayers().size() == 1) { // if there is only one
-			// player they already
-			// win
+		if (this.allPlayers.getPlayers().size() == 1) { 
 			return this.allPlayers.getPlayers().get(0);
 		}
 		for (Player p : this.allPlayers.getPlayers()) {

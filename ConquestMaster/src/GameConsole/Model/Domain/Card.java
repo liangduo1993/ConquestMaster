@@ -9,7 +9,7 @@ import GameConsole.Model.Player.Player;
 @SuppressWarnings("all")
 public class Card {
 
-	private int type; // 0, 1, 2 three types
+	private int type; 
 	private Player player;
 
 	/**

@@ -48,7 +48,7 @@ import GameConsole.View.PhaseView;
  */
 public class WindowMain implements ActionListener{
 	private JFrame frame1;
-	private JPanel cards; // card lay out panel for whole frame
+	private JPanel cards; 
 	private CardExchangeView cardPanel;
 	private PhaseView phaseView;
 	private CardLayout cardLayout;
@@ -466,8 +466,7 @@ public class WindowMain implements ActionListener{
 					System.out.println(p.getName() + " has: " + p.getInitTroop());
 				}
 				System.out.println(gameState.getAllPlayers().getPlayers().size());
-				if (gameState.getAllPlayers().getPlayers().size() > 0) { // Display
-																			// the
+				if (gameState.getAllPlayers().getPlayers().size() > 0) { 																			
 					if (gameState.getAllPlayers().getPlayers().size() > 0) {
 						phaseView.player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
 						gameState.getAllPlayers().getPlayers().get(0).setPlayerTextName(phaseView.player1Name);
@@ -862,13 +861,13 @@ public class WindowMain implements ActionListener{
 												int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
 														JOptionPane.QUESTION_MESSAGE);
 												if (result == JOptionPane.CANCEL_OPTION) {
-													moveNum = 1; // if they cancel it will just move one
+													moveNum = 1; 
 												} else {
 													moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 												}
 												moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 												gameState.getCountry2().addInfrantry(moveNum);
-												gameState.getCountry1().removeTroops(moveNum); // removing troops from the origin country
+												gameState.getCountry1().removeTroops(moveNum); 
 												lp.addLog(gameState.getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
 												
 												if(gameState.getCurrPlayer().checkWinGame()){

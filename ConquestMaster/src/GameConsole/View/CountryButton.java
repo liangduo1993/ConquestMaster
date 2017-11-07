@@ -32,7 +32,7 @@ public class CountryButton{
 		c.setButton(this);
 		this.name = name;
 		
-		this.label = new JLabel(1 + ""); // defining the label that will say the number of troops
+		this.label = new JLabel(1 + ""); 
 		this.label.setHorizontalAlignment(SwingConstants.CENTER);
 		this.label.setForeground(Color.RED);
 		this.label.setFont(new Font("Dialog", Font.PLAIN, 20));

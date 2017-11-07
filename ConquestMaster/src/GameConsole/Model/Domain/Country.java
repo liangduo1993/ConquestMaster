@@ -35,7 +35,7 @@ public class Country {
 	 * @param name country name with String type
 	 */
 	public Country(String name) {
-		this.continent = null; // will set this in the addCountry() method
+		this.continent = null; 
 		this.player = null;
 		this.name = name;
 		this.xLoc = 0;
@@ -117,8 +117,8 @@ public class Country {
 	 * @param numToRemove the number of the troops that want to be removed from the continent
 	 */
 	public void removeTroops(int numToRemove) {
-		for (int i = 0; i < numToRemove; i++) { // removing the troops from the
-												// attacking country
+		for (int i = 0; i < numToRemove; i++) { 
+												
 			this.troops.remove(this.troops.size() - 1);
 		}
 	}
