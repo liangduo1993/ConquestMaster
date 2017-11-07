@@ -8,6 +8,7 @@ import GameConsole.Model.Army.Troop;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
 
 /**

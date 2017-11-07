@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import GameConsole.Core.GameState;
+import GameConsole.Core.WindowMain;
 import GameConsole.Model.Player.Player;
 
 /**

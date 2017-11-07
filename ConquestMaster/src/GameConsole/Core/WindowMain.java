@@ -1,4 +1,4 @@
-package GameConsole.View;
+package GameConsole.Core;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -33,8 +33,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
-import GameConsole.Core.GameState;
 import GameConsole.Model.Player.Player;
+import GameConsole.View.CardExchangeView;
+import GameConsole.View.ConquestRatio;
+import GameConsole.View.CountryButton;
+import GameConsole.View.DomiInfoPanel;
+import GameConsole.View.LogPanel;
+import GameConsole.View.MapDisplayer;
+import GameConsole.View.PhaseView;
 
 /**
  * This class is to display the interface of the game where the player can

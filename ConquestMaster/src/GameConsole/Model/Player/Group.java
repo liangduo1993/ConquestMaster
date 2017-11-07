@@ -1,8 +1,8 @@
-package GameConsole.Core;
+package GameConsole.Model.Player;
 
 import java.util.ArrayList;
 
-import GameConsole.Model.Player.Player;
+import GameConsole.Core.World;
 
 /**
  * This class handles the list of players and manages to perform actions

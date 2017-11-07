@@ -2,8 +2,6 @@ package GameConsole.Core;
 
 
 import javax.swing.JFrame;
-
-import GameConsole.View.WindowMain;
 /**
  *  The main entrance of the application
  *

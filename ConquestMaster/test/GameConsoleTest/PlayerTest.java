@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import GameConsole.Core.GameState;
-import GameConsole.Core.Group;
 import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
 
 /**

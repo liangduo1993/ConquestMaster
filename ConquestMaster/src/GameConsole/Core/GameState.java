@@ -4,9 +4,9 @@ import java.util.Observable;
 
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
 import GameConsole.View.LogPanel;
-import GameConsole.View.WindowMain;
 
 /**
  * Set up basic states of the game Current phase, current player

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import GameConsole.Core.Group;
+import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
 
 /**
