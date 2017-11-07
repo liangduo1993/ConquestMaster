@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -38,17 +37,16 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import GameConsole.Core.GameState;
-import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
 /**
  * This class is to display the interface of the game where the player can
  * visually perform game operations.
  */
-public class WindowMain implements ActionListener, Observer {
+public class WindowMain implements ActionListener, Observer{
 	private JFrame frame1;
 	private JPanel cards; // card lay out panel for whole frame
-	private JPanel cardPanel;
+	public CardExchangeObserver cardPanel;
 	private CardLayout cardLayout;
 	private JPanel mapPanel;
 	private DomiInfoPanel domiInfoPanel;
@@ -62,7 +60,8 @@ public class WindowMain implements ActionListener, Observer {
 	private JPanel arrow0, arrow1, arrow2;
 	private JLabel moveStageLabel, attackStageLabel, obtainTroopLabel;
 	private JPanel unitDisplay;
-
+	
+	
 	private GameState gameState;
 	private JFileChooser fc;
 	private int troopsLeft;
@@ -781,11 +780,11 @@ public class WindowMain implements ActionListener, Observer {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
-		cardPanel = new JPanel();
-		mapPanel.add(cardPanel);
-		cardPanel.setBounds(100, buttonImage.getHeight() + 170 - 10, 900, 40);
-		cardPanel.setBackground(Color.LIGHT_GRAY);
-		cardPanel.setLayout(null);
+		cardPanel = new CardExchangeObserver(this.gameState);
+		//mapPanel.add(cardPanel);
+//		cardPanel.setBounds(100, buttonImage.getHeight() + 170 - 10, 900, 40);
+//		cardPanel.setBackground(Color.LIGHT_GRAY);
+//		cardPanel.setLayout(null);
 
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
@@ -817,17 +816,20 @@ public class WindowMain implements ActionListener, Observer {
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
 
-							cardViewUpdate();
+//							cardPanel = new CardExchangeObserver(gameState);
+//							gameState.getCurrPlayer().addObserver(cardPanel);
+							
+							//cardViewUpdate();
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
-							cardViewUpdate();
+							//cardViewUpdate();
 						}
 						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
 							gameState.setCurrPhase(2);
 						}
 						if (gameState.getCurrPhase() == 2) {
 							gameState.getCurrPlayer().giveCards();
-							cardViewUpdate();
+							//cardViewUpdate();
 						}
 					}
 				}
@@ -875,6 +877,8 @@ public class WindowMain implements ActionListener, Observer {
 						}
 						if (isFinished) {
 							gameState.setFirstRound(gameState.getFirstRound() + 1);
+//							cardPanel = new CardExchangeObserver(gameState);
+//							gameState.getCurrPlayer().addObserver(cardPanel);
 							lp.addLog("It is the Reinforcement phase!");
 
 							System.out.println("round +1 !!!");
@@ -1104,11 +1108,13 @@ public class WindowMain implements ActionListener, Observer {
 		if (gameState.getAllPlayers().getPlayers().size() > 0) {
 			for (Player p : gameState.getAllPlayers().getPlayers()) {
 				p.addObserver(domiInfoPanel);
-				p.addObserver(this);
+				//p.addObserver(this);
+				p.addObserver(cardPanel);
 				p.addObserver(cRatioPanel);
 			}
 		}
 		gameState.addObserver(this);
+		//gameState.addObserver(cardPanel);
 	}
 
 	/**
@@ -1121,43 +1127,11 @@ public class WindowMain implements ActionListener, Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof Player) {
-			cardViewUpdate();
-		} else if (o instanceof GameState) {
 			phaseViewUpdate();
-		}
-		System.out.println("state changed!");
 
 	}
 
-	/**
-	 * Method to update the hand cards view
-	 */
-	public void cardViewUpdate() {
-		Player currentPlayer = gameState.getCurrPlayer();
-		if (currentPlayer != null) {
-			ArrayList<Card> onHand = currentPlayer.getOnHand();
-			cardPanel.removeAll();
-			for (int i = 0; i < onHand.size(); i++) {
-				JLabel card = new JLabel();
-				switch (onHand.get(i).getType()) {
-				case 0:
-					card.setIcon(new ImageIcon("resources/CardImages/type1.png"));
-					break;
-				case 1:
-					card.setIcon(new ImageIcon("resources/CardImages/type2.png"));
-					break;
-				case 2:
-					card.setIcon(new ImageIcon("resources/CardImages/type3.png"));
-					break;
-				}
-				card.setBounds(80 * i - 40 + 40, 0, 60, 40);
-				cardPanel.add(card);
-			}
-			System.out.println("there's " + cardPanel.getComponentCount() + " cards!");
-			cardPanel.repaint();
-		}
-	}
+	
 
 	/**
 	 * Method to update the phase view

@@ -5,6 +5,7 @@ import java.util.Observable;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.View.CardExchangeObserver;
 import GameConsole.View.LogPanel;
 import GameConsole.View.WindowMain;
 /**
@@ -145,6 +146,7 @@ public class GameState extends Observable{
 		this.currPhase = p;
 		setChanged();
 		notifyObservers();
+		
 	}
 
 	/**

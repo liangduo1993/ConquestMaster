@@ -491,6 +491,8 @@ public class Player extends Observable {
 	 * @return the number of the got armies
 	 */
 	public int getBonus() {
+		setChanged();
+		notifyObservers("card");
 		int firstRound = game.getFirstRound();
 		if (firstRound == 1) {
 			if (game.getAllPlayers().getPlayers().size() == 2) {
@@ -621,7 +623,7 @@ public class Player extends Observable {
 						}
 						System.out.println("after change===========");
 						setChanged();
-						notifyObservers();
+						notifyObservers("card");
 					}
 				} else
 					break;
