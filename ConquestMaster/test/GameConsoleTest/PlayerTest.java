@@ -31,15 +31,14 @@ public class PlayerTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		// set gamestate
-		// set group
+
 		group = new Group();
 		ArrayList<Player> players = new ArrayList<Player>();
 
 		state = new GameState(null, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
 
-		// set player
+
 		player = new Player("testPlayer", null, state);
 		ArrayList<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < 14; ++i) {
@@ -47,7 +46,7 @@ public class PlayerTest {
 		}
 		player.setCountries(temp);
 		
-		// set player2
+
 		player2 = new Player("testPlayerDefender", null, state);
 		ArrayList<Country> temp2 = new ArrayList<Country>();
 		for (int i = 0; i < 2; ++i) {
@@ -55,7 +54,7 @@ public class PlayerTest {
 		}
 		player2.setCountries(temp2);
 		
-		// set player3
+	
 		player3 = new Player("testPlayer3", null, state);
 		ArrayList<Country> temp3 = new ArrayList<Country>();
 		for (int i = 0; i < 2; ++i) {

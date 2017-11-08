@@ -16,15 +16,15 @@ import MapEditorTest.TablePanelTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
-		CountryTest.class, //
-		GroupTest.class, //
-		PlayerTest.class,//
-		GameStateTest.class,//
-		CardsTest.class,//
-		MapLoaderTest.class,//
-		ConquestMapTest.class, //
-		MyStringUtilTest.class, //
-		TablePanelTest.class,//
+		CountryTest.class,
+		GroupTest.class, 
+		PlayerTest.class,
+		GameStateTest.class,
+		CardsTest.class,
+		MapLoaderTest.class,
+		ConquestMapTest.class, 
+		MyStringUtilTest.class, 
+		TablePanelTest.class,
 		
 })
 public class SuiteTest {
