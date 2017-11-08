@@ -489,11 +489,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		loadContinents(in);
 		loadTerritories(in);
 		changeState();
-		//
-		// if (!validityCheck()) {
-		// clear();
-		// throw new RuntimeException("didn't pass the validation!");
-		// }
 	}
 
 	/**
