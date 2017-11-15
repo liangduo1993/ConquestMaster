@@ -118,13 +118,13 @@ public class SoloGamePanel {
 
 		JComboBox comboBox_8 = new JComboBox();
 		comboBox_8.setModel(
-				new DefaultComboBoxModel(new String[] { "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_8.setBounds(211, 126, 102, 21);
 		panel.add(comboBox_8);
 
 		JComboBox comboBox_9 = new JComboBox();
 		comboBox_9.setModel(
-				new DefaultComboBoxModel(new String[] { "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_9.setBounds(501, 126, 102, 21);
 		panel.add(comboBox_9);
 
