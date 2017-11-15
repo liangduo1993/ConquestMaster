@@ -138,7 +138,8 @@ public class SoloGamePanel {
 		panel.add(CancelButt);
 		
 		JLabel lblNewLabel_1 = new JLabel("Games Number");
-		lblNewLabel_1.setBounds(91, 185, 75, 15);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(70, 185, 102, 15);
 		panel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
