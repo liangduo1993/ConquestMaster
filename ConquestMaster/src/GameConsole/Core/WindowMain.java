@@ -41,7 +41,6 @@ import GameConsole.View.DomiInfoPanel;
 import GameConsole.View.LogPanel;
 import GameConsole.View.MapDisplayer;
 import GameConsole.View.PhaseView;
-import MapEditor.Core.FileChooser;
 
 /**
  * This class is to display the interface of the game where the player can
@@ -661,7 +660,7 @@ public class WindowMain implements ActionListener {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
-		cardPanel = new CardExchangeView(this.gameState);
+		//cardPanel = new CardExchangeView(this.gameState);
 
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
@@ -687,6 +686,7 @@ public class WindowMain implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(gameState.getCurrPhase() + "::" + gameState.getFirstRound());
 				if (troopsLeft == 0) {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 					if (gameState.getFirstRound() > 1) {
@@ -703,6 +703,7 @@ public class WindowMain implements ActionListener {
 							numberOfTroops.setText(Integer.toString(troopsLeft));
 						}
 						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
+							lp.addLog("Attack phase automatically skips!");
 							gameState.setCurrPhase(2);
 						}
 						if (gameState.getCurrPhase() == 2) {
@@ -883,6 +884,7 @@ public class WindowMain implements ActionListener {
 
 									if (!gameState.getCurrPlayer().checkIfCanAttack()) {
 										nextStage.doClick();
+										lp.addLog("Attack phase is automatically skipped!");
 									}
 									gameState.updateCountryLabels();
 									gameState.setCountry1(null);
@@ -981,6 +983,7 @@ public class WindowMain implements ActionListener {
 	 * Method to connect the observer object to the model object
 	 */
 	public void registerObserver() {
+		cardPanel = new CardExchangeView(this.gameState);
 		if (gameState.getAllPlayers().getPlayers().size() > 0) {
 			for (Player p : gameState.getAllPlayers().getPlayers()) {
 				p.addObserver(domiInfoPanel);
@@ -1013,7 +1016,7 @@ public class WindowMain implements ActionListener {
 			
 			registerObserver();
 			bindButtons();
-			bindNextStage();
+			//bindNextStage();
 			gameState.changed();
 			
 			
