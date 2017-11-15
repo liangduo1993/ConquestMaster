@@ -54,7 +54,6 @@ public class WindowMain {
 	private CardLayout cardLayout;
 	public JPanel mapPanel, Country1Display, Country2Display;
 	private DomiInfoPanel domiInfoPanel;
-	private JButton openButton;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
 	private JLabel playerWonLabell;
 	private ConquestRatio cRatioPanel;
@@ -70,14 +69,14 @@ public class WindowMain {
 	private JFileChooser fc;
 	public int troopsLeft;
 
-	private JPanel mainScreen,playerSelect,resultsScreen;
+	private JPanel mainScreen, playerSelect, resultsScreen;
+
 	/**
 	 * Constructor method
 	 * 
 	 * @throws IOException
 	 */
 	public WindowMain() throws IOException {
-		//this.openMapFile();
 		init();
 	}
 
@@ -94,18 +93,17 @@ public class WindowMain {
 		cards.setBounds(100, 100, 1200, 900);
 
 		cards.setVisible(true);
-		 mainScreen = new JPanel();
-		 playerSelect = new JPanel();
+		mainScreen = new JPanel();
+		playerSelect = new JPanel();
 		mapPanel = new JPanel();
 		mapPanel.setBackground(Color.LIGHT_GRAY);
 
-		 resultsScreen = new JPanel();
+		resultsScreen = new JPanel();
 		cards.add(mainScreen, "Main Screen");
 		cards.add(playerSelect, "Player Selection");
 		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
-		
 
 		mainScreen.setBackground(Color.LIGHT_GRAY);
 		mainScreen.setLayout(null);
@@ -115,7 +113,6 @@ public class WindowMain {
 		singleGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//cardLayout.show(cards, "Player Selection");
 				openMapFile();
 			}
 		});
@@ -124,7 +121,7 @@ public class WindowMain {
 		tournamentGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//cardLayout.show(cards, "Player Selection");
+				// cardLayout.show(cards, "Player Selection");
 			}
 		});
 		tournamentGame.setBackground(new Color(255, 0, 0));
@@ -137,9 +134,7 @@ public class WindowMain {
 		tournament.setHorizontalAlignment(SwingConstants.CENTER);
 		tournament.setBounds(0, 0, 317, 77);
 		tournamentGame.add(tournament);
-		
-		
-		
+
 		JPanel exitPanel = new JPanel();
 		exitPanel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -173,72 +168,31 @@ public class WindowMain {
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
 		label.setIcon(new ImageIcon("resources/GimpFiles/StartGame.png"));
-		
+
 	}
 
 	/**
 	 * To open a map file in the main window
 	 */
 	public void openMapFile() {
-		
 		fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
-//		openButton = new JButton("Open Map", null);
-//		openButton.addActionListener(this);
-//		openButton.setBounds(400, 400, 250, 100);
-//
-//		this.frame1.add(openButton, BorderLayout.PAGE_START);
-//	
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
 			String path = file.getAbsolutePath();
-			//this.frame1.remove(openButton);
 			try {
 				gameState = new GameState(this, path);
 				cardLayout.show(cards, "Player Selection");
 				initialize();
-				//openButton.setVisible(false);
-				//initialize();
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
 				e1.printStackTrace();
-				//this.frame1.dispose();
-				//openMapFile();
 				cardLayout.show(cards, "Main Screen");
 			}
-			
+
 		}
 	}
 
-//	/**
-//	 * Method to listen for action event on openButton
-//	 * 
-//	 * @param e
-//	 *            a object allows to access the properties of the ActionEvent
-//	 *            with ActionEvent type
-//	 */
-//	public void actionPerformed(ActionEvent e) {
-//		if (e.getSource() == openButton) {
-//			int returnVal = fc.showOpenDialog(this.frame1);
-//			if (returnVal == JFileChooser.APPROVE_OPTION) {
-//				File file = fc.getSelectedFile();
-//				String path = file.getAbsolutePath();
-//				this.frame1.remove(openButton);
-//				try {
-//					gameState = new GameState(this, path);
-//					initialize();
-//					openButton.setVisible(false);
-//					cardLayout.show(cards, "Player Selection");
-//					initialize();
-//				} catch (Exception e1) {
-//					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
-//					e1.printStackTrace();
-//					this.frame1.dispose();
-//					openMapFile();
-//				}
-//			}
-//		}
-//	}
 
 	/**
 	 * Method to initial the start game interface, the player selection window
@@ -247,7 +201,6 @@ public class WindowMain {
 	 * @throws IOException
 	 */
 	private void initialize() throws IOException {
-		
 		phaseView = new PhaseView(gameState, this);
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);
@@ -536,7 +489,6 @@ public class WindowMain {
 				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 			}
 
-
 		});
 
 		startGamePanel.setLayout(null);
@@ -710,7 +662,7 @@ public class WindowMain {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
-		//cardPanel = new CardExchangeView(this.gameState);
+		// cardPanel = new CardExchangeView(this.gameState);
 
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
@@ -1054,30 +1006,24 @@ public class WindowMain {
 		try {
 			GameLoader gl = new GameLoader(this, path.getAbsolutePath());
 			this.gameState = gl.getGameState();
-		
-			
-			
-			
 
 			mapPanel.removeAll();
 			mapDisplayer = new MapDisplayer(mapPanel, gameState.getWorld());
 			buttonImage = mapDisplayer.getButtonImage();
 			addCompOnMapPanel();
-			
-			
+
 			registerObserver();
 			bindButtons();
-			//bindNextStage();
+			// bindNextStage();
 			gameState.changed();
-			
-			
+
 			gameState.updateCountryLabels();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-	
-	public void saveGame(){
+
+	public void saveGame() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
 		File path = fc.getSelectedFile();
@@ -1113,23 +1059,23 @@ public class WindowMain {
 		mapPanel.add(lp);
 		lp.log.setText("");
 		addMenu();
-		
+
 		domiInfoPanel = new DomiInfoPanel(gameState);
 		domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 		mainScroll.setViewportView(domiInfoPanel);
 		mapPanel.add(mainScroll);
-		
+
 		phaseView = new PhaseView(gameState, this);
 		mapPanel.add(phaseView.phasePanel);
 		mapPanel.add(phaseView.namePanel);
 		numberOfTroops.setText("" + troopsLeft);
-		
+
 		mapPanel.add(unitDisplay);
 		mapPanel.add(Country1Display);
 		mapPanel.add(Country2Display);
 		mapPanel.add(nextStage);
 		readjustLoc();
-		
+
 		System.out.println("!!!!!!");
 		System.out.println(gameState.getAllPlayers().getPlayers().size());
 		System.out.println("!!!!!!");
@@ -1160,11 +1106,9 @@ public class WindowMain {
 				phaseView.player5Name.setVisible(true);
 			}
 		}
-		
-		
+
 	}
-	
-	
+
 	public void addMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, frame1.getWidth(), 30);
@@ -1193,7 +1137,7 @@ public class WindowMain {
 		mnNewMenu.add(exitMenuItem);
 		mnNewMenu.add(saveMenuItem);
 		mnNewMenu.add(LoadMenuItem);
-		
+
 	}
 
 }
