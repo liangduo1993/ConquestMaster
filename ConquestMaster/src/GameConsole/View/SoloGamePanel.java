@@ -208,7 +208,7 @@ public class SoloGamePanel {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc2.getSelectedFile();
 					String path = file.getAbsolutePath();
-					M1Label.setText(path);
+					M2Label.setText(path);
 			}
 			}
 		});
@@ -223,7 +223,7 @@ public class SoloGamePanel {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc3.getSelectedFile();
 					String path = file.getAbsolutePath();
-					M1Label.setText(path);
+					M3Label.setText(path);
 			}
 			}
 		});
@@ -238,7 +238,7 @@ public class SoloGamePanel {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc4.getSelectedFile();
 					String path = file.getAbsolutePath();
-					M1Label.setText(path);
+					M4Label.setText(path);
 				}
 			}
 		});
@@ -253,7 +253,7 @@ public class SoloGamePanel {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc5.getSelectedFile();
 					String path = file.getAbsolutePath();
-					M1Label.setText(path);
+					M5Label.setText(path);
 				}
 			}
 		});
