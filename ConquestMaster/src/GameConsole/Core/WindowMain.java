@@ -46,7 +46,7 @@ import GameConsole.View.PhaseView;
  * This class is to display the interface of the game where the player can
  * visually perform game operations.
  */
-public class WindowMain implements ActionListener {
+public class WindowMain {
 	private JFrame frame1;
 	private JPanel cards;
 	private CardExchangeView cardPanel;
@@ -70,101 +70,76 @@ public class WindowMain implements ActionListener {
 	private JFileChooser fc;
 	public int troopsLeft;
 
+	private JPanel mainScreen,playerSelect,resultsScreen;
 	/**
 	 * Constructor method
 	 * 
 	 * @throws IOException
 	 */
 	public WindowMain() throws IOException {
-		this.openMapFile();
-
+		//this.openMapFile();
+		init();
 	}
 
-	/**
-	 * To open a map file in the main window
-	 */
-	public void openMapFile() {
+	private void init() {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
+		frame1.setVisible(true);
 		frame1.setTitle("Risk - The Game of Global Domination");
 		frame1.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame1.setBounds(100, 100, 1200, 900);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.getContentPane().setLayout(new CardLayout(0, 0));
-		fc = new JFileChooser();
-		openButton = new JButton("Open Map", null);
-		openButton.addActionListener(this);
-		openButton.setBounds(400, 400, 250, 100);
-
-		this.frame1.add(openButton, BorderLayout.PAGE_START);
-		frame1.setVisible(true);
-
-	}
-
-	/**
-	 * Method to listen for action event on openButton
-	 * 
-	 * @param e
-	 *            a object allows to access the properties of the ActionEvent
-	 *            with ActionEvent type
-	 */
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == openButton) {
-			int returnVal = fc.showOpenDialog(this.frame1);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				String path = file.getAbsolutePath();
-				this.frame1.remove(openButton);
-				try {
-					gameState = new GameState(this, path);
-					initialize();
-					openButton.setVisible(false);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
-					e1.printStackTrace();
-					this.frame1.dispose();
-					openMapFile();
-				}
-			}
-		}
-	}
-
-	/**
-	 * Method to initial the start game interface, the player selection window
-	 * interface, and the game play interface
-	 * 
-	 * @throws IOException
-	 */
-	private void initialize() throws IOException {
 		cards = new JPanel(new CardLayout());
 		cards.setBounds(100, 100, 1200, 900);
 
 		cards.setVisible(true);
-		JPanel mainScreen = new JPanel();
-		JPanel playerSelect = new JPanel();
+		 mainScreen = new JPanel();
+		 playerSelect = new JPanel();
 		mapPanel = new JPanel();
 		mapPanel.setBackground(Color.LIGHT_GRAY);
 
-		JPanel resultsScreen = new JPanel();
+		 resultsScreen = new JPanel();
 		cards.add(mainScreen, "Main Screen");
 		cards.add(playerSelect, "Player Selection");
 		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
-		phaseView = new PhaseView(gameState, this);
+		
 
 		mainScreen.setBackground(Color.LIGHT_GRAY);
 		mainScreen.setLayout(null);
 
 		this.cardLayout = (CardLayout) cards.getLayout();
-		JPanel startGame = new JPanel();
-		startGame.addMouseListener(new MouseAdapter() {
+		JPanel singleGame = new JPanel();
+		singleGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cardLayout.show(cards, "Player Selection");
+				//cardLayout.show(cards, "Player Selection");
+				openMapFile();
 			}
 		});
 
+		JPanel tournamentGame = new JPanel();
+		tournamentGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//cardLayout.show(cards, "Player Selection");
+			}
+		});
+		tournamentGame.setBackground(new Color(255, 0, 0));
+		tournamentGame.setBounds(451, 680 + 50, 317, 77);
+		mainScreen.add(tournamentGame);
+		tournamentGame.setLayout(null);
+		JLabel tournament = new JLabel("Tournament Mode");
+		tournament.setForeground(new Color(255, 255, 255));
+		tournament.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		tournament.setHorizontalAlignment(SwingConstants.CENTER);
+		tournament.setBounds(0, 0, 317, 77);
+		tournamentGame.add(tournament);
+		
+		
+		
 		JPanel exitPanel = new JPanel();
 		exitPanel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -182,23 +157,98 @@ public class WindowMain implements ActionListener {
 		exitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		exitLabel.setBounds(0, 0, 50, 30);
 		exitPanel.add(exitLabel);
-		startGame.setBackground(new Color(255, 0, 0));
-		startGame.setBounds(451, 680, 317, 77);
-		mainScreen.add(startGame);
-		startGame.setLayout(null);
+		singleGame.setBackground(new Color(255, 0, 0));
+		singleGame.setBounds(451, 680 - 50, 317, 77);
+		mainScreen.add(singleGame);
+		singleGame.setLayout(null);
 
-		JLabel labelStart = new JLabel("Start Game");
+		JLabel labelStart = new JLabel("Single Game Mode");
 		labelStart.setForeground(new Color(255, 255, 255));
-		labelStart.setFont(new Font("Tahoma", Font.PLAIN, 60));
+		labelStart.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		labelStart.setHorizontalAlignment(SwingConstants.CENTER);
 		labelStart.setBounds(0, 0, 317, 77);
-		startGame.add(labelStart);
+		singleGame.add(labelStart);
 
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 1194, 860);
 		mainScreen.add(label);
 		label.setIcon(new ImageIcon("resources/GimpFiles/StartGame.png"));
+		
+	}
 
+	/**
+	 * To open a map file in the main window
+	 */
+	public void openMapFile() {
+		
+		fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(null);
+//		openButton = new JButton("Open Map", null);
+//		openButton.addActionListener(this);
+//		openButton.setBounds(400, 400, 250, 100);
+//
+//		this.frame1.add(openButton, BorderLayout.PAGE_START);
+//	
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			String path = file.getAbsolutePath();
+			//this.frame1.remove(openButton);
+			try {
+				gameState = new GameState(this, path);
+				cardLayout.show(cards, "Player Selection");
+				initialize();
+				//openButton.setVisible(false);
+				//initialize();
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
+				e1.printStackTrace();
+				//this.frame1.dispose();
+				//openMapFile();
+				cardLayout.show(cards, "Main Screen");
+			}
+			
+		}
+	}
+
+//	/**
+//	 * Method to listen for action event on openButton
+//	 * 
+//	 * @param e
+//	 *            a object allows to access the properties of the ActionEvent
+//	 *            with ActionEvent type
+//	 */
+//	public void actionPerformed(ActionEvent e) {
+//		if (e.getSource() == openButton) {
+//			int returnVal = fc.showOpenDialog(this.frame1);
+//			if (returnVal == JFileChooser.APPROVE_OPTION) {
+//				File file = fc.getSelectedFile();
+//				String path = file.getAbsolutePath();
+//				this.frame1.remove(openButton);
+//				try {
+//					gameState = new GameState(this, path);
+//					initialize();
+//					openButton.setVisible(false);
+//					cardLayout.show(cards, "Player Selection");
+//					initialize();
+//				} catch (Exception e1) {
+//					JOptionPane.showMessageDialog(this.frame1, "The map applies warn & the map is not valid!");
+//					e1.printStackTrace();
+//					this.frame1.dispose();
+//					openMapFile();
+//				}
+//			}
+//		}
+//	}
+
+	/**
+	 * Method to initial the start game interface, the player selection window
+	 * interface, and the game play interface
+	 * 
+	 * @throws IOException
+	 */
+	private void initialize() throws IOException {
+		
+		phaseView = new PhaseView(gameState, this);
 		Scrollbar scrollbar = new Scrollbar();
 		scrollbar.setBounds(1168, 102, 26, 200);
 		mainScreen.add(scrollbar);
