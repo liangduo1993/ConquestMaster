@@ -70,8 +70,8 @@ public class FileChooser {
 			this.map.load(MyStringUtil.getMapPath(path));
 			LogPanel.addLog("Map is successfully loaded!");
 		} catch (Exception e) {
-			LogPanel.addLog("Loading map failed!");
-			e.printStackTrace();
+			LogPanel.addLog(e.getMessage());
+			//e.printStackTrace();
 		}
 
 	}

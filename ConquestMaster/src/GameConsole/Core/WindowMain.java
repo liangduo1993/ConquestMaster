@@ -41,6 +41,7 @@ import GameConsole.View.DomiInfoPanel;
 import GameConsole.View.LogPanel;
 import GameConsole.View.MapDisplayer;
 import GameConsole.View.PhaseView;
+import MapEditor.Core.FileChooser;
 
 /**
  * This class is to display the interface of the game where the player can
@@ -413,13 +414,41 @@ public class WindowMain implements ActionListener{
 				mapPanel.add(menuBar);
 				JMenu mnNewMenu = new JMenu("Game");
 				menuBar.add(mnNewMenu);
-				JMenuItem mntmNewMenuItem = new JMenuItem("Exit");
-				mntmNewMenuItem.addActionListener(new ActionListener() {
+				JMenuItem exitMenuItem = new JMenuItem("Exit");
+				JMenuItem saveMenuItem = new JMenuItem("Save");
+				saveMenuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JFileChooser fc = new JFileChooser();
+						int returnVal = fc.showOpenDialog(null);
+						File path = fc.getSelectedFile();
+						
+						System.out.println(path.getAbsolutePath());
+						
+						GameSaver gs = new GameSaver(gameState);
+						try {
+							gs.save(path.getAbsolutePath());
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						
+						
+					}
+				});
+				JMenuItem LoadMenuItem = new JMenuItem("Load");
+				LoadMenuItem.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						loadGame();
+						
+					}
+				});
+				exitMenuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						System.exit(0);
 					}
 				});
-				mnNewMenu.add(mntmNewMenuItem);
+				mnNewMenu.add(exitMenuItem);
+				mnNewMenu.add(saveMenuItem);
+				mnNewMenu.add(LoadMenuItem);
 
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
@@ -989,5 +1018,22 @@ public class WindowMain implements ActionListener{
 			}
 		}
 		gameState.addObserver(phaseView);
+	}
+	
+	
+	public void loadGame(){
+		
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(null);
+		File path = fc.getSelectedFile();
+		
+		System.out.println(path.getAbsolutePath());
+		
+		try {
+			GameLoader gl = new GameLoader(this, path.getAbsolutePath());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 	}
 }

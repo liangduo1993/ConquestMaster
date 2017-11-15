@@ -231,6 +231,16 @@ public class Player extends Observable {
 		this.isConquered = _isCQ;
 	}
 
+	
+
+	
+
+	public boolean isConquered() {
+		return isConquered;
+	}
+
+
+
 	/**
 	 * To get the game state
 	 * 
@@ -474,7 +484,7 @@ public class Player extends Observable {
 	 */
 	public void giveCards() {
 		if (this.isConquered == true) {
-			Card c = new Card(this);
+			Card c = new Card();
 			c.addRandomTypeCard();
 			this.onhand.add(c);
 			lp.addLog(this.name + " gets a card!");

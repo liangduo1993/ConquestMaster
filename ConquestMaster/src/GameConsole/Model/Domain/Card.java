@@ -10,16 +10,14 @@ import GameConsole.Model.Player.Player;
 public class Card {
 
 	private int type; 
-	private Player player;
 
-	/**
-	 * The constructor of the class
-	 * @param player The owner of the card
-	 */
-	public Card(Player player) {
-		this.player = player;
+
+	public Card(){}
+	
+	public Card(int type){
+		this.type = type;
 	}
-
+	
 	/**
 	 * The override toString function
 	 */

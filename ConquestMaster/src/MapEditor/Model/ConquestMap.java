@@ -488,7 +488,16 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		loadMapSection(in);
 		loadContinents(in);
 		loadTerritories(in);
-		changeState();
+
+		ArrayList<String> errMsg = new ArrayList<>();
+		if ((errMsg = loadingCheck()) == null)
+			changeState();
+		else {
+			for (String string : errMsg) {
+				throw new RuntimeException(string);
+			}
+		}
+
 	}
 
 	/**
@@ -898,29 +907,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 */
 	public boolean validityCheck() {
 		ArrayList<String> probs = new ArrayList<>();
-		if ((this.territories == null) || (this.territories.isEmpty())) {
-			probs.add("Map contains no territories");
-		}
-		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
-			probs.add("Map image is not specified");
-		} else if (getMapDirectory() != null) {
-			if (isDisparateImageFileDirectory()) {
-				probs.add("Map and image files are not located in the same directory");
-			}
-		}
-		if (hasOneWayLinks()) {
-			probs.add("");
-		}
-
-		if (this.territories.size() > 0 && !eachTerReachable()) {
-			probs.add("There's some teris cannot reach to every other territories!");
-		}
-
-		for (Continent c : this.continents) {
-			if (!eachTerInContReachable(c)) {
-				probs.add(c.getName() + " territories cannot reach to every other territories!");
-			}
-		}
+		probs = loadingCheck();
 
 		if (probs.isEmpty()) {
 			return true;
@@ -931,6 +918,52 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		}
 
 		return false;
+	}
+
+	/**
+	 * check map parameters, if a territory has links. check if a map file has a
+	 * matched image file. check if a map file and its matched image file are in
+	 * the same path. check the territory link information. check if the
+	 * territory list is not empty and it can not reach to other territories.
+	 * 
+	 * @return false if also the check failed
+	 * @see eachTerReachable()
+	 */
+	public ArrayList<String> loadingCheck() {
+		ArrayList<String> probs = new ArrayList<>();
+		if ((this.territories == null) || (this.territories.isEmpty())) {
+			probs.add("Map contains no territories");
+		}
+//		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
+//			probs.add("Map image is not specified");
+//		} else if (getMapDirectory() != null) {
+//			if (isDisparateImageFileDirectory()) {
+//				probs.add("Map and image files are not located in the same directory");
+//			}
+//		}
+//		if (hasOneWayLinks()) {
+//			probs.add("");
+//		}
+
+		if (this.territories.size() > 0 && !eachTerReachable()) {
+			probs.add("There's some teris cannot reach to every other territories!");
+		}
+
+		for (Continent c : this.continents) {
+			if (!eachTerInContReachable(c)) {
+				probs.add(c.getName() + " inside the continent, not each ter can reach to others!");
+			}
+		}
+
+		if (probs.isEmpty()) {
+			return null;
+		}
+
+		for (String string : probs) {
+			LogPanel.addLog(string);
+		}
+
+		return probs;
 	}
 
 	/**
