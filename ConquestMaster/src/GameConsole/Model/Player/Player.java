@@ -710,4 +710,9 @@ public class Player extends Observable {
 	public void setPlayerTextName(JFormattedTextField playerTextName) {
 		this.playerTextName = playerTextName;
 	}
+
+	public void changed() {
+		setChanged();
+		notifyObservers();
+	}
 }

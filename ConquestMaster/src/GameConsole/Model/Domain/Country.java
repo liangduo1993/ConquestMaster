@@ -63,7 +63,7 @@ public class Country {
 				nameList.add(c.getName());
 			}
 		}
-		return "Country [continent=" + continent.getName() + ", name=" + name + ", borderingCountries=" + nameList
+		return "Country ["+ "player=" +player.getName()+" continent=" + continent.getName() + ", name=" + name + ", borderingCountries=" + nameList
 				+ "]";
 	}
 

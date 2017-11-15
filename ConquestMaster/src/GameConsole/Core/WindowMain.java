@@ -47,13 +47,13 @@ import MapEditor.Core.FileChooser;
  * This class is to display the interface of the game where the player can
  * visually perform game operations.
  */
-public class WindowMain implements ActionListener{
+public class WindowMain implements ActionListener {
 	private JFrame frame1;
-	private JPanel cards; 
+	private JPanel cards;
 	private CardExchangeView cardPanel;
 	private PhaseView phaseView;
 	private CardLayout cardLayout;
-	private JPanel mapPanel;
+	public JPanel mapPanel, Country1Display, Country2Display;
 	private DomiInfoPanel domiInfoPanel;
 	private JButton openButton;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
@@ -61,10 +61,12 @@ public class WindowMain implements ActionListener{
 	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
 	public BufferedImage buttonImage;
-	private JButton nextStage;
+	private JButton nextStage, cancelCountryButton;
 	public JPanel unitDisplay;
-	private JLabel numberOfTroops;
-	
+	private JLabel numberOfTroops, country1, country2;
+	private JScrollPane mainScroll;
+	public MapDisplayer mapDisplayer;
+
 	private GameState gameState;
 	private JFileChooser fc;
 	public int troopsLeft;
@@ -104,8 +106,8 @@ public class WindowMain implements ActionListener{
 	 * Method to listen for action event on openButton
 	 * 
 	 * @param e
-	 *            a object allows to access the properties of the ActionEvent with
-	 *            ActionEvent type
+	 *            a object allows to access the properties of the ActionEvent
+	 *            with ActionEvent type
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == openButton) {
@@ -151,7 +153,7 @@ public class WindowMain implements ActionListener{
 		cards.add(resultsScreen, "Results");
 		frame1.getContentPane().add(cards);
 		phaseView = new PhaseView(gameState, this);
-		
+
 		mainScreen.setBackground(Color.LIGHT_GRAY);
 		mainScreen.setLayout(null);
 
@@ -372,16 +374,14 @@ public class WindowMain implements ActionListener{
 		cancelPanel.add(cancelLabel);
 		JPanel startGamePanel = new JPanel();
 
-		
-		
-		JLabel country1 = new JLabel((String) null);
-		JLabel country2 = new JLabel((String) null);
+		country1 = new JLabel((String) null);
+		country2 = new JLabel((String) null);
 
-		MapDisplayer g = new MapDisplayer(mapPanel, gameState.getWorld());
-		this.buttonImage = g.getButtonImage();
-		System.out.println("button nums: " + g.getButtons().size());
+		mapDisplayer = new MapDisplayer(mapPanel, gameState.getWorld());
+		this.buttonImage = mapDisplayer.getButtonImage();
+		System.out.println("button nums: " + mapDisplayer.getButtons().size());
 
-		JButton cancelCountryButton = new JButton("Cancel\r\n");
+		cancelCountryButton = new JButton("Cancel\r\n");
 		cancelCountryButton.setVisible(false);
 		cancelCountryButton.setEnabled(false);
 		cancelCountryButton.setBackground(Color.RED);
@@ -421,24 +421,23 @@ public class WindowMain implements ActionListener{
 						JFileChooser fc = new JFileChooser();
 						int returnVal = fc.showOpenDialog(null);
 						File path = fc.getSelectedFile();
-						
+
 						System.out.println(path.getAbsolutePath());
-						
+
 						GameSaver gs = new GameSaver(gameState);
 						try {
 							gs.save(path.getAbsolutePath());
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						
-						
+
 					}
 				});
 				JMenuItem LoadMenuItem = new JMenuItem("Load");
 				LoadMenuItem.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						loadGame();
-						
+
 					}
 				});
 				exitMenuItem.addActionListener(new ActionListener() {
@@ -476,7 +475,7 @@ public class WindowMain implements ActionListener{
 
 				domiInfoPanel = new DomiInfoPanel(gameState);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
-				JScrollPane mainScroll = new JScrollPane();
+				mainScroll = new JScrollPane();
 				mainScroll.setBounds(buttonImage.getWidth() + 130, 150, 380, buttonImage.getHeight());
 				mainScroll.setViewportView(domiInfoPanel);
 				mapPanel.add(mainScroll);
@@ -489,13 +488,13 @@ public class WindowMain implements ActionListener{
 
 				troopsLeft = gameState.getCurrPlayer().getBonus();
 				numberOfTroops.setText("" + troopsLeft);
-				
+
 				for (Player p : gameState.getAllPlayers().getPlayers()) {
 					p.setInitTroop(troopsLeft);
 					System.out.println(p.getName() + " has: " + p.getInitTroop());
 				}
 				System.out.println(gameState.getAllPlayers().getPlayers().size());
-				if (gameState.getAllPlayers().getPlayers().size() > 0) { 																			
+				if (gameState.getAllPlayers().getPlayers().size() > 0) {
 					if (gameState.getAllPlayers().getPlayers().size() > 0) {
 						phaseView.player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
 						gameState.getAllPlayers().getPlayers().get(0).setPlayerTextName(phaseView.player1Name);
@@ -611,25 +610,20 @@ public class WindowMain implements ActionListener{
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
-		
-
-		 numberOfTroops = new JLabel("0");
+		numberOfTroops = new JLabel("0");
 		unitDisplay = new JPanel();
 		numberOfTroops.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 		int yM = 30;
 
 		unitDisplay.setVisible(true);
-		
-	
+
 		phaseView.phasePanel.setBounds(640, buttonImage.getHeight() + 240 - yM, 250, 250);
 		mapPanel.add(phaseView.phasePanel);
 
-		
 		phaseView.namePanel.setBounds(100, 40, 975, 60);
 		mapPanel.add(phaseView.namePanel);
-		
-		
+
 		unitDisplay.setBackground(Color.LIGHT_GRAY);
 		unitDisplay.setBounds(410, buttonImage.getHeight() + 240 - yM, 220, 30);
 		mapPanel.add(unitDisplay);
@@ -644,7 +638,7 @@ public class WindowMain implements ActionListener{
 		numberOfTroops.setBounds(175, 0, 45, 30);
 		unitDisplay.add(numberOfTroops);
 
-		JPanel Country1Display = new JPanel();
+		Country1Display = new JPanel();
 		Country1Display.setOpaque(false);
 		Country1Display.setBounds(100, buttonImage.getHeight() + 240 - yM, 300, 35);
 		mapPanel.add(Country1Display);
@@ -656,7 +650,7 @@ public class WindowMain implements ActionListener{
 		country1.setHorizontalAlignment(SwingConstants.LEADING);
 		Country1Display.add(country1);
 		Country1Display.setLayout(new GridLayout(1, 2));
-		JPanel Country2Display = new JPanel();
+		Country2Display = new JPanel();
 		Country2Display.setOpaque(false);
 		Country2Display.setBounds(100, buttonImage.getHeight() + 290 - yM, 300, 35);
 		mapPanel.add(Country2Display);
@@ -718,6 +712,13 @@ public class WindowMain implements ActionListener{
 		nextStageLabel.setBounds(0, 0, 170, 50);
 		nextStage.add(nextStageLabel);
 
+		bindNextStage();
+
+		bindButtons();
+
+	}
+
+	private void bindNextStage() {
 		nextStage.addActionListener(new ActionListener() {
 
 			@Override
@@ -730,11 +731,10 @@ public class WindowMain implements ActionListener{
 							gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 							lp.addLog("It is the Reinforcement phase!");
-							
+
 							gameState.setCountry1(null);
 							gameState.setCountry2(null);
 
-							
 							troopsLeft = gameState.getCurrPlayer().getBonus();
 							numberOfTroops.setText(Integer.toString(troopsLeft));
 						}
@@ -748,8 +748,10 @@ public class WindowMain implements ActionListener{
 				}
 			}
 		});
+	}
 
-		for (CountryButton countryButton : g.getButtons()) {
+	private void bindButtons() {
+		for (CountryButton countryButton : mapDisplayer.getButtons()) {
 			countryButton.b.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -768,7 +770,6 @@ public class WindowMain implements ActionListener{
 							return;
 						}
 
-						
 						gameState.setNextPlayer();
 						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
@@ -840,7 +841,7 @@ public class WindowMain implements ActionListener{
 										numdice1.add(label);
 										DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
 										for (int i = Math.min(gameState.getCountry1().getTroops().size() - 1,
-												3); i >=1 ; i--) {
+												3); i >= 1; i--) {
 											select1.addElement(Integer.toString(i));
 										}
 										JComboBox<String> list1 = new JComboBox<>(select1);
@@ -873,33 +874,40 @@ public class WindowMain implements ActionListener{
 										lp.addLog("Defender chooses " + decision2 + " dices!");
 
 										try {
-											if(gameState.getCurrPlayer().attack(gameState.getCountry1(),
-													gameState.getCountry2(), decision1, decision2)){
+											if (gameState.getCurrPlayer().attack(gameState.getCountry1(),
+													gameState.getCountry2(), decision1, decision2)) {
 												System.out.println("conquest!!!!!");
 												int moveNum = 0;
 												JPanel numPanel = new JPanel();
-												numPanel.add(new JLabel("Congrats you conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName()
-														+ ". How many troops would you like to add?"));
-												lp.addLog("Congrats " + gameState.getCurrPlayer().getName() + " conquered " + gameState.getCountry2().getName() + " with " + gameState.getCountry1().getName());
+												numPanel.add(new JLabel(
+														"Congrats you conquered " + gameState.getCountry2().getName()
+																+ " with " + gameState.getCountry1().getName()
+																+ ". How many troops would you like to add?"));
+												lp.addLog("Congrats " + gameState.getCurrPlayer().getName()
+														+ " conquered " + gameState.getCountry2().getName() + " with "
+														+ gameState.getCountry1().getName());
 												DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-												for (int i = gameState.getCountry1().getTroops().size() - 1; i >=1 ; i--) {
+												for (int i = gameState.getCountry1().getTroops().size()
+														- 1; i >= 1; i--) {
 													selection.addElement(Integer.toString(i));
 												}
 												JComboBox<String> comboBox = new JComboBox<String>(selection);
 												numPanel.add(comboBox);
-												int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
+												int result = JOptionPane.showConfirmDialog(null, numPanel,
+														"Number of Troops", JOptionPane.OK_CANCEL_OPTION,
 														JOptionPane.QUESTION_MESSAGE);
 												if (result == JOptionPane.CANCEL_OPTION) {
-													moveNum = 1; 
+													moveNum = 1;
 												} else {
 													moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 												}
 												moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 												gameState.getCountry2().addInfrantry(moveNum);
-												gameState.getCountry1().removeTroops(moveNum); 
-												lp.addLog(gameState.getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
-												
-												if(gameState.getCurrPlayer().checkWinGame()){
+												gameState.getCountry1().removeTroops(moveNum);
+												lp.addLog(gameState.getCurrPlayer().getName() + " leaves " + moveNum
+														+ " troops!");
+
+												if (gameState.getCurrPlayer().checkWinGame()) {
 													initializeEndGame();
 												}
 											}
@@ -994,7 +1002,6 @@ public class WindowMain implements ActionListener{
 				}
 			});
 		}
-
 	}
 
 	/**
@@ -1015,25 +1022,108 @@ public class WindowMain implements ActionListener{
 				p.addObserver(domiInfoPanel);
 				p.addObserver(cardPanel);
 				p.addObserver(cRatioPanel);
+				p.changed();
 			}
 		}
 		gameState.addObserver(phaseView);
 	}
-	
-	
-	public void loadGame(){
-		
+
+	public void loadGame() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
 		File path = fc.getSelectedFile();
-		
 		System.out.println(path.getAbsolutePath());
-		
 		try {
 			GameLoader gl = new GameLoader(this, path.getAbsolutePath());
+			this.gameState = gl.getGameState();
+		
+			
+			
+			
+
+			mapPanel.removeAll();
+			mapDisplayer = new MapDisplayer(mapPanel, gameState.getWorld());
+			buttonImage = mapDisplayer.getButtonImage();
+			addCompOnMapPanel();
+			
+			
+			registerObserver();
+			bindButtons();
+			bindNextStage();
+			gameState.changed();
+			
+			
+			gameState.updateCountryLabels();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	public void readjustLoc() {
+		cancelCountryButton.setBounds(371 + 40, buttonImage.getHeight() + 250, 124, 60);
+		frame1.setBounds(100, 100, 750 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
+		lp.setBounds(buttonImage.getWidth() + 550, 30, 200, frame1.getHeight() - 100);
+		mainScroll.setBounds(buttonImage.getWidth() + 130, 150, 380, buttonImage.getHeight());
+		int yM = 30;
+		phaseView.phasePanel.setBounds(640, buttonImage.getHeight() + 240 - yM, 250, 250);
+		unitDisplay.setBounds(410, buttonImage.getHeight() + 240 - yM, 220, 30);
+		Country1Display.setBounds(100, buttonImage.getHeight() + 240 - yM, 300, 35);
+		Country2Display.setBounds(100, buttonImage.getHeight() + 290 - yM, 300, 35);
+		nextStage.setBounds(900 - 20, buttonImage.getHeight() + 300 - yM, 170, 50);
+	}
+
+	public void addCompOnMapPanel() {
+		mapPanel.add(cancelCountryButton);
+		// mapPanel.add(frame1);
+		mapPanel.add(lp);
+		lp.log.removeAll();
+
+		
+		domiInfoPanel = new DomiInfoPanel(gameState);
+		domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
+		mainScroll.setViewportView(domiInfoPanel);
+		mapPanel.add(mainScroll);
+		
+		phaseView = new PhaseView(gameState, this);
+		mapPanel.add(phaseView.phasePanel);
+		mapPanel.add(phaseView.namePanel);
+		
+		
+		mapPanel.add(unitDisplay);
+		mapPanel.add(Country1Display);
+		mapPanel.add(Country2Display);
+		mapPanel.add(nextStage);
+		readjustLoc();
+		
+		System.out.println(gameState.getAllPlayers().getPlayers().size());
+		if (gameState.getAllPlayers().getPlayers().size() > 0) {
+			if (gameState.getAllPlayers().getPlayers().size() > 0) {
+				phaseView.player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
+				gameState.getAllPlayers().getPlayers().get(0).setPlayerTextName(phaseView.player1Name);
+				phaseView.player1Name.setVisible(true);
+			}
+			if (gameState.getAllPlayers().getPlayers().size() > 1) {
+				phaseView.player2Name.setText(gameState.getAllPlayers().getPlayers().get(1).getName());
+				gameState.getAllPlayers().getPlayers().get(1).setPlayerTextName(phaseView.player2Name);
+				phaseView.player2Name.setVisible(true);
+			}
+			if (gameState.getAllPlayers().getPlayers().size() > 2) {
+				phaseView.player3Name.setText(gameState.getAllPlayers().getPlayers().get(2).getName());
+				gameState.getAllPlayers().getPlayers().get(2).setPlayerTextName(phaseView.player3Name);
+				phaseView.player3Name.setVisible(true);
+			}
+			if (gameState.getAllPlayers().getPlayers().size() > 3) {
+				phaseView.player4Name.setText(gameState.getAllPlayers().getPlayers().get(3).getName());
+				gameState.getAllPlayers().getPlayers().get(3).setPlayerTextName(phaseView.player4Name);
+				phaseView.player4Name.setVisible(true);
+			}
+			if (gameState.getAllPlayers().getPlayers().size() > 4) {
+				phaseView.player5Name.setText(gameState.getAllPlayers().getPlayers().get(4).getName());
+				gameState.getAllPlayers().getPlayers().get(4).setPlayerTextName(phaseView.player5Name);
+				phaseView.player5Name.setVisible(true);
+			}
+		}
 		
 	}
+
 }

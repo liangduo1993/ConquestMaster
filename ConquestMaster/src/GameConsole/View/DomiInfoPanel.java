@@ -51,7 +51,11 @@ public class DomiInfoPanel extends JPanel implements Observer {
 
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			ArrayList<Country> countries = cur.getCountries();
-			System.out.println(countries);
+
+			for (int row = 0; row < countries.size(); row++) {
+				System.out.println(countries.get(row));
+			}
+			
 			Object[][] model = new Object[countries.size()][3];
 			for (int row = 0; row < countries.size(); row++) {
 				model[row][0] = countries.get(row).getName();

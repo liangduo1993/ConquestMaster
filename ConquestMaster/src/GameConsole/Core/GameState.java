@@ -83,6 +83,7 @@ public class GameState extends Observable {
 				System.out.println(cou.getButton().getClass());
 				System.out.println(cou.getButton().getLabel());
 				System.out.println(cou.getPlayer());
+				System.out.println(cou.getTroops().size());
 				cou.getButton().updateLabel(cou.getPlayer());
 			}
 		}
@@ -268,4 +269,9 @@ public class GameState extends Observable {
 		this.allPlayers = allPlayers;
 	}
 
+	public void changed(){
+		setChanged();
+		notifyObservers();
+	}
+	
 }

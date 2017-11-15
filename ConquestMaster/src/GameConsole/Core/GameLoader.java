@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 
 import GameConsole.Model.Domain.Card;
+import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.View.MapDisplayer;
 
 public class GameLoader {
 	private GameState game;
 	private String path;
 	private int playerNum;
+	private String currName;
 
 	public GameLoader(WindowMain win, String gamePath) throws Exception {
 		LineNumberReader in = new LineNumberReader(new FileReader(gamePath));
@@ -29,7 +32,23 @@ public class GameLoader {
 		loadGameState(in);
 		loadPlayers(in);
 		loadCountries(in);
-		game.updateCountryLabels();
+
+		System.out.println("==============");
+		System.out.println(game.getAllPlayers().getPlayers().size());
+		for (Player p : game.getAllPlayers().getPlayers()) {
+			System.out.println(p.getName());
+		}
+		System.out.println("==============");
+
+		for (Player p : game.getAllPlayers().getPlayers()) {
+			if (p.getName().equals(currName))
+				game.setCurrPlayer(p);
+		}
+		
+	}
+
+	public GameState getGameState() {
+		return this.game;
 	}
 
 	private void loadGameState(LineNumberReader in) throws IOException {
@@ -47,10 +66,7 @@ public class GameLoader {
 				if ("firstRound".equals(prop)) {
 					game.setFirstRound(Integer.parseInt(val));
 				} else if ("currPlayer".equals(prop)) {
-					for (Player p : game.getAllPlayers().getPlayers()) {
-						if (p.getName().equals(val))
-							game.setCurrPlayer(p);
-					}
+					currName = val;
 				} else if ("currPhase".equals(prop)) {
 					game.setCurrPhase(Integer.parseInt(val));
 				} else if ("playerNum".equals(prop)) {
@@ -61,7 +77,6 @@ public class GameLoader {
 	}
 
 	private void loadPlayers(LineNumberReader in) throws IOException {
-		for (int index = 0; index < this.playerNum; index++) {
 			Player p1 = new Player("", Color.cyan, game);
 			game.addPlayer(p1);
 			if (playerNum >= 2) {
@@ -80,20 +95,23 @@ public class GameLoader {
 				Player p5 = new Player("", Color.red, game);
 				game.addPlayer(p5);
 			}
-		}
 
-		findSection(in, "Players");
+		//findSection(in, "Players");
 		for (int index = 0; index < this.playerNum; index++) {
 			Player p = game.getAllPlayers().getPlayers().get(index);
+			//findSection(in, "Player" + (index + 1));
 			for (;;) {
 				String line = in.readLine();
-				if (line.equalsIgnoreCase("[Countries]")) {
-					return;
-				}
-				if (line.startsWith("Player")) {
+//				if (line.equalsIgnoreCase("[Countries]")) {
+//					return;
+//				}
+//				if (line.startsWith("Player")) {
+//					break;
+//				}
+				if (line.equals("")) {
 					break;
 				}
-
+				
 				String[] pair = line.split("=", 2);
 				if (pair.length == 2) {
 					String prop = pair[0];
@@ -113,17 +131,30 @@ public class GameLoader {
 					} else if ("initTroop".equals(prop)) {
 						p.setInitTroop(Integer.parseInt(val));
 					} else if ("onhand".equals(prop)) {
-						String[] onhand = line.split(" ");
-						if (onhand.length != 0) {
+						String[] onhand = val.split(" ");
+						if (!val.trim().equals("") && onhand.length != 0) {
 							for (int i = 0; i < onhand.length; i++) {
 								p.getOnHand().add(new Card(Integer.parseInt(onhand[i])));
 							}
 						}
-					}else if("countries".equals(prop)){
+					} else if ("countries".equals(prop)) {
 						String[] countries = line.split(" ");
 						if (countries.length != 0) {
 							for (int i = 0; i < countries.length; i++) {
-								p.addCountry(game.getWorld().getMapLoader().findCountry(countries[i]));
+								
+								for(Continent con: game.getWorld().getContinents()){
+									for(Country cou: con.getCountries()){
+										if(cou.getName().equals(countries[i])){
+											p.addCountry(cou);
+										}
+									}
+								}
+								
+								
+//								p.addCountry(game.getWorld().getMapLoader().findCountry(countries[i]));
+							
+							
+							
 							}
 						}
 					}
@@ -132,12 +163,9 @@ public class GameLoader {
 			}
 		}
 	}
-	
-	
-	
-	
+
 	private void loadCountries(LineNumberReader in) throws IOException {
-		findSection(in, "Countries");
+		 findSection(in, "Countries");
 		for (;;) {
 			String line = in.readLine();
 			if (line == null) {
@@ -148,21 +176,25 @@ public class GameLoader {
 				String cName = lineInfo[0];
 				String pName = lineInfo[1];
 				int tNum = Integer.parseInt(lineInfo[2]);
-				
-				Country c = game.getWorld().getMapLoader().findCountry(cName);
-				
-				for(Player p: game.getAllPlayers().getPlayers()){
-					if(p.getName().equals(pName)){
-						c.setPlayer(p);
+
+				for (Player p : game.getAllPlayers().getPlayers()) {
+					if (p.getName().equals(pName)) {
+						for (Continent con : game.getWorld().getContinents()) {
+							for (Country cou : con.getCountries()) {
+								if (cou.getName().equals(cName)) {
+									cou.setPlayer(p);
+									cou.addInfrantry(tNum);
+								}
+							}
+
+						}
+
 					}
 				}
-				c.addInfrantry(tNum);
+
 			}
 		}
 	}
-	
-	
-	
 
 	/**
 	 * Makes the pointer of LineNumberReader points to the target section.
