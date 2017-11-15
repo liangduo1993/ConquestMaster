@@ -62,27 +62,27 @@ public class SoloGamePanel {
 		lblNewLabel.setBounds(23, 21, 702, 66);
 		panel.add(lblNewLabel);
 
-		JLabel p1Label = new JLabel("New label");
+		JLabel p1Label = new JLabel("Player 1:");
 		p1Label.setBounds(91, 110, 54, 15);
 		panel.add(p1Label);
 
-		JLabel p2Label = new JLabel("New label");
+		JLabel p2Label = new JLabel("Player 2:");
 		p2Label.setBounds(91, 160, 54, 15);
 		panel.add(p2Label);
 
-		JLabel p3Label = new JLabel("New label");
+		JLabel p3Label = new JLabel("Player 3:");
 		p3Label.setBounds(91, 210, 54, 15);
 		panel.add(p3Label);
 
-		JLabel p4Label = new JLabel("New label");
+		JLabel p4Label = new JLabel("Player 4:");
 		p4Label.setBounds(91, 260, 54, 15);
 		panel.add(p4Label);
 
-		JLabel p5Label = new JLabel("New label");
+		JLabel p5Label = new JLabel("Player 5:");
 		p5Label.setBounds(91, 310, 54, 15);
 		panel.add(p5Label);
 
-		JLabel p6Label = new JLabel("New label");
+		JLabel p6Label = new JLabel("Player 6:");
 		p6Label.setBounds(91, 360, 54, 15);
 		panel.add(p6Label);
 
