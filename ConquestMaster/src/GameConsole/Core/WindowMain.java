@@ -738,6 +738,7 @@ public class WindowMain implements ActionListener {
 						gameState.setNextPlayer();
 						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
+						troopsLeft = gameState.getCurrPlayer().getInitTroop();
 						gameState.setCountry1(null);
 						gameState.setCountry2(null);
 
