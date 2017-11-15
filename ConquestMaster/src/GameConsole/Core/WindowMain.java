@@ -409,45 +409,7 @@ public class WindowMain implements ActionListener {
 				lp.setBounds(buttonImage.getWidth() + 550, 30, 200, frame1.getHeight() - 100);
 				lp.setBackground(Color.white);
 
-				JMenuBar menuBar = new JMenuBar();
-				menuBar.setBounds(0, 0, frame1.getWidth(), 30);
-				mapPanel.add(menuBar);
-				JMenu mnNewMenu = new JMenu("Game");
-				menuBar.add(mnNewMenu);
-				JMenuItem exitMenuItem = new JMenuItem("Exit");
-				JMenuItem saveMenuItem = new JMenuItem("Save");
-				saveMenuItem.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JFileChooser fc = new JFileChooser();
-						int returnVal = fc.showOpenDialog(null);
-						File path = fc.getSelectedFile();
-
-						System.out.println(path.getAbsolutePath());
-
-						GameSaver gs = new GameSaver(gameState);
-						try {
-							gs.save(path.getAbsolutePath());
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-
-					}
-				});
-				JMenuItem LoadMenuItem = new JMenuItem("Load");
-				LoadMenuItem.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						loadGame();
-
-					}
-				});
-				exitMenuItem.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						System.exit(0);
-					}
-				});
-				mnNewMenu.add(exitMenuItem);
-				mnNewMenu.add(saveMenuItem);
-				mnNewMenu.add(LoadMenuItem);
+				addMenu();
 
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
@@ -524,6 +486,8 @@ public class WindowMain implements ActionListener {
 				}
 				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 			}
+
+
 		});
 
 		startGamePanel.setLayout(null);
@@ -1070,14 +1034,15 @@ public class WindowMain implements ActionListener {
 		Country1Display.setBounds(100, buttonImage.getHeight() + 240 - yM, 300, 35);
 		Country2Display.setBounds(100, buttonImage.getHeight() + 290 - yM, 300, 35);
 		nextStage.setBounds(900 - 20, buttonImage.getHeight() + 300 - yM, 170, 50);
+		phaseView.namePanel.setBounds(100, 40, 975, 60);
 	}
 
 	public void addCompOnMapPanel() {
 		mapPanel.add(cancelCountryButton);
 		// mapPanel.add(frame1);
 		mapPanel.add(lp);
-		lp.log.removeAll();
-
+		lp.log.setText("");
+		addMenu();
 		
 		domiInfoPanel = new DomiInfoPanel(gameState);
 		domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
@@ -1088,14 +1053,15 @@ public class WindowMain implements ActionListener {
 		mapPanel.add(phaseView.phasePanel);
 		mapPanel.add(phaseView.namePanel);
 		
-		
 		mapPanel.add(unitDisplay);
 		mapPanel.add(Country1Display);
 		mapPanel.add(Country2Display);
 		mapPanel.add(nextStage);
 		readjustLoc();
 		
+		System.out.println("!!!!!!");
 		System.out.println(gameState.getAllPlayers().getPlayers().size());
+		System.out.println("!!!!!!");
 		if (gameState.getAllPlayers().getPlayers().size() > 0) {
 			if (gameState.getAllPlayers().getPlayers().size() > 0) {
 				phaseView.player1Name.setText(gameState.getAllPlayers().getPlayers().get(0).getName());
@@ -1123,6 +1089,51 @@ public class WindowMain implements ActionListener {
 				phaseView.player5Name.setVisible(true);
 			}
 		}
+		
+		
+	}
+	
+	
+	public void addMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, frame1.getWidth(), 30);
+		mapPanel.add(menuBar);
+		JMenu mnNewMenu = new JMenu("Game");
+		menuBar.add(mnNewMenu);
+		JMenuItem exitMenuItem = new JMenuItem("Exit");
+		JMenuItem saveMenuItem = new JMenuItem("Save");
+		saveMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fc = new JFileChooser();
+				int returnVal = fc.showOpenDialog(null);
+				File path = fc.getSelectedFile();
+
+				System.out.println(path.getAbsolutePath());
+
+				GameSaver gs = new GameSaver(gameState);
+				try {
+					gs.save(path.getAbsolutePath());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		JMenuItem LoadMenuItem = new JMenuItem("Load");
+		LoadMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadGame();
+
+			}
+		});
+		exitMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		mnNewMenu.add(exitMenuItem);
+		mnNewMenu.add(saveMenuItem);
+		mnNewMenu.add(LoadMenuItem);
 		
 	}
 

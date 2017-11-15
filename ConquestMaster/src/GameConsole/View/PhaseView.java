@@ -132,15 +132,15 @@ public class PhaseView implements Observer {
 		namePanel.setBackground(Color.LIGHT_GRAY);
 
 		player1Name = new JFormattedTextField();
-		player1Name.setVisible(false);
 		player1Name.setBackground(Color.GRAY);
 		player2Name = new JFormattedTextField();
-		player2Name.setVisible(false);
 		player3Name = new JFormattedTextField();
-		player3Name.setVisible(false);
 		player4Name = new JFormattedTextField();
-		player4Name.setVisible(false);
 		player5Name = new JFormattedTextField();
+		player1Name.setVisible(false);
+		player2Name.setVisible(false);
+		player3Name.setVisible(false);
+		player4Name.setVisible(false);
 		player5Name.setVisible(false);
 
 		player1Name.setBackground(Color.LIGHT_GRAY);

@@ -60,7 +60,7 @@ public class GameSaver {
 			
 			sb = new StringBuffer(100);
 			for(Country c: p.getCountries()){
-				sb.append(c.getName()).append(" ");
+				sb.append(c.getName()).append(",");
 			}
 			if(sb.length() > 1)
 			sb.deleteCharAt(sb.length() - 1);

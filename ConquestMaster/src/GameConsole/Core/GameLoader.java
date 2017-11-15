@@ -138,7 +138,7 @@ public class GameLoader {
 							}
 						}
 					} else if ("countries".equals(prop)) {
-						String[] countries = line.split(" ");
+						String[] countries = val.split(",");
 						if (countries.length != 0) {
 							for (int i = 0; i < countries.length; i++) {
 								

@@ -79,11 +79,11 @@ public class GameState extends Observable {
 	public void updateCountryLabels() {
 		for (Continent con : this.world.getContinents()) {
 			for (Country cou : con.getCountries()) {
-				System.out.println(cou.getName());
-				System.out.println(cou.getButton().getClass());
-				System.out.println(cou.getButton().getLabel());
-				System.out.println(cou.getPlayer());
-				System.out.println(cou.getTroops().size());
+//				System.out.println(cou.getName());
+//				System.out.println(cou.getButton().getClass());
+//				System.out.println(cou.getButton().getLabel());
+//				System.out.println(cou.getPlayer());
+//				System.out.println(cou.getTroops().size());
 				cou.getButton().updateLabel(cou.getPlayer());
 			}
 		}
