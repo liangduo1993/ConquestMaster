@@ -14,10 +14,12 @@ import GameConsole.Model.Player.Player;
 
 public class GameSaver {
 	private GameState game;
+	private WindowMain win;
 	
 	
-	public GameSaver(GameState game) {
+	public GameSaver(GameState game, WindowMain win) {
 		this.game = game;
+		this.win = win;
 	}
 	
 	
@@ -38,6 +40,7 @@ public class GameSaver {
 		out.println("currPlayer=" + game.getCurrPlayer().getName());
 		out.println("currPhase=" + game.getCurrPhase());
 		out.println("playerNum=" + game.getAllPlayers().getPlayers().size());
+		out.println("troopRemaining=" + win.troopsLeft);
 		
 		out.println();
 		out.println("[Players]");

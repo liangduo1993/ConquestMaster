@@ -713,6 +713,7 @@ public class Player extends Observable {
 
 	public void changed() {
 		setChanged();
+		notifyObservers("card");
 		notifyObservers();
 	}
 }

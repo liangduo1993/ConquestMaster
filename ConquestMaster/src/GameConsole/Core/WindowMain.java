@@ -1025,6 +1025,22 @@ public class WindowMain implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void saveGame(){
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showOpenDialog(null);
+		File path = fc.getSelectedFile();
+
+		System.out.println(path.getAbsolutePath());
+
+		GameSaver gs = new GameSaver(gameState, this);
+		try {
+			gs.save(path.getAbsolutePath());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+	}
 
 	public void readjustLoc() {
 		cancelCountryButton.setBounds(371 + 40, buttonImage.getHeight() + 250, 124, 60);
@@ -1055,6 +1071,7 @@ public class WindowMain implements ActionListener {
 		phaseView = new PhaseView(gameState, this);
 		mapPanel.add(phaseView.phasePanel);
 		mapPanel.add(phaseView.namePanel);
+		numberOfTroops.setText("" + troopsLeft);
 		
 		mapPanel.add(unitDisplay);
 		mapPanel.add(Country1Display);
@@ -1107,19 +1124,7 @@ public class WindowMain implements ActionListener {
 		JMenuItem saveMenuItem = new JMenuItem("Save");
 		saveMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFileChooser fc = new JFileChooser();
-				int returnVal = fc.showOpenDialog(null);
-				File path = fc.getSelectedFile();
-
-				System.out.println(path.getAbsolutePath());
-
-				GameSaver gs = new GameSaver(gameState);
-				try {
-					gs.save(path.getAbsolutePath());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-
+				saveGame();
 			}
 		});
 		JMenuItem LoadMenuItem = new JMenuItem("Load");

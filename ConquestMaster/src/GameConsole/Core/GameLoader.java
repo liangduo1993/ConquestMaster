@@ -17,10 +17,12 @@ public class GameLoader {
 	private String path;
 	private int playerNum;
 	private String currName;
+	private WindowMain win;
 
 	public GameLoader(WindowMain win, String gamePath) throws Exception {
 		LineNumberReader in = new LineNumberReader(new FileReader(gamePath));
 
+		this.win = win;
 		findSection(in, "Map");
 		String line = in.readLine();
 		String[] pair = line.split("=", 2);
@@ -71,6 +73,8 @@ public class GameLoader {
 					game.setCurrPhase(Integer.parseInt(val));
 				} else if ("playerNum".equals(prop)) {
 					this.playerNum = Integer.parseInt(val);
+				}else if ("troopRemaining".equals(prop)) {
+					win.troopsLeft = Integer.parseInt(val);
 				}
 			}
 		}
