@@ -25,6 +25,10 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This class is the interface for the beginning of the tournament mode where the user
+ * can select maps, computer players, number of games and turns
+ */
 public class SoloGamePanel {
 
 	private JFrame frame;

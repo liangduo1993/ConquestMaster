@@ -11,7 +11,12 @@ import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Player.Player;
 
-public class CardExchangeView   implements Observer {
+/**
+ * This class is the GUI for the Card Exchange View Panel,
+ * showing player exchange card for infantry if the player
+ * has more than 3 cards
+ */
+public class CardExchangeView implements Observer {
 	private GameState gameState;
 	private JFrame frame;
 	

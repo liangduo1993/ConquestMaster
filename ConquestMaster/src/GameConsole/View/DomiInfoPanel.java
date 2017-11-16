@@ -14,6 +14,10 @@ import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
+/**
+ * This class is the GUI for the domination View Panel, showing the world domination situation
+ * of the list of players
+ */
 public class DomiInfoPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JScrollPane> tables = new ArrayList<>();
