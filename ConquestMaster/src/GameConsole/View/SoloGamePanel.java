@@ -1,6 +1,5 @@
 package GameConsole.View;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,19 +34,17 @@ public class SoloGamePanel {
 	private JFileChooser fc3;
 	private JFileChooser fc4;
 	private JFileChooser fc5;
-	
+
 	private JLabel M1Label;
 	private JLabel M2Label;
 	private JLabel M3Label;
 	private JLabel M4Label;
 	private JLabel M5Label;
-	
-	private JComboBox comboBox_6;
-	private JComboBox comboBox_7;
-	private JComboBox comboBox_8;
-	private JComboBox comboBox_9;
-	
-	
+
+	private JComboBox<String> comboBox_6;
+	private JComboBox<String> comboBox_7;
+	private JComboBox<String> comboBox_8;
+	private JComboBox<String> comboBox_9;
 
 	/**
 	 * Launch the application.
@@ -111,71 +108,71 @@ public class SoloGamePanel {
 		p4Label.setBounds(381, 123, 75, 15);
 		panel.add(p4Label);
 
-		 comboBox_6 = new JComboBox();
-		comboBox_6.setModel(new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
+		comboBox_6 = new JComboBox();
+		comboBox_6.setModel(
+				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_6.setBounds(211, 76, 102, 21);
 		panel.add(comboBox_6);
 
-		 comboBox_7 = new JComboBox();
+		comboBox_7 = new JComboBox();
 		comboBox_7.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_7.setBounds(501, 76, 102, 21);
 		comboBox_7.setEnabled(false);
 		panel.add(comboBox_7);
 
-		 comboBox_8 = new JComboBox();
+		comboBox_8 = new JComboBox();
 		comboBox_8.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_8.setBounds(211, 126, 102, 21);
 		comboBox_8.setEnabled(false);
 		panel.add(comboBox_8);
 
-		 comboBox_9 = new JComboBox();
+		comboBox_9 = new JComboBox();
 		comboBox_9.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
 		comboBox_9.setBounds(501, 126, 102, 21);
 		comboBox_9.setEnabled(false);
 		panel.add(comboBox_9);
 
-		 comboBox_6.addActionListener(new ActionListener() {
-			 	public void actionPerformed(ActionEvent arg0) {
-					String text = (String)comboBox_6.getSelectedItem();
-					if(text.equals("none")){
-						comboBox_7.setEnabled(false);
-					}else{
-						comboBox_7.setEnabled(true);
-					}
-			 	}
-			 });
-		 
-		 comboBox_7.addActionListener(new ActionListener() {
-			
+		comboBox_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String text = (String) comboBox_6.getSelectedItem();
+				if (text.equals("none")) {
+					comboBox_7.setEnabled(false);
+				} else {
+					comboBox_7.setEnabled(true);
+				}
+			}
+		});
+
+		comboBox_7.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				String text7 = (String)comboBox_7.getSelectedItem();
-				if(text7.equals("none")){
+				String text7 = (String) comboBox_7.getSelectedItem();
+				if (text7.equals("none")) {
 					comboBox_8.setEnabled(false);
-				}else{
+				} else {
 					comboBox_8.setEnabled(true);
 				}
 			}
 		});
-		 
-		 comboBox_8.addActionListener(new ActionListener() {
-				
+
+		comboBox_8.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				String text8 = (String)comboBox_8.getSelectedItem();
-				if(text8.equals("none")){
+				String text8 = (String) comboBox_8.getSelectedItem();
+				if (text8.equals("none")) {
 					comboBox_9.setEnabled(false);
-				}else{
+				} else {
 					comboBox_9.setEnabled(true);
 				}
 			}
 		});
-		
 
 		JButton startGameButt = new JButton("Start Game");
 		startGameButt.setBackground(Color.WHITE);
@@ -183,58 +180,63 @@ public class SoloGamePanel {
 		panel.add(startGameButt);
 
 		JButton CancelButt = new JButton("Cancel");
+		CancelButt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		CancelButt.setBounds(448, 537, 93, 23);
 		panel.add(CancelButt);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Games Number");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(70, 185, 102, 15);
 		panel.add(lblNewLabel_1);
-		
+
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 		comboBox.setBounds(211, 182, 102, 21);
 		panel.add(comboBox);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Max Turns :");
 		lblNewLabel_2.setBounds(381, 185, 75, 15);
 		panel.add(lblNewLabel_2);
-		
+
 		textField = new JTextField();
 		textField.setBounds(501, 182, 102, 21);
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewM5Label = new JLabel("(input 10-50)");
 		lblNewM5Label.setBounds(628, 185, 84, 15);
 		panel.add(lblNewM5Label);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("Map Selection");
 		lblNewLabel_4.setFont(new Font("Calibri", Font.PLAIN, 22));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(0, 220, 182, 38);
 		panel.add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("Map 1:");
 		lblNewLabel_5.setBounds(91, 260, 54, 15);
 		panel.add(lblNewLabel_5);
-		
+
 		JLabel lblMap = new JLabel("Map 2:");
 		lblMap.setBounds(91, 300, 54, 15);
 		panel.add(lblMap);
-		
+
 		JLabel lblMap_1 = new JLabel("Map 3:");
 		lblMap_1.setBounds(91, 340, 54, 15);
 		panel.add(lblMap_1);
-		
+
 		JLabel lblMap_2 = new JLabel("Map 4:");
 		lblMap_2.setBounds(91, 380, 54, 15);
 		panel.add(lblMap_2);
-		
+
 		JLabel lblMap_3 = new JLabel("Map 5:");
 		lblMap_3.setBounds(91, 420, 54, 15);
 		panel.add(lblMap_3);
-		
+
 		JButton btnSelectM = new JButton("select M1");
 		btnSelectM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -244,12 +246,12 @@ public class SoloGamePanel {
 					File file = fc1.getSelectedFile();
 					String path = file.getAbsolutePath();
 					M1Label.setText(path);
-			}
+				}
 			}
 		});
 		btnSelectM.setBounds(211, 256, 93, 23);
 		panel.add(btnSelectM);
-		
+
 		JButton btnSelectM_1 = new JButton("select M2");
 		btnSelectM_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -259,12 +261,12 @@ public class SoloGamePanel {
 					File file = fc2.getSelectedFile();
 					String path = file.getAbsolutePath();
 					M2Label.setText(path);
-			}
+				}
 			}
 		});
 		btnSelectM_1.setBounds(211, 296, 93, 23);
 		panel.add(btnSelectM_1);
-		
+
 		JButton btnSelectM_2 = new JButton("select M3");
 		btnSelectM_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,12 +276,12 @@ public class SoloGamePanel {
 					File file = fc3.getSelectedFile();
 					String path = file.getAbsolutePath();
 					M3Label.setText(path);
-			}
+				}
 			}
 		});
 		btnSelectM_2.setBounds(211, 336, 93, 23);
 		panel.add(btnSelectM_2);
-		
+
 		JButton btnSelectM_3 = new JButton("select M4");
 		btnSelectM_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -294,7 +296,7 @@ public class SoloGamePanel {
 		});
 		btnSelectM_3.setBounds(211, 376, 93, 23);
 		panel.add(btnSelectM_3);
-		
+
 		JButton btnSelectM_4 = new JButton("select M5");
 		btnSelectM_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -309,31 +311,31 @@ public class SoloGamePanel {
 		});
 		btnSelectM_4.setBounds(211, 416, 93, 23);
 		panel.add(btnSelectM_4);
-		
+
 		M1Label = new JLabel("");
 		M1Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M1Label.setForeground(Color.RED);
 		M1Label.setBounds(381, 260, 297, 19);
 		panel.add(M1Label);
-		
+
 		M2Label = new JLabel("");
 		M2Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M2Label.setForeground(Color.RED);
 		M2Label.setBounds(381, 298, 297, 19);
 		panel.add(M2Label);
-		
-		M3Label= new JLabel("");
+
+		M3Label = new JLabel("");
 		M3Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M3Label.setForeground(Color.RED);
 		M3Label.setBounds(381, 340, 297, 19);
 		panel.add(M3Label);
-		
-		M4Label= new JLabel("");
+
+		M4Label = new JLabel("");
 		M4Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M4Label.setForeground(Color.RED);
 		M4Label.setBounds(381, 380, 297, 19);
 		panel.add(M4Label);
-		
+
 		M5Label = new JLabel("");
 		M5Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M5Label.setForeground(Color.RED);
