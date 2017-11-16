@@ -5,11 +5,6 @@ import GameConsole.Model.Player.Player;
 
 public class CheaterStrategy extends OriginalStrategy implements Strategy{
 
-	public CheaterStrategy(GameState gameState, Player player) {
-		super(gameState, player);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public void originalAttack() {
 		// TODO Auto-generated method stub
