@@ -2,7 +2,9 @@ package GameConsole.Model.Player;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
 
@@ -347,7 +349,9 @@ public class Player extends Observable {
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public boolean originalAttack(Country c1, Country c2, int decision1, int decision2) {
+	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) {
+		Map<String, Object> result = new HashMap<>();
+		
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
@@ -377,7 +381,9 @@ public class Player extends Observable {
 			}
 		}
 		lp.addLog(diceString);
-
+		diceString += "\n";
+		
+		
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
 			int attackMax = 0; 
 			int attackIndex = 0;
@@ -403,12 +409,16 @@ public class Player extends Observable {
 
 				c2.getTroops().remove(c2.getTroops().size() - 1);
 				lp.addLog("Attacker won!" + "\n");
+				diceString += "Attacker won!" + "\n";
 			}else{
 				c1.getTroops().remove(c1.getTroops().size() - 1);
 				lp.addLog("Defender won!" + "\n");
+				diceString += "Defender won!" + "\n";
 			}
 		}
 
+		
+		result.put("dice", diceString);
 		setChanged();
 		notifyObservers();
 		
@@ -417,10 +427,13 @@ public class Player extends Observable {
 			c2.setPlayer(this);
 			this.addCountry(c2);
 			this.isConquered(true);
-			return true;
+			//return true;
+			result.put("result", true);
+		}else{
+			result.put("result", false);
 		}
-		
-		return false;
+		return result;
+		//return false;
 	}
 
 

@@ -1,5 +1,7 @@
 package GameConsole.Strategy;
 
+import java.util.Map;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -49,8 +51,11 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 		lp.addLog("Defender chooses " + decision2 + " dices!");
 
-		if (getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(), getGameState().getCountry2(),
-				decision1, decision2)) {
+		Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(), getGameState().getCountry2(),
+				decision1, decision2);
+		JOptionPane.showConfirmDialog(null,(String)result.get("dice"), "Dice Result",JOptionPane.OK_OPTION);
+		
+		if ((Boolean)result.get("result")) {
 			int moveNum = 0;
 			JPanel numPanel = new JPanel();
 			numPanel.add(new JLabel("Congrats you conquered " + getGameState().getCountry2().getName() + " with "
@@ -64,12 +69,12 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			JComboBox<String> comboBox = new JComboBox<String>(selection);
 			numPanel.add(comboBox);
 
-			int result = -1;
-			while (result != JOptionPane.OK_OPTION) {
-				result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
+			int result1 = -1;
+			while (result1 != JOptionPane.OK_OPTION) {
+				result1 = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops", JOptionPane.OK_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
-				moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 			}
+			moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
 			getGameState().getCountry2().addInfrantry(moveNum);
 			getGameState().getCountry1().removeTroops(moveNum);
 			lp.addLog(getGameState().getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
