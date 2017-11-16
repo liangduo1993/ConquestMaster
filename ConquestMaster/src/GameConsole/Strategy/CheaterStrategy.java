@@ -6,7 +6,7 @@ import GameConsole.Model.Player.Player;
 public class CheaterStrategy extends OriginalStrategy implements Strategy{
 
 	@Override
-	public void originalAttack() {
+	public void attack() {
 		// TODO Auto-generated method stub
 		
 	}

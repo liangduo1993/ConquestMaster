@@ -6,7 +6,7 @@ import GameConsole.Model.Player.Player;
 public class AggressiveStrategy extends OriginalStrategy implements Strategy{
 
 	@Override
-	public void originalAttack() {
+	public void attack() {
 		
 		
 		

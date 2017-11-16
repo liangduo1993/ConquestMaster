@@ -57,6 +57,8 @@ public class Player extends Observable {
 		this.color = color;
 		this.game = game;
 		this.strategy = strategy;
+		strategy.setGameState(game);
+		strategy.setPlayer(this);
 	}
 
 	/**
@@ -345,7 +347,7 @@ public class Player extends Observable {
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public boolean attack(Country c1, Country c2, int decision1, int decision2) throws Exception {
+	public boolean originalAttack(Country c1, Country c2, int decision1, int decision2) throws Exception {
 		if(c1.getPlayer() != this || c2.getPlayer() == this){
 			throw new RuntimeException("The attacker and defender is not right!");
 		}

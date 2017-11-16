@@ -8,17 +8,28 @@ public class OriginalStrategy implements Strategy{
 	private Player player;
 	
 	
-	public void originalAttack() {
-		// TODO Auto-generated method stub
+	public void attack() {
 		
 	}
 	public void reinforce() {
-		// TODO Auto-generated method stub
 		
 	}
 	public void fortify() {
-		// TODO Auto-generated method stub
 		
 	}
+	public GameState getGameState() {
+		return gameState;
+	}
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	
 
 }

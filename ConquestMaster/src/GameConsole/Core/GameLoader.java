@@ -10,6 +10,7 @@ import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.HumanStrategy;
 import GameConsole.View.MapDisplayer;
 
 public class GameLoader {
@@ -81,22 +82,22 @@ public class GameLoader {
 	}
 
 	private void loadPlayers(LineNumberReader in) throws IOException {
-			Player p1 = new Player("", Color.cyan, game);
+			Player p1 = new Player("", Color.cyan, game, new HumanStrategy());
 			game.addPlayer(p1);
 			if (playerNum >= 2) {
-				Player p2 = new Player("", Color.magenta, game);
+				Player p2 = new Player("", Color.magenta, game, new HumanStrategy());
 				game.addPlayer(p2);
 			}
 			if (playerNum >= 3) {
-				Player p3 = new Player("", Color.green, game);
+				Player p3 = new Player("", Color.green, game, new HumanStrategy());
 				game.addPlayer(p3);
 			}
 			if (playerNum >= 4) {
-				Player p4 = new Player("", Color.blue, game);
+				Player p4 = new Player("", Color.blue, game, new HumanStrategy());
 				game.addPlayer(p4);
 			}
 			if (playerNum >= 5) {
-				Player p5 = new Player("", Color.red, game);
+				Player p5 = new Player("", Color.red, game, new HumanStrategy());
 				game.addPlayer(p5);
 			}
 

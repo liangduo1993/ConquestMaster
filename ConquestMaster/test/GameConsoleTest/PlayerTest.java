@@ -136,7 +136,7 @@ public class PlayerTest {
 		c2.setPlayer(player2);
 		
 		try {
-			player.attack(c1, c2, 1, 1);
+			player.originalAttack(c1, c2, 1, 1);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			assertNotEquals(ex.getMessage(), "The attacker and defender is not right!");

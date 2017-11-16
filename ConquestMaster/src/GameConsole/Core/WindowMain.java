@@ -34,6 +34,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.HumanStrategy;
 import GameConsole.View.CardExchangeView;
 import GameConsole.View.ConquestRatio;
 import GameConsole.View.CountryButton;
@@ -415,24 +416,24 @@ public class WindowMain {
 
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
-					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState);
+					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new HumanStrategy());
 					gameState.addPlayer(p1);
 					gameState.setCurrPlayer(p1);
 				}
 				if (playerTwoText.isVisible()) {
-					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState);
+					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new HumanStrategy());
 					gameState.addPlayer(p2);
 				}
 				if (playerThreeText.isVisible()) {
-					Player p3 = new Player(player3TextField.getText(), Color.green, gameState);
+					Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new HumanStrategy());
 					gameState.addPlayer(p3);
 				}
 				if (playerFourText.isVisible()) {
-					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState);
+					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new HumanStrategy());
 					gameState.addPlayer(p4);
 				}
 				if (playerFiveText.isVisible()) {
-					Player p5 = new Player(player5TextField.getText(), Color.red, gameState);
+					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
 					gameState.addPlayer(p5);
 				}
 				gameState.gameStart();
@@ -842,7 +843,7 @@ public class WindowMain {
 										lp.addLog("Defender chooses " + decision2 + " dices!");
 
 										try {
-											if (gameState.getCurrPlayer().attack(gameState.getCountry1(),
+											if (gameState.getCurrPlayer().originalAttack(gameState.getCountry1(),
 													gameState.getCountry2(), decision1, decision2)) {
 												System.out.println("conquest!!!!!");
 												int moveNum = 0;
