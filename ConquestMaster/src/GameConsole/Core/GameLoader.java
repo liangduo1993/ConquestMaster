@@ -13,6 +13,9 @@ import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.HumanStrategy;
 import GameConsole.View.MapDisplayer;
 
+/**
+ * This class is used to load the game session the user saved
+ */
 public class GameLoader {
 	private GameState game;
 	private String path;
@@ -20,6 +23,12 @@ public class GameLoader {
 	private String currName;
 	private WindowMain win;
 
+	/**
+	 * Constructor for GameLoader with coming parameters
+	 * @param win Window frame of the game
+	 * @param gamePath The saved path
+	 * @throws Exception
+	 */
 	public GameLoader(WindowMain win, String gamePath) throws Exception {
 		LineNumberReader in = new LineNumberReader(new FileReader(gamePath));
 
@@ -50,10 +59,20 @@ public class GameLoader {
 		
 	}
 
+	/**
+	 * This method is to get the game state
+	 * @return current game state
+	 */
 	public GameState getGameState() {
 		return this.game;
 	}
 
+	/**
+	 * This method is used to load the game state which includes the current round,
+	 * the current player, the number of players, and the remaining troop of the current player
+	 * @param in The input LineNumberReader.
+	 * @throws IOException
+	 */
 	private void loadGameState(LineNumberReader in) throws IOException {
 		findSection(in, "GameState");
 		for (;;) {
@@ -81,6 +100,12 @@ public class GameLoader {
 		}
 	}
 
+	/**
+	 *  This method is used to load the information of players which includes the list of players, players' names,
+	 *  the game phase of the players, the init troop number, cards, countries and so on that are attached to the players.
+	 * @param in The input LineNumberReader.
+	 * @throws IOException
+	 */
 	private void loadPlayers(LineNumberReader in) throws IOException {
 			Player p1 = new Player("", Color.cyan, game, new HumanStrategy());
 			game.addPlayer(p1);
@@ -169,8 +194,14 @@ public class GameLoader {
 		}
 	}
 
+	/**
+	 * This method is used to load countries and the corresponding players
+	 * and the assigned number of infantries that are attached to the country.
+	 * @param in The input LineNumberReader.
+	 * @throws IOException
+	 */
 	private void loadCountries(LineNumberReader in) throws IOException {
-		 findSection(in, "Countries");
+		findSection(in, "Countries");
 		for (;;) {
 			String line = in.readLine();
 			if (line == null) {
