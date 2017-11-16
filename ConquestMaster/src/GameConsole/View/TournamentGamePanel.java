@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
  * This class is the interface for the beginning of the tournament mode where the user
  * can select maps, computer players, number of games and turns
  */
-public class SoloGamePanel extends JPanel{
+public class TournamentGamePanel extends JPanel{
 
 	/**
 	 * 
@@ -55,7 +55,7 @@ public class SoloGamePanel extends JPanel{
 	/**
 	 * Create the application.
 	 */
-	public SoloGamePanel() {
+	public TournamentGamePanel() {
 
 		setLayout(null);
 		setBounds(0, 0, 735, 591);
@@ -334,7 +334,7 @@ public class SoloGamePanel extends JPanel{
 		JFrame jFrame = new JFrame("");
 		jFrame.getContentPane().setLayout(null);
 		jFrame.setBounds(0, 0, 900, 800);
-		SoloGamePanel sgp = new SoloGamePanel();
+		TournamentGamePanel sgp = new TournamentGamePanel();
 		sgp.setBounds(jFrame.getWidth()/7, jFrame.getHeight()/6, 735, 591);
 		jFrame.getContentPane().add(sgp);
 		jFrame.setVisible(true);
