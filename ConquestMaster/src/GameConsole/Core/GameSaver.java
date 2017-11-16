@@ -12,11 +12,18 @@ import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
+/**
+ * This class is used to save the game if user wants to save the current session
+ */
 public class GameSaver {
 	private GameState game;
 	private WindowMain win;
-	
-	
+
+	/**
+	 * Constructor for GameSaver with incoming parameters
+	 * @param game Game state the current game
+	 * @param win Window frame of the game
+	 */
 	public GameSaver(GameState game, WindowMain win) {
 		this.game = game;
 		this.win = win;
@@ -24,8 +31,8 @@ public class GameSaver {
 	
 	
 	/**
-	 * 
-	 * @param out
+	 * Write all the information of the current game into output stream
+	 * @param out output stream
 	 */
 	private void save(PrintWriter out) {
 
@@ -129,8 +136,8 @@ public class GameSaver {
 	}
 
 	/**
-	 * 
-	 * @param path
+	 * Save the game information into file
+	 * @param path file path
 	 * @throws IOException
 	 * @see validityCheck()
 	 */
