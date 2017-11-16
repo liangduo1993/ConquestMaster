@@ -22,6 +22,7 @@ public class GameState extends Observable {
 	private Country country2;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
+	private Country currClick;
 
 	/**
 	 * constructor method with incoming parameters
@@ -87,6 +88,17 @@ public class GameState extends Observable {
 				cou.getButton().updateLabel(cou.getPlayer());
 			}
 		}
+	}
+
+	
+	
+	
+	public Country getCurrClick() {
+		return currClick;
+	}
+
+	public void setCurrClick(Country currClick) {
+		this.currClick = currClick;
 	}
 
 	/**

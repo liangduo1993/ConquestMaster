@@ -1,8 +1,5 @@
 package GameConsole.Strategy;
 
-import GameConsole.Core.GameState;
-import GameConsole.Model.Player.Player;
-
 public class BenevolentStrategy extends OriginalStrategy implements Strategy{
 
 	@Override

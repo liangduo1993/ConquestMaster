@@ -347,11 +347,7 @@ public class Player extends Observable {
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public boolean originalAttack(Country c1, Country c2, int decision1, int decision2) throws Exception {
-		if(c1.getPlayer() != this || c2.getPlayer() == this){
-			throw new RuntimeException("The attacker and defender is not right!");
-		}
-		
+	public boolean originalAttack(Country c1, Country c2, int decision1, int decision2) {
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
@@ -434,14 +430,18 @@ public class Player extends Observable {
 	 * @param c
 	 *            the target country
 	 */
-	public void reinforce(Country c) {
-		if (countries.contains(c)) {
-			c.addInfrantry(1);
-		}
-		setChanged();
-		notifyObservers();
+	public void reinforce() {
+		this.strategy.reinforce();
 	}
 
+	public void fortify(){
+		this.strategy.fortify();
+	}
+	
+	public void attack(){
+		this.strategy.attack();
+	}
+	
 	/**
 	 * To perform move troop action
 	 * 
