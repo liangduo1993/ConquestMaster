@@ -1,5 +1,6 @@
 package GameConsole.View;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -40,6 +41,12 @@ public class SoloGamePanel {
 	private JLabel M3Label;
 	private JLabel M4Label;
 	private JLabel M5Label;
+	
+	private JComboBox comboBox_6;
+	private JComboBox comboBox_7;
+	private JComboBox comboBox_8;
+	private JComboBox comboBox_9;
+	
 	
 
 	/**
@@ -104,29 +111,71 @@ public class SoloGamePanel {
 		p4Label.setBounds(381, 123, 75, 15);
 		panel.add(p4Label);
 
-		JComboBox comboBox_6 = new JComboBox();
-		comboBox_6.setModel(
-				new DefaultComboBoxModel(new String[] { "aggressive ", "benevolent ", "random ", "cheater " }));
+		 comboBox_6 = new JComboBox();
+		comboBox_6.setModel(new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
 		comboBox_6.setBounds(211, 76, 102, 21);
 		panel.add(comboBox_6);
 
-		JComboBox comboBox_7 = new JComboBox();
+		 comboBox_7 = new JComboBox();
 		comboBox_7.setModel(
-				new DefaultComboBoxModel(new String[] { "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
 		comboBox_7.setBounds(501, 76, 102, 21);
+		comboBox_7.setEnabled(false);
 		panel.add(comboBox_7);
 
-		JComboBox comboBox_8 = new JComboBox();
+		 comboBox_8 = new JComboBox();
 		comboBox_8.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
 		comboBox_8.setBounds(211, 126, 102, 21);
+		comboBox_8.setEnabled(false);
 		panel.add(comboBox_8);
 
-		JComboBox comboBox_9 = new JComboBox();
+		 comboBox_9 = new JComboBox();
 		comboBox_9.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive ", "benevolent ", "random ", "cheater "}));
 		comboBox_9.setBounds(501, 126, 102, 21);
+		comboBox_9.setEnabled(false);
 		panel.add(comboBox_9);
+
+		 comboBox_6.addActionListener(new ActionListener() {
+			 	public void actionPerformed(ActionEvent arg0) {
+					String text = (String)comboBox_6.getSelectedItem();
+					if(text.equals("none")){
+						comboBox_7.setEnabled(false);
+					}else{
+						comboBox_7.setEnabled(true);
+					}
+			 	}
+			 });
+		 
+		 comboBox_7.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String text7 = (String)comboBox_7.getSelectedItem();
+				if(text7.equals("none")){
+					comboBox_8.setEnabled(false);
+				}else{
+					comboBox_8.setEnabled(true);
+				}
+			}
+		});
+		 
+		 comboBox_8.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String text8 = (String)comboBox_8.getSelectedItem();
+				if(text8.equals("none")){
+					comboBox_9.setEnabled(false);
+				}else{
+					comboBox_9.setEnabled(true);
+				}
+			}
+		});
+		
 
 		JButton startGameButt = new JButton("Start Game");
 		startGameButt.setBackground(Color.WHITE);
