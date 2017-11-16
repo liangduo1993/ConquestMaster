@@ -207,7 +207,7 @@ public class GameLoader {
 	 * @param in
 	 *            The input LineNumberReader.
 	 * @param section
-	 *            The section among "Map", "Continent" and "Territory".
+	 *            The section among "Map", "GameState", "Players", "Countries".
 	 * @throws IOException
 	 */
 	private int findSection(LineNumberReader in, String section) throws IOException {
