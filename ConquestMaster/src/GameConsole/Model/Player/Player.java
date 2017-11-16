@@ -19,6 +19,7 @@ import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.Strategy.Strategy;
 import GameConsole.View.LogPanel;
 
 /**
@@ -39,6 +40,7 @@ public class Player extends Observable {
 	private int initTroop;
 	private boolean isConquered = false;
 	private LogPanel lp = LogPanel.getInstance();
+	private Strategy strategy;
 
 	/**
 	 * Constructor method
@@ -50,10 +52,11 @@ public class Player extends Observable {
 	 * @param game
 	 *            the game state with GameState type
 	 */
-	public Player(String name, Color color, GameState game) {
+	public Player(String name, Color color, GameState game,Strategy strategy) {
 		this.name = name;
 		this.color = color;
 		this.game = game;
+		this.strategy = strategy;
 	}
 
 	/**
