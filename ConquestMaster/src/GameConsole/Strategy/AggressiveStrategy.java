@@ -1,7 +1,6 @@
 package GameConsole.Strategy;
 
-public class AggressiveStrategy extends OriginalStrategy implements Strategy {
-
+public class AggressiveStrategy extends OriginalStrategy implements Strategy{
 	@Override
 	public void originalAttack() {
 		// TODO Auto-generated method stub
@@ -19,5 +18,6 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

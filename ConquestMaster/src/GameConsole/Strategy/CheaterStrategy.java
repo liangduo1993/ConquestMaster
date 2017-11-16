@@ -1,6 +1,6 @@
 package GameConsole.Strategy;
 
-public class CheaterStrategy implements Strategy{
+public class CheaterStrategy extends OriginalStrategy implements Strategy{
 
 	@Override
 	public void originalAttack() {

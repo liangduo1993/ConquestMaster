@@ -1,12 +1,10 @@
 package GameConsole.Strategy;
 
-public class HumanStrategy implements Strategy{
+public class HumanStrategy extends OriginalStrategy implements Strategy {
 
-	
 	@Override
 	public void originalAttack() {
 		// TODO Auto-generated method stub
-		
 		
 	}
 
