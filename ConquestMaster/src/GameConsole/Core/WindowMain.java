@@ -42,6 +42,7 @@ import GameConsole.View.DomiInfoPanel;
 import GameConsole.View.LogPanel;
 import GameConsole.View.MapDisplayer;
 import GameConsole.View.PhaseView;
+import GameConsole.View.TournamentGamePanel;
 
 /**
  * This class is to display the interface of the game where the player can
@@ -122,7 +123,30 @@ public class WindowMain {
 		tournamentGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// cardLayout.show(cards, "Player Selection");
+				TournamentGamePanel tgp = new TournamentGamePanel();
+				cards.add(tgp, "Tournament Mode");
+				cardLayout.show(cards, "Tournament Mode");
+				tgp.startGameButt.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						int gameTimes = Integer.parseInt(tgp.textField.getText());
+						if(gameTimes>=10&&gameTimes<=50){
+							
+						}else{
+							JOptionPane.showMessageDialog(null, "Plase input the correct Game Times on each map from 10 to 50!!!");
+						}
+					}
+				});
+				tgp.CancelButt.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						cardLayout.show(cards, "Main Screen");
+					}
+				});
 			}
 		});
 		tournamentGame.setBackground(new Color(255, 0, 0));
