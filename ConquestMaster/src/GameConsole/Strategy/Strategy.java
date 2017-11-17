@@ -10,9 +10,5 @@ public interface Strategy {
 	void reinforce();
 	void fortify();
 	
-	GameState getGameState();
-	void setGameState(GameState gameState);
-	Player getPlayer();
-	void setPlayer(Player player);
 
 }

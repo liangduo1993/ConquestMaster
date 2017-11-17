@@ -21,6 +21,7 @@ import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Domain.CountryDecorator;
+import GameConsole.Strategy.OriginalStrategy;
 import GameConsole.Strategy.Strategy;
 import GameConsole.View.LogPanel;
 
@@ -59,8 +60,8 @@ public class Player extends Observable {
 		this.color = color;
 		this.game = game;
 		this.strategy = strategy;
-		strategy.setGameState(game);
-		strategy.setPlayer(this);
+		((OriginalStrategy)strategy).setGameState(game);
+		((OriginalStrategy)strategy).setPlayer(this);
 	}
 
 	/**
