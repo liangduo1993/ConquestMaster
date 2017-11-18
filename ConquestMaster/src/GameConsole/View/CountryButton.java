@@ -82,7 +82,7 @@ public class CountryButton{
 	 * @param p the player who owns the corresponding country of the button with Player type
 	 */
 	public void updateLabel(Player p) {
-		this.label.setText("" + this.country.getTroops().size());
+		this.label.setText("" + this.country.getTroopNum());
 		this.label.setForeground(p.getColor());
 	}
 	

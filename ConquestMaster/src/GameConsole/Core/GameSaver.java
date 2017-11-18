@@ -85,7 +85,7 @@ public class GameSaver {
 			countries.addAll(c.getCountries());
 		}
 		for(Country c: countries){
-			out.println(c.getName() + "," + c.getPlayer().getName() + "," + c.getTroops().size());
+			out.println(c.getName() + "," + c.getPlayer().getName() + "," + c.getTroopNum());
 		}
 		
 		

@@ -64,12 +64,13 @@ public class GameState extends Observable {
 	/**
 	 * will start the game setting player 1 as the current player
 	 */
-	public void gameStart() {
+	public void gameStart(boolean flag) {
 		this.currPhase = 0;
 		this.setFirstRound(1);
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers);
-		this.updateCountryLabels();
+		if(flag)
+			this.updateCountryLabels();
 		lp.addLog("The game is started!");
 		lp.addLog("It is the Startup phase!");
 	}

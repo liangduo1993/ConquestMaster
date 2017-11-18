@@ -1,6 +1,7 @@
 package GameConsole.Model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import GameConsole.Core.World;
 
@@ -9,7 +10,7 @@ import GameConsole.Core.World;
  * associated with the list of players
  */
 public class Group {
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private List<Player> players = new ArrayList<Player>();
 	private World world;
 	private String groupName;
 
@@ -17,7 +18,7 @@ public class Group {
 	 * Method to get the players list
 	 * @return the list of players with Arraylist type
 	 */
-	public ArrayList<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
@@ -25,7 +26,7 @@ public class Group {
 	 * To set the players list
 	 * @param players the players list need to be set
 	 */
-	public void setPlayers(ArrayList<Player> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 

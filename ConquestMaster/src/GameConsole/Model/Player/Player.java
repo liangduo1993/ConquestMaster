@@ -64,19 +64,13 @@ public class Player extends Observable {
 		((OriginalStrategy) strategy).setPlayer(this);
 	}
 
-	
-	
 	public Strategy getStrategy() {
 		return strategy;
 	}
 
-
-
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
-
-
 
 	/**
 	 * To check whether the player has moved the troop or not
@@ -200,8 +194,6 @@ public class Player extends Observable {
 		notifyObservers();
 	}
 
-	
-
 	/**
 	 * To get the player's hand cards list
 	 * 
@@ -289,7 +281,7 @@ public class Player extends Observable {
 		ArrayList<Country> canAttackCountrys = new ArrayList<>();
 		boolean flag = true;
 		for (Country c : this.countries) {
-			if (c.getTroops().size() > 1) {
+			if (c.getTroopNum() > 1) {
 				flag = false;
 				canAttackCountrys.add(c);
 			}
@@ -322,7 +314,7 @@ public class Player extends Observable {
 	 *         troop otherwise return null
 	 */
 	public Country checkIfCanMove(Country origin, String countryName) {
-		if ((this.checkIfOwned(countryName) == null) || (origin.getTroops().size() == 1)) {
+		if ((this.checkIfOwned(countryName) == null) || (origin.getTroopNum() == 1)) {
 			return null;
 		}
 
@@ -401,11 +393,11 @@ public class Player extends Observable {
 
 			if (attackMax > defendMax) {
 
-				c2.getTroops().remove(c2.getTroops().size() - 1);
+				c2.removeTroops(1);
 				lp.addLog("Attacker won!" + "\n");
 				diceString += "Attacker won!" + "\n";
 			} else {
-				c1.getTroops().remove(c1.getTroops().size() - 1);
+				c1.removeTroops(1);
 				lp.addLog("Defender won!" + "\n");
 				diceString += "Defender won!" + "\n";
 			}
@@ -415,7 +407,7 @@ public class Player extends Observable {
 		setChanged();
 		notifyObservers();
 
-		if (c2.getTroops().size() == 0) {
+		if (c2.getTroopNum() == 0) {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
@@ -684,12 +676,11 @@ public class Player extends Observable {
 	 * @return the number of the got armies
 	 */
 	public int getBonusAndChangeCard() {
-//		if (this.countries.size() == 0) {
-//			this.loseGame();
-//			return 0;
-//		}
-		
-		
+		// if (this.countries.size() == 0) {
+		// this.loseGame();
+		// return 0;
+		// }
+
 		int firstRound = game.getFirstRound();
 		if (firstRound == 1) {
 			if (game.getAllPlayers().getPlayers().size() == 2) {
@@ -710,48 +701,68 @@ public class Player extends Observable {
 			if (reward < 3)
 				reward = 3;
 
-			while (this.onhand.size() >= 3) {
-				int cardType0 = 0;
-				int cardType1 = 0;
-				int cardType2 = 0;
+			while (this.onhand.size() >= 5) {
+				ArrayList<Card> cardType0 = new ArrayList<>();
+				ArrayList<Card> cardType1 = new ArrayList<>();
+				ArrayList<Card> cardType2 = new ArrayList<>();
 
 				for (Card c : this.onhand) {
 					if (c.getType() == 0) {
-						cardType0 = cardType0 + 1;
+						cardType0.add(c);
 					}
 					if (c.getType() == 1) {
-						cardType1 = cardType1 + 1;
+						cardType1.add(c);
 					}
 					if (c.getType() == 2) {
-						cardType2 = cardType2 + 1;
+						cardType2.add(c);
 					}
 				}
 
-				if (cardType0 >= 3) {
-					cardType0 -= 3;
+				if (cardType0.size() >= 3) {
+					ArrayList<Card> temp = new ArrayList<>();
+					for (int i = 0; i < 3; i++) {
+						Card t = cardType0.remove(0);
+						temp.add(t);
+					}
+					this.onhand.removeAll(temp);
 					totalCardsExchange++;
 					reward = reward + (totalCardsExchange * 5);
 				}
-				if (cardType1 >= 3) {
-					cardType1 -= 3;
+				if (cardType1.size() >= 3) {
+					ArrayList<Card> temp = new ArrayList<>();
+					for (int i = 0; i < 3; i++) {
+						Card t = cardType1.remove(0);
+						temp.add(t);
+					}
+					this.onhand.removeAll(temp);
 					totalCardsExchange++;
 					reward = reward + (totalCardsExchange * 5);
 				}
-				if (cardType2 >= 3) {
-					cardType2 -= 3;
+				if (cardType2.size() >= 3) {
+					ArrayList<Card> temp = new ArrayList<>();
+					for (int i = 0; i < 3; i++) {
+						Card t = cardType2.remove(0);
+						temp.add(t);
+					}
+					this.onhand.removeAll(temp);
 					totalCardsExchange++;
 					reward = reward + (totalCardsExchange * 5);
 				}
-				if (cardType0 >= 1 && cardType1 >= 1 && cardType2 >= 1) {
-					cardType0--;
-					cardType1--;
-					cardType2--;
+				if (cardType0.size() >= 1 && cardType1.size() >= 1 && cardType2.size() >= 1) {
+					ArrayList<Card> temp = new ArrayList<>();
+					Card t = cardType0.remove(0);
+					temp.add(t);
+					t = cardType1.remove(0);
+					temp.add(t);
+					t = cardType2.remove(0);
+					temp.add(t);
+					this.onhand.removeAll(temp);
 					totalCardsExchange++;
 					reward = reward + (totalCardsExchange * 5);
 				}
 
 			}
-			
+
 			boolean owned;
 			World world = game.getWorld();
 			if (world.getContinents().size() > 0) {

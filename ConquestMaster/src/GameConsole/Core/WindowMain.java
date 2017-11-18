@@ -459,7 +459,7 @@ public class WindowMain {
 					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
 					gameState.addPlayer(p5);
 				}
-				gameState.gameStart();
+				gameState.gameStart(true);
 
 				domiInfoPanel = new DomiInfoPanel(gameState);
 				domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
@@ -808,7 +808,7 @@ public class WindowMain {
 						} else if (gameState.getCurrPhase() == 1) {
 							if (countryButton.country.getPlayer() == gameState.getCurrPlayer()
 									&& gameState.getCountry1() == null) {
-								if (countryButton.country.getTroops().size() > 1) {
+								if (countryButton.country.getTroopNum() > 1) {
 									gameState.setCountry1(countryButton.country);
 									country1.setText(gameState.getCountry1().getName());
 									cancelCountryButton.setVisible(true);
@@ -857,7 +857,7 @@ public class WindowMain {
 								if (gameState.getCountry1() == null) {
 									gameState.setCountry1(countryButton.country);
 									country1.setText(gameState.getCountry1().getName());
-									if (gameState.getCountry1().getTroops().size() == 1) {
+									if (gameState.getCountry1().getTroopNum() == 1) {
 										JOptionPane.showMessageDialog(countryButton.b,
 												"Troops cannot be moved from here because "
 														+ gameState.getCountry1().getName() + " only has 1 troop.");

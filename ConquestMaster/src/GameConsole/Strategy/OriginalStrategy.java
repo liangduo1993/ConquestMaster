@@ -6,6 +6,7 @@ import GameConsole.Model.Player.Player;
 public class OriginalStrategy implements Strategy{
 	private GameState gameState;
 	private Player player;
+	private String name;
 	
 	
 	public void attack() {
@@ -28,6 +29,12 @@ public class OriginalStrategy implements Strategy{
 	}
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

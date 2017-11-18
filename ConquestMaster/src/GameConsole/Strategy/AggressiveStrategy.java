@@ -12,11 +12,19 @@ import GameConsole.Model.Player.Player;
 
 public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 
+	
+	
+	
+	public AggressiveStrategy() {
+		super();
+		this.setName("Aggressive");
+	}
+
 	@Override
 	public void attack() {
 		for (;;) {
 			Country strongestC = this.getStrongestContry();
-			int decision1 = strongestC.getTroops().size() >= 3 ? 3 : strongestC.getTroops().size();
+			int decision1 = strongestC.getTroopNum() >= 3 ? 3 : strongestC.getTroopNum();
 			int decision2 = 1;
 			Country country1 = strongestC;
 			Country country2 = new Country();
@@ -31,7 +39,7 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 						decision1, decision2);
 				boolean flag = (boolean) result.get("result");
 				if (flag) {
-					int moveNum = strongestC.getTroops().size() - 1;
+					int moveNum = strongestC.getTroopNum() - 1;
 					country2.addInfrantry(moveNum);
 					country1.removeTroops(moveNum);
 					// break;
@@ -57,7 +65,7 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		Country strongestC = getStrongestContry();
 		for (Country neighbour : strongestC.getBorderingCountries()) {
 			if (neighbour.getPlayer() == this.getPlayer()) {
-				getGameState().getCurrPlayer().moveTroops(neighbour, strongestC, neighbour.getTroops().size() - 1);
+				getGameState().getCurrPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
 			}
 		}
 	}
@@ -66,7 +74,7 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttackCountries = new ArrayList<>();
 		for (Country c : countrys) {
-			if (c.getTroops().size() > 1) {
+			//if (c.getTroops().size() > 1) {
 				boolean flag = false;
 				for (Country neighbour : c.getBorderingCountries()) {
 					if (neighbour.getPlayer() != this.getPlayer())
@@ -75,12 +83,12 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 				if (flag) {
 					canAttackCountries.add(c);
 				}
-			}
+			//}
 		}
 
 		Country strongestCountry = new Country();
 		for (Country country : canAttackCountries) {
-			if (country.getTroops().size() > strongestCountry.getTroops().size()) {
+			if (country.getTroopNum() > strongestCountry.getTroopNum()) {
 				strongestCountry = country;
 			}
 		}
@@ -98,18 +106,36 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		p1.setStrategy(s1);
 		
 		for(Country c: p1.getCountries()){
-			System.out.println(c.getName() + ": " + c.getTroops().size());
+			System.out.println(c.getName() + ": " + c.getTroopNum());
 		}
 		System.out.println("======");
 		
 		p1.reinforce();
 		
 		for(Country c: p1.getCountries()){
-			System.out.println(c.getName() + ": " + c.getTroops().size());
+			System.out.println(c.getName() + ": " + c.getTroopNum());
 		}		
+		System.out.println("======");
 		
+		p1.fortify();
+		for(Country c: p1.getCountries()){
+			System.out.println(c.getName() + ": " + c.getTroopNum());
+		}	
+		System.out.println("======");
 		
+		p1.attack();
 		
+		for(Country c: p1.getCountries()){
+			System.out.println(c.getName() + ": " + c.getTroopNum());
+		}	
+		System.out.println("======");
+		
+		p1.reinforce();
+		
+		for(Country c: p1.getCountries()){
+			System.out.println(c.getName() + ": " + c.getTroopNum());
+		}	
+		System.out.println("======");
 	}
 	
 	

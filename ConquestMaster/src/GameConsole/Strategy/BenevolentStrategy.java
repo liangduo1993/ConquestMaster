@@ -6,6 +6,11 @@ import GameConsole.Model.Domain.Country;
 
 public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
+	public BenevolentStrategy() {
+		super();
+		this.setName("Benevolent");
+	}
+
 	@Override
 	public void attack() {
 	}
@@ -21,33 +26,30 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
-		for (;;) {
-			Country country1 = getWeakestCountry();
-			Country country2 = new Country();
-			for (Country neighbour : country1.getBorderingCountries()) {
-				if (neighbour.getPlayer() == this.getPlayer()) {
-					country2 = neighbour;
-					break;
-				}
-			}
-
-			int minNum = country1.getTroops().size();
-			int maxNum = country2.getTroops().size();
-
-			int moveTroopNum = (maxNum - minNum) / 2;
-			getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
-
-			if (country2.getPlayer() != null)
+		Country country1 = getWeakestCountry();
+		Country country2 = new Country();
+		for (Country neighbour : country1.getBorderingCountries()) {
+			if (neighbour.getPlayer() == this.getPlayer()) {
+				country2 = neighbour;
 				break;
-
+			}
 		}
+
+		if(country2.getPlayer() == null) return;
+		
+		int minNum = country1.getTroopNum();
+		int maxNum = country2.getTroopNum();
+
+		int moveTroopNum = (maxNum - minNum) / 2;
+		getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
+
 	}
 
 	private Country getWeakestCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		Country weakestCountry = countrys.get(0);
 		for (Country country : countrys) {
-			if (country.getTroops().size() < weakestCountry.getTroops().size()) {
+			if (country.getTroopNum() < weakestCountry.getTroopNum()) {
 				weakestCountry = country;
 			}
 		}

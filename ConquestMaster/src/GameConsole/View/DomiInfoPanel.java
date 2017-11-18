@@ -63,7 +63,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 			Object[][] model = new Object[countries.size()][3];
 			for (int row = 0; row < countries.size(); row++) {
 				model[row][0] = countries.get(row).getName();
-				model[row][1] = countries.get(row).getTroops().size();
+				model[row][1] = countries.get(row).getTroopNum();
 				model[row][2] = countries.get(row).getContinent().getName();
 			}
 
@@ -97,7 +97,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 			Object[][] model = new Object[countries.size()][3];
 			for (int row = 0; row < countries.size(); row++) {
 				model[row][0] = countries.get(row).getName();
-				model[row][1] = countries.get(row).getTroops().size();
+				model[row][1] = countries.get(row).getTroopNum();
 				model[row][2] = countries.get(row).getContinent().getName();
 			}
 			JScrollPane scrollPane = tables.get(i);

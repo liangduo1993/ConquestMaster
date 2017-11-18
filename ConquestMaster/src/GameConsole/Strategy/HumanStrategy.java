@@ -20,7 +20,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		JLabel label = new JLabel("Attacker selects how many dice to roll");
 		numdice1.add(label);
 		DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
-		for (int i = Math.min(getGameState().getCountry1().getTroops().size() - 1, 3); i >= 1; i--) {
+		for (int i = Math.min(getGameState().getCountry1().getTroopNum() - 1, 3); i >= 1; i--) {
 			select1.addElement(Integer.toString(i));
 		}
 		JComboBox<String> list1 = new JComboBox<>(select1);
@@ -38,7 +38,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 
 		numdice1.add(new JLabel("Defender selects how many dice to roll"));
 		DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
-		for (int i = 1; i <= Math.min(getGameState().getCountry2().getTroops().size(), 2); i++) {
+		for (int i = 1; i <= Math.min(getGameState().getCountry2().getTroopNum(), 2); i++) {
 			select2.addElement(Integer.toString(i));
 		}
 		JComboBox<String> list2 = new JComboBox<>(select2);
@@ -63,7 +63,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			lp.addLog("Congrats " + getGameState().getCurrPlayer().getName() + " conquered "
 					+ getGameState().getCountry2().getName() + " with " + getGameState().getCountry1().getName());
 			DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-			for (int i = getGameState().getCountry1().getTroops().size() - 1; i >= 1; i--) {
+			for (int i = getGameState().getCountry1().getTroopNum() - 1; i >= 1; i--) {
 				selection.addElement(Integer.toString(i));
 			}
 			JComboBox<String> comboBox = new JComboBox<String>(selection);
@@ -93,7 +93,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		JPanel numPanel = new JPanel();
 		numPanel.add(new JLabel("Select how many troops to add"));
 		DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-		for (int i = 1; i < getGameState().getCountry1().getTroops().size(); i++) {
+		for (int i = 1; i < getGameState().getCountry1().getTroopNum(); i++) {
 			selection.addElement(Integer.toString(i));
 		}
 		JComboBox<String> comboBox = new JComboBox<String>(selection);

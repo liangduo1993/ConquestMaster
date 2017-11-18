@@ -14,7 +14,8 @@ import GameConsole.View.CountryButton;
 public class Country {
 	private Continent continent;
 	private Player player;
-	private ArrayList<AbstractTroop> troops = new ArrayList<AbstractTroop>();
+	//private ArrayList<AbstractTroop> troops = new ArrayList<AbstractTroop>();
+	private int troopNum;
 	private String name;
 	private int xLoc;
 	private int yLoc;
@@ -92,23 +93,24 @@ public class Country {
 	}
 
 
-	/**
-	 * To add the troop to the continent
-	 * @param t the troop need to be added with Troop type
-	 */
-	public void addTroop(AbstractTroop t) {
-		troops.add(t);
-	}
+//	/**
+//	 * To add the troop to the continent
+//	 * @param t the troop need to be added with Troop type
+//	 */
+//	public void addTroop(AbstractTroop t) {
+//		troops.add(t);
+//	}
 
 	/**
 	 * To add the troop to the continent
 	 * @param numTroops the number of the troops that need to be added with int type
 	 */
 	public void addInfrantry(int numTroops) {
-		for (int i = 0; i < numTroops; i++) {
-			Troop temp = new Troop();
-			this.troops.add(temp);
-		}
+//		for (int i = 0; i < numTroops; i++) {
+//			Troop temp = new Troop();
+//			this.troops.add(temp);
+//		}
+		this.troopNum += numTroops;
 	}
 
 
@@ -117,19 +119,20 @@ public class Country {
 	 * @param numToRemove the number of the troops that want to be removed from the continent
 	 */
 	public void removeTroops(int numToRemove) {
-		for (int i = 0; i < numToRemove; i++) { 
-												
-			this.troops.remove(this.troops.size() - 1);
-		}
+//		for (int i = 0; i < numToRemove; i++) { 
+//												
+//			this.troops.remove(this.troops.size() - 1);
+//		}
+		this.troopNum -= numToRemove;
 	}
 
-	/**
-	 * To get the troop list from the country
-	 * @return the troop list with ArrayList type
-	 */
-	public ArrayList<AbstractTroop> getTroops() {
-		return troops;
-	}
+//	/**
+//	 * To get the troop list from the country
+//	 * @return the troop list with ArrayList type
+//	 */
+//	public ArrayList<AbstractTroop> getTroops() {
+//		return troops;
+//	}
 
 	/**
 	 * To set a name to the country
@@ -238,4 +241,14 @@ public class Country {
 		this.linkNames = linkNames;
 	}
 
+	public int getTroopNum() {
+		return troopNum;
+	}
+
+	public void setTroopNum(int troopNum) {
+		this.troopNum = troopNum;
+	}
+
+	
+	
 }
