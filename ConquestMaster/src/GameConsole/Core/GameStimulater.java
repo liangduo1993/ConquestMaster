@@ -74,12 +74,17 @@ public class GameStimulater {
 		return "draw";
 	}
 
+	
+	//AggressiveStrategy
+	//BenevolentStrategy
+	//CheaterStrategy
+	//RandomStrategy
 	public static void main(String[] args) throws Exception {
 		GameState gs = new GameState(null, "C:\\Users\\Liang\\Documents\\Atlantis.map");
-		Player p1 = new Player("p1", Color.magenta, gs, new CheaterStrategy());
-		Player p2 = new Player("p2", Color.green, gs, new CheaterStrategy());
+		Player p1 = new Player("p1", Color.magenta, gs, new AggressiveStrategy());
+		Player p2 = new Player("p2", Color.green, gs, new BenevolentStrategy());
 		Player p3 = new Player("p3", Color.blue, gs, new CheaterStrategy());
-		Player p4 = new Player("p4", Color.red, gs, new CheaterStrategy());
+		Player p4 = new Player("p4", Color.red, gs, new RandomStrategy());
 		List<Player> list = new ArrayList<>();
 		list.add(p1);
 		list.add(p2);
@@ -87,7 +92,7 @@ public class GameStimulater {
 		list.add(p4);
 		
 		
-		GameStimulater gameSt = new GameStimulater(gs, list, 30);
+		GameStimulater gameSt = new GameStimulater(gs, list, 5);
 		gs.gameStart(false);
 
 		System.out.println("=====================");
