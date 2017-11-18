@@ -12,6 +12,7 @@ import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.HumanStrategy;
 
 /**
  * this class is a test class for testing if player owns the corresponding
@@ -33,13 +34,12 @@ public class PlayerTest {
 	public void setUp() throws Exception {
 
 		group = new Group();
-		ArrayList<Player> players = new ArrayList<Player>();
 
 		state = new GameState(null, "resources/ConquestMaps/Atlantis.map");
 		state.setAllPlayers(group);
 
 
-		player = new Player("testPlayer", null, state);
+		player = new Player("testPlayer", null, state, new HumanStrategy());
 		ArrayList<Country> temp = new ArrayList<Country>();
 		for (int i = 0; i < 14; ++i) {
 			temp.add(new Country());
@@ -47,7 +47,7 @@ public class PlayerTest {
 		player.setCountries(temp);
 		
 
-		player2 = new Player("testPlayerDefender", null, state);
+		player2 = new Player("testPlayerDefender", null, state, new HumanStrategy());
 		ArrayList<Country> temp2 = new ArrayList<Country>();
 		for (int i = 0; i < 2; ++i) {
 			temp2.add(new Country());
@@ -55,7 +55,7 @@ public class PlayerTest {
 		player2.setCountries(temp2);
 		
 	
-		player3 = new Player("testPlayer3", null, state);
+		player3 = new Player("testPlayer3", null, state, new HumanStrategy());
 		ArrayList<Country> temp3 = new ArrayList<Country>();
 		for (int i = 0; i < 2; ++i) {
 			temp3.add(new Country());
@@ -92,8 +92,8 @@ public class PlayerTest {
 		c1.addInfrantry(5);
 		c2.addInfrantry(4);
 		player.moveTroops(c1, c2, 2);
-		assertEquals(3, c1.getTroops().size());
-		assertEquals(6, c2.getTroops().size());
+		assertEquals(3, c1.getTroopNum());
+		assertEquals(6, c2.getTroopNum());
 	}
 	
 	/**

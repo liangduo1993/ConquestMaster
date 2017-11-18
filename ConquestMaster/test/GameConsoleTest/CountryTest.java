@@ -31,7 +31,7 @@ public class CountryTest {
 	 */
 	@Test
 	public void testAddTroop() {
-		assertEquals(3, country.getTroops().size());
+		assertEquals(3, country.getTroopNum());
 
 	}
 

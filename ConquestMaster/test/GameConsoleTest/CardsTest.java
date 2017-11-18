@@ -13,6 +13,7 @@ import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.HumanStrategy;
 
 /**
  * 
@@ -30,8 +31,8 @@ public class CardsTest {
 	 */
 	@Test
 	public void testAddCards() {
-		p1 = new Player("a", Color.cyan, null);
-		c = new Card(p1);
+		p1 = new Player("a", Color.cyan, null, new HumanStrategy());
+		c = new Card(0);
 		p1.addCard(c);
 		assertEquals(1, p1.getOnHand().size());
 	}
@@ -42,12 +43,12 @@ public class CardsTest {
 	 */
 	@Test
 	public void testgiveCards() {
-		p1 = new Player("a", Color.cyan, null);
-		p2 = new Player("a", Color.cyan, null);
+		p1 = new Player("a", Color.cyan, null, new HumanStrategy());
+		p2 = new Player("a", Color.cyan, null, new HumanStrategy());
 		p1.giveCards();// giver will receive some cards
 		p2.giveCards();// receiver will receive some cards
 		int sum = p1.getOnHand().size() + p2.getOnHand().size();
-		Card c = new Card(p1);
+		Card c = new Card(0);
 		c.handOverCards(p1, p2);
 		assertEquals(sum, p2.getOnHand().size());
 
@@ -64,8 +65,8 @@ public class CardsTest {
 		String path = "resources/ConquestMaps/Atlantis.map";
 		GameState gs = new GameState(null, path);
 		World w = gs.getWorld();
-		p1 = new Player("a", Color.cyan, gs);
-		p2 = new Player("b", Color.cyan, gs);
+		p1 = new Player("a", Color.cyan, gs, new HumanStrategy());
+		p2 = new Player("b", Color.cyan, gs, new HumanStrategy());
 
 		for (Continent c : w.getContinents()) {
 			for (Country country : c.getCountries()) {

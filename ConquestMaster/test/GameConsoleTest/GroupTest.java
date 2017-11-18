@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.HumanStrategy;
 
 /**
  * this class is test class for class Player. Check method of adding new player
@@ -24,7 +25,7 @@ public class GroupTest {
 		group = new Group();
 		players = new ArrayList<Player>();
 		for (int i = 0; i < 3; ++i) {
-			players.add(new Player(null, null, null));
+			players.add(new Player(null, null, null, new HumanStrategy()));
 		}
 		group.setPlayers(players);
 
