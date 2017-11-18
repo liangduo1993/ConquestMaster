@@ -36,7 +36,7 @@ public class Player extends Observable {
 	private ArrayList<Country> countries = new ArrayList<Country>();
 	private ArrayList<CountryDecorator> hand = new ArrayList<CountryDecorator>();
 	private ArrayList<Card> onhand = new ArrayList<Card>();
-	private GameState game; 
+	private GameState game;
 	private JFormattedTextField playerTextName;
 	private int totalCardsExchange = 0;
 	private boolean hasMoved = false;
@@ -55,13 +55,13 @@ public class Player extends Observable {
 	 * @param game
 	 *            the game state with GameState type
 	 */
-	public Player(String name, Color color, GameState game,Strategy strategy) {
+	public Player(String name, Color color, GameState game, Strategy strategy) {
 		this.name = name;
 		this.color = color;
 		this.game = game;
 		this.strategy = strategy;
-		((OriginalStrategy)strategy).setGameState(game);
-		((OriginalStrategy)strategy).setPlayer(this);
+		((OriginalStrategy) strategy).setGameState(game);
+		((OriginalStrategy) strategy).setPlayer(this);
 	}
 
 	/**
@@ -143,10 +143,6 @@ public class Player extends Observable {
 		this.color = color;
 	}
 
-
-
-
-
 	/**
 	 * To get the player's countries list
 	 * 
@@ -189,18 +185,8 @@ public class Player extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
 
-	/**
-	 * To set the player's hand cards list
-	 * 
-	 * @param hand
-	 *            the hand cards list desired to be set to belong to the player
-	 *            with ArrayList type
-	 */
-	public void setHand(ArrayList<CountryDecorator> hand) {
-		this.hand = hand;
-	}
+	
 
 	/**
 	 * To get the player's hand cards list
@@ -239,15 +225,9 @@ public class Player extends Observable {
 		this.isConquered = _isCQ;
 	}
 
-	
-
-	
-
 	public boolean isConquered() {
 		return isConquered;
 	}
-
-
 
 	/**
 	 * To get the game state
@@ -352,7 +332,7 @@ public class Player extends Observable {
 	 */
 	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) {
 		Map<String, Object> result = new HashMap<>();
-		
+
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
@@ -383,60 +363,57 @@ public class Player extends Observable {
 		}
 		lp.addLog(diceString);
 		diceString += "\n";
-		
-		
+
 		while (!defendRoll.isEmpty() && !attackRoll.isEmpty()) {
-			int attackMax = 0; 
+			int attackMax = 0;
 			int attackIndex = 0;
-			for(int i = 0; i < attackRoll.size(); i++){
-				if(attackRoll.get(i) > attackMax){
+			for (int i = 0; i < attackRoll.size(); i++) {
+				if (attackRoll.get(i) > attackMax) {
 					attackMax = attackRoll.get(i);
 					attackIndex = i;
 				}
 			}
 			attackRoll.remove(attackIndex);
-			
-			int defendMax = 0; 
+
+			int defendMax = 0;
 			int defendIndex = 0;
-			for(int i = 0; i < defendRoll.size(); i++){
-				if(defendRoll.get(i) > defendMax){
+			for (int i = 0; i < defendRoll.size(); i++) {
+				if (defendRoll.get(i) > defendMax) {
 					defendMax = defendRoll.get(i);
 					defendIndex = i;
 				}
 			}
 			defendRoll.remove(defendIndex);
-			
-			if(attackMax > defendMax){
+
+			if (attackMax > defendMax) {
 
 				c2.getTroops().remove(c2.getTroops().size() - 1);
 				lp.addLog("Attacker won!" + "\n");
 				diceString += "Attacker won!" + "\n";
-			}else{
+			} else {
 				c1.getTroops().remove(c1.getTroops().size() - 1);
 				lp.addLog("Defender won!" + "\n");
 				diceString += "Defender won!" + "\n";
 			}
 		}
 
-		
 		result.put("dice", diceString);
 		setChanged();
 		notifyObservers();
-		
+
 		if (c2.getTroops().size() == 0) {
 			c2.getPlayer().removeCountry(c2);
 			c2.setPlayer(this);
 			this.addCountry(c2);
 			this.isConquered(true);
-			//return true;
+			// return true;
 			result.put("result", true);
-		}else{
+		} else {
 			result.put("result", false);
 		}
 		return result;
-		//return false;
+		// return false;
 	}
-
 
 	/**
 	 * To add an infantry for target country of current player
@@ -448,14 +425,14 @@ public class Player extends Observable {
 		this.strategy.reinforce();
 	}
 
-	public void fortify(){
+	public void fortify() {
 		this.strategy.fortify();
 	}
-	
-	public void attack(){
+
+	public void attack() {
 		this.strategy.attack();
 	}
-	
+
 	/**
 	 * To perform move troop action
 	 * 
@@ -492,12 +469,12 @@ public class Player extends Observable {
 
 	}
 
-	public boolean checkWinGame(){
-		if(this.countries.size() == game.getWorld().getDeck().size())
+	public boolean checkWinGame() {
+		if (this.countries.size() == game.getWorld().getDeck().size())
 			return true;
 		return false;
 	}
-	
+
 	/**
 	 * To give the player the hand cards
 	 */
@@ -687,7 +664,100 @@ public class Player extends Observable {
 		}
 	}
 
+	/**
+	 * To get the initial army bonus in the setup phase
+	 * 
+	 * @return the number of the got armies
+	 */
+	public int getBonusAndChangeCard() {
+//		if (this.countries.size() == 0) {
+//			this.loseGame();
+//			return 0;
+//		}
+		
+		
+		int firstRound = game.getFirstRound();
+		if (firstRound == 1) {
+			if (game.getAllPlayers().getPlayers().size() == 2) {
+				return 40 - this.getCountries().size();
+			} else if (game.getAllPlayers().getPlayers().size() == 3) {
+				return 35 - this.getCountries().size();
+			} else if (game.getAllPlayers().getPlayers().size() == 4) {
+				return 30 - this.getCountries().size();
+			} else if (game.getAllPlayers().getPlayers().size() == 5) {
+				return 25 - this.getCountries().size();
+			} else {
+				return 20 - this.getCountries().size();
+			}
 
+		} else {
+
+			int reward = this.getCountries().size() / 3;
+			if (reward < 3)
+				reward = 3;
+
+			while (this.onhand.size() >= 3) {
+				int cardType0 = 0;
+				int cardType1 = 0;
+				int cardType2 = 0;
+
+				for (Card c : this.onhand) {
+					if (c.getType() == 0) {
+						cardType0 = cardType0 + 1;
+					}
+					if (c.getType() == 1) {
+						cardType1 = cardType1 + 1;
+					}
+					if (c.getType() == 2) {
+						cardType2 = cardType2 + 1;
+					}
+				}
+
+				if (cardType0 >= 3) {
+					cardType0 -= 3;
+					totalCardsExchange++;
+					reward = reward + (totalCardsExchange * 5);
+				}
+				if (cardType1 >= 3) {
+					cardType1 -= 3;
+					totalCardsExchange++;
+					reward = reward + (totalCardsExchange * 5);
+				}
+				if (cardType2 >= 3) {
+					cardType2 -= 3;
+					totalCardsExchange++;
+					reward = reward + (totalCardsExchange * 5);
+				}
+				if (cardType0 >= 1 && cardType1 >= 1 && cardType2 >= 1) {
+					cardType0--;
+					cardType1--;
+					cardType2--;
+					totalCardsExchange++;
+					reward = reward + (totalCardsExchange * 5);
+				}
+
+			}
+			
+			boolean owned;
+			World world = game.getWorld();
+			if (world.getContinents().size() > 0) {
+				for (Continent con : world.getContinents()) {
+					owned = true;
+					for (Country cou : con.getCountries()) {
+						if (cou.getPlayer() == null || !(cou.getPlayer().equals(this))) {
+							owned = false;
+							break;
+						}
+					}
+					if (owned) {
+						reward += con.getBonus();
+					}
+				}
+			}
+
+			return reward;
+		}
+	}
 
 	/**
 	 * To add a country to the player's countries list

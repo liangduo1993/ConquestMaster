@@ -12,11 +12,15 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
 	@Override
 	public void reinforce() {
-		this.getPlayer().addInfantry(this.getWeakestCountry());
+		int num = getPlayer().getBonusAndChangeCard();
+		for (int i = 0; i < num; i++) {
+			this.getPlayer().addInfantry(this.getWeakestCountry());
+		}
 	}
 
 	@Override
 	public void fortify() {
+		getPlayer().giveCards();
 		for (;;) {
 			Country country1 = getWeakestCountry();
 			Country country2 = new Country();
@@ -29,14 +33,13 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
 			int minNum = country1.getTroops().size();
 			int maxNum = country2.getTroops().size();
-			
+
 			int moveTroopNum = (maxNum - minNum) / 2;
-			getGameState().getCurrPlayer().moveTroops(country2,country1,
-					moveTroopNum);
-			
-			if(country2.getPlayer() != null)
+			getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
+
+			if (country2.getPlayer() != null)
 				break;
-			
+
 		}
 	}
 

@@ -37,19 +37,23 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 				country1.removeTroops(moveNum);
 			}
 			randomAttackTime--;
-			
-			if(!getPlayer().checkIfCanAttack() || randomAttackTime == 0)
+
+			if (!getPlayer().checkIfCanAttack() || randomAttackTime == 0)
 				break;
 		}
 	}
 
 	@Override
 	public void reinforce() {
-		this.getPlayer().addInfantry(this.getRandCountry());
+		int num = getPlayer().getBonusAndChangeCard();
+		for (int i = 0; i < num; i++) {
+			this.getPlayer().addInfantry(this.getRandCountry());
+		}
 	}
 
 	@Override
 	public void fortify() {
+		getPlayer().giveCards();
 		for (;;) {
 			Country country1 = getRandCountry();
 			Country country2 = new Country();

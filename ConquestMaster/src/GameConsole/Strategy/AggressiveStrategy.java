@@ -41,11 +41,15 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 
 	@Override
 	public void reinforce() {
-		this.getPlayer().addInfantry(this.getStrongestContry());
+		int num = getPlayer().getBonusAndChangeCard();
+		for (int i = 0; i < num; i++) {
+			this.getPlayer().addInfantry(this.getStrongestContry());
+		}
 	}
 
 	@Override
 	public void fortify() {
+		getPlayer().giveCards();
 		Country strongestC = getStrongestContry();
 		for (Country neighbour : strongestC.getBorderingCountries()) {
 			if (neighbour.getPlayer() == this.getPlayer()) {
