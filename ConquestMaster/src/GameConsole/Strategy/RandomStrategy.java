@@ -6,22 +6,40 @@ import java.util.Map;
 import GameConsole.Model.Army.AbstractTroop;
 import GameConsole.Model.Domain.Country;
 
-public class RandomStrategy extends OriginalStrategy implements Strategy{
+public class RandomStrategy extends OriginalStrategy implements Strategy {
 
 	@Override
 	public void attack() {
-		Country country1 = getGameState().getCountry1();
-		Country country2 = getGameState().getCountry2();
-		int decision1 = getRandTroops(country1.getTroops());
-		int decision2 = getRandTroops(country2.getTroops());
-		Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2,
-				decision1, decision2);
-		boolean flag = (boolean) result.get("result");
-		if(flag){
-			//占领国家后移动军队的数量
-			int moveNum = getRandTroops(country1.getTroops());
-			country2.addInfrantry(moveNum);
-			country1.removeTroops(moveNum);
+		int randomAttackTime = (int) (Math.random() * 50);
+		for (;;) {
+			Country country1 = getRandCountry();
+			Country country2 = new Country();
+			for (Country neighbour : country1.getBorderingCountries()) {
+				if (neighbour.getPlayer() == this.getPlayer()) {
+					country2 = neighbour;
+					break;
+				}
+			}
+
+			if (country1.getTroops().size() <= 1 || country2.getPlayer() == null) {
+				continue;
+			}
+
+			int decision1 = country1.getTroops().size() >= 3 ? 3 : country1.getTroops().size();
+			int decision2 = 1;
+
+			Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2, decision1,
+					decision2);
+			boolean flag = (boolean) result.get("result");
+			if (flag) {
+				int moveNum = getRandTroops(country1.getTroops());
+				country2.addInfrantry(moveNum);
+				country1.removeTroops(moveNum);
+			}
+			randomAttackTime--;
+			
+			if(!getPlayer().checkIfCanAttack() || randomAttackTime == 0)
+				break;
 		}
 	}
 
@@ -32,18 +50,35 @@ public class RandomStrategy extends OriginalStrategy implements Strategy{
 
 	@Override
 	public void fortify() {
-		int moveTroopNum = getRandTroops(getGameState().getCountry1().getTroops());
-		getGameState().getCurrPlayer().moveTroops(getGameState().getCountry1(), getGameState().getCountry2(),
-				moveTroopNum);
+		for (;;) {
+			Country country1 = getRandCountry();
+			Country country2 = new Country();
+			for (Country neighbour : country1.getBorderingCountries()) {
+				if (neighbour.getPlayer() == this.getPlayer()) {
+					country2 = neighbour;
+					break;
+				}
+			}
+
+			int moveTroopNum = getRandTroops(country2.getTroops());
+			getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
+
+			if (country2.getPlayer() != null) {
+				break;
+			}
+		}
 	}
-	
-	private Country getRandCountry(){
+
+	private Country getRandCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
-		int rand = (int) (Math.random()*countrys.size());
+		int rand = (int) (Math.random() * countrys.size());
 		return countrys.get(rand);
 	}
-	
-	private int getRandTroops(List<AbstractTroop> troops){
-		return (int) (Math.random()*troops.size());
+
+	private int getRandTroops(List<AbstractTroop> troops) {
+		if (troops.size() == 1)
+			return 0;
+		else
+			return ((int) (Math.random() * (troops.size() - 1))) + 1;
 	}
 }
