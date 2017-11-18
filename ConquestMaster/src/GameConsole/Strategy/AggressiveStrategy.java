@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import GameConsole.Core.GameLoader;
+import GameConsole.Core.GameState;
+import GameConsole.Core.WindowMain;
 import GameConsole.Model.Domain.Country;
+import GameConsole.Model.Player.Player;
 
 public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 
@@ -82,4 +86,32 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		}
 		return strongestCountry;
 	}
+	
+	public static void main(String[] args) throws Exception {
+		GameLoader gl = new GameLoader(null, "C:\\Users\\Liang\\Documents\\13.txt");
+		GameState gs = gl.getGameState();
+		Player p1 = gs.getAllPlayers().getPlayers().get(0);
+		AggressiveStrategy s1 = new AggressiveStrategy();
+		s1.setGameState(gs);
+		s1.setPlayer(p1);
+		
+		p1.setStrategy(s1);
+		
+		for(Country c: p1.getCountries()){
+			System.out.println(c.getName() + ": " + c.getTroops().size());
+		}
+		System.out.println("======");
+		
+		p1.reinforce();
+		
+		for(Country c: p1.getCountries()){
+			System.out.println(c.getName() + ": " + c.getTroops().size());
+		}		
+		
+		
+		
+	}
+	
+	
+	
 }

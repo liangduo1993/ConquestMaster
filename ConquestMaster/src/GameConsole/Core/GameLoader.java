@@ -94,7 +94,8 @@ public class GameLoader {
 				} else if ("playerNum".equals(prop)) {
 					this.playerNum = Integer.parseInt(val);
 				}else if ("troopRemaining".equals(prop)) {
-					win.troopsLeft = Integer.parseInt(val);
+					if(win != null)
+						win.troopsLeft = Integer.parseInt(val);
 				}
 			}
 		}
