@@ -1,5 +1,5 @@
 [Map]
-mapFilePath=C:\Users\Liang\Documents\ConquestMaps\Atlantis.map
+mapFilePath=resources/ConquestMaps/Atlantis.map
 
 [GameState]
 firstRound=2
