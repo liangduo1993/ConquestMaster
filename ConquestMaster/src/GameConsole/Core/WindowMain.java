@@ -134,10 +134,12 @@ public class WindowMain {
 				cards.add(tgp, "Tournament Mode");
 				cardLayout.show(cards, "Tournament Mode");
 				tgp.startGameButt.addActionListener(new ActionListener() {	
+					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						ArrayList<Player> players = new ArrayList<>();
+//						GameState gameState;
 						if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
 							if(tgp.comboBox_6.getSelectedItem().equals("agressive")){
 								Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
@@ -194,39 +196,23 @@ public class WindowMain {
 								Player p4 = new Player("p4", Color.green, gameState, new CheaterStrategy());
 								players.add(p4);
 							}
+							System.out.println(players.get(0).getName());
 							
 							int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
 							//System.out.println(gameTimes);
 							
 							String gameTurnsString = tgp.textField.getText();
+							String path = tgp.fc1.getSelectedFile().getAbsolutePath();
 							if(!gameTurnsString.equals("")){
 								int gameTurns = Integer.parseInt(tgp.textField.getText());
-								WindowMain win;
 								
 								if(gameTurns>=10&&gameTurns<=50){
-									StringBuffer sb = new StringBuffer(100);
-									for (int i = 0; i < gameTimes; i++) {
-										try {
-											win = new WindowMain();
-											try {
-												gameState = new GameState(win, tgp.fc1.getSelectedFile().getAbsolutePath());
-											} catch (Exception e1) {
-												// TODO Auto-generated catch block
-												e1.printStackTrace();
-											}
-										} catch (IOException e1) {
-											// TODO Auto-generated catch block
-											e1.printStackTrace();
-										}
-										gameSt = new GameStimulater(gameState, players, gameTurns);
-										gameState.gameStart(false);
-										sb.append(gameSt.execute());
-										sb.append("\r\n");
-										cardLayout.show(cards, "Game");
+									
+						
+									for (int i = 0; i < gameTimes; i++) {		
+										newGameState(path, players, gameTurns);
 									}
-									System.out.println("=====================");
-									System.out.println(sb.toString());
-									System.out.println("=====================");
+
 								}else{
 									JOptionPane.showMessageDialog(null, "Please input correct game turns from 10 to 50!");
 								}
@@ -1166,5 +1152,19 @@ public class WindowMain {
 
 	}
 	
+	public  GameState newGameState (String path, ArrayList<Player> players,int gameTurns){
+			StringBuffer sb = new StringBuffer(100);
+		try {
+			gameState = new GameState(this,path);
+			gameSt = new GameStimulater(gameState, players, gameTurns);
+			gameState.gameStart(false);
+			sb.append(gameSt.execute());
+			sb.append("\r\n");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return gameState;
+	}
 
 }
