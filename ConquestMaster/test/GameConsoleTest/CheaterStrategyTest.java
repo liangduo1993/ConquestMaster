@@ -23,6 +23,7 @@ public class CheaterStrategyTest {
 	GameState gs;
 	Player p1;
 	CheaterStrategy s1;
+	
 	/**
 	 * Set up function, to do some initial work.
 	 * 
