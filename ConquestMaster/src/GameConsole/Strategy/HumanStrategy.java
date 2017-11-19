@@ -10,8 +10,14 @@ import javax.swing.JPanel;
 
 import GameConsole.View.LogPanel;
 
+/**
+ * A concrete Strategy that implements human strategy operation
+ */
 public class HumanStrategy extends OriginalStrategy implements Strategy {
 
+	/**
+	 * Method to attack.
+	 */
 	@Override
 	public void attack() {
 		LogPanel lp = LogPanel.getInstance();
@@ -83,11 +89,17 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 
 	}
 
+	/**
+	 * Method to reinforce.
+	 */
 	@Override
 	public void reinforce() {
 		this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 	}
 
+	/**
+	 * Method to fortify
+	 */
 	@Override
 	public void fortify() {
 		JPanel numPanel = new JPanel();

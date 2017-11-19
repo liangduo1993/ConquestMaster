@@ -10,13 +10,22 @@ import GameConsole.Model.Army.AbstractTroop;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
+/**
+ * A concrete Strategy that implements random strategy operation
+ */
 public class RandomStrategy extends OriginalStrategy implements Strategy {
 
+	/**
+	 * Constructor for RandomStrategy
+	 */
 	public RandomStrategy() {
 		super();
 		this.setName("Random");
 	}
 
+	/**
+	 * Method to attack.
+	 */
 	@Override
 	public void attack() {
 		int randomAttackTime = (int) (Math.random() * 50);
@@ -55,6 +64,9 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to reinforce.
+	 */
 	@Override
 	public void reinforce() {
 		int num = getPlayer().getBonusAndChangeCard();
@@ -63,6 +75,9 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to fortify
+	 */
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
@@ -88,12 +103,20 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to get country in random mode
+	 * @return the country that got which is Country type
+	 */
 	private Country getRandCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		int rand = (int) (Math.random() * countrys.size());
 		return countrys.get(rand);
 	}
-	
+
+	/**
+	 * Method to get country which can be attacked in random mode
+	 * @return the country that got which is Country type
+	 */
 	private Country getCanAttackRandomCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttack = new ArrayList<>();
@@ -110,6 +133,11 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 		return canAttack.get(rand);
 	}
 
+	/**
+	 * Method to get the number of troop in randomly
+	 * @param num the total number of troop the country owns
+	 * @return the random number of the troop which is no more than the total number of troop the country owns
+	 */
 	private int getRandTroops(int num) {
 		if (num == 1)
 			return 0;
@@ -117,6 +145,9 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 			return ((int) (Math.random() * (num - 1))) + 1;
 	}
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) throws Exception {
 		GameLoader gl = new GameLoader(null, "C:\\Users\\Liang\\Documents\\13.txt");
 		GameState gs = gl.getGameState();

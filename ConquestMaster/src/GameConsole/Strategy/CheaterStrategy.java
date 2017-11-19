@@ -9,13 +9,22 @@ import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
+/**
+ * A concrete Strategy that implements cheater strategy operation
+ */
 public class CheaterStrategy extends OriginalStrategy implements Strategy{
 
+	/**
+	 * Constructor for CheaterStrategy
+	 */
 	public CheaterStrategy() {
 		super();
 		this.setName("Cheater");
 	}
-	
+
+	/**
+	 * Method to attack.
+	 */
 	@Override
 	public void attack() {
 		Set<Country> neighbours = new HashSet<>();
@@ -48,6 +57,9 @@ public class CheaterStrategy extends OriginalStrategy implements Strategy{
 		
 	}
 
+	/**
+	 * Method to reinforce.
+	 */
 	@Override
 	public void reinforce() {
 		ArrayList<Country> list = getPlayer().getCountries();
@@ -58,6 +70,9 @@ public class CheaterStrategy extends OriginalStrategy implements Strategy{
 		
 	}
 
+	/**
+	 * Method to fortify
+	 */
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
@@ -72,9 +87,11 @@ public class CheaterStrategy extends OriginalStrategy implements Strategy{
 			}
 		}
 	}
-	
-	
-	
+
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) throws Exception {
 		GameLoader gl = new GameLoader(null, "C:\\Users\\Liang\\Documents\\13.txt");
 		GameState gs = gl.getGameState();

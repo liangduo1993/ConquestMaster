@@ -4,17 +4,29 @@ import java.util.List;
 
 import GameConsole.Model.Domain.Country;
 
+/**
+ * A concrete Strategy that implements benevolent strategy operation
+ */
 public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
+	/**
+	 * Constructor for BenevolentStrategy
+	 */
 	public BenevolentStrategy() {
 		super();
 		this.setName("Benevolent");
 	}
 
+	/**
+	 * Method to attack.
+	 */
 	@Override
 	public void attack() {
 	}
 
+	/**
+	 * Method to reinforce.
+	 */
 	@Override
 	public void reinforce() {
 		int num = getPlayer().getBonusAndChangeCard();
@@ -23,6 +35,9 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to fortify
+	 */
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
@@ -45,6 +60,10 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
 	}
 
+	/**
+	 * Method to get its weakest country
+	 * @return the country that got which is Country type
+	 */
 	private Country getWeakestCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		Country weakestCountry = countrys.get(0);

@@ -10,16 +10,22 @@ import GameConsole.Core.WindowMain;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
+/**
+ * A concrete Strategy that implements Aggressive strategy operation
+ */
 public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 
-	
-	
-	
+	/**
+	 * Constructor for AggressiveStrategy
+	 */
 	public AggressiveStrategy() {
 		super();
 		this.setName("Aggressive");
 	}
 
+	/**
+	 * Method to attack.
+	 */
 	@Override
 	public void attack() {
 		for (;;) {
@@ -51,6 +57,9 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to reinforce.
+	 */
 	@Override
 	public void reinforce() {
 		int num = getPlayer().getBonusAndChangeCard();
@@ -59,6 +68,9 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to fortify
+	 */
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
@@ -70,6 +82,10 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		}
 	}
 
+	/**
+	 * Method to get its strongest country
+	 * @return the country that got which is Country type
+	 */
 	private Country getStrongestContry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttackCountries = new ArrayList<>();
@@ -94,7 +110,10 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		}
 		return strongestCountry;
 	}
-	
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) throws Exception {
 		GameLoader gl = new GameLoader(null, "C:\\Users\\Liang\\Documents\\13.txt");
 		GameState gs = gl.getGameState();
