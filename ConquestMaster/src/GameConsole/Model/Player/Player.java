@@ -64,10 +64,18 @@ public class Player extends Observable {
 		((OriginalStrategy) strategy).setPlayer(this);
 	}
 
+	/**
+	 * Method to get strategy
+	 * @return The operator to be applied which is Strategy method
+	 */
 	public Strategy getStrategy() {
 		return strategy;
 	}
 
+	/**
+	 * Plugs in a specific strategy to be used
+	 * @param strategy The operator to be applied
+	 */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
