@@ -22,10 +22,12 @@ import MapEditorTest.TablePanelTest;
 		GameStateTest.class,
 		CardsTest.class,
 		AggressiveStrategyTest.class,
+		CheaterStrategyTest.class,
 		MapLoaderTest.class,
 		ConquestMapTest.class, 
 		MyStringUtilTest.class, 
 		TablePanelTest.class,
+		
 		
 })
 public class SuiteTest {
