@@ -48,16 +48,6 @@ public class AggressiveStrategyTest {
 		p1.attack();
 		assertEquals(false, p1.checkIfCanAttack());
 		
-		for(Country c: p1.getCountries()){
-			System.out.println(c.getName() + ": " + c.getTroopNum());
-		}	
-		System.out.println("======");
-		
-		for(Country c: p1.getCountries()){
-			if(c.getName().equals("Arvi")){
-				assertEquals(20, c.getTroopNum());
-			}
-		}	
 		
 	}
 
