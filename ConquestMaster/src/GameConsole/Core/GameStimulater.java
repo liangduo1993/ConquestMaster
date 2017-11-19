@@ -77,8 +77,9 @@ public class GameStimulater {
 	// RandomStrategy
 	public static void main(String[] args) throws Exception {
 		StringBuffer sb = new StringBuffer(100);
+		WindowMain win = new WindowMain();
 		for (int i = 0; i < 50; i++) {
-			GameState gs = new GameState(null, "C:\\Users\\Liang\\Documents\\Atlantis.map");
+			GameState gs = new GameState( win, "resources/ConquestMaps/Atlantis.map");
 			Player p1 = new Player("p1", Color.magenta, gs, new AggressiveStrategy());
 			Player p2 = new Player("p2", Color.green, gs, new BenevolentStrategy());
 			//Player p3 = new Player("p3", Color.blue, gs, new CheaterStrategy());

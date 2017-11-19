@@ -14,6 +14,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -34,7 +36,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.AggressiveStrategy;
+import GameConsole.Strategy.BenevolentStrategy;
+import GameConsole.Strategy.CheaterStrategy;
 import GameConsole.Strategy.HumanStrategy;
+import GameConsole.Strategy.RandomStrategy;
 import GameConsole.View.CardExchangeView;
 import GameConsole.View.ConquestRatio;
 import GameConsole.View.CountryButton;
@@ -66,6 +72,7 @@ public class WindowMain {
 	public JLabel numberOfTroops, country1, country2;
 	private JScrollPane mainScroll;
 	public MapDisplayer mapDisplayer;
+	public GameStimulater gameSt;
 
 	private GameState gameState;
 	private JFileChooser fc;
@@ -126,16 +133,108 @@ public class WindowMain {
 				TournamentGamePanel tgp = new TournamentGamePanel();
 				cards.add(tgp, "Tournament Mode");
 				cardLayout.show(cards, "Tournament Mode");
-				tgp.startGameButt.addActionListener(new ActionListener() {
-					
+				tgp.startGameButt.addActionListener(new ActionListener() {	
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						int gameTimes = Integer.parseInt(tgp.textField.getText());
-						if(gameTimes>=10&&gameTimes<=50){
+						ArrayList<Player> players = new ArrayList<>();
+						if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
+							if(tgp.comboBox_6.getSelectedItem().equals("agressive")){
+								Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
+								players.add(p1);
+							}else if (tgp.comboBox_6.getSelectedItem().equals("benevolent")) {
+								Player p1 = new Player("p1", Color.magenta, gameState, new BenevolentStrategy());
+								players.add(p1);
+							}else if (tgp.comboBox_6.getSelectedItem().equals("random")) {
+								Player p1 = new Player("p1", Color.magenta, gameState, new RandomStrategy());
+								players.add(p1);
+							}else {
+								Player p1 = new Player("p1", Color.magenta, gameState, new CheaterStrategy());
+								players.add(p1);
+							}
 							
+							if(tgp.comboBox_7.getSelectedItem().equals("agressive")){
+								Player p2 = new Player("p2", Color.green, gameState, new AggressiveStrategy());
+								players.add(p2);
+							}else if (tgp.comboBox_7.getSelectedItem().equals("benevolent")) {
+								Player p2 = new Player("p2", Color.green, gameState, new BenevolentStrategy());
+								players.add(p2);
+							}else if (tgp.comboBox_7.getSelectedItem().equals("random")) {
+								Player p2 = new Player("p2", Color.green, gameState, new RandomStrategy());
+								players.add(p2);
+							}else {
+								Player p2 = new Player("p2", Color.green, gameState, new CheaterStrategy());
+								players.add(p2);
+							}
+							
+							if(tgp.comboBox_8.getSelectedItem().equals("agressive")){
+								Player p3 = new Player("p3", Color.green, gameState, new AggressiveStrategy());
+								players.add(p3);
+							}else if (tgp.comboBox_8.getSelectedItem().equals("benevolent")) {
+								Player p3 = new Player("p3", Color.green, gameState, new BenevolentStrategy());
+								players.add(p3);
+							}else if (tgp.comboBox_8.getSelectedItem().equals("random")) {
+								Player p3 = new Player("p3", Color.green, gameState, new RandomStrategy());
+								players.add(p3);
+							}else if(tgp.comboBox_8.getSelectedItem().equals("cheater")){
+								Player p3 = new Player("p3", Color.green, gameState, new CheaterStrategy());
+								players.add(p3);
+							}
+							
+							if(tgp.comboBox_9.getSelectedItem().equals("agressive")){
+								Player p4 = new Player("p4", Color.green, gameState, new AggressiveStrategy());
+								players.add(p4);
+							}else if (tgp.comboBox_9.getSelectedItem().equals("benevolent")) {
+								Player p4 = new Player("p4", Color.green, gameState, new BenevolentStrategy());
+								players.add(p4);
+							}else if (tgp.comboBox_9.getSelectedItem().equals("random")) {
+								Player p4 = new Player("p4", Color.green, gameState, new RandomStrategy());
+								players.add(p4);
+							}else if(tgp.comboBox_9.getSelectedItem().equals("cheater")){
+								Player p4 = new Player("p4", Color.green, gameState, new CheaterStrategy());
+								players.add(p4);
+							}
+							
+							int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
+							//System.out.println(gameTimes);
+							
+							String gameTurnsString = tgp.textField.getText();
+							if(!gameTurnsString.equals("")){
+								int gameTurns = Integer.parseInt(tgp.textField.getText());
+								WindowMain win;
+								
+								if(gameTurns>=10&&gameTurns<=50){
+									StringBuffer sb = new StringBuffer(100);
+									for (int i = 0; i < gameTimes; i++) {
+										try {
+											win = new WindowMain();
+											try {
+												gameState = new GameState(win, tgp.fc1.getSelectedFile().getAbsolutePath());
+											} catch (Exception e1) {
+												// TODO Auto-generated catch block
+												e1.printStackTrace();
+											}
+										} catch (IOException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
+										gameSt = new GameStimulater(gameState, players, gameTurns);
+										gameState.gameStart(false);
+										sb.append(gameSt.execute());
+										sb.append("\r\n");
+										cardLayout.show(cards, "Game");
+									}
+									System.out.println("=====================");
+									System.out.println(sb.toString());
+									System.out.println("=====================");
+								}else{
+									JOptionPane.showMessageDialog(null, "Please input correct game turns from 10 to 50!");
+								}
+							}else{
+								JOptionPane.showMessageDialog(null, "Please input game turns");
+							}
 						}else{
-							JOptionPane.showMessageDialog(null, "Plase input the correct Game Times on each map from 10 to 50!!!");
+							JOptionPane.showMessageDialog(null, "there must be at least two players");
 						}
 					}
 				});
@@ -1066,5 +1165,6 @@ public class WindowMain {
 		mnNewMenu.add(LoadMenuItem);
 
 	}
+	
 
 }

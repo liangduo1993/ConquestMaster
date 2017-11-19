@@ -33,25 +33,26 @@ public class TournamentGamePanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	public JTextField textField;
-	private JFileChooser fc1;
-	private JFileChooser fc2;
-	private JFileChooser fc3;
-	private JFileChooser fc4;
-	private JFileChooser fc5;
+	public JFileChooser fc1;
+	public JFileChooser fc2;
+	public JFileChooser fc3;
+	public JFileChooser fc4;
+	public JFileChooser fc5;
 	
 	public JButton startGameButt;
 	public JButton CancelButt;
 
-	private JLabel M1Label;
-	private JLabel M2Label;
-	private JLabel M3Label;
-	private JLabel M4Label;
-	private JLabel M5Label;
+	public JLabel M1Label;
+	public JLabel M2Label;
+	public JLabel M3Label;
+	public JLabel M4Label;
+	public JLabel M5Label;
 
-	private JComboBox<String> comboBox_6;
-	private JComboBox<String> comboBox_7;
-	private JComboBox<String> comboBox_8;
-	private JComboBox<String> comboBox_9;
+	public JComboBox<String> comboBox_6;
+	public JComboBox<String> comboBox_7;
+	public JComboBox<String> comboBox_8;
+	public JComboBox<String> comboBox_9;
+	public JComboBox<String> comboBox;
 
 
 
@@ -88,41 +89,41 @@ public class TournamentGamePanel extends JPanel{
 
 		comboBox_6 = new JComboBox();
 		comboBox_6.setModel(
-				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
 		comboBox_6.setBounds(504, 149, 102, 21);
 		add(comboBox_6);
 
 		comboBox_7 = new JComboBox();
 		comboBox_7.setModel(
-				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
 		comboBox_7.setBounds(891, 149, 102, 21);
-		comboBox_7.setEnabled(false);
+		//comboBox_7.setEnabled(false);
 		add(comboBox_7);
 
 		comboBox_8 = new JComboBox();
 		comboBox_8.setModel(
-				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
 		comboBox_8.setBounds(504, 199, 102, 21);
 		comboBox_8.setEnabled(false);
 		add(comboBox_8);
 
 		comboBox_9 = new JComboBox();
 		comboBox_9.setModel(
-				new DefaultComboBoxModel(new String[] { "none", "aggressive ", "benevolent ", "random ", "cheater " }));
+				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
 		comboBox_9.setBounds(891, 199, 102, 21);
 		comboBox_9.setEnabled(false);
 		add(comboBox_9);
 
-		comboBox_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String text = (String) comboBox_6.getSelectedItem();
-				if (text.equals("none")) {
-					comboBox_7.setEnabled(false);
-				} else {
-					comboBox_7.setEnabled(true);
-				}
-			}
-		});
+//		comboBox_6.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				String text = (String) comboBox_6.getSelectedItem();
+//				if (text.equals("none")) {
+//					comboBox_7.setEnabled(false);
+//				} else {
+//					comboBox_7.setEnabled(true);
+//				}
+//			}
+//		});
 
 		comboBox_7.addActionListener(new ActionListener() {
 
@@ -176,7 +177,7 @@ public class TournamentGamePanel extends JPanel{
 		lblNewLabel_1.setBounds(268, 261, 102, 15);
 		add(lblNewLabel_1);
 
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 		comboBox.setBounds(504, 255, 102, 21);
 		add(comboBox);
@@ -336,5 +337,6 @@ public class TournamentGamePanel extends JPanel{
 		sgp.setBounds(0, 0, 1200, 900);
 		jFrame.getContentPane().add(sgp);
 		jFrame.setVisible(true);
+		
 	}
 }
