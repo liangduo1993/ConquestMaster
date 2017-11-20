@@ -1,6 +1,5 @@
 package GameConsole.Core;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,12 +14,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -114,7 +110,7 @@ public class WindowMain {
 		cards.add(playerSelect, "Player Selection");
 		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
-		cards.add(tournamentResultPanel,"tournamentResultPanel");
+		cards.add(tournamentResultPanel, "tournamentResultPanel");
 		frame1.getContentPane().add(cards);
 
 		mainScreen.setBackground(Color.LIGHT_GRAY);
@@ -136,55 +132,142 @@ public class WindowMain {
 				TournamentGamePanel tgp = new TournamentGamePanel();
 				cards.add(tgp, "Tournament Mode");
 				cardLayout.show(cards, "Tournament Mode");
-				tgp.startGameButt.addActionListener(new ActionListener() {	
-					
+				tgp.startGameButt.addActionListener(new ActionListener() {
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
 						ArrayList<String> strategies = new ArrayList<>();
-						if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
-								String strategy1 = (String) tgp.comboBox_6.getSelectedItem();
-								String strategy2 = (String) tgp.comboBox_7.getSelectedItem();
-								String strategy3 = (String) tgp.comboBox_8.getSelectedItem();
-								String strategy4 = (String) tgp.comboBox_9.getSelectedItem();
-								strategies.add(strategy1);
-								strategies.add(strategy2);
-								strategies.add(strategy3);
-								strategies.add(strategy4);
-							for(int i=0;i<strategies.size();i++){
-								System.out.println(strategies.get(i));
-							}
-							
-							int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
-							//System.out.println(gameTimes);
-							
-							String gameTurnsString = tgp.textField.getText();
-							String path = tgp.fc1.getSelectedFile().getAbsolutePath();
-							if(!gameTurnsString.equals("")){
-								int gameTurns = Integer.parseInt(tgp.textField.getText());
-								
-								if(gameTurns>=10&&gameTurns<=50){
-									
-						
-									for (int i = 0; i < gameTimes; i++) {		
-										newGameState(path, strategies, gameTurns);
-									}
-									TournamentResultPanel trp = new TournamentResultPanel();
-									cards.add(trp, "tournamentResultPanel");
-									cardLayout.show(cards, "tournamentResultPanel");	
-								}else{
-									JOptionPane.showMessageDialog(null, "Please input correct game turns from 10 to 50!");
-								}
-							}else{
-								JOptionPane.showMessageDialog(null, "Please input game turns");
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, "there must be at least two players");
+						ArrayList<String> paths = new ArrayList<>();
+						ArrayList<String> probs = new ArrayList<>();
+
+						if (tgp.path1 != null && tgp.path1.endsWith(".map")) {
+							paths.add(tgp.path1);
 						}
+						if (tgp.path2 != null && tgp.path2.endsWith(".map")) {
+							paths.add(tgp.path2);
+						}
+						if (tgp.path3 != null && tgp.path3.endsWith(".map")) {
+							paths.add(tgp.path3);
+						}
+						if (tgp.path4 != null && tgp.path4.endsWith(".map")) {
+							paths.add(tgp.path4);
+						}
+						if (tgp.path5 != null && tgp.path5.endsWith(".map")) {
+							paths.add(tgp.path5);
+						}
+
+						if (paths.size() == 0)
+							probs.add("Please choose at least one map!");
+
+						String strategy1 = (String) tgp.comboBox_6.getSelectedItem();
+						String strategy2 = (String) tgp.comboBox_7.getSelectedItem();
+						String strategy3 = (String) tgp.comboBox_8.getSelectedItem();
+						String strategy4 = (String) tgp.comboBox_9.getSelectedItem();
+						if (!strategy1.equals("none"))
+							strategies.add(strategy1);
+						if (!strategy2.equals("none"))
+							strategies.add(strategy2);
+						if (strategy3 != null && !strategy3.equals("none"))
+							strategies.add(strategy3);
+						if (strategy4 != null && !strategy4.equals("none"))
+							strategies.add(strategy4);
+
+						if (strategies.size() < 2)
+							probs.add("There must be at least two players");
+
+						int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
+
+						String gameTurnsString = tgp.textField.getText();
+						if (gameTurnsString.equals(""))
+							probs.add("Please input game turns!");
+						int gameTurns = 0;
+						try {
+							gameTurns = Integer.parseInt(gameTurnsString);
+							if (gameTurns < 10 || gameTurns > 50)
+								probs.add("Please input correct game turns from 10 to 50!");
+						} catch (NumberFormatException numError) {
+							probs.add("The game turns must be a number!");
+						}
+
+						System.out.println(probs.size());
+						if (!probs.isEmpty()) {
+							JOptionPane.showMessageDialog(null, probs.get(0));
+							return;
+						} else {
+
+							Object[][] results = new Object[paths.size()][gameTimes];
+
+							for (int j = 0; j < paths.size(); j++) {
+								String mapPath = paths.get(j);
+								for (int i = 0; i < gameTimes; i++) {
+									String result = newGameState(mapPath, strategies, gameTurns);
+									System.out.println("============");
+									System.out.println(result);
+									System.out.println("============");
+									results[j][i] = result;
+								}
+							}
+
+							TournamentResultPanel trp = new TournamentResultPanel(results);
+							cards.add(trp, "tournamentResultPanel");
+							cardLayout.show(cards, "tournamentResultPanel");
+							trp.returnToMainFrame.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									cardLayout.show(cards, "Main Screen");
+								}
+							});
+
+						}
+						// if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
+						// String strategy1 = (String)
+						// tgp.comboBox_6.getSelectedItem();
+						// String strategy2 = (String)
+						// tgp.comboBox_7.getSelectedItem();
+						// String strategy3 = (String)
+						// tgp.comboBox_8.getSelectedItem();
+						// String strategy4 = (String)
+						// tgp.comboBox_9.getSelectedItem();
+						// strategies.add(strategy1);
+						// strategies.add(strategy2);
+						// strategies.add(strategy3);
+						// strategies.add(strategy4);
+						// for(int i=0;i<strategies.size();i++){
+						// System.out.println(strategies.get(i));
+						// }
+						//
+						//
+						// //System.out.println(gameTimes);
+						//
+						//
+						// if(!gameTurnsString.equals("")){
+						// int gameTurns =
+						// Integer.parseInt(tgp.textField.getText());
+						//
+						// if(gameTurns>=10&&gameTurns<=50){
+						//
+						//
+						// for (int i = 0; i < gameTimes; i++) {
+						// newGameState(path, strategies, gameTurns);
+						// }
+						//
+						// }else{
+						// JOptionPane.showMessageDialog(null, "Please input
+						// correct game turns from 10 to 50!");
+						// }
+						// }else{
+						// JOptionPane.showMessageDialog(null, "Please input
+						// game turns");
+						// }
+						// }else{
+						// JOptionPane.showMessageDialog(null, "there must be at
+						// least two players");
+						// }
+						//
+
 					}
 				});
 				tgp.CancelButt.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
@@ -1110,42 +1193,43 @@ public class WindowMain {
 		mnNewMenu.add(LoadMenuItem);
 
 	}
-	
-	public  void newGameState (String path, ArrayList<String> strategies,int gameTurns){
-			StringBuffer sb = new StringBuffer(100);
-			ArrayList<Player> players = new ArrayList<>();
+
+	public String newGameState(String path, ArrayList<String> strategies, int gameTurns) {
+		// StringBuffer sb = new StringBuffer(100);
+		ArrayList<Player> players = new ArrayList<>();
+		String result = "";
 		try {
-			gameState = new GameState(this,path);
-			for(int i=0;i<strategies.size();i++){
-				if(strategies.get(i).equals("aggressive")){
+			gameState = new GameState(this, path);
+			for (int i = 0; i < strategies.size(); i++) {
+				if (strategies.get(i).equals("aggressive")) {
 					Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
 					players.add(p1);
-				}else if(strategies.get(i).equals("benevolent")){
+				} else if (strategies.get(i).equals("benevolent")) {
 					Player p2 = new Player("p2", Color.magenta, gameState, new BenevolentStrategy());
 					players.add(p2);
-				}else if(strategies.get(i).equals("cheater")){
+				} else if (strategies.get(i).equals("cheater")) {
 					Player p3 = new Player("p3", Color.magenta, gameState, new CheaterStrategy());
 					players.add(p3);
-				}else if(strategies.get(i).equals("random")){
+				} else if (strategies.get(i).equals("random")) {
 					Player p4 = new Player("p4", Color.magenta, gameState, new RandomStrategy());
 					players.add(p4);
 				}
 			}
-			for(int x=0;x<players.size();x++){
+			for (int x = 0; x < players.size(); x++) {
 				System.out.println(players.size());
 				System.out.println(players.get(x).getName());
 			}
-			
+
 			GameStimulater gameSt = new GameStimulater(gameState, players, gameTurns);
 			gameState.gameStart(false);
-			sb.append(gameSt.execute());
-			sb.append("\r\n");
+			result = gameSt.execute();
+			// sb.append(gameSt.execute());
+			// sb.append("\r\n");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return result;
 	}
-	
-	
 
 }

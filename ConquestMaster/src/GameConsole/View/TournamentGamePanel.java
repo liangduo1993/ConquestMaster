@@ -17,28 +17,35 @@ import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
-
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * This class is the interface for the beginning of the tournament mode where the user
- * can select maps, computer players, number of games and turns
+ * This class is the interface for the beginning of the tournament mode where
+ * the user can select maps, computer players, number of games and turns
  */
-public class TournamentGamePanel extends JPanel{
+public class TournamentGamePanel extends JPanel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public JTextField textField;
-	public JFileChooser fc1;
-	public JFileChooser fc2;
-	public JFileChooser fc3;
-	public JFileChooser fc4;
-	public JFileChooser fc5;
+	public JFileChooser fc1 = new JFileChooser();
+	public JFileChooser fc2 = new JFileChooser();
+	public JFileChooser fc3 = new JFileChooser();
+	public JFileChooser fc4 = new JFileChooser();
+	public JFileChooser fc5 = new JFileChooser();
+	public String path1;
+	public String path2;
+	public String path3;
+	public String path4;
+	public String path5;
 	
+	
+	
+
 	public JButton startGameButt;
 	public JButton CancelButt;
 
@@ -53,8 +60,6 @@ public class TournamentGamePanel extends JPanel{
 	public JComboBox<String> comboBox_8;
 	public JComboBox<String> comboBox_9;
 	public JComboBox<String> comboBox;
-
-
 
 	/**
 	 * Create the application.
@@ -89,41 +94,41 @@ public class TournamentGamePanel extends JPanel{
 
 		comboBox_6 = new JComboBox();
 		comboBox_6.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive", "benevolent", "random", "cheater" }));
 		comboBox_6.setBounds(504, 149, 102, 21);
 		add(comboBox_6);
 
 		comboBox_7 = new JComboBox();
 		comboBox_7.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive", "benevolent", "random", "cheater" }));
 		comboBox_7.setBounds(891, 149, 102, 21);
-		//comboBox_7.setEnabled(false);
+		// comboBox_7.setEnabled(false);
 		add(comboBox_7);
 
 		comboBox_8 = new JComboBox();
 		comboBox_8.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive", "benevolent", "random", "cheater" }));
 		comboBox_8.setBounds(504, 199, 102, 21);
 		comboBox_8.setEnabled(false);
 		add(comboBox_8);
 
 		comboBox_9 = new JComboBox();
 		comboBox_9.setModel(
-				new DefaultComboBoxModel(new String[] {"none", "aggressive", "benevolent", "random", "cheater"}));
+				new DefaultComboBoxModel(new String[] { "none", "aggressive", "benevolent", "random", "cheater" }));
 		comboBox_9.setBounds(891, 199, 102, 21);
 		comboBox_9.setEnabled(false);
 		add(comboBox_9);
 
-//		comboBox_6.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				String text = (String) comboBox_6.getSelectedItem();
-//				if (text.equals("none")) {
-//					comboBox_7.setEnabled(false);
-//				} else {
-//					comboBox_7.setEnabled(true);
-//				}
-//			}
-//		});
+		// comboBox_6.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent arg0) {
+		// String text = (String) comboBox_6.getSelectedItem();
+		// if (text.equals("none")) {
+		// comboBox_7.setEnabled(false);
+		// } else {
+		// comboBox_7.setEnabled(true);
+		// }
+		// }
+		// });
 
 		comboBox_7.addActionListener(new ActionListener() {
 
@@ -154,16 +159,17 @@ public class TournamentGamePanel extends JPanel{
 		});
 
 		startGameButt = new JButton("Start Game");
-//		startGameButt.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				int gameTimes = Integer.parseInt(textField.getText());
-//				if(gameTimes>=10&&gameTimes<=50){
-//					
-//				}else{
-//					JOptionPane.showMessageDialog(null, "Plase input the correct Game Times on each map from 10 to 50!!!");
-//				}
-//			}
-//		});
+		// startGameButt.addActionListener(new ActionListener() {
+		// public void actionPerformed(ActionEvent arg0) {
+		// int gameTimes = Integer.parseInt(textField.getText());
+		// if(gameTimes>=10&&gameTimes<=50){
+		//
+		// }else{
+		// JOptionPane.showMessageDialog(null, "Plase input the correct Game
+		// Times on each map from 10 to 50!!!");
+		// }
+		// }
+		// });
 		startGameButt.setBackground(Color.WHITE);
 		startGameButt.setBounds(434, 772, 102, 23);
 		add(startGameButt);
@@ -224,11 +230,12 @@ public class TournamentGamePanel extends JPanel{
 		JButton btnSelectM = new JButton("select M1");
 		btnSelectM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc1 = new JFileChooser();
+				// fc1 = new JFileChooser();
 				int returnVal = fc1.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc1.getSelectedFile();
 					String path = file.getAbsolutePath();
+					path1 = path;
 					M1Label.setText(path);
 				}
 			}
@@ -239,11 +246,12 @@ public class TournamentGamePanel extends JPanel{
 		JButton btnSelectM_1 = new JButton("select M2");
 		btnSelectM_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc2 = new JFileChooser();
+				// fc2 = new JFileChooser();
 				int returnVal = fc2.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc2.getSelectedFile();
 					String path = file.getAbsolutePath();
+					path2 = path;
 					M2Label.setText(path);
 				}
 			}
@@ -254,11 +262,12 @@ public class TournamentGamePanel extends JPanel{
 		JButton btnSelectM_2 = new JButton("select M3");
 		btnSelectM_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc3 = new JFileChooser();
+				// fc3 = new JFileChooser();
 				int returnVal = fc3.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc3.getSelectedFile();
 					String path = file.getAbsolutePath();
+					path3 = path;
 					M3Label.setText(path);
 				}
 			}
@@ -269,11 +278,12 @@ public class TournamentGamePanel extends JPanel{
 		JButton btnSelectM_3 = new JButton("select M4");
 		btnSelectM_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc4 = new JFileChooser();
+				// fc4 = new JFileChooser();
 				int returnVal = fc4.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc4.getSelectedFile();
 					String path = file.getAbsolutePath();
+					path4 = path;
 					M4Label.setText(path);
 				}
 			}
@@ -284,11 +294,12 @@ public class TournamentGamePanel extends JPanel{
 		JButton btnSelectM_4 = new JButton("select M5");
 		btnSelectM_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fc5 = new JFileChooser();
+				// fc5 = new JFileChooser();
 				int returnVal = fc5.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc5.getSelectedFile();
 					String path = file.getAbsolutePath();
+					path5 = path;
 					M5Label.setText(path);
 				}
 			}
@@ -299,36 +310,36 @@ public class TournamentGamePanel extends JPanel{
 		M1Label = new JLabel("");
 		M1Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M1Label.setForeground(Color.RED);
-		M1Label.setBounds(815, 498, 297, 19);
+		M1Label.setBounds(815 - 140, 498, 400, 19);
 		add(M1Label);
 
 		M2Label = new JLabel("");
 		M2Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M2Label.setForeground(Color.RED);
-		M2Label.setBounds(815, 536, 297, 19);
+		M2Label.setBounds(815 - 140, 536, 400, 19);
 		add(M2Label);
 
 		M3Label = new JLabel("");
 		M3Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M3Label.setForeground(Color.RED);
-		M3Label.setBounds(815, 578, 297, 19);
+		M3Label.setBounds(815 - 140, 578, 400, 19);
 		add(M3Label);
 
 		M4Label = new JLabel("");
 		M4Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M4Label.setForeground(Color.RED);
-		M4Label.setBounds(815, 618, 297, 19);
+		M4Label.setBounds(815 - 140, 618, 400, 19);
 		add(M4Label);
 
 		M5Label = new JLabel("");
 		M5Label.setHorizontalAlignment(SwingConstants.CENTER);
 		M5Label.setForeground(Color.RED);
-		M5Label.setBounds(815, 658, 297, 19);
+		M5Label.setBounds(815 - 140, 658, 400, 19);
 		add(M5Label);
 		setVisible(true);
 	}
-	
-	//test JPanel
+
+	// test JPanel
 	public static void main(String[] args) {
 		JFrame jFrame = new JFrame("");
 		jFrame.getContentPane().setLayout(null);
@@ -337,6 +348,6 @@ public class TournamentGamePanel extends JPanel{
 		sgp.setBounds(0, 0, 1200, 900);
 		jFrame.getContentPane().add(sgp);
 		jFrame.setVisible(true);
-		
+
 	}
 }

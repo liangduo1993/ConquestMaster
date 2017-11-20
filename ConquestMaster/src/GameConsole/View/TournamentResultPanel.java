@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -15,30 +16,51 @@ public class TournamentResultPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-
+	public JButton returnToMainFrame;
 	/**
 	 * Create the panel.
 	 */
-	public TournamentResultPanel() {
+	public TournamentResultPanel(Object[][] result) {
 		setLayout(null);
 		setBounds(0, 0, 1200, 900);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(44, 348, 608, 108);
+		scrollPane.setBounds(300, 348, 608, 108);
 		add(scrollPane);
+		returnToMainFrame = new JButton("Return");
+		add(returnToMainFrame);
+		returnToMainFrame.setBounds(400, 800, 200, 30);
+		
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Map 1", null, null, null, null, null},
-				{"Map 2", null, null, null, null, null},
-				{"Map 3", null, null, null, null, null},
-				{"Map 4", null, null, null, null, null},
-				{"Map 5", null, null, null, null, null},
-			},
-			new String[] {
-				"", "Game 1", "Game 2", "Game 3", "Game 4", "Game 5"
+		
+		int row = result.length;
+		int col = result[0].length;
+		
+		Object[][] table1 = new Object[row][col + 1];
+		for(int i = 0; i < row; i++){
+			table1[i][0] = "Map " + (i + 1);
+		}
+		
+		String[] table2 = new String[col + 1];
+		for(int i = 0; i < col + 1; i++){
+			if(i ==0)
+				table2[0] = "";
+			else
+				table2[i] = "Game " + i;
+		}
+		
+		for(int i = 0; i < table1.length; i++){
+			for(int j = 1; j < table1[0].length; j++ ){
+				table1[i][j] = result[i][j - 1];
 			}
+		}
+		
+		
+		
+		table.setModel(new DefaultTableModel(
+			table1,
+			table2
 		) {
 			boolean[] columnEditables = new boolean[] {
 				false, true, true, true, true, false
