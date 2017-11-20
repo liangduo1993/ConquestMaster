@@ -72,7 +72,6 @@ public class WindowMain {
 	public JLabel numberOfTroops, country1, country2;
 	private JScrollPane mainScroll;
 	public MapDisplayer mapDisplayer;
-	public GameStimulater gameSt;
 
 	private GameState gameState;
 	private JFileChooser fc;
@@ -169,30 +168,30 @@ public class WindowMain {
 							}
 							
 							if(tgp.comboBox_8.getSelectedItem().equals("agressive")){
-								Player p3 = new Player("p3", Color.green, gameState, new AggressiveStrategy());
+								Player p3 = new Player("p3", Color.blue, gameState, new AggressiveStrategy());
 								players.add(p3);
 							}else if (tgp.comboBox_8.getSelectedItem().equals("benevolent")) {
-								Player p3 = new Player("p3", Color.green, gameState, new BenevolentStrategy());
+								Player p3 = new Player("p3", Color.blue, gameState, new BenevolentStrategy());
 								players.add(p3);
 							}else if (tgp.comboBox_8.getSelectedItem().equals("random")) {
-								Player p3 = new Player("p3", Color.green, gameState, new RandomStrategy());
+								Player p3 = new Player("p3", Color.blue, gameState, new RandomStrategy());
 								players.add(p3);
 							}else if(tgp.comboBox_8.getSelectedItem().equals("cheater")){
-								Player p3 = new Player("p3", Color.green, gameState, new CheaterStrategy());
+								Player p3 = new Player("p3", Color.blue, gameState, new CheaterStrategy());
 								players.add(p3);
 							}
 							
 							if(tgp.comboBox_9.getSelectedItem().equals("agressive")){
-								Player p4 = new Player("p4", Color.green, gameState, new AggressiveStrategy());
+								Player p4 = new Player("p4", Color.red, gameState, new AggressiveStrategy());
 								players.add(p4);
 							}else if (tgp.comboBox_9.getSelectedItem().equals("benevolent")) {
-								Player p4 = new Player("p4", Color.green, gameState, new BenevolentStrategy());
+								Player p4 = new Player("p4", Color.red, gameState, new BenevolentStrategy());
 								players.add(p4);
 							}else if (tgp.comboBox_9.getSelectedItem().equals("random")) {
-								Player p4 = new Player("p4", Color.green, gameState, new RandomStrategy());
+								Player p4 = new Player("p4", Color.red, gameState, new RandomStrategy());
 								players.add(p4);
 							}else if(tgp.comboBox_9.getSelectedItem().equals("cheater")){
-								Player p4 = new Player("p4", Color.green, gameState, new CheaterStrategy());
+								Player p4 = new Player("p4", Color.red, gameState, new CheaterStrategy());
 								players.add(p4);
 							}
 							for(int i=0;i<players.size();i++){
@@ -1158,10 +1157,11 @@ public class WindowMain {
 			StringBuffer sb = new StringBuffer(100);
 		try {
 			gameState = new GameState(this,path);
-			gameSt = new GameStimulater(gameState, players, gameTurns);
 			for(int i=0;i<players.size();i++){
+				System.out.println(players.get(i).getName());
 				players.get(i).setgame(gameState);
 			}
+			GameStimulater gameSt = new GameStimulater(gameState, players, gameTurns);
 			gameState.gameStart(false);
 			sb.append(gameSt.execute());
 			sb.append("\r\n");
