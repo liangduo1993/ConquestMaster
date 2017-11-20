@@ -21,7 +21,7 @@ public class TournamentResultPanel extends JPanel {
 	 */
 	public TournamentResultPanel() {
 		setLayout(null);
-		
+		setBounds(0, 0, 1200, 900);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(44, 348, 608, 108);
 		add(scrollPane);
@@ -54,6 +54,6 @@ public class TournamentResultPanel extends JPanel {
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 25));
 		lblNewLabel.setBounds(20, 62, 655, 98);
 		add(lblNewLabel);
-
+		setVisible(true);
 	}
 }

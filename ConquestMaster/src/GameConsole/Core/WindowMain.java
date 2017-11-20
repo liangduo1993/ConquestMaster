@@ -49,6 +49,7 @@ import GameConsole.View.LogPanel;
 import GameConsole.View.MapDisplayer;
 import GameConsole.View.PhaseView;
 import GameConsole.View.TournamentGamePanel;
+import GameConsole.View.TournamentResultPanel;
 
 /**
  * This class is to display the interface of the game where the player can
@@ -78,6 +79,7 @@ public class WindowMain {
 	public int troopsLeft;
 
 	private JPanel mainScreen, playerSelect, resultsScreen;
+	private JPanel tournamentResultPanel;
 
 	/**
 	 * Constructor method
@@ -104,6 +106,7 @@ public class WindowMain {
 		mainScreen = new JPanel();
 		playerSelect = new JPanel();
 		mapPanel = new JPanel();
+		tournamentResultPanel = new JPanel();
 		mapPanel.setBackground(Color.LIGHT_GRAY);
 
 		resultsScreen = new JPanel();
@@ -111,6 +114,7 @@ public class WindowMain {
 		cards.add(playerSelect, "Player Selection");
 		cards.add(mapPanel, "Game");
 		cards.add(resultsScreen, "Results");
+		cards.add(tournamentResultPanel,"tournamentResultPanel");
 		frame1.getContentPane().add(cards);
 
 		mainScreen.setBackground(Color.LIGHT_GRAY);
@@ -137,66 +141,16 @@ public class WindowMain {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						ArrayList<Player> players = new ArrayList<>();
+						ArrayList<String> strategies = new ArrayList<>();
 						if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
-							if(tgp.comboBox_6.getSelectedItem().equals("agressive")){
-								Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
-								players.add(p1);
-							}else if (tgp.comboBox_6.getSelectedItem().equals("benevolent")) {
-								Player p1 = new Player("p1", Color.magenta, gameState, new BenevolentStrategy());
-								players.add(p1);
-							}else if (tgp.comboBox_6.getSelectedItem().equals("random")) {
-								Player p1 = new Player("p1", Color.magenta, gameState, new RandomStrategy());
-								players.add(p1);
-							}else {
-								Player p1 = new Player("p1", Color.magenta, gameState, new CheaterStrategy());
-								players.add(p1);
-							}
-							
-							if(tgp.comboBox_7.getSelectedItem().equals("agressive")){
-								Player p2 = new Player("p2", Color.green, gameState, new AggressiveStrategy());
-								players.add(p2);
-							}else if (tgp.comboBox_7.getSelectedItem().equals("benevolent")) {
-								Player p2 = new Player("p2", Color.green, gameState, new BenevolentStrategy());
-								players.add(p2);
-							}else if (tgp.comboBox_7.getSelectedItem().equals("random")) {
-								Player p2 = new Player("p2", Color.green, gameState, new RandomStrategy());
-								players.add(p2);
-							}else {
-								Player p2 = new Player("p2", Color.green, gameState, new CheaterStrategy());
-								players.add(p2);
-							}
-							
-							if(tgp.comboBox_8.getSelectedItem().equals("agressive")){
-								Player p3 = new Player("p3", Color.blue, gameState, new AggressiveStrategy());
-								players.add(p3);
-							}else if (tgp.comboBox_8.getSelectedItem().equals("benevolent")) {
-								Player p3 = new Player("p3", Color.blue, gameState, new BenevolentStrategy());
-								players.add(p3);
-							}else if (tgp.comboBox_8.getSelectedItem().equals("random")) {
-								Player p3 = new Player("p3", Color.blue, gameState, new RandomStrategy());
-								players.add(p3);
-							}else if(tgp.comboBox_8.getSelectedItem().equals("cheater")){
-								Player p3 = new Player("p3", Color.blue, gameState, new CheaterStrategy());
-								players.add(p3);
-							}
-							
-							if(tgp.comboBox_9.getSelectedItem().equals("agressive")){
-								Player p4 = new Player("p4", Color.red, gameState, new AggressiveStrategy());
-								players.add(p4);
-							}else if (tgp.comboBox_9.getSelectedItem().equals("benevolent")) {
-								Player p4 = new Player("p4", Color.red, gameState, new BenevolentStrategy());
-								players.add(p4);
-							}else if (tgp.comboBox_9.getSelectedItem().equals("random")) {
-								Player p4 = new Player("p4", Color.red, gameState, new RandomStrategy());
-								players.add(p4);
-							}else if(tgp.comboBox_9.getSelectedItem().equals("cheater")){
-								Player p4 = new Player("p4", Color.red, gameState, new CheaterStrategy());
-								players.add(p4);
-							}
-							for(int i=0;i<players.size();i++){
-								System.out.println(players.get(i).getName());
-							}
+								String strategy1 = (String) tgp.comboBox_6.getSelectedItem();
+								String strategy2 = (String) tgp.comboBox_7.getSelectedItem();
+								String strategy3 = (String) tgp.comboBox_8.getSelectedItem();
+								String strategy4 = (String) tgp.comboBox_9.getSelectedItem();
+								strategies.add(strategy1);
+								strategies.add(strategy2);
+								strategies.add(strategy3);
+								strategies.add(strategy4);
 							
 							
 							int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
@@ -211,9 +165,11 @@ public class WindowMain {
 									
 						
 									for (int i = 0; i < gameTimes; i++) {		
-										newGameState(path, players, gameTurns);
+										newGameState(path, strategies, gameTurns);
 									}
-
+									TournamentResultPanel trp = new TournamentResultPanel();
+									cards.add(trp, "tournamentResultPanel");
+									cardLayout.show(cards, "tournamentResultPanel");	
 								}else{
 									JOptionPane.showMessageDialog(null, "Please input correct game turns from 10 to 50!");
 								}
@@ -1153,14 +1109,31 @@ public class WindowMain {
 
 	}
 	
-	public  void newGameState (String path, ArrayList<Player> players,int gameTurns){
+	public  void newGameState (String path, ArrayList<String> strategies,int gameTurns){
 			StringBuffer sb = new StringBuffer(100);
+			ArrayList<Player> players = new ArrayList<>();
 		try {
 			gameState = new GameState(this,path);
-			for(int i=0;i<players.size();i++){
-				System.out.println(players.get(i).getName());
-				players.get(i).setgame(gameState);
+			for(int i=0;i<strategies.size();i++){
+				if(strategies.get(i).equals("agressive")){
+					Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
+					players.add(p1);
+				}else if(strategies.get(i).equals("benevolent")){
+					Player p2 = new Player("p2", Color.magenta, gameState, new BenevolentStrategy());
+					players.add(p2);
+				}else if(strategies.get(i).equals("cheater")){
+					Player p3 = new Player("p3", Color.magenta, gameState, new CheaterStrategy());
+					players.add(p3);
+				}else if(strategies.get(i).equals("random")){
+					Player p4 = new Player("p4", Color.magenta, gameState, new RandomStrategy());
+					players.add(p4);
+				}
 			}
+			for(int x=0;x<players.size();x++){
+				System.out.println(players.size());
+				System.out.println(players.get(x).getName());
+			}
+			
 			GameStimulater gameSt = new GameStimulater(gameState, players, gameTurns);
 			gameState.gameStart(false);
 			sb.append(gameSt.execute());
@@ -1170,5 +1143,6 @@ public class WindowMain {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
