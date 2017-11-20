@@ -151,7 +151,9 @@ public class WindowMain {
 								strategies.add(strategy2);
 								strategies.add(strategy3);
 								strategies.add(strategy4);
-							
+							for(int i=0;i<strategies.size();i++){
+								System.out.println(strategies.get(i));
+							}
 							
 							int gameTimes = Integer.parseInt((String) tgp.comboBox.getSelectedItem());
 							//System.out.println(gameTimes);
@@ -1115,7 +1117,7 @@ public class WindowMain {
 		try {
 			gameState = new GameState(this,path);
 			for(int i=0;i<strategies.size();i++){
-				if(strategies.get(i).equals("agressive")){
+				if(strategies.get(i).equals("aggressive")){
 					Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
 					players.add(p1);
 				}else if(strategies.get(i).equals("benevolent")){
@@ -1143,6 +1145,7 @@ public class WindowMain {
 			e.printStackTrace();
 		}
 	}
+	
 	
 
 }
