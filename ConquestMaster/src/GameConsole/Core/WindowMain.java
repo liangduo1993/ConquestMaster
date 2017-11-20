@@ -1202,17 +1202,17 @@ public class WindowMain {
 			gameState = new GameState(this, path);
 			for (int i = 0; i < strategies.size(); i++) {
 				if (strategies.get(i).equals("aggressive")) {
-					Player p1 = new Player("p1", Color.magenta, gameState, new AggressiveStrategy());
-					players.add(p1);
+					Player p = new Player("p" + (i + 1), Color.magenta, gameState, new AggressiveStrategy());
+					players.add(p);
 				} else if (strategies.get(i).equals("benevolent")) {
-					Player p2 = new Player("p2", Color.magenta, gameState, new BenevolentStrategy());
-					players.add(p2);
+					Player p = new Player("p" + (i + 1), Color.magenta, gameState, new BenevolentStrategy());
+					players.add(p);
 				} else if (strategies.get(i).equals("cheater")) {
-					Player p3 = new Player("p3", Color.magenta, gameState, new CheaterStrategy());
-					players.add(p3);
+					Player p = new Player("p" + (i + 1), Color.magenta, gameState, new CheaterStrategy());
+					players.add(p);
 				} else if (strategies.get(i).equals("random")) {
-					Player p4 = new Player("p4", Color.magenta, gameState, new RandomStrategy());
-					players.add(p4);
+					Player p = new Player("p" + (i + 1), Color.magenta, gameState, new RandomStrategy());
+					players.add(p);
 				}
 			}
 			for (int x = 0; x < players.size(); x++) {
