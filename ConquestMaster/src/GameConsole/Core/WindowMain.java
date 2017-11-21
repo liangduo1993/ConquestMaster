@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -61,6 +63,7 @@ public class WindowMain {
 	public JPanel mapPanel, Country1Display, Country2Display;
 	private DomiInfoPanel domiInfoPanel;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
+	private JComboBox<String> player1Strategy,player2Strategy,player3Strategy,player4Strategy,player5Strategy;
 	private JLabel playerWonLabell;
 	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
@@ -570,35 +573,119 @@ public class WindowMain {
 
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
+					if(player1Strategy.getSelectedItem().equals("human")){
 					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new HumanStrategy());
 					gameState.addPlayer(p1);
 					gameState.setCurrPlayer(p1);
+					}
+					else if(player1Strategy.getSelectedItem().equals("aggressive")){
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new AggressiveStrategy());
+						gameState.addPlayer(p1);
+						gameState.setCurrPlayer(p1);
+					}
+					else if(player1Strategy.getSelectedItem().equals("benevolent")){
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new BenevolentStrategy());
+						gameState.addPlayer(p1);
+						gameState.setCurrPlayer(p1);
+					}
+					else if(player1Strategy.getSelectedItem().equals("random")){
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new RandomStrategy());
+						gameState.addPlayer(p1);
+						gameState.setCurrPlayer(p1);
+					}
+					else if(player1Strategy.getSelectedItem().equals("cheater")){
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new CheaterStrategy());
+						gameState.addPlayer(p1);
+						gameState.setCurrPlayer(p1);
+					}
 				}
 				if (playerTwoText.isVisible()) {
-					// Player p2 = new Player(player2TextField.getText(),
-					// Color.magenta, gameState, new HumanStrategy());
-					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
-							new AggressiveStrategy());
+					if(player2Strategy.getSelectedItem().equals("human")){
+					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new HumanStrategy());
 					gameState.addPlayer(p2);
+					}
+					else if(player2Strategy.getSelectedItem().equals("aggressive")){
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new AggressiveStrategy());
+						gameState.addPlayer(p2);
+					}
+					else if(player2Strategy.getSelectedItem().equals("benevolent")){
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new BenevolentStrategy());
+						gameState.addPlayer(p2);			
+					}
+					else if(player2Strategy.getSelectedItem().equals("random")){
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new RandomStrategy());
+						gameState.addPlayer(p2);
+					}
+					else if(player2Strategy.getSelectedItem().equals("cheater")){
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new CheaterStrategy());
+						gameState.addPlayer(p2);	
+					}
 				}
 				if (playerThreeText.isVisible()) {
-					// Player p3 = new Player(player3TextField.getText(),
-					// Color.green, gameState, new HumanStrategy());
-					Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
-							new BenevolentStrategy());
+					if(player3Strategy.getSelectedItem().equals("human")){
+					Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new HumanStrategy());
 					gameState.addPlayer(p3);
+					}
+					else if(player3Strategy.getSelectedItem().equals("aggressive")){
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new AggressiveStrategy());
+						gameState.addPlayer(p3);
+					}
+					else if(player3Strategy.getSelectedItem().equals("benevolent")){
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new BenevolentStrategy());
+						gameState.addPlayer(p3);			
+					}
+					else if(player3Strategy.getSelectedItem().equals("random")){
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new RandomStrategy());
+						gameState.addPlayer(p3);
+					}
+					else if(player3Strategy.getSelectedItem().equals("cheater")){
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new CheaterStrategy());
+						gameState.addPlayer(p3);	
+					}
 				}
 				if (playerFourText.isVisible()) {
-					// Player p4 = new Player(player4TextField.getText(),
-					// Color.blue, gameState, new HumanStrategy());
-					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new RandomStrategy());
+					if(player4Strategy.getSelectedItem().equals("human")){
+					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new HumanStrategy());
 					gameState.addPlayer(p4);
+					}
+					else if(player4Strategy.getSelectedItem().equals("aggressive")){
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new AggressiveStrategy());
+						gameState.addPlayer(p4);
+					}
+					else if(player4Strategy.getSelectedItem().equals("benevolent")){
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new BenevolentStrategy());
+						gameState.addPlayer(p4);			
+					}
+					else if(player4Strategy.getSelectedItem().equals("random")){
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new RandomStrategy());
+						gameState.addPlayer(p4);
+					}
+					else if(player4Strategy.getSelectedItem().equals("cheater")){
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new CheaterStrategy());
+						gameState.addPlayer(p4);	
+					}
 				}
 				if (playerFiveText.isVisible()) {
-					// Player p5 = new Player(player5TextField.getText(),
-					// Color.red, gameState, new HumanStrategy());
-					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new CheaterStrategy());
+					if(player5Strategy.getSelectedItem().equals("human")){
+					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
 					gameState.addPlayer(p5);
+					}
+					else if(player5Strategy.getSelectedItem().equals("aggressive")){
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new AggressiveStrategy());
+						gameState.addPlayer(p5);
+					}
+					else if(player5Strategy.getSelectedItem().equals("benevolent")){
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new BenevolentStrategy());
+						gameState.addPlayer(p5);			
+					}
+					else if(player5Strategy.getSelectedItem().equals("random")){
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new RandomStrategy());
+						gameState.addPlayer(p5);
+					}
+					else if(player5Strategy.getSelectedItem().equals("cheater")){
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new CheaterStrategy());
+						gameState.addPlayer(p5);	
+					}
 				}
 				gameState.gameStart(true);
 
@@ -692,6 +779,11 @@ public class WindowMain {
 		player1TextField.setText("");
 		playerOneText.add(player1TextField);
 		player1TextField.setColumns(10);
+		
+		player1Strategy = new JComboBox<>();
+		player1Strategy.setModel(
+				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
+		playerOneText.add(player1Strategy);
 
 		playerTwoText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		playerTwoText.setBounds(500, 0, 300, 80);
@@ -705,6 +797,11 @@ public class WindowMain {
 		player2TextField.setText("");
 		player2TextField.setColumns(10);
 		playerTwoText.add(player2TextField);
+		
+		player2Strategy = new JComboBox<>();
+		player2Strategy.setModel(
+				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
+		playerTwoText.add(player2Strategy);
 
 		playerThreeText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		playerThreeText.setBounds(0, 120, 300, 80);
@@ -718,6 +815,11 @@ public class WindowMain {
 		player3TextField.setText("");
 		player3TextField.setColumns(10);
 		playerThreeText.add(player3TextField);
+		
+		player3Strategy = new JComboBox<>();
+		player3Strategy.setModel(
+				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
+		playerThreeText.add(player3Strategy);
 
 		playerFourText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		playerFourText.setBounds(500, 120, 300, 80);
@@ -730,6 +832,11 @@ public class WindowMain {
 		player4TextField = new JTextField();
 		player4TextField.setColumns(10);
 		playerFourText.add(player4TextField);
+		
+		player4Strategy = new JComboBox<>();
+		player4Strategy.setModel(
+				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
+		playerFourText.add(player4Strategy);
 
 		playerFiveText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		playerFiveText.setBounds(250, 220, 300, 80);
@@ -742,6 +849,12 @@ public class WindowMain {
 		player5TextField = new JTextField();
 		player5TextField.setColumns(10);
 		playerFiveText.add(player5TextField);
+		
+		JComboBox<String> player5Strategy = new JComboBox<>();
+		player5Strategy.setModel(
+				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
+		playerFiveText.add(player5Strategy);
+		
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
