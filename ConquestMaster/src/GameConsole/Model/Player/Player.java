@@ -430,19 +430,22 @@ public class Player extends Observable {
 	}
 
 	/**
-	 * To add an infantry for target country of current player
-	 * 
-	 * @param c
-	 *            the target country
+	 * Method to reinforce by implementing the selected strategy
 	 */
 	public void reinforce() {
 		this.strategy.reinforce();
 	}
 
+	/**
+	 * Method to fortify by implementing the selected strategy
+	 */
 	public void fortify() {
 		this.strategy.fortify();
 	}
 
+	/**
+	 * Method to attack by implementing the selected strategy
+	 */
 	public void attack() {
 		this.strategy.attack();
 	}
@@ -483,6 +486,10 @@ public class Player extends Observable {
 
 	}
 
+	/**
+	 * Method to check if the player wins the game
+	 * @return true if the player has the total number of the countries in the map otherwise false
+	 */
 	public boolean checkWinGame() {
 		if (this.countries.size() == game.getWorld().getDeck().size())
 			return true;
@@ -833,6 +840,9 @@ public class Player extends Observable {
 		this.playerTextName = playerTextName;
 	}
 
+	/**
+	 * Method to specify the state changes
+	 */
 	public void changed() {
 		setChanged();
 		notifyObservers("card");
