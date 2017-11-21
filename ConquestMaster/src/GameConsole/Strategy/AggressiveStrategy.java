@@ -61,9 +61,15 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		int num = getPlayer().getBonusAndChangeCard();
-		for (int i = 0; i < num; i++) {
+		if (getGameState().getFirstRound() == 1) {
 			this.getPlayer().addInfantry(this.getStrongestContry());
+			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+		} else {
+			int num = getPlayer().getBonusAndChangeCard();
+			for (int i = 0; i < num; i++) {
+				this.getPlayer().addInfantry(this.getStrongestContry());
+				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			}
 		}
 	}
 
@@ -83,22 +89,23 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 
 	/**
 	 * Method to get its strongest country
+	 * 
 	 * @return the country that got which is Country type
 	 */
 	private Country getStrongestContry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttackCountries = new ArrayList<>();
 		for (Country c : countrys) {
-			//if (c.getTroops().size() > 1) {
-				boolean flag = false;
-				for (Country neighbour : c.getBorderingCountries()) {
-					if (neighbour.getPlayer() != this.getPlayer())
-						flag = true;
-				}
-				if (flag) {
-					canAttackCountries.add(c);
-				}
-			//}
+			// if (c.getTroops().size() > 1) {
+			boolean flag = false;
+			for (Country neighbour : c.getBorderingCountries()) {
+				if (neighbour.getPlayer() != this.getPlayer())
+					flag = true;
+			}
+			if (flag) {
+				canAttackCountries.add(c);
+			}
+			// }
 		}
 
 		Country strongestCountry = new Country();
@@ -120,42 +127,40 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		AggressiveStrategy s1 = new AggressiveStrategy();
 		s1.setGameState(gs);
 		s1.setPlayer(p1);
-		
+
 		p1.setStrategy(s1);
-		
-		for(Country c: p1.getCountries()){
+
+		for (Country c : p1.getCountries()) {
 			System.out.println(c.getName() + ": " + c.getTroopNum());
 		}
 		System.out.println("======");
-		
+
 		p1.reinforce();
-		
-		for(Country c: p1.getCountries()){
+
+		for (Country c : p1.getCountries()) {
 			System.out.println(c.getName() + ": " + c.getTroopNum());
-		}		
+		}
 		System.out.println("======");
-		
+
 		p1.fortify();
-		for(Country c: p1.getCountries()){
+		for (Country c : p1.getCountries()) {
 			System.out.println(c.getName() + ": " + c.getTroopNum());
-		}	
+		}
 		System.out.println("======");
-		
+
 		p1.attack();
-		
-		for(Country c: p1.getCountries()){
+
+		for (Country c : p1.getCountries()) {
 			System.out.println(c.getName() + ": " + c.getTroopNum());
-		}	
+		}
 		System.out.println("======");
-		
+
 		p1.reinforce();
-		
-		for(Country c: p1.getCountries()){
+
+		for (Country c : p1.getCountries()) {
 			System.out.println(c.getName() + ": " + c.getTroopNum());
-		}	
+		}
 		System.out.println("======");
 	}
-	
-	
-	
+
 }

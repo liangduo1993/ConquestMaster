@@ -9,25 +9,31 @@ import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
 import GameConsole.Strategy.RandomStrategy;
 
-public class GameStimulater {
+public class TournamentStimulater {
 
 	private GameState gs;
 	private int turn;
 	private List<Player> players;
 
-	public GameStimulater(GameState gs, List<Player> players, int turn) {
+	public TournamentStimulater(GameState gs, List<Player> players, int turn, boolean flag) {
 		this.gs = gs;
 		gs.getAllPlayers().setPlayers(players);
 		gs.setCurrPlayer(players.get(0));
 		this.players = players;
 		this.turn = turn;
+		gs.gameStart(flag);
 	}
 
 	public String execute() {
-
-		for (Player p : players) {
-			p.reinforce();
+		Player tempP = gs.getCurrPlayer();
+		while(tempP.getInitTroop() > 0){
+			tempP.reinforce();
+			gs.setNextPlayer();
+			tempP = gs.getCurrPlayer();
 		}
+//		for (Player p : players) {
+//			p.reinforce();
+//		}
 
 		gs.setFirstRound(2);
 
@@ -88,7 +94,7 @@ public class GameStimulater {
 			//list.add(p3);
 			list.add(p4);
 
-			GameStimulater gameSt = new GameStimulater(gs, list, 30);
+			TournamentStimulater gameSt = new TournamentStimulater(gs, list, 30,false);
 			gs.gameStart(false);
 			sb.append(gameSt.execute());
 			sb.append("\r\n");

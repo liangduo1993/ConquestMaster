@@ -68,10 +68,19 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		int num = getPlayer().getBonusAndChangeCard();
-		for (int i = 0; i < num; i++) {
+		if (getGameState().getFirstRound() == 1) {
 			this.getPlayer().addInfantry(this.getRandCountry());
+			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+		} else {
+
+			int num = getPlayer().getBonusAndChangeCard();
+			for (int i = 0; i < num; i++) {
+				this.getPlayer().addInfantry(this.getRandCountry());
+				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			}
+
 		}
+
 	}
 
 	/**
@@ -104,6 +113,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 
 	/**
 	 * Method to get country in random mode
+	 * 
 	 * @return the country that got which is Country type
 	 */
 	private Country getRandCountry() {
@@ -114,28 +124,33 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 
 	/**
 	 * Method to get country which can be attacked in random mode
+	 * 
 	 * @return the country that got which is Country type
 	 */
 	private Country getCanAttackRandomCountry() {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttack = new ArrayList<>();
-		for(Country c: countrys){
-			if(c.getTroopNum() <= 1) continue;
-			for(Country neighbour: c.getBorderingCountries()){
-				if(neighbour.getPlayer() != this.getPlayer()){
+		for (Country c : countrys) {
+			if (c.getTroopNum() <= 1)
+				continue;
+			for (Country neighbour : c.getBorderingCountries()) {
+				if (neighbour.getPlayer() != this.getPlayer()) {
 					canAttack.add(c);
 				}
 			}
 		}
-		
+
 		int rand = (int) (Math.random() * canAttack.size());
 		return canAttack.get(rand);
 	}
 
 	/**
 	 * Method to get the number of troop in randomly
-	 * @param num the total number of troop the country owns
-	 * @return the random number of the troop which is no more than the total number of troop the country owns
+	 * 
+	 * @param num
+	 *            the total number of troop the country owns
+	 * @return the random number of the troop which is no more than the total
+	 *         number of troop the country owns
 	 */
 	private int getRandTroops(int num) {
 		if (num == 1)

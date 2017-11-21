@@ -29,9 +29,16 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		int num = getPlayer().getBonusAndChangeCard();
-		for (int i = 0; i < num; i++) {
+		if (getGameState().getFirstRound() == 1) {
 			this.getPlayer().addInfantry(this.getWeakestCountry());
+			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+		} else {
+
+			int num = getPlayer().getBonusAndChangeCard();
+			for (int i = 0; i < num; i++) {
+				this.getPlayer().addInfantry(this.getWeakestCountry());
+				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			}
 		}
 	}
 
@@ -50,8 +57,9 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 			}
 		}
 
-		if(country2.getPlayer() == null) return;
-		
+		if (country2.getPlayer() == null)
+			return;
+
 		int minNum = country1.getTroopNum();
 		int maxNum = country2.getTroopNum();
 
@@ -62,6 +70,7 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 
 	/**
 	 * Method to get its weakest country
+	 * 
 	 * @return the country that got which is Country type
 	 */
 	private Country getWeakestCountry() {

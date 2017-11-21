@@ -18,11 +18,11 @@ public class GameState extends Observable {
 	private Group allPlayers;
 	private int currPhase; 
 	private World world;
-	private Country country1;
-	private Country country2;
+	private Country country1 = null;
+	private Country country2 = null;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
-	private Country currClick;
+	private Country currClick = null;
 
 	/**
 	 * constructor method with incoming parameters

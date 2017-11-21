@@ -91,6 +91,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		playerNum = state.getAllPlayers().getPlayers().size();
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
 			ArrayList<Country> countries = cur.getCountries();

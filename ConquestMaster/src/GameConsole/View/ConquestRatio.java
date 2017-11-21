@@ -27,7 +27,9 @@ public class ConquestRatio extends JPanel implements Observer {
 
 	/**
 	 * constructor method
-	 * @param state game state with GameState type
+	 * 
+	 * @param state
+	 *            game state with GameState type
 	 */
 	public ConquestRatio(GameState state) {
 		this.state = state;
@@ -58,11 +60,13 @@ public class ConquestRatio extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		Color color = g.getColor();
 		int loc = 0;
-		for (int i = 0; i < playerNum; i++) {
-			Player cur = state.getAllPlayers().getPlayers().get(i);
-			g.setColor(cur.getColor());
-			g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
-			loc += ratio * cur.getCountries().size();
+		if (playerNum > 1) {
+			for (int i = 0; i < playerNum; i++) {
+				Player cur = state.getAllPlayers().getPlayers().get(i);
+				g.setColor(cur.getColor());
+				g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
+				loc += ratio * cur.getCountries().size();
+			}
 		}
 		g.setColor(color);
 	}
@@ -72,6 +76,7 @@ public class ConquestRatio extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		playerNum = state.getAllPlayers().getPlayers().size();
 		int loc = 0;
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);

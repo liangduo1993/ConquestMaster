@@ -36,10 +36,10 @@ public class CardExchangeView implements Observer {
 	 * Method to update the hand cards view
 	 */
 	public void update(Observable o, Object arg) {
-		System.out.println("//================");
-		System.out.println("cardExchange panel!");
-		System.out.println(arg);
-		System.out.println(gameState.getFirstRound() + "&" + gameState.getCurrPhase());
+//		System.out.println("//================");
+//		System.out.println("cardExchange panel!");
+//		System.out.println(arg);
+//		System.out.println(gameState.getFirstRound() + "&" + gameState.getCurrPhase());
 		
 		if(arg!= null &&(gameState.getFirstRound() > 1 && gameState.getCurrPhase() == 0 && arg.equals("card"))){
 			Player currentPlayer = gameState.getCurrPlayer();

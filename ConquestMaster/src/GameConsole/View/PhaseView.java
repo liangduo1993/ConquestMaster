@@ -193,7 +193,7 @@ public class PhaseView implements Observer {
 		for(Player p: gameState.getAllPlayers().getPlayers()){
 			p.getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 		}
-		System.out.println(gameState.getCurrPlayer());
+		//System.out.println(gameState.getCurrPlayer());
 		gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 		if (gameState.getFirstRound() == 1) {
 			obtainTroopLabel.setVisible(true);
