@@ -82,7 +82,7 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		Country strongestC = getStrongestContry();
 		for (Country neighbour : strongestC.getBorderingCountries()) {
 			if (neighbour.getPlayer() == this.getPlayer()) {
-				getGameState().getCurrPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
+				getPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
 			}
 		}
 	}

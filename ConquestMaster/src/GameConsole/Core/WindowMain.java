@@ -859,7 +859,7 @@ public class WindowMain {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 					if (gameState.getFirstRound() > 1) {
 						if (gameState.getCurrPhase() == 0) {
-							gameState.getCurrPlayer().setHasMoved(false);
+							//gameState.getCurrPlayer().setHasMoved(false);
 							//gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 							lp.addLog("It is the Reinforcement phase!");
@@ -874,9 +874,9 @@ public class WindowMain {
 							lp.addLog("Attack phase automatically skips!");
 							gameState.setCurrPhase(2);
 						}
-						if (gameState.getCurrPhase() == 2) {
-							gameState.getCurrPlayer().giveCards();
-						}
+						
+						
+						
 					}
 				}
 			}
@@ -996,7 +996,7 @@ public class WindowMain {
 										country2.setText((String) null);
 									}
 								}
-							} else if (!gameState.getCurrPlayer().isHasMoved()) {
+							}} else if (!gameState.getCurrPlayer().isHasMoved()) {
 								if (gameState.getCountry1() == null) {
 									gameState.setCountry1(countryButton.country);
 									country1.setText(gameState.getCountry1().getName());
@@ -1020,7 +1020,7 @@ public class WindowMain {
 										cancelCountryButton.setVisible(false);
 										cancelCountryButton.setEnabled(false);
 
-										currentPlayer.fortify();
+										//currentPlayer.fortify();
 
 									} else {
 										JOptionPane.showMessageDialog(countryButton.b,
@@ -1029,15 +1029,15 @@ public class WindowMain {
 										gameState.setCountry2(null);
 										country2.setText((String) null);
 									}
-									gameState.updateCountryLabels();
-									gameState.setCountry1(null);
-									gameState.setCountry2(null);
-									country1.setText((String) null);
-									country2.setText((String) null);
+//									gameState.updateCountryLabels();
+//									gameState.setCountry1(null);
+//									gameState.setCountry2(null);
+//									country1.setText((String) null);
+//									country2.setText((String) null);
 								}
 							}
 						}
-					}
+					
 				}
 			});
 		}

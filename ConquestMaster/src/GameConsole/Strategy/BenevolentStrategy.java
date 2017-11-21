@@ -64,7 +64,7 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 		int maxNum = country2.getTroopNum();
 
 		int moveTroopNum = (maxNum - minNum) / 2;
-		getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
+		getPlayer().moveTroops(country2, country1, moveTroopNum);
 
 	}
 

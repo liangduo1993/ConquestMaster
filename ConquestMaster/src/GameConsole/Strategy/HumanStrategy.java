@@ -14,7 +14,7 @@ import GameConsole.View.LogPanel;
  * A concrete Strategy that implements human strategy operation
  */
 public class HumanStrategy extends OriginalStrategy implements Strategy {
-	
+
 	/**
 	 * Constructor for HumanStrategy
 	 */
@@ -22,8 +22,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		super();
 		this.setName("Human");
 	}
-	
-	
+
 	/**
 	 * Method to attack.
 	 */
@@ -34,7 +33,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			if (!getPlayer().checkIfCanAttack()) {
 				return;
 			}
-			System.out.println(this.getGameState().getCurrClick() );
+			System.out.println(this.getGameState().getCurrClick());
 			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null) {
 
 				JPanel numdice1 = new JPanel();
@@ -107,10 +106,10 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 				updateLabel();
 			}
 
-			getGameState().setCountry1(null);
-			getGameState().setCountry2(null);
-			getGameState().getWindow().country1.setText((String) null);
-			getGameState().getWindow().country2.setText((String) null);
+			// getGameState().setCountry1(null);
+			// getGameState().setCountry2(null);
+			// getGameState().getWindow().country1.setText((String) null);
+			// getGameState().getWindow().country2.setText((String) null);
 
 		}
 
@@ -123,7 +122,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 	public void reinforce() {
 		if (getGameState().getFirstRound() == 1) {
 			while (true) {
-				System.out.println(this.getGameState().getCurrClick() );
+				System.out.println(this.getGameState().getCurrClick());
 				if (this.getGameState().getCurrClick() != null) {
 					this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
@@ -134,7 +133,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			}
 		} else {
 			while (getPlayer().getInitTroop() > 0) {
-				System.out.println(this.getGameState().getCurrClick() );
+				System.out.println(this.getGameState().getCurrClick());
 				if (this.getGameState().getCurrClick() != null) {
 					this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
@@ -150,10 +149,13 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void fortify() {
+		getPlayer().giveCards();
+		getPlayer().setHasMoved(false);
 		while (getGameState().getCurrPhase() == 2) {
 			System.out.println("fortify!!!!!!");
-			if(getGameState().getCurrPhase() != 2) return;
-			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null) {
+//			if (getGameState().getCurrPhase() != 2)
+//				return;
+			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null && !getPlayer().isHasMoved()) {
 				JPanel numPanel = new JPanel();
 				numPanel.add(new JLabel("Select how many troops to add"));
 				DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
@@ -162,17 +164,15 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 				}
 				JComboBox<String> comboBox = new JComboBox<String>(selection);
 				numPanel.add(comboBox);
-				int result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops",
-						JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int result = -1;
+				while(result != JOptionPane.OK_OPTION && result != JOptionPane.CANCEL_OPTION){
+					result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops",
+							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				}
 				if (result == JOptionPane.OK_OPTION) {
-					getGameState().getCurrPlayer().moveTroops(getGameState().getCountry1(),
-							getGameState().getCountry2(), Integer.parseInt(comboBox.getSelectedItem().toString()));
-					getGameState().getCurrPlayer().setHasMoved(true);
-					getGameState().updateCountryLabels();
-					getGameState().setCountry1(null);
-					getGameState().setCountry2(null);
-					getGameState().getWindow().country1.setText((String) null);
-					getGameState().getWindow().country2.setText((String) null);
+					getPlayer().moveTroops(getGameState().getCountry1(), getGameState().getCountry2(),
+							Integer.parseInt(comboBox.getSelectedItem().toString()));
+					 getPlayer().setHasMoved(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "Move was cancelled.");
 					LogPanel.getInstance().addLog("Move was cancelled.");
@@ -181,26 +181,24 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 					getGameState().getWindow().country1.setText((String) null);
 					getGameState().getWindow().country2.setText((String) null);
 				}
-				clearLabel();
-				updateLabel();
+				 clearLabel();
+				 updateLabel();
 			}
 
 		}
 
 	}
-	
-	
-	public void updateLabel(){
+
+	public void updateLabel() {
 		getGameState().updateCountryLabels();
 		getGameState().getWindow().country1.setText((String) null);
 		getGameState().getWindow().country2.setText((String) null);
 		getGameState().getWindow().troopsLeft = getPlayer().getInitTroop();
 		getGameState().getWindow().numberOfTroops.setText("" + getGameState().getWindow().troopsLeft);
-		
-		
+
 	}
-	
-	public void clearLabel(){
+
+	public void clearLabel() {
 		getGameState().setCountry1(null);
 		getGameState().setCountry2(null);
 		getGameState().setCurrClick(null);

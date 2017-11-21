@@ -106,7 +106,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 				continue;
 			}
 			int moveTroopNum = getRandTroops(country2.getTroopNum());
-			getGameState().getCurrPlayer().moveTroops(country2, country1, moveTroopNum);
+			getPlayer().moveTroops(country2, country1, moveTroopNum);
 
 		}
 	}
