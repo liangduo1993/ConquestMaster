@@ -86,6 +86,9 @@ public class WindowMain {
 		init();
 	}
 
+	/**
+	 * Method to initiate the game.
+	 */
 	private void init() {
 		frame1 = new JFrame();
 		frame1.setResizable(false);
@@ -1052,6 +1055,9 @@ public class WindowMain {
 		gameState.addObserver(phaseView);
 	}
 
+	/**
+	 * Method to load the game
+	 */
 	public void loadGame() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
@@ -1077,6 +1083,9 @@ public class WindowMain {
 		}
 	}
 
+	/**
+	 * Method to save the game
+	 */
 	public void saveGame() {
 		JFileChooser fc = new JFileChooser();
 		int returnVal = fc.showOpenDialog(null);
@@ -1163,6 +1172,9 @@ public class WindowMain {
 
 	}
 
+	/**
+	 * Method to a menu which includes Exit, Save, Load option
+	 */
 	public void addMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, frame1.getWidth(), 30);

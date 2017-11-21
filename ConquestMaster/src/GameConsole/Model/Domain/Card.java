@@ -6,14 +6,20 @@ import GameConsole.Model.Player.Player;
  * This class defines the Cards that player can exchange to troops
  *
  */
-@SuppressWarnings("all")
 public class Card {
 
-	private int type; 
+	private int type;
 
 
+	/**
+	 * Constructor for Card class
+	 */
 	public Card(){}
-	
+
+	/**
+	 * Constructor for Card class with coming parameter
+	 * @param type the type of the card with int type
+	 */
 	public Card(int type){
 		this.type = type;
 	}

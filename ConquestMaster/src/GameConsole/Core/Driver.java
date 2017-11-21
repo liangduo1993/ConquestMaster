@@ -12,7 +12,6 @@ public class Driver extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	@SuppressWarnings("all")
 	public static void main(String[] args) {
 		try {
 			WindowMain w = new WindowMain();

@@ -26,13 +26,13 @@ public class Country {
 
 
 	/**
-	 * Construction method
+	 * Constructor method
 	 */
 	public Country() {
 	}
 
 	/**
-	 * Construction method to initial the attributes
+	 * Constructor method to initial the attributes
 	 * @param name country name with String type
 	 */
 	public Country(String name) {
@@ -241,10 +241,18 @@ public class Country {
 		this.linkNames = linkNames;
 	}
 
+	/**
+	 * Method to get the number of troop
+	 * @return the number of troop
+	 */
 	public int getTroopNum() {
 		return troopNum;
 	}
 
+	/**
+	 * Method to set the number of the troop
+	 * @param troopNum the desired number that needs to be set
+	 */
 	public void setTroopNum(int troopNum) {
 		this.troopNum = troopNum;
 	}
