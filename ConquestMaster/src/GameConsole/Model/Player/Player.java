@@ -216,6 +216,7 @@ public class Player extends Observable {
 		}
 		setChanged();
 		notifyObservers();
+		lp.addLog(this.getName() + " adds one troop to " + c.getName() + "!");
 	}
 
 	/**
@@ -362,7 +363,6 @@ public class Player extends Observable {
 	 */
 	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) {
 		Map<String, Object> result = new HashMap<>();
-
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();
 		ArrayList<Integer> attackRoll = new ArrayList<Integer>();
@@ -481,9 +481,9 @@ public class Player extends Observable {
 	public void moveTroops(Country c1, Country c2, int toMove) {
 		c1.removeTroops(toMove);
 		c2.addInfrantry(toMove);
-		lp.addLog(this.getName() + " moves " + toMove + " troops from " + c1.getName() + " to " + c2.getName());
 		setChanged();
 		notifyObservers();
+		lp.addLog(this.getName() + " moves " + toMove + " troops from " + c1.getName() + " to " + c2.getName());
 	}
 
 //	/**

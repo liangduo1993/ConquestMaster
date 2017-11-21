@@ -51,7 +51,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 				}
 				int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
-				lp.addLog("Attacker chooses " + decision1 + " dices!");
+			//	lp.addLog("Attacker chooses " + decision1 + " dices!");
 
 				numdice1.remove(label);
 				numdice1.remove(list1);
@@ -70,7 +70,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 								JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					decision2 = Integer.parseInt(list2.getSelectedItem().toString());
-					lp.addLog("Defender chooses " + decision2 + " dices!");
+					//lp.addLog("Defender chooses " + decision2 + " dices!");
 				}
 
 				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(),

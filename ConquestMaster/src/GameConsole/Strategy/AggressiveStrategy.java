@@ -79,12 +79,13 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
-		Country strongestC = getStrongestContry();
-		for (Country neighbour : strongestC.getBorderingCountries()) {
-			if (neighbour.getPlayer() == this.getPlayer()) {
-				getPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
+			Country strongestC = getStrongestContry();
+			for (Country neighbour : strongestC.getBorderingCountries()) {
+				if (neighbour.getPlayer() == this.getPlayer() && neighbour.getTroopNum() > 1) {
+					getPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
+					return;
+				}
 			}
-		}
 	}
 
 	/**

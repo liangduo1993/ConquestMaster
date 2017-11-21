@@ -1018,7 +1018,7 @@ public class WindowMain {
 							// ==========
 							// currentPlayer.addInfantry(countryButton.country);
 
-							lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
+							//lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
 							lp.addLog("That country does not belong to you.");
@@ -1067,7 +1067,7 @@ public class WindowMain {
 								// currentPlayer.reinforce(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
-								lp.addLog(currentPlayer.getName() + " reinforces one troop to " + countryButton.name);
+								//lp.addLog(currentPlayer.getName() + " reinforces one troop to " + countryButton.name);
 							} else if (troopsLeft == 0) {
 								JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
 								lp.addLog("Out of troops to add");
