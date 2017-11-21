@@ -33,7 +33,6 @@ public class Troop extends AbstractTroop{
 	 * Method extends from the super class and provide implementations for die() method.
 	 * The specific implementation will be decided when the future requirements need.
 	 */
-	@Override
 	public void die() {
 		
 	}

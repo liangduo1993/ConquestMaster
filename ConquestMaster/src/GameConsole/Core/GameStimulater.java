@@ -2,13 +2,11 @@ package GameConsole.Core;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
-import GameConsole.Strategy.CheaterStrategy;
 import GameConsole.Strategy.RandomStrategy;
 
 public class GameStimulater {

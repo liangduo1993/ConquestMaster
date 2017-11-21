@@ -1060,7 +1060,7 @@ public class WindowMain {
 	 */
 	public void loadGame() {
 		JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(null);
+		fc.showOpenDialog(null);
 		File path = fc.getSelectedFile();
 		System.out.println(path.getAbsolutePath());
 		try {
@@ -1088,7 +1088,7 @@ public class WindowMain {
 	 */
 	public void saveGame() {
 		JFileChooser fc = new JFileChooser();
-		int returnVal = fc.showOpenDialog(null);
+		fc.showOpenDialog(null);
 		File path = fc.getSelectedFile();
 
 		System.out.println(path.getAbsolutePath());

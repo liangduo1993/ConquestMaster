@@ -6,7 +6,6 @@ import java.util.Map;
 
 import GameConsole.Core.GameLoader;
 import GameConsole.Core.GameState;
-import GameConsole.Core.WindowMain;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 

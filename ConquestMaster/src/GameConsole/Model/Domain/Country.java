@@ -2,8 +2,6 @@ package GameConsole.Model.Domain;
 
 import java.util.ArrayList;
 
-import GameConsole.Model.Army.Troop;
-import GameConsole.Model.Army.AbstractTroop;
 import GameConsole.Model.Player.Player;
 import GameConsole.View.CountryButton;
 

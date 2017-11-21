@@ -1,14 +1,15 @@
 package GameConsole.View;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * This class is the user interface for the beginning of the tournament mode where
@@ -64,6 +65,7 @@ public class TournamentResultPanel extends JPanel {
 			table1,
 			table2
 		) {
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, true, true, true, true, false
 			};

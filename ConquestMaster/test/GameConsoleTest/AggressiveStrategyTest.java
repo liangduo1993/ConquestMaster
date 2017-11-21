@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import GameConsole.Core.GameState;
 import GameConsole.Core.GameLoader;
-import GameConsole.Model.Domain.Country;
+import GameConsole.Core.GameState;
 import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.AggressiveStrategy;
 /**

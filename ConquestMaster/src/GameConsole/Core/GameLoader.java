@@ -11,7 +11,6 @@ import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.HumanStrategy;
-import GameConsole.View.MapDisplayer;
 
 /**
  * This class is used to load the game session the user saved
