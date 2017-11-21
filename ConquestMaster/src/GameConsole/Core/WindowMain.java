@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,6 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
@@ -67,7 +67,7 @@ public class WindowMain {
 	public BufferedImage buttonImage;
 	private JButton nextStage, cancelCountryButton;
 	public JPanel unitDisplay;
-	public  JLabel numberOfTroops, country1, country2;
+	public JLabel numberOfTroops, country1, country2;
 	private JScrollPane mainScroll;
 	public MapDisplayer mapDisplayer;
 
@@ -575,22 +575,28 @@ public class WindowMain {
 					gameState.setCurrPlayer(p1);
 				}
 				if (playerTwoText.isVisible()) {
-//					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new HumanStrategy());
-					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new AggressiveStrategy());
+					// Player p2 = new Player(player2TextField.getText(),
+					// Color.magenta, gameState, new HumanStrategy());
+					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+							new AggressiveStrategy());
 					gameState.addPlayer(p2);
 				}
 				if (playerThreeText.isVisible()) {
-//					Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new HumanStrategy());
-					Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new BenevolentStrategy());
+					// Player p3 = new Player(player3TextField.getText(),
+					// Color.green, gameState, new HumanStrategy());
+					Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
+							new BenevolentStrategy());
 					gameState.addPlayer(p3);
 				}
 				if (playerFourText.isVisible()) {
-//					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new HumanStrategy());
+					// Player p4 = new Player(player4TextField.getText(),
+					// Color.blue, gameState, new HumanStrategy());
 					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new RandomStrategy());
 					gameState.addPlayer(p4);
 				}
 				if (playerFiveText.isVisible()) {
-//					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
+					// Player p5 = new Player(player5TextField.getText(),
+					// Color.red, gameState, new HumanStrategy());
 					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new CheaterStrategy());
 					gameState.addPlayer(p5);
 				}
@@ -609,13 +615,11 @@ public class WindowMain {
 
 				registerObserver();
 
-				
-
 				for (Player p : gameState.getAllPlayers().getPlayers()) {
 					p.setInitTroop(p.getBonus());
 					System.out.println(p.getName() + " has: " + p.getInitTroop());
 				}
-				
+
 				troopsLeft = gameState.getCurrPlayer().getInitTroop();
 				numberOfTroops.setText("" + troopsLeft);
 				System.out.println(gameState.getAllPlayers().getPlayers().size());
@@ -648,11 +652,11 @@ public class WindowMain {
 					}
 				}
 				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
-				
-				//================
+
+				// ================
 				SingleGameMode singleGame = new SingleGameMode(gameState);
 				singleGame.execute();
-				//================
+				// ================
 			}
 
 		});
@@ -859,24 +863,23 @@ public class WindowMain {
 					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
 					if (gameState.getFirstRound() > 1) {
 						if (gameState.getCurrPhase() == 0) {
-							//gameState.getCurrPlayer().setHasMoved(false);
-							//gameState.setNextPlayer();
+							// gameState.getCurrPlayer().setHasMoved(false);
+							// gameState.setNextPlayer();
 							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 							lp.addLog("It is the Reinforcement phase!");
 
-//							gameState.setCountry1(null);
-//							gameState.setCountry2(null);
+							// gameState.setCountry1(null);
+							// gameState.setCountry2(null);
 
-							//troopsLeft = gameState.getCurrPlayer().getBonus();
-							//numberOfTroops.setText(Integer.toString(troopsLeft));
+							// troopsLeft =
+							// gameState.getCurrPlayer().getBonus();
+							// numberOfTroops.setText(Integer.toString(troopsLeft));
 						}
 						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
 							lp.addLog("Attack phase automatically skips!");
 							gameState.setCurrPhase(2);
 						}
-						
-						
-						
+
 					}
 				}
 			}
@@ -892,13 +895,14 @@ public class WindowMain {
 					if (gameState.getFirstRound() == 1) {
 
 						if (currentPlayer == countryButton.country.getPlayer() && currentPlayer.getInitTroop() > 0) {
-							//currentPlayer.setInitTroop(currentPlayer.getInitTroop() - 1);
+							// currentPlayer.setInitTroop(currentPlayer.getInitTroop()
+							// - 1);
 							gameState.setCurrClick(countryButton.country);
-							//==========
-							//currentPlayer.reinforce();
-							//==========
+							// ==========
+							// currentPlayer.reinforce();
+							// ==========
 							// currentPlayer.addInfantry(countryButton.country);
-							
+
 							lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
@@ -906,30 +910,35 @@ public class WindowMain {
 							return;
 						}
 
-//						gameState.setNextPlayer();
-//						lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
-//						numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
-//						troopsLeft = gameState.getCurrPlayer().getInitTroop();
-//						gameState.setCountry1(null);
-//						gameState.setCountry2(null);
+						// gameState.setNextPlayer();
+						// lp.addLog("=====It's " +
+						// gameState.getCurrPlayer().getName() + "'s
+						// turn.=====");
+						// numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
+						// troopsLeft =
+						// gameState.getCurrPlayer().getInitTroop();
+						// gameState.setCountry1(null);
+						// gameState.setCountry2(null);
 
 						System.out.println("current player name:" + gameState.getCurrPlayer().getName());
 						System.out.println("current round num:" + gameState.getFirstRound());
 						System.out.println("current phase:" + gameState.getCurrPhase());
 
-//						boolean isFinished = true;
-//						for (Player p : gameState.getAllPlayers().getPlayers()) {
-//							if (p.getInitTroop() > 0)
-//								isFinished = false;
-//						}
-//						if (isFinished) {
-//							gameState.setFirstRound(gameState.getFirstRound() + 1);
-//							lp.addLog("It is the Reinforcement phase!");
-//
-//							System.out.println("round +1 !!!");
-//							troopsLeft = gameState.getCurrPlayer().getBonus();
-//							numberOfTroops.setText(Integer.toString(troopsLeft));
-//						}
+						// boolean isFinished = true;
+						// for (Player p :
+						// gameState.getAllPlayers().getPlayers()) {
+						// if (p.getInitTroop() > 0)
+						// isFinished = false;
+						// }
+						// if (isFinished) {
+						// gameState.setFirstRound(gameState.getFirstRound() +
+						// 1);
+						// lp.addLog("It is the Reinforcement phase!");
+						//
+						// System.out.println("round +1 !!!");
+						// troopsLeft = gameState.getCurrPlayer().getBonus();
+						// numberOfTroops.setText(Integer.toString(troopsLeft));
+						// }
 
 					} else if (gameState.getFirstRound() > 1) {
 						if (gameState.getCurrPhase() == 0) {
@@ -937,9 +946,9 @@ public class WindowMain {
 							if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0) {
 								troopsLeft--;
 								gameState.setCurrClick(countryButton.country);
-								//=============
-								//currentPlayer.reinforce();
-								//===========
+								// =============
+								// currentPlayer.reinforce();
+								// ===========
 								// currentPlayer.reinforce(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
@@ -977,50 +986,19 @@ public class WindowMain {
 									if (gameState.getCountry1().getPlayer() == gameState.getCurrPlayer()
 											&& gameState.getCountry2().getPlayer() != gameState.getCurrPlayer()) {
 
-										//=======
-//										currentPlayer.attack();
-										//=======
-									
-//										if (!gameState.getCurrPlayer().checkIfCanAttack()) {
-//											nextStage.doClick();
-//											lp.addLog("Attack phase is automatically skipped!");
-//										}
-//										gameState.updateCountryLabels();
-//										
-										
-									} else {
-										JOptionPane.showMessageDialog(countryButton.b,
-												"Countries are not adjacent, select the second country again.");
-										lp.addLog("Countries are not adjacent, select the second country again.");
-										gameState.setCountry2(null);
-										country2.setText((String) null);
-									}
-								}
-							}} else if (!gameState.getCurrPlayer().isHasMoved()) {
-								if (gameState.getCountry1() == null) {
-									gameState.setCountry1(countryButton.country);
-									country1.setText(gameState.getCountry1().getName());
-									if (gameState.getCountry1().getTroopNum() == 1) {
-										JOptionPane.showMessageDialog(countryButton.b,
-												"Troops cannot be moved from here because "
-														+ gameState.getCountry1().getName() + " only has 1 troop.");
-										lp.addLog("Troops cannot be moved from here because "
-												+ gameState.getCountry1().getName() + " only has 1 troop.");
-										gameState.setCountry1(null);
-										country1.setText((String) null);
-									} else {
-										cancelCountryButton.setVisible(true);
-										cancelCountryButton.setEnabled(true);
-									}
-								} else if (countryButton.country.getPlayer() == gameState.getCurrPlayer()
-										&& gameState.getCountry1() != null && gameState.getCountry2() == null) {
-									gameState.setCountry2(countryButton.country);
-									country2.setText(gameState.getCountry2().getName());
-									if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())) {
-										cancelCountryButton.setVisible(false);
-										cancelCountryButton.setEnabled(false);
+										// =======
+										// currentPlayer.attack();
+										// =======
 
-										//currentPlayer.fortify();
+										// if
+										// (!gameState.getCurrPlayer().checkIfCanAttack())
+										// {
+										// nextStage.doClick();
+										// lp.addLog("Attack phase is
+										// automatically skipped!");
+										// }
+										// gameState.updateCountryLabels();
+										//
 
 									} else {
 										JOptionPane.showMessageDialog(countryButton.b,
@@ -1029,15 +1007,55 @@ public class WindowMain {
 										gameState.setCountry2(null);
 										country2.setText((String) null);
 									}
-//									gameState.updateCountryLabels();
-//									gameState.setCountry1(null);
-//									gameState.setCountry2(null);
-//									country1.setText((String) null);
-//									country2.setText((String) null);
 								}
 							}
+						} else if (!gameState.getCurrPlayer().isHasMoved()) {
+							Country tempCountry1 = null;
+
+							if (gameState.getCountry1() == null) {
+								tempCountry1 = countryButton.country;
+								if (tempCountry1.getTroopNum() == 1 ) {
+									JOptionPane.showMessageDialog(countryButton.b,
+											"Troops cannot be moved from here because "
+													+ gameState.getCountry1().getName() + " only has 1 troop.");
+									lp.addLog("Troops cannot be moved from here because "
+											+ gameState.getCountry1().getName() + " only has 1 troop.");
+								} else if(tempCountry1.getPlayer() != gameState.getCurrPlayer()){
+									JOptionPane.showMessageDialog(countryButton.b,
+											"Country doesn't belong to you!");
+									lp.addLog("Country doesn't belong to you!");
+								}else {
+									cancelCountryButton.setVisible(true);
+									cancelCountryButton.setEnabled(true);
+									gameState.setCountry1(tempCountry1);
+									country1.setText(gameState.getCountry1().getName());
+								}
+							} else if (countryButton.country.getPlayer() == gameState.getCurrPlayer()
+									&& gameState.getCountry1() != null && gameState.getCountry2() == null) {
+								gameState.setCountry2(countryButton.country);
+								country2.setText(gameState.getCountry2().getName());
+								if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())) {
+									cancelCountryButton.setVisible(false);
+									cancelCountryButton.setEnabled(false);
+
+									// currentPlayer.fortify();
+
+								} else {
+									JOptionPane.showMessageDialog(countryButton.b,
+											"Countries are not adjacent, select the second country again.");
+									lp.addLog("Countries are not adjacent, select the second country again.");
+									gameState.setCountry2(null);
+									country2.setText((String) null);
+								}
+								// gameState.updateCountryLabels();
+								// gameState.setCountry1(null);
+								// gameState.setCountry2(null);
+								// country1.setText((String) null);
+								// country2.setText((String) null);
+							}
 						}
-					
+					}
+
 				}
 			});
 		}
@@ -1245,8 +1263,8 @@ public class WindowMain {
 				System.out.println(players.get(x).getName());
 			}
 
-			TournamentStimulater gameSt = new TournamentStimulater(gameState, players, gameTurns,false);
-			
+			TournamentStimulater gameSt = new TournamentStimulater(gameState, players, gameTurns, false);
+
 			result = gameSt.execute();
 			// sb.append(gameSt.execute());
 			// sb.append("\r\n");
