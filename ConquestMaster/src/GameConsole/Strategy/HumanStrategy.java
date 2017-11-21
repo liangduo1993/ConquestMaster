@@ -55,21 +55,23 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 
 				numdice1.remove(label);
 				numdice1.remove(list1);
-
-				numdice1.add(new JLabel("Defender selects how many dice to roll"));
-				DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
-				for (int i = 1; i <= Math.min(getGameState().getCountry2().getTroopNum(), 2); i++) {
-					select2.addElement(Integer.toString(i));
+				int decision2 = 1;
+				if (getGameState().getCountry2().getPlayer().getStrategy().getName().equals("Human")) {
+					numdice1.add(new JLabel("Defender selects how many dice to roll"));
+					DefaultComboBoxModel<String> select2 = new DefaultComboBoxModel<>();
+					for (int i = 1; i <= Math.min(getGameState().getCountry2().getTroopNum(), 2); i++) {
+						select2.addElement(Integer.toString(i));
+					}
+					JComboBox<String> list2 = new JComboBox<>(select2);
+					numdice1.add(list2);
+					int message2 = -1;
+					while (message2 != JOptionPane.OK_OPTION) {
+						message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
+								JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					}
+					decision2 = Integer.parseInt(list2.getSelectedItem().toString());
+					lp.addLog("Defender chooses " + decision2 + " dices!");
 				}
-				JComboBox<String> list2 = new JComboBox<>(select2);
-				numdice1.add(list2);
-				int message2 = -1;
-				while (message2 != JOptionPane.OK_OPTION) {
-					message2 = JOptionPane.showConfirmDialog(null, numdice1, "Number of Dices",
-							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-				}
-				int decision2 = Integer.parseInt(list2.getSelectedItem().toString());
-				lp.addLog("Defender chooses " + decision2 + " dices!");
 
 				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(),
 						getGameState().getCountry2(), decision1, decision2);
@@ -153,9 +155,10 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		getPlayer().setHasMoved(false);
 		while (getGameState().getCurrPhase() == 2) {
 			System.out.println("fortify!!!!!!");
-//			if (getGameState().getCurrPhase() != 2)
-//				return;
-			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null && !getPlayer().isHasMoved()) {
+			// if (getGameState().getCurrPhase() != 2)
+			// return;
+			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null
+					&& !getPlayer().isHasMoved()) {
 				JPanel numPanel = new JPanel();
 				numPanel.add(new JLabel("Select how many troops to add"));
 				DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
@@ -165,14 +168,14 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 				JComboBox<String> comboBox = new JComboBox<String>(selection);
 				numPanel.add(comboBox);
 				int result = -1;
-				while(result != JOptionPane.OK_OPTION && result != JOptionPane.CANCEL_OPTION){
+				while (result != JOptionPane.OK_OPTION && result != JOptionPane.CANCEL_OPTION) {
 					result = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops",
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 				}
 				if (result == JOptionPane.OK_OPTION) {
 					getPlayer().moveTroops(getGameState().getCountry1(), getGameState().getCountry2(),
 							Integer.parseInt(comboBox.getSelectedItem().toString()));
-					 getPlayer().setHasMoved(true);
+					getPlayer().setHasMoved(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "Move was cancelled.");
 					LogPanel.getInstance().addLog("Move was cancelled.");
@@ -181,8 +184,8 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 					getGameState().getWindow().country1.setText((String) null);
 					getGameState().getWindow().country2.setText((String) null);
 				}
-				 clearLabel();
-				 updateLabel();
+				clearLabel();
+				updateLabel();
 			}
 
 		}
