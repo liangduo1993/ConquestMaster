@@ -10,10 +10,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
+/**
+ * This class is the user interface for the beginning of the tournament mode where
+ * the user can select maps, computer players, number of games and turns
+ */
 public class TournamentResultPanel extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	public JButton returnToMainFrame;

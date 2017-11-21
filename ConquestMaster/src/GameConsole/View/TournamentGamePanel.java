@@ -22,14 +22,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * This class is the interface for the beginning of the tournament mode where
+ * This class is the user interface for the beginning of the tournament mode where
  * the user can select maps, computer players, number of games and turns
  */
 public class TournamentGamePanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public JTextField textField;
 	public JFileChooser fc1 = new JFileChooser();
@@ -339,7 +336,9 @@ public class TournamentGamePanel extends JPanel {
 		setVisible(true);
 	}
 
-	// test JPanel
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		JFrame jFrame = new JFrame("");
 		jFrame.getContentPane().setLayout(null);

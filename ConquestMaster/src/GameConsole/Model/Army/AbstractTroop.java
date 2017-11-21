@@ -12,6 +12,4 @@ public abstract class AbstractTroop {
 	protected Player player;
 	protected String color;
 	protected Country country;
-	
-	public abstract void die();
 }

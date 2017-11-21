@@ -19,7 +19,11 @@ import GameConsole.Model.Player.Player;
 public class CardExchangeView implements Observer {
 	private GameState gameState;
 	private JFrame frame;
-	
+
+	/**
+	 * Constructor with coming parameter
+	 * @param state the game state with GameState type
+	 */
 	public CardExchangeView(GameState state) {
 		this.gameState = state;
 		this.frame = new JFrame();

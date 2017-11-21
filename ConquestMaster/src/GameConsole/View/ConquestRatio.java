@@ -24,8 +24,10 @@ public class ConquestRatio extends JPanel implements Observer {
 	private int playerNum;
 	private ArrayList<JLabel> lable = new ArrayList<>();
 	public static final int ratio = 15;
+
 	/**
-	 * constructor method, conquestRatio extends JPanel and input parameters.
+	 * constructor method
+	 * @param state game state with GameState type
 	 */
 	public ConquestRatio(GameState state) {
 		this.state = state;
