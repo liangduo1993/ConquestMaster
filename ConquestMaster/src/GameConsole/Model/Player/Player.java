@@ -65,6 +65,22 @@ public class Player extends Observable {
 	}
 
 	/**
+	 * Constructor method
+	 * 
+	 * @param name
+	 *            the player name with String type
+	 * @param color
+	 *            the color of the player with Color type
+	 * @param game
+	 *            the game state with GameState type
+	 */
+	public Player(String name, Color color, GameState game) {
+		this.name = name;
+		this.color = color;
+		this.game = game;
+	}
+	
+	/**
 	 * Method to get strategy
 	 * @return The operator to be applied which is Strategy method
 	 */

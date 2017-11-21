@@ -10,7 +10,11 @@ import GameConsole.Model.Domain.Card;
 import GameConsole.Model.Domain.Continent;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.Strategy.AggressiveStrategy;
+import GameConsole.Strategy.BenevolentStrategy;
+import GameConsole.Strategy.CheaterStrategy;
 import GameConsole.Strategy.HumanStrategy;
+import GameConsole.Strategy.RandomStrategy;
 
 /**
  * This class is used to load the game session the user saved
@@ -107,22 +111,22 @@ public class GameLoader {
 	 * @throws IOException
 	 */
 	private void loadPlayers(LineNumberReader in) throws IOException {
-			Player p1 = new Player("", Color.cyan, game, new HumanStrategy());
+			Player p1 = new Player("", Color.cyan, game);
 			game.addPlayer(p1);
 			if (playerNum >= 2) {
-				Player p2 = new Player("", Color.magenta, game, new HumanStrategy());
+				Player p2 = new Player("", Color.magenta, game);
 				game.addPlayer(p2);
 			}
 			if (playerNum >= 3) {
-				Player p3 = new Player("", Color.green, game, new HumanStrategy());
+				Player p3 = new Player("", Color.green, game);
 				game.addPlayer(p3);
 			}
 			if (playerNum >= 4) {
-				Player p4 = new Player("", Color.blue, game, new HumanStrategy());
+				Player p4 = new Player("", Color.blue, game);
 				game.addPlayer(p4);
 			}
 			if (playerNum >= 5) {
-				Player p5 = new Player("", Color.red, game, new HumanStrategy());
+				Player p5 = new Player("", Color.red, game);
 				game.addPlayer(p5);
 			}
 
@@ -160,6 +164,50 @@ public class GameLoader {
 							p.setHasMoved(false);
 					} else if ("initTroop".equals(prop)) {
 						p.setInitTroop(Integer.parseInt(val));
+					}else if("strategy".equals(prop)){
+						
+						switch (val) {
+						case "Human":
+							HumanStrategy strategy1 = new HumanStrategy();
+							strategy1.setGameState(game);
+							strategy1.setPlayer(p);
+							p.setStrategy(strategy1);
+							break;
+
+						case "Aggressive":
+							AggressiveStrategy strategy2 = new AggressiveStrategy();
+							strategy2.setGameState(game);
+							strategy2.setPlayer(p);
+							p.setStrategy(strategy2);
+							break;
+							
+						case "Benevolent":
+							BenevolentStrategy strategy3 = new BenevolentStrategy();
+							strategy3.setGameState(game);
+							strategy3.setPlayer(p);
+							p.setStrategy(strategy3);
+							break;
+							
+						case "Random":
+							RandomStrategy strategy4 = new RandomStrategy();
+							strategy4.setGameState(game);
+							strategy4.setPlayer(p);
+							p.setStrategy(strategy4);
+							break;
+							
+						case "Cheater":
+							CheaterStrategy strategy5 = new CheaterStrategy();
+							strategy5.setGameState(game);
+							strategy5.setPlayer(p);
+							p.setStrategy(strategy5);
+							break;
+						}
+						
+						
+						
+						
+						
+						
 					} else if ("onhand".equals(prop)) {
 						String[] onhand = val.split(" ");
 						if (!val.trim().equals("") && onhand.length != 0) {

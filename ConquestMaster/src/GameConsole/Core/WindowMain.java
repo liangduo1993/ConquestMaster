@@ -81,6 +81,8 @@ public class WindowMain {
 	private JPanel mainScreen, playerSelect, resultsScreen;
 	private JPanel tournamentResultPanel;
 
+	private SingleGameMode singleGame;
+	
 	/**
 	 * Constructor method
 	 * 
@@ -741,7 +743,7 @@ public class WindowMain {
 				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 
 				// ================
-				SingleGameMode singleGame = new SingleGameMode(gameState);
+				singleGame = new SingleGameMode(gameState);
 				singleGame.execute();
 				// ================
 			}
@@ -1222,6 +1224,10 @@ public class WindowMain {
 			gameState.changed();
 
 			gameState.updateCountryLabels();
+			singleGame = new SingleGameMode(gameState);
+			singleGame.execute();
+		
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

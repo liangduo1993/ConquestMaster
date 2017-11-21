@@ -58,6 +58,7 @@ public class GameSaver {
 			out.println("isConquered=" + p.isConquered());
 			out.println("hasMoved=" + p.isHasMoved());
 			out.println("initTroop=" + p.getInitTroop());
+			out.println("strategy=" + p.getStrategy().getName());
 			
 			StringBuffer sb = new StringBuffer(100);
 			for(Card c: p.getOnHand()){
