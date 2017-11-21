@@ -852,7 +852,7 @@ public class WindowMain {
 		player5TextField.setColumns(10);
 		playerFiveText.add(player5TextField);
 		
-		JComboBox<String> player5Strategy = new JComboBox<>();
+		player5Strategy = new JComboBox<>();
 		player5Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
 		playerFiveText.add(player5Strategy);
