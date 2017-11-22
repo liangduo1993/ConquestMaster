@@ -41,7 +41,7 @@ public class LogPanel extends JPanel {
 	 * The method to attach a log to the panel
 	 * @param msg The input log message
 	 */
-	public void addLog(String msg){
+	public synchronized void addLog(String msg){
 		log.append(msg + NEWLINE);
 	}
 

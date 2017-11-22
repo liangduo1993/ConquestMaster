@@ -102,6 +102,13 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			}
 			this.players.removeAll(removeList);
 
+			lp.addLog("\r\n" + "Conquest Number:");
+			for(Player p: players){
+				lp.addLog(p.getName() + " : " + p.getCountries().size() + " countries!");
+				
+			}
+			
+			
 			gameState.setNextPlayer();
 		}
 
