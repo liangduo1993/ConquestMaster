@@ -287,4 +287,8 @@ public class GameState extends Observable {
 		notifyObservers();
 	}
 	
+	public void setNextPhase(){
+		setCurrPhase((getCurrPhase() + 1) % 3);
+	}
+	
 }

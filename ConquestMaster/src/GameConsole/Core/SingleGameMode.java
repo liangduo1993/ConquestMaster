@@ -14,7 +14,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	private List<Player> players;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
-	private final int sleepTime = 300;
+	private final int sleepTime = 0;
 	
 	public SingleGameMode(GameState gs) {
 		this.gameState = gs;
@@ -31,6 +31,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			System.out.println(tempP.getName() + " inits " + tempP.getInitTroop());
 			updateLabel();
 			Thread.sleep(sleepTime);
+			lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 			tempP.reinforce();
 			
 			
@@ -38,11 +39,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			gameState.updateCountryLabels();
 			tempP = gameState.getCurrPlayer();
 			
-			
-			lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
-			win.numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
-			win.troopsLeft = gameState.getCurrPlayer().getInitTroop();
-			//clearLabel();
+			updateLabel();
 			
 			boolean isFinished = true;
 			for(Player p: players){
@@ -53,10 +50,10 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 		}
 
 		gameState.setFirstRound(2);
-		//clearLabel();
+		
 		while (true) {
-			System.out.println("loopppppppppppp");
 			Player currPlayer = gameState.getCurrPlayer();
+			lp.addLog("=====It's " + currPlayer.getName() + "'s turn.=====");
 			if(currPlayer.getStrategy().getName().equals("Human")){
 				currPlayer.setInitTroop(currPlayer.getBonus());
 			}else{
@@ -67,7 +64,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			currPlayer.reinforce();
 			
 			gameState.updateCountryLabels();
-			win.getNextStage().doClick();
+			gameState.setNextPhase();
 			clearLabel();
 			
 			System.out.println("attack");
@@ -75,7 +72,9 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			currPlayer.attack();
 			
 			gameState.updateCountryLabels();
-			win.getNextStage().doClick();
+			if (gameState.getCurrPhase() == 1) {
+				gameState.setNextPhase();
+			}
 			clearLabel();
 			
 			if (gameState.getCurrPlayer().checkWinGame()) {
@@ -89,7 +88,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			
 			gameState.updateCountryLabels();
 			if (gameState.getCurrPhase() == 2) {
-				win.getNextStage().doClick();
+				gameState.setNextPhase();
 			}
 			clearLabel();
 

@@ -33,7 +33,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			if (!getPlayer().checkIfCanAttack()) {
 				return;
 			}
-			System.out.println(this.getGameState().getCurrClick());
+			System.out.println((getGameState().getCountry1() == null) + ":"+ (getGameState().getCountry2() == null));
 			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null) {
 
 				JPanel numdice1 = new JPanel();

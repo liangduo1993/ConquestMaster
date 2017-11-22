@@ -63,7 +63,7 @@ public class WindowMain {
 	public JPanel mapPanel, Country1Display, Country2Display;
 	private DomiInfoPanel domiInfoPanel;
 	private JTextField player1TextField, player2TextField, player3TextField, player4TextField, player5TextField;
-	private JComboBox<String> player1Strategy,player2Strategy,player3Strategy,player4Strategy,player5Strategy;
+	private JComboBox<String> player1Strategy, player2Strategy, player3Strategy, player4Strategy, player5Strategy;
 	private JLabel playerWonLabell;
 	private ConquestRatio cRatioPanel;
 	private LogPanel lp = LogPanel.getInstance();
@@ -82,7 +82,7 @@ public class WindowMain {
 	private JPanel tournamentResultPanel;
 
 	private SingleGameMode singleGame;
-	
+
 	/**
 	 * Constructor method
 	 * 
@@ -575,118 +575,115 @@ public class WindowMain {
 
 				mapPanel.add(lp);
 				if (playerOneText.isVisible()) {
-					if(player1Strategy.getSelectedItem().equals("human")){
-					Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new HumanStrategy());
-					gameState.addPlayer(p1);
-					gameState.setCurrPlayer(p1);
-					}
-					else if(player1Strategy.getSelectedItem().equals("aggressive")){
-						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new AggressiveStrategy());
+					if (player1Strategy.getSelectedItem().equals("human")) {
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new HumanStrategy());
 						gameState.addPlayer(p1);
 						gameState.setCurrPlayer(p1);
-					}
-					else if(player1Strategy.getSelectedItem().equals("benevolent")){
-						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new BenevolentStrategy());
+					} else if (player1Strategy.getSelectedItem().equals("aggressive")) {
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState,
+								new AggressiveStrategy());
 						gameState.addPlayer(p1);
 						gameState.setCurrPlayer(p1);
-					}
-					else if(player1Strategy.getSelectedItem().equals("random")){
+					} else if (player1Strategy.getSelectedItem().equals("benevolent")) {
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState,
+								new BenevolentStrategy());
+						gameState.addPlayer(p1);
+						gameState.setCurrPlayer(p1);
+					} else if (player1Strategy.getSelectedItem().equals("random")) {
 						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new RandomStrategy());
 						gameState.addPlayer(p1);
 						gameState.setCurrPlayer(p1);
-					}
-					else if(player1Strategy.getSelectedItem().equals("cheater")){
-						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState, new CheaterStrategy());
+					} else if (player1Strategy.getSelectedItem().equals("cheater")) {
+						Player p1 = new Player(player1TextField.getText(), Color.cyan, gameState,
+								new CheaterStrategy());
 						gameState.addPlayer(p1);
 						gameState.setCurrPlayer(p1);
 					}
 				}
 				if (playerTwoText.isVisible()) {
-					if(player2Strategy.getSelectedItem().equals("human")){
-					Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new HumanStrategy());
-					gameState.addPlayer(p2);
-					}
-					else if(player2Strategy.getSelectedItem().equals("aggressive")){
-						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new AggressiveStrategy());
+					if (player2Strategy.getSelectedItem().equals("human")) {
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+								new HumanStrategy());
 						gameState.addPlayer(p2);
-					}
-					else if(player2Strategy.getSelectedItem().equals("benevolent")){
-						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new BenevolentStrategy());
-						gameState.addPlayer(p2);			
-					}
-					else if(player2Strategy.getSelectedItem().equals("random")){
-						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new RandomStrategy());
+					} else if (player2Strategy.getSelectedItem().equals("aggressive")) {
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+								new AggressiveStrategy());
 						gameState.addPlayer(p2);
-					}
-					else if(player2Strategy.getSelectedItem().equals("cheater")){
-						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState, new CheaterStrategy());
-						gameState.addPlayer(p2);	
+					} else if (player2Strategy.getSelectedItem().equals("benevolent")) {
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+								new BenevolentStrategy());
+						gameState.addPlayer(p2);
+					} else if (player2Strategy.getSelectedItem().equals("random")) {
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+								new RandomStrategy());
+						gameState.addPlayer(p2);
+					} else if (player2Strategy.getSelectedItem().equals("cheater")) {
+						Player p2 = new Player(player2TextField.getText(), Color.magenta, gameState,
+								new CheaterStrategy());
+						gameState.addPlayer(p2);
 					}
 				}
 				if (playerThreeText.isVisible()) {
-					if(player3Strategy.getSelectedItem().equals("human")){
-					Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new HumanStrategy());
-					gameState.addPlayer(p3);
-					}
-					else if(player3Strategy.getSelectedItem().equals("aggressive")){
-						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new AggressiveStrategy());
+					if (player3Strategy.getSelectedItem().equals("human")) {
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new HumanStrategy());
 						gameState.addPlayer(p3);
-					}
-					else if(player3Strategy.getSelectedItem().equals("benevolent")){
-						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new BenevolentStrategy());
-						gameState.addPlayer(p3);			
-					}
-					else if(player3Strategy.getSelectedItem().equals("random")){
-						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new RandomStrategy());
+					} else if (player3Strategy.getSelectedItem().equals("aggressive")) {
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
+								new AggressiveStrategy());
 						gameState.addPlayer(p3);
-					}
-					else if(player3Strategy.getSelectedItem().equals("cheater")){
-						Player p3 = new Player(player3TextField.getText(), Color.green, gameState, new CheaterStrategy());
-						gameState.addPlayer(p3);	
+					} else if (player3Strategy.getSelectedItem().equals("benevolent")) {
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
+								new BenevolentStrategy());
+						gameState.addPlayer(p3);
+					} else if (player3Strategy.getSelectedItem().equals("random")) {
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
+								new RandomStrategy());
+						gameState.addPlayer(p3);
+					} else if (player3Strategy.getSelectedItem().equals("cheater")) {
+						Player p3 = new Player(player3TextField.getText(), Color.green, gameState,
+								new CheaterStrategy());
+						gameState.addPlayer(p3);
 					}
 				}
 				if (playerFourText.isVisible()) {
-					if(player4Strategy.getSelectedItem().equals("human")){
-					Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new HumanStrategy());
-					gameState.addPlayer(p4);
-					}
-					else if(player4Strategy.getSelectedItem().equals("aggressive")){
-						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new AggressiveStrategy());
+					if (player4Strategy.getSelectedItem().equals("human")) {
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new HumanStrategy());
 						gameState.addPlayer(p4);
-					}
-					else if(player4Strategy.getSelectedItem().equals("benevolent")){
-						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new BenevolentStrategy());
-						gameState.addPlayer(p4);			
-					}
-					else if(player4Strategy.getSelectedItem().equals("random")){
+					} else if (player4Strategy.getSelectedItem().equals("aggressive")) {
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState,
+								new AggressiveStrategy());
+						gameState.addPlayer(p4);
+					} else if (player4Strategy.getSelectedItem().equals("benevolent")) {
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState,
+								new BenevolentStrategy());
+						gameState.addPlayer(p4);
+					} else if (player4Strategy.getSelectedItem().equals("random")) {
 						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new RandomStrategy());
 						gameState.addPlayer(p4);
-					}
-					else if(player4Strategy.getSelectedItem().equals("cheater")){
-						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState, new CheaterStrategy());
-						gameState.addPlayer(p4);	
+					} else if (player4Strategy.getSelectedItem().equals("cheater")) {
+						Player p4 = new Player(player4TextField.getText(), Color.blue, gameState,
+								new CheaterStrategy());
+						gameState.addPlayer(p4);
 					}
 				}
 				if (playerFiveText.isVisible()) {
-					if(player5Strategy.getSelectedItem().equals("human")){
-					Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
-					gameState.addPlayer(p5);
-					}
-					else if(player5Strategy.getSelectedItem().equals("aggressive")){
-						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new AggressiveStrategy());
+					if (player5Strategy.getSelectedItem().equals("human")) {
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new HumanStrategy());
 						gameState.addPlayer(p5);
-					}
-					else if(player5Strategy.getSelectedItem().equals("benevolent")){
-						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new BenevolentStrategy());
-						gameState.addPlayer(p5);			
-					}
-					else if(player5Strategy.getSelectedItem().equals("random")){
+					} else if (player5Strategy.getSelectedItem().equals("aggressive")) {
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState,
+								new AggressiveStrategy());
+						gameState.addPlayer(p5);
+					} else if (player5Strategy.getSelectedItem().equals("benevolent")) {
+						Player p5 = new Player(player5TextField.getText(), Color.red, gameState,
+								new BenevolentStrategy());
+						gameState.addPlayer(p5);
+					} else if (player5Strategy.getSelectedItem().equals("random")) {
 						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new RandomStrategy());
 						gameState.addPlayer(p5);
-					}
-					else if(player5Strategy.getSelectedItem().equals("cheater")){
+					} else if (player5Strategy.getSelectedItem().equals("cheater")) {
 						Player p5 = new Player(player5TextField.getText(), Color.red, gameState, new CheaterStrategy());
-						gameState.addPlayer(p5);	
+						gameState.addPlayer(p5);
 					}
 				}
 				gameState.gameStart(true);
@@ -740,7 +737,8 @@ public class WindowMain {
 						phaseView.player5Name.setVisible(true);
 					}
 				}
-				lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
+				// lp.addLog("=====It's " + gameState.getCurrPlayer().getName()
+				// + "'s turn.=====");
 
 				// ================
 				singleGame = new SingleGameMode(gameState);
@@ -781,7 +779,7 @@ public class WindowMain {
 		player1TextField.setText("");
 		playerOneText.add(player1TextField);
 		player1TextField.setColumns(10);
-		
+
 		player1Strategy = new JComboBox<>();
 		player1Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
@@ -799,7 +797,7 @@ public class WindowMain {
 		player2TextField.setText("");
 		player2TextField.setColumns(10);
 		playerTwoText.add(player2TextField);
-		
+
 		player2Strategy = new JComboBox<>();
 		player2Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
@@ -817,7 +815,7 @@ public class WindowMain {
 		player3TextField.setText("");
 		player3TextField.setColumns(10);
 		playerThreeText.add(player3TextField);
-		
+
 		player3Strategy = new JComboBox<>();
 		player3Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
@@ -834,7 +832,7 @@ public class WindowMain {
 		player4TextField = new JTextField();
 		player4TextField.setColumns(10);
 		playerFourText.add(player4TextField);
-		
+
 		player4Strategy = new JComboBox<>();
 		player4Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
@@ -851,12 +849,12 @@ public class WindowMain {
 		player5TextField = new JTextField();
 		player5TextField.setColumns(10);
 		playerFiveText.add(player5TextField);
-		
+
 		player5Strategy = new JComboBox<>();
 		player5Strategy.setModel(
 				new DefaultComboBoxModel(new String[] { "human", "aggressive", "benevolent", "random", "cheater" }));
 		playerFiveText.add(player5Strategy);
-		
+
 		this.playerWonLabell = new JLabel("playerName");
 		mapPanel.setLayout(null);
 
@@ -970,32 +968,10 @@ public class WindowMain {
 
 	private void bindNextStage() {
 		nextStage.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(gameState.getCurrPhase() + "::" + gameState.getFirstRound());
 				if (troopsLeft == 0) {
-					gameState.setCurrPhase((gameState.getCurrPhase() + 1) % 3);
-					if (gameState.getFirstRound() > 1) {
-						if (gameState.getCurrPhase() == 0) {
-							// gameState.getCurrPlayer().setHasMoved(false);
-							// gameState.setNextPlayer();
-							lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
-							lp.addLog("It is the Reinforcement phase!");
-
-							// gameState.setCountry1(null);
-							// gameState.setCountry2(null);
-
-							// troopsLeft =
-							// gameState.getCurrPlayer().getBonus();
-							// numberOfTroops.setText(Integer.toString(troopsLeft));
-						}
-						if (gameState.getCurrPhase() == 1 && !gameState.getCurrPlayer().checkIfCanAttack()) {
-							lp.addLog("Attack phase automatically skips!");
-							gameState.setCurrPhase(2);
-						}
-
-					}
+					gameState.setNextPhase();
 				}
 			}
 		});
@@ -1010,64 +986,27 @@ public class WindowMain {
 					if (gameState.getFirstRound() == 1) {
 
 						if (currentPlayer == countryButton.country.getPlayer() && currentPlayer.getInitTroop() > 0) {
-							// currentPlayer.setInitTroop(currentPlayer.getInitTroop()
-							// - 1);
 							gameState.setCurrClick(countryButton.country);
-							// ==========
-							// currentPlayer.reinforce();
-							// ==========
-							// currentPlayer.addInfantry(countryButton.country);
-
-							//lp.addLog(currentPlayer.getName() + " adds one troop to " + countryButton.name);
 						} else {
 							JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
 							lp.addLog("That country does not belong to you.");
 							return;
 						}
 
-						// gameState.setNextPlayer();
-						// lp.addLog("=====It's " +
-						// gameState.getCurrPlayer().getName() + "'s
-						// turn.=====");
-						// numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
-						// troopsLeft =
-						// gameState.getCurrPlayer().getInitTroop();
-						// gameState.setCountry1(null);
-						// gameState.setCountry2(null);
-
-						System.out.println("current player name:" + gameState.getCurrPlayer().getName());
-						System.out.println("current round num:" + gameState.getFirstRound());
-						System.out.println("current phase:" + gameState.getCurrPhase());
-
-						// boolean isFinished = true;
-						// for (Player p :
-						// gameState.getAllPlayers().getPlayers()) {
-						// if (p.getInitTroop() > 0)
-						// isFinished = false;
-						// }
-						// if (isFinished) {
-						// gameState.setFirstRound(gameState.getFirstRound() +
-						// 1);
-						// lp.addLog("It is the Reinforcement phase!");
-						//
-						// System.out.println("round +1 !!!");
-						// troopsLeft = gameState.getCurrPlayer().getBonus();
-						// numberOfTroops.setText(Integer.toString(troopsLeft));
-						// }
-
 					} else if (gameState.getFirstRound() > 1) {
+						if (gameState.getCountry1() == null)
+							country1.setText(countryButton.country.getName());
+						else {
+							cancelCountryButton.setVisible(true);
+							cancelCountryButton.setEnabled(true);
+						}
 						if (gameState.getCurrPhase() == 0) {
 							System.out.println("click on button!");
 							if (gameState.getCurrPlayer() == countryButton.country.getPlayer() && troopsLeft > 0) {
 								troopsLeft--;
 								gameState.setCurrClick(countryButton.country);
-								// =============
-								// currentPlayer.reinforce();
-								// ===========
-								// currentPlayer.reinforce(countryButton.country);
 								numberOfTroops.setText(Integer.toString(troopsLeft));
 								gameState.updateCountryLabels();
-								//lp.addLog(currentPlayer.getName() + " reinforces one troop to " + countryButton.name);
 							} else if (troopsLeft == 0) {
 								JOptionPane.showMessageDialog(countryButton.b, "Out of troops to add");
 								lp.addLog("Out of troops to add");
@@ -1075,6 +1014,7 @@ public class WindowMain {
 								JOptionPane.showMessageDialog(countryButton.b, "That country does not belong to you.");
 								lp.addLog("That country does not belong to you.");
 							}
+							country1.setText((String) null);
 						} else if (gameState.getCurrPhase() == 1) {
 							if (countryButton.country.getPlayer() == gameState.getCurrPlayer()
 									&& gameState.getCountry1() == null) {
@@ -1083,63 +1023,53 @@ public class WindowMain {
 									country1.setText(gameState.getCountry1().getName());
 									cancelCountryButton.setVisible(true);
 									cancelCountryButton.setEnabled(true);
+									return;
 								} else {
+									//country1.setText((String) null);
 									gameState.setCountry1(null);
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Country does not have enough troops to attack");
 									lp.addLog("Country does not have enough troops to attack");
-									country1.setText((String) null);
+									return;
 								}
 							} else if (countryButton.country.getPlayer() != gameState.getCurrPlayer()
 									&& gameState.getCountry1() != null && gameState.getCountry2() == null) {
-								gameState.setCountry2(countryButton.country);
-								if (gameState.getCountry1().checkAdjacent(gameState.getCountry2())) {
+								Country tempCountry2 = countryButton.country;
+								country2.setText(countryButton.country.getName());
+								if (!gameState.getCountry1().checkAdjacent(tempCountry2)) {
+									JOptionPane.showMessageDialog(countryButton.b,
+											"Countries are not adjacent, select the second country again.");
+									lp.addLog("Countries are not adjacent, select the second country again.");
+									gameState.setCountry2(null);
+									country2.setText((String) null);
+									return;
+									
+								}else{
+									
 									cancelCountryButton.setVisible(false);
 									cancelCountryButton.setEnabled(false);
-									country2.setText(gameState.getCountry2().getName());
-
-									if (gameState.getCountry1().getPlayer() == gameState.getCurrPlayer()
-											&& gameState.getCountry2().getPlayer() != gameState.getCurrPlayer()) {
-
-										// =======
-										// currentPlayer.attack();
-										// =======
-
-										// if
-										// (!gameState.getCurrPlayer().checkIfCanAttack())
-										// {
-										// nextStage.doClick();
-										// lp.addLog("Attack phase is
-										// automatically skipped!");
-										// }
-										// gameState.updateCountryLabels();
-										//
-
-									} else {
-										JOptionPane.showMessageDialog(countryButton.b,
-												"Countries are not adjacent, select the second country again.");
-										lp.addLog("Countries are not adjacent, select the second country again.");
-										gameState.setCountry2(null);
-										country2.setText((String) null);
-									}
+									gameState.setCountry2(tempCountry2);
+									//country2.setText(gameState.getCountry2().getName());
+									return;
 								}
+
+								
 							}
 						} else if (!gameState.getCurrPlayer().isHasMoved()) {
 							Country tempCountry1 = null;
 
 							if (gameState.getCountry1() == null) {
 								tempCountry1 = countryButton.country;
-								if (tempCountry1.getTroopNum() == 1 ) {
+								if (tempCountry1.getTroopNum() == 1) {
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Troops cannot be moved from here because "
 													+ gameState.getCountry1().getName() + " only has 1 troop.");
 									lp.addLog("Troops cannot be moved from here because "
 											+ gameState.getCountry1().getName() + " only has 1 troop.");
-								} else if(tempCountry1.getPlayer() != gameState.getCurrPlayer()){
-									JOptionPane.showMessageDialog(countryButton.b,
-											"Country doesn't belong to you!");
+								} else if (tempCountry1.getPlayer() != gameState.getCurrPlayer()) {
+									JOptionPane.showMessageDialog(countryButton.b, "Country doesn't belong to you!");
 									lp.addLog("Country doesn't belong to you!");
-								}else {
+								} else {
 									cancelCountryButton.setVisible(true);
 									cancelCountryButton.setEnabled(true);
 									gameState.setCountry1(tempCountry1);
@@ -1153,8 +1083,6 @@ public class WindowMain {
 									cancelCountryButton.setVisible(false);
 									cancelCountryButton.setEnabled(false);
 
-									// currentPlayer.fortify();
-
 								} else {
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Countries are not adjacent, select the second country again.");
@@ -1162,11 +1090,6 @@ public class WindowMain {
 									gameState.setCountry2(null);
 									country2.setText((String) null);
 								}
-								// gameState.updateCountryLabels();
-								// gameState.setCountry1(null);
-								// gameState.setCountry2(null);
-								// country1.setText((String) null);
-								// country2.setText((String) null);
 							}
 						}
 					}
@@ -1226,8 +1149,7 @@ public class WindowMain {
 			gameState.updateCountryLabels();
 			singleGame = new SingleGameMode(gameState);
 			singleGame.execute();
-		
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
