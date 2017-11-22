@@ -18,6 +18,7 @@ import GameConsole.Model.Player.Player;
 public class GameSaver {
 	private GameState game;
 	private WindowMain win;
+	private boolean flag=true; //this flag is for test purpose
 
 	/**
 	 * Constructor for GameSaver with incoming parameters
@@ -47,7 +48,9 @@ public class GameSaver {
 		out.println("currPlayer=" + game.getCurrPlayer().getName());
 		out.println("currPhase=" + game.getCurrPhase());
 		out.println("playerNum=" + game.getAllPlayers().getPlayers().size());
-		out.println("troopRemaining=" + win.troopsLeft);
+		if (flag==true){
+			out.println("troopRemaining=" + win.troopsLeft);
+		}
 		
 		out.println();
 		out.println("[Players]");
@@ -85,10 +88,11 @@ public class GameSaver {
 		for(Continent c: game.getWorld().getContinents()){
 			countries.addAll(c.getCountries());
 		}
-		for(Country c: countries){
-			out.println(c.getName() + "," + c.getPlayer().getName() + "," + c.getTroopNum());
+		if (flag==true){
+			for(Country c: countries){
+				out.println(c.getName() + "," + c.getPlayer().getName() + "," + c.getTroopNum());
+			}
 		}
-		
 		
 //		out.println("wrap=" + (this.wrap ? "yes" : "no"));
 //		out.println("scroll=" + (this.scroll == null ? "" : this.scroll.toString().toLowerCase()));
@@ -149,8 +153,14 @@ public class GameSaver {
 			save(out);
 			fos.close();
 	}
-	
-	
+	/**
+	 * Only use for test
+	 * @param _flag Should be always true in the game
+	 * 
+	 */
+	public void setFlagForTest(boolean _flag){
+		this.flag=_flag;
+	}
 	
 	
 }
