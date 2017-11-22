@@ -26,9 +26,12 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	@Override
 	protected Boolean doInBackground() throws Exception {
 		Player tempP = gameState.getCurrPlayer();
-		while (win.troopsLeft > 0) {
+		while (true) {
 			System.out.println(tempP.getName() + " inits " + tempP.getInitTroop());
+			updateLabel();
 			tempP.reinforce();
+			Thread.sleep(500);
+			
 			gameState.setNextPlayer();
 			gameState.updateCountryLabels();
 			tempP = gameState.getCurrPlayer();
@@ -38,6 +41,13 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			win.numberOfTroops.setText(Integer.toString(gameState.getCurrPlayer().getInitTroop()));
 			win.troopsLeft = gameState.getCurrPlayer().getInitTroop();
 			//clearLabel();
+			
+			boolean isFinished = true;
+			for(Player p: players){
+				if(p.getInitTroop() > 0)
+					isFinished = false;
+			}
+			if(isFinished) break;
 		}
 
 		gameState.setFirstRound(2);
@@ -52,12 +62,16 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			}
 			updateLabel();
 			currPlayer.reinforce();
+			Thread.sleep(500);
+			
 			gameState.updateCountryLabels();
 			win.getNextStage().doClick();
 			clearLabel();
 			
 			System.out.println("attack");
 			currPlayer.attack();
+			Thread.sleep(500);
+			
 			gameState.updateCountryLabels();
 			win.getNextStage().doClick();
 			clearLabel();
@@ -69,6 +83,8 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 
 			System.out.println("fortify");
 			currPlayer.fortify();
+			Thread.sleep(500);
+			
 			gameState.updateCountryLabels();
 			if (gameState.getCurrPhase() == 2) {
 				win.getNextStage().doClick();
