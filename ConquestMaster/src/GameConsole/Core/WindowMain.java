@@ -949,7 +949,7 @@ public class WindowMain {
 
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
-		nextStage.setBounds(900 - 20, buttonImage.getHeight() + 300 - yM, 170, 50);
+		nextStage.setBounds(900 - 10, buttonImage.getHeight() + 300 - yM, 170, 50);
 		mapPanel.add(nextStage);
 		nextStage.setLayout(null);
 

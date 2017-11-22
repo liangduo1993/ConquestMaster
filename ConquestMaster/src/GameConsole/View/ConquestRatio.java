@@ -3,6 +3,7 @@ package GameConsole.View;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +26,8 @@ public class ConquestRatio extends JPanel implements Observer {
 	private ArrayList<JLabel> lable = new ArrayList<>();
 	public static final int ratio = 15;
 
+	private List<Player> players = new ArrayList<>();
+	
 	/**
 	 * constructor method
 	 * 
@@ -34,6 +37,7 @@ public class ConquestRatio extends JPanel implements Observer {
 	public ConquestRatio(GameState state) {
 		this.state = state;
 		playerNum = state.getAllPlayers().getPlayers().size();
+		players.addAll(state.getAllPlayers().getPlayers());
 		this.setLayout(null);
 		this.setBounds(0, 0, state.getWorld().getDeck().size() * ratio, 25);
 		System.out.println(this.getBounds());
@@ -62,7 +66,7 @@ public class ConquestRatio extends JPanel implements Observer {
 		int loc = 0;
 		if (playerNum > 1) {
 			for (int i = 0; i < playerNum; i++) {
-				Player cur = state.getAllPlayers().getPlayers().get(i);
+				Player cur = players.get(i);
 				g.setColor(cur.getColor());
 				g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
 				loc += ratio * cur.getCountries().size();
@@ -76,10 +80,9 @@ public class ConquestRatio extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		playerNum = state.getAllPlayers().getPlayers().size();
 		int loc = 0;
 		for (int i = 0; i < playerNum; i++) {
-			Player cur = state.getAllPlayers().getPlayers().get(i);
+			Player cur = players.get(i);
 			int oldLoc = loc;
 			loc += ratio * cur.getCountries().size();
 			JLabel lb1 = lable.get(i);

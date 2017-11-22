@@ -14,7 +14,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	private List<Player> players;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
-	private final int sleepTime = 0;
+	private final int sleepTime = 300;
 	
 	public SingleGameMode(GameState gs) {
 		this.gameState = gs;
