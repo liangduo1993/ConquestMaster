@@ -1160,7 +1160,7 @@ public class WindowMain {
 	 */
 	public void saveGame() {
 		JFileChooser fc = new JFileChooser();
-		fc.showOpenDialog(null);
+		fc.showSaveDialog(null);
 		File path = fc.getSelectedFile();
 
 		System.out.println(path.getAbsolutePath());
