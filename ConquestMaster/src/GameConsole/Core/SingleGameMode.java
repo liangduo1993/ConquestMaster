@@ -14,6 +14,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	private List<Player> players;
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
+	private final int sleepTime = 300;
 	
 	public SingleGameMode(GameState gs) {
 		this.gameState = gs;
@@ -29,8 +30,9 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 		while (true) {
 			System.out.println(tempP.getName() + " inits " + tempP.getInitTroop());
 			updateLabel();
+			Thread.sleep(sleepTime);
 			tempP.reinforce();
-			Thread.sleep(500);
+			
 			
 			gameState.setNextPlayer();
 			gameState.updateCountryLabels();
@@ -61,16 +63,16 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 				currPlayer.setInitTroop(currPlayer.getBonusAndChangeCard());
 			}
 			updateLabel();
+			Thread.sleep(sleepTime);
 			currPlayer.reinforce();
-			Thread.sleep(500);
 			
 			gameState.updateCountryLabels();
 			win.getNextStage().doClick();
 			clearLabel();
 			
 			System.out.println("attack");
+			Thread.sleep(sleepTime);
 			currPlayer.attack();
-			Thread.sleep(500);
 			
 			gameState.updateCountryLabels();
 			win.getNextStage().doClick();
@@ -82,8 +84,8 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			}
 
 			System.out.println("fortify");
+			Thread.sleep(sleepTime);
 			currPlayer.fortify();
-			Thread.sleep(500);
 			
 			gameState.updateCountryLabels();
 			if (gameState.getCurrPhase() == 2) {

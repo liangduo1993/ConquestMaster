@@ -122,14 +122,14 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		if (getGameState().getFirstRound() == 1) {
+		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
 			while (true) {
 				System.out.println(this.getGameState().getCurrClick());
 				if (this.getGameState().getCurrClick() != null) {
 					this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 					clearLabel();
-					updateLabel();
+//					updateLabel();
 					return;
 				}
 			}

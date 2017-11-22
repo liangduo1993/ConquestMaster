@@ -68,7 +68,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		if (getGameState().getFirstRound() == 1) {
+		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
 			this.getPlayer().addInfantry(this.getRandCountry());
 			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 		} else {
