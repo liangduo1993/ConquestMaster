@@ -15,7 +15,7 @@ import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.HumanStrategy;
 /**
  * 
- * This class is a test class for class GameLoader and the methods in it.
+ * This class is a test class for class GameSaver and the methods in it.
  *
  */
 public class GameSaverTest {
