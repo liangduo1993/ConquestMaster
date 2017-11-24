@@ -91,13 +91,19 @@ public class GameState extends Observable {
 		}
 	}
 
-	
-	
-	
+
+	/**
+	 * Method to get the country via the click operation
+	 * @return the got country
+	 */
 	public Country getCurrClick() {
 		return currClick;
 	}
 
+	/**
+	 * Method to set the country via the click operation
+	 * @param currClick the country is needed to be clicked
+	 */
 	public void setCurrClick(Country currClick) {
 		this.currClick = currClick;
 	}
@@ -282,11 +288,17 @@ public class GameState extends Observable {
 		this.allPlayers = allPlayers;
 	}
 
+	/**
+	 * Method to specify the state changes
+	 */
 	public void changed(){
 		setChanged();
 		notifyObservers();
 	}
-	
+
+	/**
+	 * Method to set the next phase
+	 */
 	public void setNextPhase(){
 		setCurrPhase((getCurrPhase() + 1) % 3);
 	}

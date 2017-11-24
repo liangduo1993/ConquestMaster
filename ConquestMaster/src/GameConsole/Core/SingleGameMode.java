@@ -8,6 +8,9 @@ import javax.swing.SwingWorker;
 import GameConsole.Model.Player.Player;
 import GameConsole.View.LogPanel;
 
+/**
+ * This class is for single game mode
+ */
 public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 
 	private GameState gameState;
@@ -15,15 +18,23 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	private WindowMain win;
 	private LogPanel lp = LogPanel.getInstance();
 	private final int sleepTime = 300;
-	
+
+	/**
+	 * Constructor for SingleGameMode class
+	 * @param gs game state with GameState type
+	 */
 	public SingleGameMode(GameState gs) {
 		this.gameState = gs;
 		this.win = gs.getWindow();
 		this.players = gs.getAllPlayers().getPlayers();
 	}
 
-	
 
+	/**
+	 * This method is mainly to display the detail of the game on the log panel
+	 * @return true if the game is end otherwise return false
+	 * @throws Exception
+	 */
 	@Override
 	protected Boolean doInBackground() throws Exception {
 		Player tempP = gameState.getCurrPlayer();
@@ -112,13 +123,19 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 		}
 
 	}
-	
+
+	/**
+	 * Method to set the labels clean
+	 */
 	public void clearLabel(){
 		gameState.setCountry1(null);
 		gameState.setCountry2(null);
 		gameState.setCurrClick(null);
 	}
-	
+
+	/**
+	 * Method to update the labels
+	 */
 	public void updateLabel(){
 		gameState.updateCountryLabels();
 		win.country1.setText((String) null);

@@ -9,12 +9,22 @@ import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
 import GameConsole.Strategy.RandomStrategy;
 
+/**
+ * This class is for tournament game mode
+ */
 public class TournamentStimulater {
 
 	private GameState gs;
 	private int turn;
 	private List<Player> players;
 
+	/**
+	 * Constructor of the TournamentStimulater class with coming parameters
+	 * @param gs the game state with GameState type
+	 * @param players the list of players in the game
+	 * @param turn the current turn with int type
+	 * @param flag a signal to specify if the game start with boolean type
+	 */
 	public TournamentStimulater(GameState gs, List<Player> players, int turn, boolean flag) {
 		this.gs = gs;
 		gs.getAllPlayers().setPlayers(players);
@@ -24,6 +34,10 @@ public class TournamentStimulater {
 		gs.gameStart(flag);
 	}
 
+	/**
+	 * This method is mainly to display the details of the game on the console
+	 * @return "draw" String after the turns
+	 */
 	public String execute() {
 		Player tempP = gs.getCurrPlayer();
 		while(tempP.getInitTroop() > 0){
@@ -79,6 +93,12 @@ public class TournamentStimulater {
 	// BenevolentStrategy
 	// CheaterStrategy
 	// RandomStrategy
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 		StringBuffer sb = new StringBuffer(100);
 		WindowMain win = new WindowMain();

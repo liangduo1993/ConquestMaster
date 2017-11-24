@@ -17,7 +17,7 @@ import MapEditor.Util.StringUtil;
  */
 public class MapLoader {
 	public static enum ScrollOptions {
-		HORIZONTAL, VERTICAL, NONE;
+		HORIZONTAL, VERTICAL, NONE
 	}
 
 	private String mapFilePath;

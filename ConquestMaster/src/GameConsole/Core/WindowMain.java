@@ -977,6 +977,9 @@ public class WindowMain {
 		});
 	}
 
+	/**
+	 * Method to bind the button with corresponding country
+	 */
 	private void bindButtons() {
 		for (CountryButton countryButton : mapDisplayer.getButtons()) {
 			countryButton.b.addActionListener(new ActionListener() {
@@ -1174,6 +1177,9 @@ public class WindowMain {
 
 	}
 
+	/**
+	 * Method to set the locations of some components
+	 */
 	public void readjustLoc() {
 		cancelCountryButton.setBounds(371 + 40, buttonImage.getHeight() + 250, 124, 60);
 		frame1.setBounds(100, 100, 750 + buttonImage.getWidth(), 370 + buttonImage.getHeight());
@@ -1188,6 +1194,9 @@ public class WindowMain {
 		phaseView.namePanel.setBounds(100, 40, 975, 60);
 	}
 
+	/**
+	 * Method to add some components on the map
+	 */
 	public void addCompOnMapPanel() {
 		mapPanel.add(cancelCountryButton);
 		// mapPanel.add(frame1);
@@ -1278,6 +1287,13 @@ public class WindowMain {
 
 	}
 
+	/**
+	 * This method is to help display the detailed items of the report of the results at the end of the tournament
+	 * @param path map path with String type
+	 * @param strategies the list of different computer players strategies with ArrayList type
+	 * @param gameTurns the number of turns for each game
+	 * @return a draw with String type after the turns
+	 */
 	public String newGameState(String path, ArrayList<String> strategies, int gameTurns) {
 		// StringBuffer sb = new StringBuffer(100);
 		ArrayList<Player> players = new ArrayList<>();
@@ -1316,10 +1332,18 @@ public class WindowMain {
 		return result;
 	}
 
+	/**
+	 * Method to set the next stage
+	 * @return the next stage with JButton type
+	 */
 	public JButton getNextStage() {
 		return nextStage;
 	}
 
+	/**
+	 * Method to set the next stage
+	 * @param nextStage the next stage with JButton type
+	 */
 	public void setNextStage(JButton nextStage) {
 		this.nextStage = nextStage;
 	}
