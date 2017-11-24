@@ -192,6 +192,9 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 
 	}
 
+	/**
+	 * Method to update some labels
+	 */
 	public void updateLabel() {
 		getGameState().updateCountryLabels();
 		getGameState().getWindow().country1.setText((String) null);
@@ -201,6 +204,9 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 
 	}
 
+	/**
+	 * Method to clear some labels
+	 */
 	public void clearLabel() {
 		getGameState().setCountry1(null);
 		getGameState().setCountry2(null);
