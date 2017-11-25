@@ -96,11 +96,13 @@ public class PlayerTest {
 		assertEquals(6, c2.getTroopNum());
 	}
 	
-	/**
-	 * test class: Player, function: loseGame(). check when one player loses
-	 * all the countries
-	 * 
-	 */
+	
+//	/**
+//	 * test class: Player, function: loseGame(). check when one player loses
+//	 * all the countries
+//	 * 
+//	 */
+	/*
 	@Test
 	public void testLoseGame() {
 		player.getCountries().removeAll(player.getCountries());
@@ -109,6 +111,7 @@ public class PlayerTest {
 		player.loseGame();
 		assertEquals(2, state.getAllPlayers().getPlayers().size());
 	}
+	*/
 	
 	/**
 	 * test class: Player. check the end of the game
@@ -141,6 +144,24 @@ public class PlayerTest {
 			System.out.println(ex.getMessage());
 			assertNotEquals(ex.getMessage(), "The attacker and defender is not right!");
 		}
+	}
+	
+	/**
+	 * test class: Player. check the fortification
+	 * phase
+	 * 
+	 */
+	@Test
+	public void testFortify() {
+		state.setCurrPlayer(group.getPlayers().get(0));
+		Player curPlayer = state.getCurrPlayer();
+		curPlayer.getCountries().get(0).setTroopNum(5);
+		curPlayer.getCountries().get(1).setTroopNum(8);
+
+		curPlayer.moveTroops(curPlayer.getCountries().get(0), curPlayer.getCountries().get(1), 2);
+		
+		assertEquals(3, curPlayer.getCountries().get(0).getTroopNum());
+		assertEquals(10, curPlayer.getCountries().get(1).getTroopNum());
 	}
 	
 

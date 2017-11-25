@@ -29,6 +29,7 @@ import MapEditorTest.TablePanelTest;
 		TablePanelTest.class,
 		GameLoaderTest.class,
 		GameSaverTest.class,
+		TournamentStimulaterTest.class,
 
 })
 public class SuiteTest {
