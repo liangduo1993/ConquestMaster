@@ -17,7 +17,13 @@ import GameConsole.Model.Domain.Country;
 public class CountryTest {
 	private Country country;
 	private ArrayList<AbstractTroop> troops;
-
+	
+	/**
+	 * Set up function, to do some initial work.
+	 * 
+	 * @throws Exception
+	 * 
+	 */
 	@Before
 	public void setUp() throws Exception {
 		country = new Country();

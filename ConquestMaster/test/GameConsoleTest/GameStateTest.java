@@ -12,7 +12,12 @@ import GameConsole.Core.GameState;
 
 public class GameStateTest {
 	private GameState state;
-
+	/**
+	 * Set up function, to do some initial work.
+	 * 
+	 * @throws Exception
+	 *             If the target file is not valid, it would throw an exception.
+	 */
 	@Before
 	public void setUp() throws Exception {
 		state = new GameState(null, "resources/ConquestMaps/Atlantis.map");

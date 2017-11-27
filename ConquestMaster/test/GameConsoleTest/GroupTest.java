@@ -19,7 +19,12 @@ import GameConsole.Strategy.HumanStrategy;
 public class GroupTest {
 	private Group group;
 	private ArrayList<Player> players;
-
+	/**
+	 * Set up function, to do some initial work.
+	 * 
+	 * @throws Exception
+	 * 
+	 */
 	@Before
 	public void setUp() throws Exception {
 		group = new Group();
