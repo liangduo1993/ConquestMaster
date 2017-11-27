@@ -915,6 +915,9 @@ public class WindowMain {
 
 	}
 
+	/**
+	 * method to bind nextSrage button to act next game phase.
+	 */
 	private void bindNextStage() {
 		nextStage.addActionListener(new ActionListener() {
 			@Override
