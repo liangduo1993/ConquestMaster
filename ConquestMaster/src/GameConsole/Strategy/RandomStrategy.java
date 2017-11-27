@@ -27,8 +27,8 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void attack() {
-		int randomAttackTime = (int) (Math.random() * 50);
-		int erroTry = 100;
+		int randomAttackTime = (int) (Math.random() * 150);
+		int erroTry = 1000;
 		for (;;) {
 			if (!getPlayer().checkIfCanAttack() || randomAttackTime == 0 || erroTry == 0)
 				return;
@@ -73,7 +73,8 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void reinforce() {
 		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
-			this.getPlayer().addInfantry(this.getRandCountry());
+			//this.getPlayer().addInfantry(this.getRandCountry());
+			this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
 			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 		} else {
 
@@ -93,7 +94,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
-		int erroTry = 10;
+		int erroTry = 200;
 		for (;;) {
 			if (erroTry == 0)
 				return;
