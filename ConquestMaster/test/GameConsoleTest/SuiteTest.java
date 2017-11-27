@@ -14,21 +14,21 @@ import MapEditorTest.TablePanelTest;
  *
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ //
-		TournamentStimulaterTest.class, //
-		CountryTest.class, //
-		GroupTest.class, //
-		PlayerTest.class, //
-		GameStateTest.class, //
-		CardsTest.class, //
-		AggressiveStrategyTest.class, //
-		CheaterStrategyTest.class, //
-		MapLoaderTest.class, //
-		ConquestMapTest.class, //
-		MyStringUtilTest.class, //
-		TablePanelTest.class, //
-		GameLoaderTest.class,//
-		GameSaverTest.class,//
+@Suite.SuiteClasses({ 
+		TournamentStimulaterTest.class, 
+		CountryTest.class, 
+		GroupTest.class, 
+		PlayerTest.class, 
+		GameStateTest.class, 
+		CardsTest.class,
+		AggressiveStrategyTest.class, 
+		CheaterStrategyTest.class, 
+		MapLoaderTest.class, 
+		ConquestMapTest.class, 
+		MyStringUtilTest.class, 
+		TablePanelTest.class, 
+		GameLoaderTest.class,
+		GameSaverTest.class,
 
 })
 public class SuiteTest {

@@ -933,17 +933,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		if ((this.territories == null) || (this.territories.isEmpty())) {
 			probs.add("Map contains no territories");
 		}
-		// if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
-		// probs.add("Map image is not specified");
-		// } else if (getMapDirectory() != null) {
-		// if (isDisparateImageFileDirectory()) {
-		// probs.add("Map and image files are not located in the same
-		// directory");
-		// }
-		// }
-		// if (hasOneWayLinks()) {
-		// probs.add("");
-		// }
 
 		if (this.territories.size() > 0 && !eachTerReachable()) {
 			probs.add("There's some teris cannot reach to every other territories!");
@@ -954,10 +943,6 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 				probs.add(c.getName() + " inside the continent, not each ter can reach to others!");
 			}
 		}
-
-//		if (probs.isEmpty()) {
-//			return null;
-//		}
 
 		for (String string : probs) {
 			LogPanel.addLog(string);

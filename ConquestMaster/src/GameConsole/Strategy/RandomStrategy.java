@@ -79,7 +79,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 
 			int num = getPlayer().getBonusAndChangeCard();
 			for (int i = 0; i < num; i++) {
-				if(getCanAttackRandomCountry() != null)
+				if (getCanAttackRandomCountry() != null)
 					this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
 				else
 					this.getPlayer().addInfantry(this.getRandCountry());
@@ -147,7 +147,8 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 				}
 			}
 		}
-		if(canAttack.size() == 0) return null;
+		if (canAttack.size() == 0)
+			return null;
 		int rand = (int) (Math.random() * canAttack.size());
 		return canAttack.get(rand);
 	}

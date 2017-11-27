@@ -95,7 +95,6 @@ public class TournamentGamePanel extends JPanel {
 		comboBox_7.setModel(
 				new DefaultComboBoxModel(new String[] { "none", "aggressive", "benevolent", "random", "cheater" }));
 		comboBox_7.setBounds(891, 149, 102, 21);
-		// comboBox_7.setEnabled(false);
 		add(comboBox_7);
 
 		comboBox_8 = new JComboBox();
@@ -112,22 +111,11 @@ public class TournamentGamePanel extends JPanel {
 		comboBox_9.setEnabled(false);
 		add(comboBox_9);
 
-		// comboBox_6.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent arg0) {
-		// String text = (String) comboBox_6.getSelectedItem();
-		// if (text.equals("none")) {
-		// comboBox_7.setEnabled(false);
-		// } else {
-		// comboBox_7.setEnabled(true);
-		// }
-		// }
-		// });
 
 		comboBox_7.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				String text7 = (String) comboBox_7.getSelectedItem();
 				if (text7.equals("none")) {
 					comboBox_8.setEnabled(false);
@@ -141,7 +129,6 @@ public class TournamentGamePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				String text8 = (String) comboBox_8.getSelectedItem();
 				if (text8.equals("none")) {
 					comboBox_9.setEnabled(false);
@@ -152,17 +139,6 @@ public class TournamentGamePanel extends JPanel {
 		});
 
 		startGameButt = new JButton("Start Game");
-		// startGameButt.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent arg0) {
-		// int gameTimes = Integer.parseInt(textField.getText());
-		// if(gameTimes>=10&&gameTimes<=50){
-		//
-		// }else{
-		// JOptionPane.showMessageDialog(null, "Plase input the correct Game
-		// Times on each map from 10 to 50!!!");
-		// }
-		// }
-		// });
 		startGameButt.setBackground(Color.WHITE);
 		startGameButt.setBounds(434, 772, 102, 23);
 		add(startGameButt);
@@ -223,7 +199,6 @@ public class TournamentGamePanel extends JPanel {
 		JButton btnSelectM = new JButton("select M1");
 		btnSelectM.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fc1 = new JFileChooser();
 				int returnVal = fc1.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc1.getSelectedFile();
@@ -239,7 +214,6 @@ public class TournamentGamePanel extends JPanel {
 		JButton btnSelectM_1 = new JButton("select M2");
 		btnSelectM_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fc2 = new JFileChooser();
 				int returnVal = fc2.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc2.getSelectedFile();
@@ -255,7 +229,6 @@ public class TournamentGamePanel extends JPanel {
 		JButton btnSelectM_2 = new JButton("select M3");
 		btnSelectM_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fc3 = new JFileChooser();
 				int returnVal = fc3.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc3.getSelectedFile();
@@ -271,7 +244,6 @@ public class TournamentGamePanel extends JPanel {
 		JButton btnSelectM_3 = new JButton("select M4");
 		btnSelectM_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fc4 = new JFileChooser();
 				int returnVal = fc4.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc4.getSelectedFile();
@@ -287,7 +259,6 @@ public class TournamentGamePanel extends JPanel {
 		JButton btnSelectM_4 = new JButton("select M5");
 		btnSelectM_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// fc5 = new JFileChooser();
 				int returnVal = fc5.showOpenDialog(null);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc5.getSelectedFile();

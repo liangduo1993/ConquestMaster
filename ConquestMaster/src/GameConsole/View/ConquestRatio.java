@@ -27,7 +27,7 @@ public class ConquestRatio extends JPanel implements Observer {
 	public static final int ratio = 15;
 
 	private List<Player> players = new ArrayList<>();
-	
+
 	/**
 	 * constructor method
 	 * 

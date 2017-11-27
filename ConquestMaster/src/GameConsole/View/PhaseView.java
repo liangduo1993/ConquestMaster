@@ -149,7 +149,6 @@ public class PhaseView implements Observer {
 		player1Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player1Name.setEditable(false);
 		player1Name.setBounds(0, 0, 175, 60);
-		
 
 		player2Name.setHorizontalAlignment(SwingConstants.CENTER);
 		player2Name.setForeground(Color.MAGENTA);
@@ -190,10 +189,9 @@ public class PhaseView implements Observer {
 	 * Method to update the phase view
 	 */
 	public void update(Observable o, Object arg) {
-		for(Player p: gameState.getAllPlayers().getPlayers()){
+		for (Player p : gameState.getAllPlayers().getPlayers()) {
 			p.getPlayerTextName().setBackground(Color.LIGHT_GRAY);
 		}
-		//System.out.println(gameState.getCurrPlayer());
 		gameState.getCurrPlayer().getPlayerTextName().setBackground(Color.GRAY);
 		if (gameState.getFirstRound() == 1) {
 			obtainTroopLabel.setVisible(true);

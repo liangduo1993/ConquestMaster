@@ -79,9 +79,10 @@ public class Player extends Observable {
 		this.color = color;
 		this.game = game;
 	}
-	
+
 	/**
 	 * Method to get strategy
+	 * 
 	 * @return The operator to be applied which is Strategy method
 	 */
 	public Strategy getStrategy() {
@@ -90,7 +91,9 @@ public class Player extends Observable {
 
 	/**
 	 * Plugs in a specific strategy to be used
-	 * @param strategy The operator to be applied
+	 * 
+	 * @param strategy
+	 *            The operator to be applied
 	 */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
@@ -361,12 +364,11 @@ public class Player extends Observable {
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) throws Exception{
-		if(c1.getPlayer() != this || c2.getPlayer() == this){
+	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) throws Exception {
+		if (c1.getPlayer() != this || c2.getPlayer() == this) {
 			throw new Exception("The attacker and defender is not right!");
 		}
-		
-		
+
 		Map<String, Object> result = new HashMap<>();
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();
@@ -441,13 +443,11 @@ public class Player extends Observable {
 			c2.setPlayer(this);
 			this.addCountry(c2);
 			this.isConquered(true);
-			// return true;
 			result.put("result", true);
 		} else {
 			result.put("result", false);
 		}
 		return result;
-		// return false;
 	}
 
 	/**
@@ -491,25 +491,11 @@ public class Player extends Observable {
 		lp.addLog(this.getName() + " moves " + toMove + " troops from " + c1.getName() + " to " + c2.getName());
 	}
 
-//	/**
-//	 * Method to claim the player fails and remove the player from the players
-//	 * list
-//	 */
-//	public void loseGame() {
-//		lp.addLog(this.name + " has lost the game!");
-//		this.game.getAllPlayers().getPlayers().remove(this);
-//		this.game.setNextPlayer();
-//		System.out.println("Current Player is at this end game point is " + game.getCurrPlayer().getName());
-//		if (game.checkWinner() == game.getCurrPlayer()) {
-//			game.getWindow().initializeEndGame();
-//			System.out.println("End game was called");
-//		}
-//
-//	}
-
 	/**
 	 * Method to check if the player wins the game
-	 * @return true if the player has the total number of the countries in the map otherwise false
+	 * 
+	 * @return true if the player has the total number of the countries in the
+	 *         map otherwise false
 	 */
 	public boolean checkWinGame() {
 		if (this.countries.size() == game.getWorld().getDeck().size())
@@ -543,18 +529,16 @@ public class Player extends Observable {
 		int firstRound = game.getFirstRound();
 		if (firstRound == 1) {
 			if (game.getAllPlayers().getPlayers().size() == 2) {
-				reward =  40 - this.getCountries().size();
+				reward = 40 - this.getCountries().size();
 			} else if (game.getAllPlayers().getPlayers().size() == 3) {
-				reward =  35 - this.getCountries().size();
+				reward = 35 - this.getCountries().size();
 			} else if (game.getAllPlayers().getPlayers().size() == 4) {
-				reward =  30 - this.getCountries().size();
+				reward = 30 - this.getCountries().size();
 			} else if (game.getAllPlayers().getPlayers().size() == 5) {
-				reward =  25 - this.getCountries().size();
+				reward = 25 - this.getCountries().size();
 			} else {
-				reward =  20 - this.getCountries().size();
+				reward = 20 - this.getCountries().size();
 			}
-//			this.initTroop = reward;
-			//return reward;
 
 		} else {
 
@@ -678,7 +662,7 @@ public class Player extends Observable {
 					break;
 			}
 			boolean owned = true;
-			
+
 			World world = game.getWorld();
 			System.out.println(world.getContinents().size());
 
@@ -702,18 +686,12 @@ public class Player extends Observable {
 			System.out.println("reward " + reward);
 			System.out.println("size " + this.countries.size());
 			lp.addLog(this.getName() + " gets total of " + reward + " troops!");
-//			this.initTroop = reward;
-			//return reward;
+
 		}
-		
-//		if (this.countries.size() == 0) {
-//			this.loseGame();
-//			this.initTroop = 0;
-//			return 0;
-//		}else{
-			this.initTroop = reward;
-			return reward;
-//		}
+
+		this.initTroop = reward;
+		return reward;
+
 	}
 
 	/**
@@ -722,10 +700,6 @@ public class Player extends Observable {
 	 * @return the number of the got armies
 	 */
 	public int getBonusAndChangeCard() {
-		// if (this.countries.size() == 0) {
-		// this.loseGame();
-		// return 0;
-		// }
 
 		int firstRound = game.getFirstRound();
 		if (firstRound == 1) {

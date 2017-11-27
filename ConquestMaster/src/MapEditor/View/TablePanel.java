@@ -126,7 +126,6 @@ public class TablePanel extends JPanel implements Observer {
 		});
 		scrollPane_2.setViewportView(contTable);
 
-		// Territory
 		terAddBtn = new JButton("Add");
 		terAddBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,7 +135,6 @@ public class TablePanel extends JPanel implements Observer {
 		terAddBtn.setBounds(46, 590, 93, 23);
 		add(terAddBtn);
 
-		// Territory
 		terEditBtn = new JButton("Edit");
 		terEditBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,7 +144,6 @@ public class TablePanel extends JPanel implements Observer {
 		terEditBtn.setBounds(46, 620, 93, 23);
 		add(terEditBtn);
 
-		// Territory
 		terDelBtn = new JButton("Delete");
 		terDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,7 +153,6 @@ public class TablePanel extends JPanel implements Observer {
 		terDelBtn.setBounds(46, 650, 93, 23);
 		add(terDelBtn);
 
-		// Continent
 		contAddBtn = new JButton("Add");
 		contAddBtn.setBounds(218, 590, 93, 23);
 		contAddBtn.addActionListener(new ActionListener() {
@@ -166,7 +162,6 @@ public class TablePanel extends JPanel implements Observer {
 		});
 		add(contAddBtn);
 
-		// Continent
 		contEditBtn = new JButton("Edit");
 		contEditBtn.setBounds(218, 620, 93, 23);
 		contEditBtn.addActionListener(new ActionListener() {
@@ -176,7 +171,6 @@ public class TablePanel extends JPanel implements Observer {
 		});
 		add(contEditBtn);
 
-		// Continent
 		contDelBtn = new JButton("Delete");
 		contDelBtn.setBounds(218, 650, 93, 23);
 		contDelBtn.addActionListener(new ActionListener() {
@@ -186,32 +180,40 @@ public class TablePanel extends JPanel implements Observer {
 		});
 		add(contDelBtn);
 	}
-	
+
 	/**
 	 * get the territories' name of the map.
+	 * 
 	 * @return all the territories on the table.
 	 */
 	public Object[][] getTerNames() {
 		return terNames;
 	}
+
 	/**
 	 * any territory that want to be edited, setting it.
-	 * @param terNames return a new territories array of the map.
+	 * 
+	 * @param terNames
+	 *            return a new territories array of the map.
 	 */
 	public void setTerNames(Object[][] terNames) {
 		this.terNames = terNames;
 	}
-	
+
 	/**
 	 * getting the continents name of a conquest map.
+	 * 
 	 * @return all the continents on the table.
 	 */
 	public Object[][] getContNames() {
 		return contNames;
 	}
+
 	/**
 	 * any continent that wants to be changed, setting it.
-	 * @param contNames return as the new continents array of the map.
+	 * 
+	 * @param contNames
+	 *            return as the new continents array of the map.
 	 */
 	public void setContNames(Object[][] contNames) {
 		this.contNames = contNames;

@@ -33,7 +33,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 			if (!getPlayer().checkIfCanAttack()) {
 				return;
 			}
-			System.out.println((getGameState().getCountry1() == null) + ":"+ (getGameState().getCountry2() == null));
+			System.out.println((getGameState().getCountry1() == null) + ":" + (getGameState().getCountry2() == null));
 			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null) {
 
 				JPanel numdice1 = new JPanel();
@@ -51,7 +51,6 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 				}
 				int decision1 = Integer.parseInt(list1.getSelectedItem().toString());
-			//	lp.addLog("Attacker chooses " + decision1 + " dices!");
 
 				numdice1.remove(label);
 				numdice1.remove(list1);
@@ -70,51 +69,46 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 								JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 					}
 					decision2 = Integer.parseInt(list2.getSelectedItem().toString());
-					//lp.addLog("Defender chooses " + decision2 + " dices!");
 				}
-				try{
-				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(),
-						getGameState().getCountry2(), decision1, decision2);
-				JOptionPane.showConfirmDialog(null, (String) result.get("dice"), "Dice Result", JOptionPane.OK_OPTION);
+				try {
+					Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(
+							getGameState().getCountry1(), getGameState().getCountry2(), decision1, decision2);
+					JOptionPane.showConfirmDialog(null, (String) result.get("dice"), "Dice Result",
+							JOptionPane.OK_OPTION);
 
-				if ((Boolean) result.get("result")) {
-					int moveNum = 0;
-					JPanel numPanel = new JPanel();
-					numPanel.add(new JLabel("Congrats you conquered " + getGameState().getCountry2().getName()
-							+ " with " + getGameState().getCountry1().getName()
-							+ ". How many troops would you like to add?"));
-					lp.addLog("Congrats " + getGameState().getCurrPlayer().getName() + " conquered "
-							+ getGameState().getCountry2().getName() + " with "
-							+ getGameState().getCountry1().getName());
-					DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
-					for (int i = getGameState().getCountry1().getTroopNum() - 1; i >= 1; i--) {
-						selection.addElement(Integer.toString(i));
+					if ((Boolean) result.get("result")) {
+						int moveNum = 0;
+						JPanel numPanel = new JPanel();
+						numPanel.add(new JLabel("Congrats you conquered " + getGameState().getCountry2().getName()
+								+ " with " + getGameState().getCountry1().getName()
+								+ ". How many troops would you like to add?"));
+						lp.addLog("Congrats " + getGameState().getCurrPlayer().getName() + " conquered "
+								+ getGameState().getCountry2().getName() + " with "
+								+ getGameState().getCountry1().getName());
+						DefaultComboBoxModel<String> selection = new DefaultComboBoxModel<String>();
+						for (int i = getGameState().getCountry1().getTroopNum() - 1; i >= 1; i--) {
+							selection.addElement(Integer.toString(i));
+						}
+						JComboBox<String> comboBox = new JComboBox<String>(selection);
+						numPanel.add(comboBox);
+
+						int result1 = -1;
+						while (result1 != JOptionPane.OK_OPTION) {
+							result1 = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops",
+									JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+						}
+						moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
+						getGameState().getCountry2().addInfrantry(moveNum);
+						getGameState().getCountry1().removeTroops(moveNum);
+						lp.addLog(getGameState().getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
+
 					}
-					JComboBox<String> comboBox = new JComboBox<String>(selection);
-					numPanel.add(comboBox);
+				} catch (Exception e) {
 
-					int result1 = -1;
-					while (result1 != JOptionPane.OK_OPTION) {
-						result1 = JOptionPane.showConfirmDialog(null, numPanel, "Number of Troops",
-								JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-					}
-					moveNum = Integer.parseInt(comboBox.getSelectedItem().toString());
-					getGameState().getCountry2().addInfrantry(moveNum);
-					getGameState().getCountry1().removeTroops(moveNum);
-					lp.addLog(getGameState().getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
-
-				}
-				}catch(Exception e){
-					
 				}
 				clearLabel();
 				updateLabel();
 			}
-
-			// getGameState().setCountry1(null);
-			// getGameState().setCountry2(null);
-			// getGameState().getWindow().country1.setText((String) null);
-			// getGameState().getWindow().country2.setText((String) null);
 
 		}
 
@@ -132,7 +126,6 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 					this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 					clearLabel();
-//					updateLabel();
 					return;
 				}
 			}
@@ -158,8 +151,6 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 		getPlayer().setHasMoved(false);
 		while (getGameState().getCurrPhase() == 2) {
 			System.out.println("fortify!!!!!!");
-			// if (getGameState().getCurrPhase() != 2)
-			// return;
 			if (getGameState().getCountry1() != null && getGameState().getCountry2() != null
 					&& !getPlayer().isHasMoved()) {
 				JPanel numPanel = new JPanel();

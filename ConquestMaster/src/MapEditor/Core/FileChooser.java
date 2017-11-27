@@ -59,7 +59,6 @@ public class FileChooser {
 		}
 	}
 
-
 	/**
 	 * Open function.
 	 */
@@ -71,7 +70,6 @@ public class FileChooser {
 			LogPanel.addLog("Map is successfully loaded!");
 		} catch (Exception e) {
 			LogPanel.addLog(e.getMessage());
-			//e.printStackTrace();
 		}
 
 	}

@@ -15,8 +15,8 @@ import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 
 /**
- * This class is the GUI for the domination View Panel, showing the world domination situation
- * of the list of players
+ * This class is the GUI for the domination View Panel, showing the world
+ * domination situation of the list of players
  */
 public class DomiInfoPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +39,6 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	private void initialize() {
 		this.setBounds(100, 100, 350, playerNum * 180);
 		this.setLayout(null);
-		
 
 		for (int i = 0; i < playerNum; i++) {
 			JLabel newLabel = new JLabel(state.getAllPlayers().getPlayers().get(i).getName());
@@ -59,7 +58,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 			for (int row = 0; row < countries.size(); row++) {
 				System.out.println(countries.get(row));
 			}
-			
+
 			Object[][] model = new Object[countries.size()][3];
 			for (int row = 0; row < countries.size(); row++) {
 				model[row][0] = countries.get(row).getName();
@@ -87,7 +86,8 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	}
 
 	/**
-	 * The override update function for Observer, would refresh the panel when the state is changed
+	 * The override update function for Observer, would refresh the panel when
+	 * the state is changed
 	 */
 	@Override
 	public void update(Observable o, Object arg) {

@@ -13,7 +13,8 @@ import MapEditor.View.TablePanel;
 /**
  * 
  * This class is a test class for class TablePanel, mostly test the function
- * whether the Observer can do corresponding change to the state change in Observable.
+ * whether the Observer can do corresponding change to the state change in
+ * Observable.
  *
  */
 public class TablePanelTest {

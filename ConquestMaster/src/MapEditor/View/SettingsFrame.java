@@ -65,8 +65,8 @@ public class SettingsFrame {
 		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
 
-		// ImagePath button no Name needed
-		imgBtn = new JButton("Click if you want to change a background!");
+		
+		imgBtn = new JButton("Click if you want to change a background!");// ImagePath button no Name needed
 		imgBtn.setBounds(140, 243 - 100, 165, 23);
 		imgBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

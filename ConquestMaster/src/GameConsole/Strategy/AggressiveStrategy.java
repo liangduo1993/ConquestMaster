@@ -101,7 +101,6 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 		List<Country> countrys = this.getPlayer().getCountries();
 		List<Country> canAttackCountries = new ArrayList<>();
 		for (Country c : countrys) {
-			// if (c.getTroops().size() > 1) {
 			boolean flag = false;
 			for (Country neighbour : c.getBorderingCountries()) {
 				if (neighbour.getPlayer() != this.getPlayer())
@@ -110,7 +109,6 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 			if (flag) {
 				canAttackCountries.add(c);
 			}
-			// }
 		}
 
 		if (canAttackCountries.isEmpty())

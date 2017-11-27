@@ -109,6 +109,7 @@ public class MapDisplayer {
 
 	/**
 	 * Return the current button image
+	 * 
 	 * @return The current button image
 	 */
 	public BufferedImage getButtonImage() {
@@ -117,12 +118,12 @@ public class MapDisplayer {
 
 	/**
 	 * To set the button image
-	 * @param buttonImage The input button image
+	 * 
+	 * @param buttonImage
+	 *            The input button image
 	 */
 	public void setButtonImage(BufferedImage buttonImage) {
 		this.buttonImage = buttonImage;
 	}
 
-	
-	
 }

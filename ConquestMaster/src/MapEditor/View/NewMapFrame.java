@@ -59,8 +59,8 @@ public class NewMapFrame {
 		errMsg.setBounds(40, 10, 300, 15);
 		errMsg.setForeground(Color.RED);
 
-		// ImagePath button no Name needed
-		imgBtn = new JButton("Please select a image!");
+		
+		imgBtn = new JButton("Please select a image!");// ImagePath button no Name needed
 		imgBtn.setBounds(140, 243 - 100, 165, 23);
 		imgBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

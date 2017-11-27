@@ -42,14 +42,6 @@ public class CheaterStrategy extends OriginalStrategy implements Strategy {
 			neighbour.setPlayer(this.getPlayer());
 			this.getPlayer().addCountry(neighbour);
 			neighbour.setTroopNum(1);
-			// for(Country c: getPlayer().getCountries()){
-			// if(c.getBorderingCountries().contains(neighbour) &&
-			// c.getTroops().size() > 1){
-			// neighbour.addInfrantry(1);
-			// c.removeTroops(1);
-			// break;
-			// }
-			// }
 		}
 
 	}

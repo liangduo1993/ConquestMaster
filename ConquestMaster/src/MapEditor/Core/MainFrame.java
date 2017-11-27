@@ -28,8 +28,7 @@ public class MainFrame {
 	public FileChooser fcp;
 	public LogPanel lp;
 	public TablePanel infoPanel;
-	
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -86,7 +85,7 @@ public class MainFrame {
 				fcp = new FileChooser("saveas", map);
 			}
 		});
-		
+
 		JMenuItem mntmSettings = new JMenuItem("settings");
 		mnFile.add(mntmSettings);
 		mntmSettings.addActionListener(new ActionListener() {
@@ -105,17 +104,15 @@ public class MainFrame {
 
 		frame.getContentPane().setLayout(null);
 
-		
-
 		lp.setBounds(0, 0, 250, 695);
 		frame.getContentPane().add(lp);
-		
+
 		infoPanel = new TablePanel(map);
 		infoPanel.setBounds(700, 10, 400, 695);
 		infoPanel.setVisible(false);
 		frame.getContentPane().add(infoPanel);
 		map.addObserver(infoPanel);
-		
+
 		frame.setVisible(true);
 	}
 
