@@ -36,7 +36,6 @@ public class GameSaver {
 	 * @param out output stream
 	 */
 	private void save(PrintWriter out) {
-
 		out.println("[Map]");
 		out.println("mapFilePath=" + game.getWorld().getMapLoader().getMapFilePath());
 		out.println();

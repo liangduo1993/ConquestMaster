@@ -906,8 +906,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 	 * @see eachTerReachable()
 	 */
 	public boolean validityCheck() {
-		ArrayList<String> probs = new ArrayList<>();
-		probs = loadingCheck();
+		ArrayList<String> probs = loadingCheck();
 
 		if (probs.isEmpty()) {
 			return true;
@@ -934,16 +933,17 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		if ((this.territories == null) || (this.territories.isEmpty())) {
 			probs.add("Map contains no territories");
 		}
-//		if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
-//			probs.add("Map image is not specified");
-//		} else if (getMapDirectory() != null) {
-//			if (isDisparateImageFileDirectory()) {
-//				probs.add("Map and image files are not located in the same directory");
-//			}
-//		}
-//		if (hasOneWayLinks()) {
-//			probs.add("");
-//		}
+		// if ((this.imageFilePath == null) || (this.imageFilePath.isEmpty())) {
+		// probs.add("Map image is not specified");
+		// } else if (getMapDirectory() != null) {
+		// if (isDisparateImageFileDirectory()) {
+		// probs.add("Map and image files are not located in the same
+		// directory");
+		// }
+		// }
+		// if (hasOneWayLinks()) {
+		// probs.add("");
+		// }
 
 		if (this.territories.size() > 0 && !eachTerReachable()) {
 			probs.add("There's some teris cannot reach to every other territories!");
@@ -955,9 +955,9 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 			}
 		}
 
-		if (probs.isEmpty()) {
-			return null;
-		}
+//		if (probs.isEmpty()) {
+//			return null;
+//		}
 
 		for (String string : probs) {
 			LogPanel.addLog(string);

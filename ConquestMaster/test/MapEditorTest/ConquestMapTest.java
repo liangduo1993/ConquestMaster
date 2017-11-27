@@ -176,7 +176,7 @@ public class ConquestMapTest {
 			try {
 				map.load("resources/ConquestMaps/Atlantis(invalid).map");
 			} catch (Exception ex) {
-				assertThat(ex.getMessage(), containsString("didn't pass the validation!"));
+				assertThat(ex.getMessage(), containsString("There's some teris cannot reach to every other territories!"));
 			}
 		}
 
@@ -188,7 +188,7 @@ public class ConquestMapTest {
 		public void testSaveString() throws Exception {
 			map.load("resources/ConquestMaps/Atlantis.map");
 			map.addContinent(new Continent("newContinent", 1));
-			map.save("f:\\1.map");
+			map.save("resources/TestResources/1.map");
 		}
 
 
