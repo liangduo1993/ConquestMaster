@@ -72,7 +72,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 					decision2 = Integer.parseInt(list2.getSelectedItem().toString());
 					//lp.addLog("Defender chooses " + decision2 + " dices!");
 				}
-
+				try{
 				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(getGameState().getCountry1(),
 						getGameState().getCountry2(), decision1, decision2);
 				JOptionPane.showConfirmDialog(null, (String) result.get("dice"), "Dice Result", JOptionPane.OK_OPTION);
@@ -104,6 +104,9 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 					lp.addLog(getGameState().getCurrPlayer().getName() + " leaves " + moveNum + " troops!");
 
 				}
+				}catch(Exception e){
+					
+				}
 				clearLabel();
 				updateLabel();
 			}
@@ -124,7 +127,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 	public void reinforce() {
 		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
 			while (true) {
-				System.out.println(this.getGameState().getCurrClick());
+				System.out.println("null");
 				if (this.getGameState().getCurrClick() != null) {
 					this.getPlayer().addInfantry(this.getGameState().getCurrClick());
 					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);

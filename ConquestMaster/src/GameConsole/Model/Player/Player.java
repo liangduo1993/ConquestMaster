@@ -361,7 +361,12 @@ public class Player extends Observable {
 	 * @param c2
 	 *            the selected target to be attacked with Country type
 	 */
-	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) {
+	public Map<String, Object> originalAttack(Country c1, Country c2, int decision1, int decision2) throws Exception{
+		if(c1.getPlayer() != this || c2.getPlayer() == this){
+			throw new Exception("The attacker and defender is not right!");
+		}
+		
+		
 		Map<String, Object> result = new HashMap<>();
 		lp.addLog(c1.getName() + " is attacking " + c2.getName() + "!");
 		Random rand = new Random();

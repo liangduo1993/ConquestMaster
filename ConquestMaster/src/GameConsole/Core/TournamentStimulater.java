@@ -23,15 +23,17 @@ public class TournamentStimulater {
 	 * @param gs the game state with GameState type
 	 * @param players the list of players in the game
 	 * @param turn the current turn with int type
-	 * @param flag a signal to specify if the game start with boolean type
+	 * @param flag1 if the game start with a UI
+	 * @param flag2 if the gamestate needs to be initilized
 	 */
-	public TournamentStimulater(GameState gs, List<Player> players, int turn, boolean flag) {
+	public TournamentStimulater(GameState gs, List<Player> players, int turn, boolean flag1, boolean flag2) {
 		this.gs = gs;
 		gs.getAllPlayers().setPlayers(players);
 		gs.setCurrPlayer(players.get(0));
 		this.players = players;
 		this.turn = turn;
-		gs.gameStart(flag);
+		if(flag2)
+			gs.gameStart(flag1);
 	}
 
 	/**

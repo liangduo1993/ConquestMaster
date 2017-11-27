@@ -28,6 +28,9 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void attack() {
 		for (;;) {
+			if (!getPlayer().checkIfCanAttack()) {
+				return;
+			}
 			Country strongestC = this.getStrongestContry();
 			int decision1 = strongestC.getTroopNum() >= 3 ? 3 : strongestC.getTroopNum();
 			int decision2 = 1;
@@ -39,18 +42,17 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 					break;
 				}
 			}
-			if (country2.getPlayer() != null) {
-				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2,
-						decision1, decision2);
-				boolean flag = (boolean) result.get("result");
-				if (flag) {
-					int moveNum = strongestC.getTroopNum() - 1;
-					country2.addInfrantry(moveNum);
-					country1.removeTroops(moveNum);
-					// break;
-				}
-				if (!getPlayer().checkIfCanAttack()) {
-					break;
+			if (country2.getPlayer() != null && country2.getPlayer() != getPlayer()) {
+				try {
+					Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2,
+							decision1, decision2);
+					boolean flag = (boolean) result.get("result");
+					if (flag) {
+						int moveNum = strongestC.getTroopNum() - 1;
+						country2.addInfrantry(moveNum);
+						country1.removeTroops(moveNum);
+					}
+				} catch (Exception e) {
 				}
 			}
 		}
@@ -79,13 +81,15 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void fortify() {
 		getPlayer().giveCards();
-			Country strongestC = getStrongestContry();
+		Country strongestC = getStrongestContry();
+		if (strongestC != null) {
 			for (Country neighbour : strongestC.getBorderingCountries()) {
 				if (neighbour.getPlayer() == this.getPlayer() && neighbour.getTroopNum() > 1) {
 					getPlayer().moveTroops(neighbour, strongestC, neighbour.getTroopNum() - 1);
 					return;
 				}
 			}
+		}
 	}
 
 	/**
@@ -109,7 +113,9 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 			// }
 		}
 
-		Country strongestCountry = new Country();
+		if (canAttackCountries.isEmpty())
+			return null;
+		Country strongestCountry = canAttackCountries.get(0);
 		for (Country country : canAttackCountries) {
 			if (country.getTroopNum() > strongestCountry.getTroopNum()) {
 				strongestCountry = country;

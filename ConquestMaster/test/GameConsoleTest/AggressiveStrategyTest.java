@@ -27,15 +27,10 @@ public class AggressiveStrategyTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		gl = new GameLoader(null, "resources/GimpFiles/13.txt");
+		gl = new GameLoader(null, "resources/TestResources/31.txt");
 		gs = gl.getGameState();
 		p1 = gs.getAllPlayers().getPlayers().get(0);
 		
-		s1 = new AggressiveStrategy();
-		s1.setGameState(gs);
-		s1.setPlayer(p1);
-		
-		p1.setStrategy(s1);
 		
 	}
 	/**

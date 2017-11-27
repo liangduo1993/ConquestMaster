@@ -28,7 +28,7 @@ public class GameLoaderTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		gl = new GameLoader(null, "resources/GimpFiles/13.txt");
+		gl = new GameLoader(null, "resources/TestResources/31.txt");
 		gs = gl.getGameState();
 		
 		p1 = gs.getAllPlayers().getPlayers().get(0);
@@ -41,7 +41,7 @@ public class GameLoaderTest {
 	 */
 	@Test
 	public void testLoadPlayers() {
-		assertEquals(2, gs.getAllPlayers().getPlayers().size());
+		assertEquals(3, gs.getAllPlayers().getPlayers().size());
 		assertEquals("p1", p1.getName());
 		assertEquals("p2", p2.getName());
 	}
@@ -53,8 +53,8 @@ public class GameLoaderTest {
 	@Test
 	public void testloadCountries() {
 
-		assertEquals(22, p1.getCountries().size());
-		assertEquals(20, p2.getCountries().size());
+		assertEquals(14, p1.getCountries().size());
+		assertEquals(14, p2.getCountries().size());
 		
 	}
 

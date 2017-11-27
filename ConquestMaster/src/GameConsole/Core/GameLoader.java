@@ -216,25 +216,25 @@ public class GameLoader {
 							}
 						}
 					} else if ("countries".equals(prop)) {
-						String[] countries = val.split(",");
-						if (countries.length != 0) {
-							for (int i = 0; i < countries.length; i++) {
-								
-								for(Continent con: game.getWorld().getContinents()){
-									for(Country cou: con.getCountries()){
-										if(cou.getName().equals(countries[i])){
-											p.addCountry(cou);
-										}
-									}
-								}
-								
-								
-//								p.addCountry(game.getWorld().getMapLoader().findCountry(countries[i]));
-							
-							
-							
-							}
-						}
+//						String[] countries = val.split(",");
+//						if (countries.length != 0) {
+//							for (int i = 0; i < countries.length; i++) {
+//								
+//								for(Continent con: game.getWorld().getContinents()){
+//									for(Country cou: con.getCountries()){
+//										if(cou.getName().equals(countries[i])){
+//											p.addCountry(cou);
+//										}
+//									}
+//								}
+//								
+//								
+////								p.addCountry(game.getWorld().getMapLoader().findCountry(countries[i]));
+//							
+//							
+//							
+//							}
+//						}
 					}
 
 				}
@@ -268,6 +268,7 @@ public class GameLoader {
 								if (cou.getName().equals(cName)) {
 									cou.setPlayer(p);
 									cou.addInfrantry(tNum);
+									p.addCountry(cou);
 								}
 							}
 

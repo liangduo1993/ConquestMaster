@@ -1320,7 +1320,7 @@ public class WindowMain {
 				System.out.println(players.get(x).getName());
 			}
 
-			TournamentStimulater gameSt = new TournamentStimulater(gameState, players, gameTurns, false);
+			TournamentStimulater gameSt = new TournamentStimulater(gameState, players, gameTurns, false, true);
 
 			result = gameSt.execute();
 			// sb.append(gameSt.execute());

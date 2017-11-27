@@ -32,19 +32,7 @@ public class MapLoaderTest {
 		map.load("resources/ConquestMaps/Atlantis.map");
 	}
 
-	/**
-	 * test class: ConquestMap, function: hasOneWaylink(). Check if a territory
-	 * has one way link connection, an check when we delete the link connection,
-	 * the link connection is null or not.
-	 */
-	@Test
-	public void testHasOneWayLinks() {
-		Territory forgoth = map.findTerritory("Forgoth");
-		Territory rove = map.findTerritory("Rove");
-		assertEquals(false, map.hasOneWayLinks());
-		forgoth.getLinks().remove(rove);
-		assertEquals(true, map.hasOneWayLinks());
-	}
+
 
 	/**
 	 * test class: ConquestMap, function eachTerReachable(), check the

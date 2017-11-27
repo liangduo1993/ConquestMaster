@@ -49,17 +49,21 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 			int decision1 = country1.getTroopNum() >= 3 ? 3 : country1.getTroopNum();
 			int decision2 = 1;
 
-			Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2, decision1,
-					decision2);
-			boolean flag = (boolean) result.get("result");
-			System.out.println("!!!onetimeattack");
-			if (flag) {
-				int moveNum = getRandTroops(country1.getTroopNum());
-				country2.addInfrantry(moveNum);
-				country1.removeTroops(moveNum);
-			}
-			randomAttackTime--;
+			try {
+				Map<String, Object> result = getGameState().getCurrPlayer().originalAttack(country1, country2,
+						decision1, decision2);
 
+				boolean flag = (boolean) result.get("result");
+				System.out.println("!!!onetimeattack");
+				if (flag) {
+					int moveNum = getRandTroops(country1.getTroopNum());
+					country2.addInfrantry(moveNum);
+					country1.removeTroops(moveNum);
+				}
+				randomAttackTime--;
+			} catch (Exception e) {
+
+			}
 		}
 	}
 

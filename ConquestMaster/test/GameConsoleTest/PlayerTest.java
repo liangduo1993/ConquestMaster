@@ -45,6 +45,7 @@ public class PlayerTest {
 			temp.add(new Country());
 		}
 		player.setCountries(temp);
+		player.setInitTroop(temp.size());
 		
 
 		player2 = new Player("testPlayerDefender", null, state, new HumanStrategy());
@@ -53,7 +54,7 @@ public class PlayerTest {
 			temp2.add(new Country());
 		}
 		player2.setCountries(temp2);
-		
+		player2.setInitTroop(temp2.size());
 	
 		player3 = new Player("testPlayer3", null, state, new HumanStrategy());
 		ArrayList<Country> temp3 = new ArrayList<Country>();
@@ -61,7 +62,8 @@ public class PlayerTest {
 			temp3.add(new Country());
 		}
 		player3.setCountries(temp3);
-
+		player3.setInitTroop(temp3.size());
+		
 		group.addPlayer(player);
 		group.addPlayer(player2);
 		group.addPlayer(player3);
@@ -97,21 +99,6 @@ public class PlayerTest {
 	}
 	
 	
-//	/**
-//	 * test class: Player, function: loseGame(). check when one player loses
-//	 * all the countries
-//	 * 
-//	 */
-	/*
-	@Test
-	public void testLoseGame() {
-		player.getCountries().removeAll(player.getCountries());
-		assertEquals(0, player.getCountries().size());
-		state.setCurrPlayer(player2);
-		player.loseGame();
-		assertEquals(2, state.getAllPlayers().getPlayers().size());
-	}
-	*/
 	
 	/**
 	 * test class: Player. check the end of the game
@@ -137,12 +124,22 @@ public class PlayerTest {
 		c1.setPlayer(player);
 		Country c2 = player2.getCountries().get(0);
 		c2.setPlayer(player2);
+		Country c3 = player.getCountries().get(1);
+		c3.setPlayer(player);
+		
 		
 		try {
 			player.originalAttack(c1, c2, 1, 1);
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			assertNotEquals(ex.getMessage(), "The attacker and defender is not right!");
+		}
+		
+		try {
+			player.originalAttack(c1, c3, 1, 1);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			assertEquals(ex.getMessage(), "The attacker and defender is not right!");
 		}
 	}
 	
@@ -152,7 +149,7 @@ public class PlayerTest {
 	 * 
 	 */
 	@Test
-	public void testFortify() {
+	public void testHumanFortify() {
 		state.setCurrPlayer(group.getPlayers().get(0));
 		Player curPlayer = state.getCurrPlayer();
 		curPlayer.getCountries().get(0).setTroopNum(5);
@@ -163,6 +160,26 @@ public class PlayerTest {
 		assertEquals(3, curPlayer.getCountries().get(0).getTroopNum());
 		assertEquals(10, curPlayer.getCountries().get(1).getTroopNum());
 	}
+	
+	/**
+	 * test class: Player. check the startup
+	 * phase
+	 * 
+	 */
+	@Test
+	public void testStartupPhase() {
+		state.setCurrPlayer(group.getPlayers().get(0));
+		Player curPlayer = state.getCurrPlayer();
+		state.setFirstRound(1); //startup phase
+		
+		int beforeInitTroops = curPlayer.getInitTroop();
+		state.setCurrClick(curPlayer.getCountries().get(0));
+		curPlayer.reinforce();
+		int afterInitTroops = curPlayer.getInitTroop();
+		
+		assertEquals(beforeInitTroops -1, afterInitTroops);
+	}
+	
 	
 
 }
