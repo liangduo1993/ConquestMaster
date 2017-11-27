@@ -38,15 +38,17 @@ public class MapLoader {
 
 	/**
 	 * To set the world
-	 * @param world the selected world that will be set as the world where the players are in
+	 * 
+	 * @param world
+	 *            the selected world that will be set as the world where the
+	 *            players are in
 	 */
-	public void setWorld(World world){
-	  System.out.println(this.continents.size());
-	  for(Continent continent : this.continents){
-	     world.addContinent(continent);
-	  }
+	public void setWorld(World world) {
+		System.out.println(this.continents.size());
+		for (Continent continent : this.continents) {
+			world.addContinent(continent);
+		}
 	}
-	
 
 	/**
 	 * Method to clear the values of the corresponding attributes
@@ -64,8 +66,11 @@ public class MapLoader {
 
 	/**
 	 * The method which convert ScrollOptions from a input String
-	 * @param option The input String
-	 * @param defaultValue The default output ScrollOptions type
+	 * 
+	 * @param option
+	 *            The input String
+	 * @param defaultValue
+	 *            The default output ScrollOptions type
 	 * @return
 	 */
 	private ScrollOptions convertScrollOptionsString(String option, ScrollOptions defaultValue) {
@@ -78,7 +83,9 @@ public class MapLoader {
 
 	/**
 	 * To find the continent from the continent list
-	 * @param name the continent name
+	 * 
+	 * @param name
+	 *            the continent name
 	 * @return the continent if the continent is found; otherwise return null
 	 */
 	public Continent findContinent(String name) {
@@ -110,7 +117,9 @@ public class MapLoader {
 
 	/**
 	 * To find the country from the country list
-	 * @param name the country name
+	 * 
+	 * @param name
+	 *            the country name
 	 * @return the country if the country is found; otherwise return null
 	 */
 	public Country findCountry(String name) {
@@ -124,6 +133,7 @@ public class MapLoader {
 
 	/**
 	 * To get the author
+	 * 
 	 * @return the author with String type
 	 */
 	public final String getAuthor() {
@@ -132,6 +142,7 @@ public class MapLoader {
 
 	/**
 	 * The method to get the image file name.
+	 * 
 	 * @return The image file name
 	 */
 	public String getImageFileName() {
@@ -143,6 +154,7 @@ public class MapLoader {
 
 	/**
 	 * To get the image file path
+	 * 
 	 * @return the image file path with String type
 	 */
 	public String getImageFilePath() {
@@ -151,6 +163,7 @@ public class MapLoader {
 
 	/**
 	 * To get the map directory
+	 * 
 	 * @return the map directory with File type
 	 */
 	public File getMapDirectory() {
@@ -162,6 +175,7 @@ public class MapLoader {
 
 	/**
 	 * To get the map file path
+	 * 
 	 * @return the map file path with String type
 	 */
 	public String getMapFilePath() {
@@ -170,6 +184,7 @@ public class MapLoader {
 
 	/**
 	 * To get the map name
+	 * 
 	 * @return the map name with String type
 	 */
 	public String getMapName() {
@@ -181,6 +196,7 @@ public class MapLoader {
 
 	/**
 	 * Return the Scroll Options type
+	 * 
 	 * @return The current Scroll Options type
 	 */
 	public final ScrollOptions getScroll() {
@@ -189,6 +205,7 @@ public class MapLoader {
 
 	/**
 	 * Return whether the map needs to be warned if the map is not valid
+	 * 
 	 * @return The boolean whether the map needed to be vertified
 	 */
 	public final boolean isWarn() {
@@ -197,6 +214,7 @@ public class MapLoader {
 
 	/**
 	 * Return whether the map is wrap
+	 * 
 	 * @return The boolean of whether the map is wrap
 	 */
 	public final boolean isWrap() {
@@ -205,7 +223,9 @@ public class MapLoader {
 
 	/**
 	 * Method to load the map
-	 * @param mapFilePath the map file path with String type
+	 * 
+	 * @param mapFilePath
+	 *            the map file path with String type
 	 * @throws IOException
 	 */
 	public void load(String mapFilePath) throws IOException {
@@ -219,7 +239,9 @@ public class MapLoader {
 
 	/**
 	 * Method to load the continents
-	 * @param in A Reader object to provide the underlying stream
+	 * 
+	 * @param in
+	 *            A Reader object to provide the underlying stream
 	 * @throws IOException
 	 */
 	private void loadContinents(LineNumberReader in) throws IOException {
@@ -253,7 +275,9 @@ public class MapLoader {
 
 	/**
 	 * Method to load the map section
-	 * @param in A Reader object to provide the underlying stream
+	 * 
+	 * @param in
+	 *            A Reader object to provide the underlying stream
 	 * @throws IOException
 	 */
 	private void loadMapSection(LineNumberReader in) throws IOException {
@@ -279,7 +303,7 @@ public class MapLoader {
 							String os = System.getProperty("os.name").toLowerCase();
 							if (os.contains("mac")) {
 								this.imageFilePath = (new File(this.mapFilePath).getParent() + "/" + val);
-							}else {
+							} else {
 								this.imageFilePath = (new File(this.mapFilePath).getParent() + "\\" + val);
 							}
 						}
@@ -298,8 +322,10 @@ public class MapLoader {
 	}
 
 	/**
-	 *  Method to load the countries
-	 * @param in A Reader object to provide the underlying stream
+	 * Method to load the countries
+	 * 
+	 * @param in
+	 *            A Reader object to provide the underlying stream
 	 * @throws IOException
 	 */
 	private void loadCountries(LineNumberReader in) throws IOException {
@@ -324,7 +350,10 @@ public class MapLoader {
 
 	/**
 	 * Method to build country name
-	 * @param t the selected country that will be built the name with Country type
+	 * 
+	 * @param t
+	 *            the selected country that will be built the name with Country
+	 *            type
 	 */
 	public void buildCountryName(Country t) {
 		if (findCountry(t.getName()) != null) {
@@ -341,7 +370,9 @@ public class MapLoader {
 
 	/**
 	 * Method to parse the country line
-	 * @param line the object that will be parsed
+	 * 
+	 * @param line
+	 *            the object that will be parsed
 	 * @return the created country with Country type
 	 * @throws IOException
 	 */
@@ -365,7 +396,9 @@ public class MapLoader {
 
 	/**
 	 * To set the author
-	 * @param author the desired author that want to be set with String type
+	 * 
+	 * @param author
+	 *            the desired author that want to be set with String type
 	 */
 	public final void setAuthor(String author) {
 		if (!StringUtil.equal(author, this.author)) {
@@ -375,24 +408,31 @@ public class MapLoader {
 
 	/**
 	 * To set the image file path
-	 * @param imageFilePath The target image file path
+	 * 
+	 * @param imageFilePath
+	 *            The target image file path
 	 */
 	public void setImageFilePath(String imageFilePath) {
 		if (!StringUtil.equal(this.imageFilePath, imageFilePath)) {
 			this.imageFilePath = imageFilePath;
 		}
 	}
+
 	/**
 	 * To set the map file path
-	 * @param mapFilePath The target map file path
+	 * 
+	 * @param mapFilePath
+	 *            The target map file path
 	 */
 	public void setMapFilePath(String mapFilePath) {
 		this.mapFilePath = mapFilePath;
 	}
 
 	/**
-	 * To set map Scroll Options 
-	 * @param scroll The target Scroll Options
+	 * To set map Scroll Options
+	 * 
+	 * @param scroll
+	 *            The target Scroll Options
 	 */
 	public final void setScroll(ScrollOptions scroll) {
 		if (this.scroll != scroll) {
@@ -402,16 +442,21 @@ public class MapLoader {
 
 	/**
 	 * To set whether the map needs to be warned
-	 * @param warn Whether the map needs to be warned
+	 * 
+	 * @param warn
+	 *            Whether the map needs to be warned
 	 */
 	public final void setWarn(boolean warn) {
 		if (warn != this.warn) {
 			this.warn = warn;
 		}
 	}
+
 	/**
 	 * To set whether the map needs to wrap
-	 * @param wrap Whether the map needs to wrap
+	 * 
+	 * @param wrap
+	 *            Whether the map needs to wrap
 	 */
 	public final void setWrap(boolean wrap) {
 		if (wrap != this.wrap) {
@@ -452,10 +497,9 @@ public class MapLoader {
 			return true;
 		}
 
-
 		return false;
 	}
-	
+
 	/**
 	 * Check whether the current map contains one way link.
 	 * 
@@ -494,7 +538,6 @@ public class MapLoader {
 		return (mapDir != null) && (imgDir != null) && (mapDir.compareTo(imgDir) != 0);
 	}
 
-	
 	/**
 	 * method to check if a territory is board to others in the territories
 	 * list.
@@ -544,5 +587,5 @@ public class MapLoader {
 			}
 		}
 	}
-	
+
 }

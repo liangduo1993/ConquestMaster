@@ -227,51 +227,6 @@ public class WindowMain {
 							});
 
 						}
-						// if(!tgp.comboBox_6.getSelectedItem().equals("none")&&!tgp.comboBox_7.getSelectedItem().equals("none")){
-						// String strategy1 = (String)
-						// tgp.comboBox_6.getSelectedItem();
-						// String strategy2 = (String)
-						// tgp.comboBox_7.getSelectedItem();
-						// String strategy3 = (String)
-						// tgp.comboBox_8.getSelectedItem();
-						// String strategy4 = (String)
-						// tgp.comboBox_9.getSelectedItem();
-						// strategies.add(strategy1);
-						// strategies.add(strategy2);
-						// strategies.add(strategy3);
-						// strategies.add(strategy4);
-						// for(int i=0;i<strategies.size();i++){
-						// System.out.println(strategies.get(i));
-						// }
-						//
-						//
-						// //System.out.println(gameTimes);
-						//
-						//
-						// if(!gameTurnsString.equals("")){
-						// int gameTurns =
-						// Integer.parseInt(tgp.textField.getText());
-						//
-						// if(gameTurns>=10&&gameTurns<=50){
-						//
-						//
-						// for (int i = 0; i < gameTimes; i++) {
-						// newGameState(path, strategies, gameTurns);
-						// }
-						//
-						// }else{
-						// JOptionPane.showMessageDialog(null, "Please input
-						// correct game turns from 10 to 50!");
-						// }
-						// }else{
-						// JOptionPane.showMessageDialog(null, "Please input
-						// game turns");
-						// }
-						// }else{
-						// JOptionPane.showMessageDialog(null, "there must be at
-						// least two players");
-						// }
-						//
 
 					}
 				});
@@ -279,7 +234,6 @@ public class WindowMain {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
 						cardLayout.show(cards, "Main Screen");
 					}
 				});
@@ -737,13 +691,10 @@ public class WindowMain {
 						phaseView.player5Name.setVisible(true);
 					}
 				}
-				// lp.addLog("=====It's " + gameState.getCurrPlayer().getName()
-				// + "'s turn.=====");
 
-				// ================
 				singleGame = new SingleGameMode(gameState);
 				singleGame.execute();
-				// ================
+
 			}
 
 		});
@@ -945,8 +896,6 @@ public class WindowMain {
 		label_12.setBounds(300, 400, 600, 321);
 		resultsScreen.add(label_12);
 
-		// cardPanel = new CardExchangeView(this.gameState);
-
 		nextStage = new JButton();
 		nextStage.setBackground(Color.RED);
 		nextStage.setBounds(900 - 10, buttonImage.getHeight() + 300 - yM, 170, 50);
@@ -1028,7 +977,7 @@ public class WindowMain {
 									cancelCountryButton.setEnabled(true);
 									return;
 								} else {
-									//country1.setText((String) null);
+
 									gameState.setCountry1(null);
 									JOptionPane.showMessageDialog(countryButton.b,
 											"Country does not have enough troops to attack");
@@ -1046,17 +995,15 @@ public class WindowMain {
 									gameState.setCountry2(null);
 									country2.setText((String) null);
 									return;
-									
-								}else{
-									
+
+								} else {
+
 									cancelCountryButton.setVisible(false);
 									cancelCountryButton.setEnabled(false);
 									gameState.setCountry2(tempCountry2);
-									//country2.setText(gameState.getCountry2().getName());
 									return;
 								}
 
-								
 							}
 						} else if (!gameState.getCurrPlayer().isHasMoved()) {
 							Country tempCountry1 = null;
@@ -1146,7 +1093,7 @@ public class WindowMain {
 
 			registerObserver();
 			bindButtons();
-			// bindNextStage();
+
 			gameState.changed();
 
 			gameState.updateCountryLabels();
@@ -1199,7 +1146,7 @@ public class WindowMain {
 	 */
 	public void addCompOnMapPanel() {
 		mapPanel.add(cancelCountryButton);
-		// mapPanel.add(frame1);
+
 		mapPanel.add(lp);
 		lp.log.setText("");
 		addMenu();
@@ -1288,14 +1235,20 @@ public class WindowMain {
 	}
 
 	/**
-	 * This method is to help display the detailed items of the report of the results at the end of the tournament
-	 * @param path map path with String type
-	 * @param strategies the list of different computer players strategies with ArrayList type
-	 * @param gameTurns the number of turns for each game
+	 * This method is to help display the detailed items of the report of the
+	 * results at the end of the tournament
+	 * 
+	 * @param path
+	 *            map path with String type
+	 * @param strategies
+	 *            the list of different computer players strategies with
+	 *            ArrayList type
+	 * @param gameTurns
+	 *            the number of turns for each game
 	 * @return a draw with String type after the turns
 	 */
 	public String newGameState(String path, ArrayList<String> strategies, int gameTurns) {
-		// StringBuffer sb = new StringBuffer(100);
+
 		ArrayList<Player> players = new ArrayList<>();
 		String result = "";
 		try {
@@ -1323,8 +1276,7 @@ public class WindowMain {
 			TournamentStimulater gameSt = new TournamentStimulater(gameState, players, gameTurns, false, true);
 
 			result = gameSt.execute();
-			// sb.append(gameSt.execute());
-			// sb.append("\r\n");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1334,6 +1286,7 @@ public class WindowMain {
 
 	/**
 	 * Method to set the next stage
+	 * 
 	 * @return the next stage with JButton type
 	 */
 	public JButton getNextStage() {
@@ -1342,7 +1295,9 @@ public class WindowMain {
 
 	/**
 	 * Method to set the next stage
-	 * @param nextStage the next stage with JButton type
+	 * 
+	 * @param nextStage
+	 *            the next stage with JButton type
 	 */
 	public void setNextStage(JButton nextStage) {
 		this.nextStage = nextStage;

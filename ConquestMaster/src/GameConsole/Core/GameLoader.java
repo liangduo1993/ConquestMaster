@@ -28,8 +28,11 @@ public class GameLoader {
 
 	/**
 	 * Constructor for GameLoader with coming parameters
-	 * @param win Window frame of the game
-	 * @param gamePath The saved path
+	 * 
+	 * @param win
+	 *            Window frame of the game
+	 * @param gamePath
+	 *            The saved path
 	 * @throws Exception
 	 */
 	public GameLoader(WindowMain win, String gamePath) throws Exception {
@@ -59,11 +62,12 @@ public class GameLoader {
 			if (p.getName().equals(currName))
 				game.setCurrPlayer(p);
 		}
-		
+
 	}
 
 	/**
 	 * This method is to get the game state
+	 * 
 	 * @return current game state
 	 */
 	public GameState getGameState() {
@@ -71,9 +75,12 @@ public class GameLoader {
 	}
 
 	/**
-	 * This method is used to load the game state which includes the current round,
-	 * the current player, the number of players, and the remaining troop of the current player
-	 * @param in The input LineNumberReader.
+	 * This method is used to load the game state which includes the current
+	 * round, the current player, the number of players, and the remaining troop
+	 * of the current player
+	 * 
+	 * @param in
+	 *            The input LineNumberReader.
 	 * @throws IOException
 	 */
 	private void loadGameState(LineNumberReader in) throws IOException {
@@ -96,8 +103,8 @@ public class GameLoader {
 					game.setCurrPhase(Integer.parseInt(val));
 				} else if ("playerNum".equals(prop)) {
 					this.playerNum = Integer.parseInt(val);
-				}else if ("troopRemaining".equals(prop)) {
-					if(win != null)
+				} else if ("troopRemaining".equals(prop)) {
+					if (win != null)
 						win.troopsLeft = Integer.parseInt(val);
 				}
 			}
@@ -105,47 +112,44 @@ public class GameLoader {
 	}
 
 	/**
-	 *  This method is used to load the information of players which includes the list of players, players' names,
-	 *  the game phase of the players, the init troop number, cards, countries and so on that are attached to the players.
-	 * @param in The input LineNumberReader.
+	 * This method is used to load the information of players which includes the
+	 * list of players, players' names, the game phase of the players, the init
+	 * troop number, cards, countries and so on that are attached to the
+	 * players.
+	 * 
+	 * @param in
+	 *            The input LineNumberReader.
 	 * @throws IOException
 	 */
 	private void loadPlayers(LineNumberReader in) throws IOException {
-			Player p1 = new Player("", Color.cyan, game);
-			game.addPlayer(p1);
-			if (playerNum >= 2) {
-				Player p2 = new Player("", Color.magenta, game);
-				game.addPlayer(p2);
-			}
-			if (playerNum >= 3) {
-				Player p3 = new Player("", Color.green, game);
-				game.addPlayer(p3);
-			}
-			if (playerNum >= 4) {
-				Player p4 = new Player("", Color.blue, game);
-				game.addPlayer(p4);
-			}
-			if (playerNum >= 5) {
-				Player p5 = new Player("", Color.red, game);
-				game.addPlayer(p5);
-			}
+		Player p1 = new Player("", Color.cyan, game);
+		game.addPlayer(p1);
+		if (playerNum >= 2) {
+			Player p2 = new Player("", Color.magenta, game);
+			game.addPlayer(p2);
+		}
+		if (playerNum >= 3) {
+			Player p3 = new Player("", Color.green, game);
+			game.addPlayer(p3);
+		}
+		if (playerNum >= 4) {
+			Player p4 = new Player("", Color.blue, game);
+			game.addPlayer(p4);
+		}
+		if (playerNum >= 5) {
+			Player p5 = new Player("", Color.red, game);
+			game.addPlayer(p5);
+		}
 
-		//findSection(in, "Players");
 		for (int index = 0; index < this.playerNum; index++) {
 			Player p = game.getAllPlayers().getPlayers().get(index);
-			//findSection(in, "Player" + (index + 1));
+
 			for (;;) {
 				String line = in.readLine();
-//				if (line.equalsIgnoreCase("[Countries]")) {
-//					return;
-//				}
-//				if (line.startsWith("Player")) {
-//					break;
-//				}
 				if (line.equals("")) {
 					break;
 				}
-				
+
 				String[] pair = line.split("=", 2);
 				if (pair.length == 2) {
 					String prop = pair[0];
@@ -164,8 +168,8 @@ public class GameLoader {
 							p.setHasMoved(false);
 					} else if ("initTroop".equals(prop)) {
 						p.setInitTroop(Integer.parseInt(val));
-					}else if("strategy".equals(prop)){
-						
+					} else if ("strategy".equals(prop)) {
+
 						switch (val) {
 						case "Human":
 							HumanStrategy strategy1 = new HumanStrategy();
@@ -180,21 +184,21 @@ public class GameLoader {
 							strategy2.setPlayer(p);
 							p.setStrategy(strategy2);
 							break;
-							
+
 						case "Benevolent":
 							BenevolentStrategy strategy3 = new BenevolentStrategy();
 							strategy3.setGameState(game);
 							strategy3.setPlayer(p);
 							p.setStrategy(strategy3);
 							break;
-							
+
 						case "Random":
 							RandomStrategy strategy4 = new RandomStrategy();
 							strategy4.setGameState(game);
 							strategy4.setPlayer(p);
 							p.setStrategy(strategy4);
 							break;
-							
+
 						case "Cheater":
 							CheaterStrategy strategy5 = new CheaterStrategy();
 							strategy5.setGameState(game);
@@ -202,12 +206,7 @@ public class GameLoader {
 							p.setStrategy(strategy5);
 							break;
 						}
-						
-						
-						
-						
-						
-						
+
 					} else if ("onhand".equals(prop)) {
 						String[] onhand = val.split(" ");
 						if (!val.trim().equals("") && onhand.length != 0) {
@@ -216,25 +215,7 @@ public class GameLoader {
 							}
 						}
 					} else if ("countries".equals(prop)) {
-//						String[] countries = val.split(",");
-//						if (countries.length != 0) {
-//							for (int i = 0; i < countries.length; i++) {
-//								
-//								for(Continent con: game.getWorld().getContinents()){
-//									for(Country cou: con.getCountries()){
-//										if(cou.getName().equals(countries[i])){
-//											p.addCountry(cou);
-//										}
-//									}
-//								}
-//								
-//								
-////								p.addCountry(game.getWorld().getMapLoader().findCountry(countries[i]));
-//							
-//							
-//							
-//							}
-//						}
+
 					}
 
 				}
@@ -243,9 +224,11 @@ public class GameLoader {
 	}
 
 	/**
-	 * This method is used to load countries and the corresponding players
-	 * and the assigned number of infantries that are attached to the country.
-	 * @param in The input LineNumberReader.
+	 * This method is used to load countries and the corresponding players and
+	 * the assigned number of infantries that are attached to the country.
+	 * 
+	 * @param in
+	 *            The input LineNumberReader.
 	 * @throws IOException
 	 */
 	private void loadCountries(LineNumberReader in) throws IOException {

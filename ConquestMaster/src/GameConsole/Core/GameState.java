@@ -16,7 +16,7 @@ public class GameState extends Observable {
 	private int firstRound = 1;
 	private Player currPlayer;
 	private Group allPlayers;
-	private int currPhase; 
+	private int currPhase;
 	private World world;
 	private Country country1 = null;
 	private Country country2 = null;
@@ -69,7 +69,7 @@ public class GameState extends Observable {
 		this.setFirstRound(1);
 		this.currPlayer = this.allPlayers.getPlayers().get(0);
 		this.world.startGame(this.allPlayers);
-		if(flag)
+		if (flag)
 			this.updateCountryLabels();
 		lp.addLog("The game is started!");
 		lp.addLog("It is the Startup phase!");
@@ -81,19 +81,14 @@ public class GameState extends Observable {
 	public void updateCountryLabels() {
 		for (Continent con : this.world.getContinents()) {
 			for (Country cou : con.getCountries()) {
-//				System.out.println(cou.getName());
-//				System.out.println(cou.getButton().getClass());
-//				System.out.println(cou.getButton().getLabel());
-//				System.out.println(cou.getPlayer());
-//				System.out.println(cou.getTroops().size());
 				cou.getButton().updateLabel(cou.getPlayer());
 			}
 		}
 	}
 
-
 	/**
 	 * Method to get the country via the click operation
+	 * 
 	 * @return the got country
 	 */
 	public Country getCurrClick() {
@@ -102,7 +97,9 @@ public class GameState extends Observable {
 
 	/**
 	 * Method to set the country via the click operation
-	 * @param currClick the country is needed to be clicked
+	 * 
+	 * @param currClick
+	 *            the country is needed to be clicked
 	 */
 	public void setCurrClick(Country currClick) {
 		this.currClick = currClick;
@@ -207,7 +204,7 @@ public class GameState extends Observable {
 	 */
 	public Player checkWinner() {
 		boolean won = false;
-		if (this.allPlayers.getPlayers().size() == 1) { 
+		if (this.allPlayers.getPlayers().size() == 1) {
 			return this.allPlayers.getPlayers().get(0);
 		}
 		for (Player p : this.allPlayers.getPlayers()) {
@@ -291,7 +288,7 @@ public class GameState extends Observable {
 	/**
 	 * Method to specify the state changes
 	 */
-	public void changed(){
+	public void changed() {
 		setChanged();
 		notifyObservers();
 	}
@@ -299,8 +296,8 @@ public class GameState extends Observable {
 	/**
 	 * Method to set the next phase
 	 */
-	public void setNextPhase(){
+	public void setNextPhase() {
 		setCurrPhase((getCurrPhase() + 1) % 3);
 	}
-	
+
 }

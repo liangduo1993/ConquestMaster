@@ -21,7 +21,9 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 
 	/**
 	 * Constructor for SingleGameMode class
-	 * @param gs game state with GameState type
+	 * 
+	 * @param gs
+	 *            game state with GameState type
 	 */
 	public SingleGameMode(GameState gs) {
 		this.gameState = gs;
@@ -29,9 +31,9 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 		this.players = gs.getAllPlayers().getPlayers();
 	}
 
-
 	/**
 	 * This method is mainly to display the detail of the game on the log panel
+	 * 
 	 * @return true if the game is end otherwise return false
 	 * @throws Exception
 	 */
@@ -44,50 +46,50 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			Thread.sleep(sleepTime);
 			lp.addLog("=====It's " + gameState.getCurrPlayer().getName() + "'s turn.=====");
 			tempP.reinforce();
-			
-			
+
 			gameState.setNextPlayer();
 			gameState.updateCountryLabels();
 			tempP = gameState.getCurrPlayer();
-			
+
 			updateLabel();
-			
+
 			boolean isFinished = true;
-			for(Player p: players){
-				if(p.getInitTroop() > 0)
+			for (Player p : players) {
+				if (p.getInitTroop() > 0)
 					isFinished = false;
 			}
-			if(isFinished) break;
+			if (isFinished)
+				break;
 		}
 
 		gameState.setFirstRound(2);
-		
+
 		while (true) {
 			Player currPlayer = gameState.getCurrPlayer();
 			lp.addLog("=====It's " + currPlayer.getName() + "'s turn.=====");
-			if(currPlayer.getStrategy().getName().equals("Human")){
+			if (currPlayer.getStrategy().getName().equals("Human")) {
 				currPlayer.setInitTroop(currPlayer.getBonus());
-			}else{
+			} else {
 				currPlayer.setInitTroop(currPlayer.getBonusAndChangeCard());
 			}
 			updateLabel();
 			Thread.sleep(sleepTime);
 			currPlayer.reinforce();
-			
+
 			gameState.updateCountryLabels();
 			gameState.setNextPhase();
 			clearLabel();
-			
+
 			System.out.println("attack");
 			Thread.sleep(sleepTime);
 			currPlayer.attack();
-			
+
 			gameState.updateCountryLabels();
 			if (gameState.getCurrPhase() == 1) {
 				gameState.setNextPhase();
 			}
 			clearLabel();
-			
+
 			if (gameState.getCurrPlayer().checkWinGame()) {
 				win.initializeEndGame();
 				return true;
@@ -96,7 +98,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			System.out.println("fortify");
 			Thread.sleep(sleepTime);
 			currPlayer.fortify();
-			
+
 			gameState.updateCountryLabels();
 			if (gameState.getCurrPhase() == 2) {
 				gameState.setNextPhase();
@@ -113,12 +115,11 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 			this.players.removeAll(removeList);
 
 			lp.addLog("\r\n" + "Conquest Number:");
-			for(Player p: players){
+			for (Player p : players) {
 				lp.addLog(p.getName() + " : " + p.getCountries().size() + " countries!");
-				
+
 			}
-			
-			
+
 			gameState.setNextPlayer();
 		}
 
@@ -127,7 +128,7 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	/**
 	 * Method to set the labels clean
 	 */
-	public void clearLabel(){
+	public void clearLabel() {
 		gameState.setCountry1(null);
 		gameState.setCountry2(null);
 		gameState.setCurrClick(null);
@@ -136,15 +137,13 @@ public class SingleGameMode extends SwingWorker<Boolean, Boolean> {
 	/**
 	 * Method to update the labels
 	 */
-	public void updateLabel(){
+	public void updateLabel() {
 		gameState.updateCountryLabels();
 		win.country1.setText((String) null);
 		win.country2.setText((String) null);
 		win.troopsLeft = gameState.getCurrPlayer().getInitTroop();
 		win.numberOfTroops.setText("" + win.troopsLeft);
-		
-		
+
 	}
-	
-	
+
 }
