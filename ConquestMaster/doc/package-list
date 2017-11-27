@@ -2,6 +2,7 @@ GameConsole.Core
 GameConsole.Model.Army
 GameConsole.Model.Domain
 GameConsole.Model.Player
+GameConsole.Strategy
 GameConsole.View
 GameConsoleTest
 MapEditor.Core
