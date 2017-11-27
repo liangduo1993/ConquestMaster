@@ -73,14 +73,16 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	@Override
 	public void reinforce() {
 		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
-			//this.getPlayer().addInfantry(this.getRandCountry());
-			this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
+			this.getPlayer().addInfantry(this.getRandCountry());
 			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 		} else {
 
 			int num = getPlayer().getBonusAndChangeCard();
 			for (int i = 0; i < num; i++) {
-				this.getPlayer().addInfantry(this.getRandCountry());
+				if(getCanAttackRandomCountry() != null)
+					this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
+				else
+					this.getPlayer().addInfantry(this.getRandCountry());
 				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
 			}
 
@@ -145,7 +147,7 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 				}
 			}
 		}
-
+		if(canAttack.size() == 0) return null;
 		int rand = (int) (Math.random() * canAttack.size());
 		return canAttack.get(rand);
 	}
