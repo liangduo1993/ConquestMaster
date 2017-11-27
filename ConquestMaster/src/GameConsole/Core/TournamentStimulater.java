@@ -89,41 +89,41 @@ public class TournamentStimulater {
 		return "draw";
 	}
 
-	// AggressiveStrategy
-	// BenevolentStrategy
-	// CheaterStrategy
-	// RandomStrategy
-
-	/**
-	 * Launch the application.
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String[] args) throws Exception {
-		StringBuffer sb = new StringBuffer(100);
-		WindowMain win = new WindowMain();
-		for (int i = 0; i < 50; i++) {
-			GameState gs = new GameState( win, "resources/ConquestMaps/Atlantis.map");
-			Player p1 = new Player("p1", Color.magenta, gs, new AggressiveStrategy());
-			Player p2 = new Player("p2", Color.green, gs, new BenevolentStrategy());
-			//Player p3 = new Player("p3", Color.blue, gs, new CheaterStrategy());
-			Player p4 = new Player("p4", Color.red, gs, new RandomStrategy());
-			List<Player> list = new ArrayList<>();
-			list.add(p1);
-			list.add(p2);
-			//list.add(p3);
-			list.add(p4);
-
-			TournamentStimulater gameSt = new TournamentStimulater(gs, list, 30,false);
-			gs.gameStart(false);
-			sb.append(gameSt.execute());
-			sb.append("\r\n");
-
-		}
-		System.out.println("=====================");
-		System.out.println(sb.toString());
-		System.out.println("=====================");
-
-	}
+//	// AggressiveStrategy
+//	// BenevolentStrategy
+//	// CheaterStrategy
+//	// RandomStrategy
+//
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 * @throws Exception
+//	 */
+//	public static void main(String[] args) throws Exception {
+//		StringBuffer sb = new StringBuffer(100);
+//		WindowMain win = new WindowMain();
+//		for (int i = 0; i < 50; i++) {
+//			GameState gs = new GameState( win, "resources/ConquestMaps/Atlantis.map");
+//			Player p1 = new Player("p1", Color.magenta, gs, new AggressiveStrategy());
+//			Player p2 = new Player("p2", Color.green, gs, new BenevolentStrategy());
+//			//Player p3 = new Player("p3", Color.blue, gs, new CheaterStrategy());
+//			Player p4 = new Player("p4", Color.red, gs, new RandomStrategy());
+//			List<Player> list = new ArrayList<>();
+//			list.add(p1);
+//			list.add(p2);
+//			//list.add(p3);
+//			list.add(p4);
+//
+//			TournamentStimulater gameSt = new TournamentStimulater(gs, list, 30,false);
+//			gs.gameStart(false);
+//			sb.append(gameSt.execute());
+//			sb.append("\r\n");
+//
+//		}
+//		System.out.println("=====================");
+//		System.out.println(sb.toString());
+//		System.out.println("=====================");
+//
+//	}
 
 }

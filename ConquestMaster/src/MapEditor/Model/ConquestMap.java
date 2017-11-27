@@ -490,7 +490,7 @@ public class ConquestMap extends Observable implements Comparator<Object> {
 		loadTerritories(in);
 
 		ArrayList<String> errMsg = new ArrayList<>();
-		if ((errMsg = loadingCheck()) == null)
+		if ((errMsg = loadingCheck()).isEmpty())
 			changeState();
 		else {
 			for (String string : errMsg) {

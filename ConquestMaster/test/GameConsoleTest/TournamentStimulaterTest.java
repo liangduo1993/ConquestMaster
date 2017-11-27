@@ -17,6 +17,7 @@ import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
 import GameConsole.Strategy.CheaterStrategy;
 import GameConsole.Strategy.RandomStrategy;
+
 /**
  * 
  * This class is a test class for class TournamentStimulater.
@@ -29,6 +30,7 @@ public class TournamentStimulaterTest {
 	Player p2;
 	Player p3;
 	Player p4;
+
 	/**
 	 * Set up function, to do some initial work.
 	 * 
@@ -39,19 +41,15 @@ public class TournamentStimulaterTest {
 	public void setUp() throws Exception {
 
 		gl = new GameLoader(null, "resources/GimpFiles/13.txt");
-		
+
 	}
-	
+
 	/**
-	 * test function: execute(). Check if the tournament
-	 * can be executed.
+	 * test function: execute(). Check if the tournament can be executed.
 	 */
 	@Test
 	public void testExecute() {
-		StringBuffer sb = new StringBuffer(100);
-		//for (int i = 0; i < 5; i++) {
 			gs = gl.getGameState();
-			//gs = new GameState( null, "resources/ConquestMaps/Europe.map");
 			p1 = new Player("p1", Color.magenta, gs, new AggressiveStrategy());
 			p2 = new Player("p2", Color.green, gs, new BenevolentStrategy());
 			p3 = new Player("p3", Color.blue, gs, new CheaterStrategy());
@@ -62,15 +60,15 @@ public class TournamentStimulaterTest {
 			list.add(p3);
 			list.add(p4);
 
-			TournamentStimulater gameSt = new TournamentStimulater(gs, list, 10,false);
+			TournamentStimulater gameSt = new TournamentStimulater(gs, list, 10, false);
 			gs.gameStart(false);
-			sb.append(gameSt.execute());
-			sb.append("\r\n");
 
-		//}
-		System.out.println("=====================");
-		System.out.println(sb.toString());
-		System.out.println("=====================");
-		
+			List<String> result = new ArrayList<>();
+			result.add("draw");
+			result.add("Cheater");
+			result.add("Aggresive");
+			result.add("Random");
+			result.add("Human");
+			assertEquals(true, result.contains(gameSt.execute()));
 	}
 }
