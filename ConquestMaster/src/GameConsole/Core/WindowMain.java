@@ -12,8 +12,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -145,6 +149,8 @@ public class WindowMain {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						lp.log.removeAll();
+
 						ArrayList<String> strategies = new ArrayList<>();
 						ArrayList<String> paths = new ArrayList<>();
 						ArrayList<String> probs = new ArrayList<>();
@@ -220,6 +226,30 @@ public class WindowMain {
 							TournamentResultPanel trp = new TournamentResultPanel(results);
 							cards.add(trp, "tournamentResultPanel");
 							cardLayout.show(cards, "tournamentResultPanel");
+
+							try {
+								File f = new File("resources/TestResources/" + new Date().getTime());
+								FileOutputStream fos;
+								fos = new FileOutputStream(f);
+								PrintWriter out = new PrintWriter(fos);
+								System.out.println("=========");
+								System.out.println("=========");
+								System.out.println("=========");
+								System.out.println("=========");
+								System.out.println("=========");
+								System.out.println("=========");
+								System.out.println(lp.log.getText());
+								out.print(lp.log.getText());
+							} catch (FileNotFoundException e1) {
+								e1.printStackTrace();
+							}
+
+							
+							
+							
+							
+							
+							
 							trp.returnToMainFrame.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									cardLayout.show(cards, "Main Screen");

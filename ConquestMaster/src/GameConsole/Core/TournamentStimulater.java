@@ -4,16 +4,17 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
 import GameConsole.Strategy.AggressiveStrategy;
 import GameConsole.Strategy.BenevolentStrategy;
 import GameConsole.Strategy.RandomStrategy;
+import GameConsole.View.LogPanel;
 
 /**
  * This class is for tournament game mode
  */
 public class TournamentStimulater {
-
 	private GameState gs;
 	private int turn;
 	private List<Player> players;
@@ -32,8 +33,9 @@ public class TournamentStimulater {
 		gs.setCurrPlayer(players.get(0));
 		this.players = players;
 		this.turn = turn;
-		if(flag2)
+		if(flag2){
 			gs.gameStart(flag1);
+		}
 	}
 
 	/**
@@ -41,24 +43,30 @@ public class TournamentStimulater {
 	 * @return "draw" String after the turns
 	 */
 	public String execute() {
+		for(Player p: gs.getAllPlayers().getPlayers()){
+			p.setInitTroop(p.getBonusAndChangeCard());
+		}
 		Player tempP = gs.getCurrPlayer();
-		while(tempP.getInitTroop() > 0){
+		while(true){
 			tempP.reinforce();
 			gs.setNextPlayer();
 			tempP = gs.getCurrPlayer();
+			boolean isFinished = true;
+			for (Player p : players) {
+				if (p.getInitTroop() > 0)
+					isFinished = false;
+			}
+			if (isFinished)
+				break;
 		}
 
 		gs.setFirstRound(2);
 
 		while (gs.getFirstRound() <= turn) {
 			Player currPlayer = gs.getCurrPlayer();
-			System.out.println(currPlayer.getName() + " starts!");
-
-			System.out.println("reinforce: " + currPlayer.getBonusAndChangeCard());
+			currPlayer.setInitTroop(currPlayer.getBonusAndChangeCard());
 			currPlayer.reinforce();
-			System.out.println("attack");
 			currPlayer.attack();
-			System.out.println("fortify");
 			currPlayer.fortify();
 
 			List<Player> removeList = new ArrayList<>();
@@ -66,11 +74,9 @@ public class TournamentStimulater {
 				if (p.getCountries().size() == 0) {
 					removeList.add(p);
 				}
-				System.out.println(p.getName() + ":" + p.getCountries().size());
 			}
 			this.players.removeAll(removeList);
 
-			System.out.println(gs.getFirstRound());
 
 			if (players.size() == 1) {
 				return players.get(0).getStrategy().getName();
