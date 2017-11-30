@@ -232,12 +232,6 @@ public class WindowMain {
 								FileOutputStream fos;
 								fos = new FileOutputStream(f);
 								PrintWriter out = new PrintWriter(fos);
-								System.out.println("=========");
-								System.out.println("=========");
-								System.out.println("=========");
-								System.out.println("=========");
-								System.out.println("=========");
-								System.out.println("=========");
 								System.out.println(lp.log.getText());
 								out.print(lp.log.getText());
 							} catch (FileNotFoundException e1) {
@@ -547,6 +541,8 @@ public class WindowMain {
 			}
 		});
 
+		
+		
 		startGamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -1172,6 +1168,13 @@ public class WindowMain {
 		Country2Display.setBounds(100, buttonImage.getHeight() + 290 - yM, 300, 35);
 		nextStage.setBounds(900 - 20, buttonImage.getHeight() + 300 - yM, 170, 50);
 		phaseView.namePanel.setBounds(100, 40, 975, 60);
+		
+		int num = 0;
+		for(Player p: gameState.getAllPlayers().getPlayers()){
+			num += p.getCountries().size();
+		}
+		
+		cRatioPanel.setBounds(100, 150 - 40, num * ConquestRatio.ratio, 20);
 	}
 
 	/**
@@ -1184,6 +1187,9 @@ public class WindowMain {
 		lp.log.setText("");
 		addMenu();
 
+		cRatioPanel = new ConquestRatio(gameState);
+		mapPanel.add(cRatioPanel);
+		
 		domiInfoPanel = new DomiInfoPanel(gameState);
 		domiInfoPanel.setPreferredSize(new Dimension(domiInfoPanel.getWidth(), domiInfoPanel.getHeight()));
 		mainScroll.setViewportView(domiInfoPanel);
