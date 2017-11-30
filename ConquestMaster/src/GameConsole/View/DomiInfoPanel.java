@@ -1,6 +1,7 @@
 package GameConsole.View;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,14 +23,15 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JScrollPane> tables = new ArrayList<>();
 	private int playerNum;
-	private GameState state;
-
+	//private GameState state;
+	private List<Player> allPlayers = new ArrayList<>();
 	/**
 	 * Create the application.
 	 */
 	public DomiInfoPanel(GameState state) {
-		this.state = state;
+		//this.state = state;
 		playerNum = state.getAllPlayers().getPlayers().size();
+		allPlayers.addAll(state.getAllPlayers().getPlayers());
 		initialize();
 	}
 
@@ -41,7 +43,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 		this.setLayout(null);
 
 		for (int i = 0; i < playerNum; i++) {
-			JLabel newLabel = new JLabel(state.getAllPlayers().getPlayers().get(i).getName());
+			JLabel newLabel = new JLabel(allPlayers.get(i).getName());
 			newLabel.setBounds(10, 55 + 170 * i, 54, 15);
 			this.add(newLabel);
 		}
@@ -52,7 +54,7 @@ public class DomiInfoPanel extends JPanel implements Observer {
 			scrollPane.setBounds(60, 26 + 170 * i, 250, 140);
 			this.add(scrollPane);
 
-			Player cur = state.getAllPlayers().getPlayers().get(i);
+			Player cur = allPlayers.get(i);
 			ArrayList<Country> countries = cur.getCountries();
 
 			for (int row = 0; row < countries.size(); row++) {
@@ -91,9 +93,8 @@ public class DomiInfoPanel extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		playerNum = state.getAllPlayers().getPlayers().size();
 		for (int i = 0; i < playerNum; i++) {
-			Player cur = state.getAllPlayers().getPlayers().get(i);
+			Player cur = allPlayers.get(i);
 			ArrayList<Country> countries = cur.getCountries();
 			Object[][] model = new Object[countries.size()][3];
 			for (int row = 0; row < countries.size(); row++) {

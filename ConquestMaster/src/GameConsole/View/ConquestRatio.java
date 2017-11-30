@@ -39,8 +39,7 @@ public class ConquestRatio extends JPanel implements Observer {
 		playerNum = state.getAllPlayers().getPlayers().size();
 		players.addAll(state.getAllPlayers().getPlayers());
 		this.setLayout(null);
-		this.setBounds(0, 0, state.getWorld().getDeck().size() * ratio, 25);
-		System.out.println(this.getBounds());
+		// this.setBounds(0, 0, state.getWorld().getDeck().size() * ratio, 25);
 		int loc = 0;
 		for (int i = 0; i < playerNum; i++) {
 			Player cur = state.getAllPlayers().getPlayers().get(i);
@@ -66,10 +65,12 @@ public class ConquestRatio extends JPanel implements Observer {
 		int loc = 0;
 		if (playerNum > 1) {
 			for (int i = 0; i < playerNum; i++) {
-				Player cur = players.get(i);
-				g.setColor(cur.getColor());
-				g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
-				loc += ratio * cur.getCountries().size();
+				if (players.get(i).getCountries().size() > 0) {
+					Player cur = players.get(i);
+					g.setColor(cur.getColor());
+					g.fillRect(loc, 0, ratio * cur.getCountries().size(), 20);
+					loc += ratio * cur.getCountries().size();
+				}
 			}
 		}
 		g.setColor(color);
@@ -80,14 +81,18 @@ public class ConquestRatio extends JPanel implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		this.removeAll();
 		int loc = 0;
 		for (int i = 0; i < playerNum; i++) {
-			Player cur = players.get(i);
-			int oldLoc = loc;
-			loc += ratio * cur.getCountries().size();
-			JLabel lb1 = lable.get(i);
-			lb1.setText("" + cur.getCountries().size());
-			lb1.setBounds((loc + oldLoc) / 2, 0, 25, 20);
+			if (players.get(i).getCountries().size() > 0) {
+				Player cur = players.get(i);
+				int oldLoc = loc;
+				loc += ratio * cur.getCountries().size();
+				JLabel lb1 = lable.get(i);
+				lb1.setText("" + cur.getCountries().size());
+				lb1.setBounds((loc + oldLoc) / 2, 0, 25, 20);
+				this.add(lb1);
+			}
 		}
 		this.repaint();
 	}
