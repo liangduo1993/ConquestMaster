@@ -8,12 +8,13 @@ import GameConsole.Core.GameLoader;
 import GameConsole.Core.GameState;
 import GameConsole.Model.Domain.Country;
 import GameConsole.Model.Player.Player;
+import GameConsole.View.LogPanel;
 
 /**
  * A concrete Strategy that implements Aggressive strategy operation
  */
 public class AggressiveStrategy extends OriginalStrategy implements Strategy {
-
+	private LogPanel lp = LogPanel.getInstance();
 	/**
 	 * Constructor for AggressiveStrategy
 	 */
@@ -51,6 +52,7 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 						int moveNum = strongestC.getTroopNum() - 1;
 						country2.addInfrantry(moveNum);
 						country1.removeTroops(moveNum);
+						lp.addLog(getPlayer().getName() + " moves " + moveNum + " troops from " + country1.getName() + " to " + country2.getName() + "!");
 					}
 				} catch (Exception e) {
 				}
@@ -63,14 +65,16 @@ public class AggressiveStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
-			this.getPlayer().addInfantry(this.getStrongestContry());
-			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
-		} else {
-			int num = getPlayer().getBonusAndChangeCard();
-			for (int i = 0; i < num; i++) {
+		if (getPlayer().getInitTroop() > 0) {
+			if (getGameState().getFirstRound() == 1) {
 				this.getPlayer().addInfantry(this.getStrongestContry());
 				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			} else {
+				int num = getPlayer().getBonusAndChangeCard();
+				for (int i = 0; i < num; i++) {
+					this.getPlayer().addInfantry(this.getStrongestContry());
+					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+				}
 			}
 		}
 	}

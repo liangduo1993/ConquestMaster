@@ -40,7 +40,7 @@ public class HumanStrategy extends OriginalStrategy implements Strategy {
 				JLabel label = new JLabel("Attacker selects how many dice to roll");
 				numdice1.add(label);
 				DefaultComboBoxModel<String> select1 = new DefaultComboBoxModel<>();
-				for (int i = Math.min(getGameState().getCountry1().getTroopNum() - 1, 3); i >= 1; i--) {
+				for (int i = Math.min(getGameState().getCountry1().getTroopNum(), 3); i >= 1; i--) {
 					select1.addElement(Integer.toString(i));
 				}
 				JComboBox<String> list1 = new JComboBox<>(select1);

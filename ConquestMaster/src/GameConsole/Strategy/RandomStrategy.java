@@ -72,22 +72,23 @@ public class RandomStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
-			this.getPlayer().addInfantry(this.getRandCountry());
-			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
-		} else {
-
-			int num = getPlayer().getBonusAndChangeCard();
-			for (int i = 0; i < num; i++) {
-				if (getCanAttackRandomCountry() != null)
-					this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
-				else
-					this.getPlayer().addInfantry(this.getRandCountry());
+		if (getPlayer().getInitTroop() > 0) {
+			if (getGameState().getFirstRound() == 1) {
+				this.getPlayer().addInfantry(this.getRandCountry());
 				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			} else {
+
+				int num = getPlayer().getBonusAndChangeCard();
+				for (int i = 0; i < num; i++) {
+					if (getCanAttackRandomCountry() != null)
+						this.getPlayer().addInfantry(this.getCanAttackRandomCountry());
+					else
+						this.getPlayer().addInfantry(this.getRandCountry());
+					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+				}
+
 			}
-
 		}
-
 	}
 
 	/**

@@ -3,12 +3,12 @@ package GameConsole.Strategy;
 import java.util.List;
 
 import GameConsole.Model.Domain.Country;
+import GameConsole.View.LogPanel;
 
 /**
  * A concrete Strategy that implements benevolent strategy operation
  */
 public class BenevolentStrategy extends OriginalStrategy implements Strategy {
-
 	/**
 	 * Constructor for BenevolentStrategy
 	 */
@@ -29,15 +29,17 @@ public class BenevolentStrategy extends OriginalStrategy implements Strategy {
 	 */
 	@Override
 	public void reinforce() {
-		if (getGameState().getFirstRound() == 1 && getPlayer().getInitTroop() > 0) {
-			this.getPlayer().addInfantry(this.getWeakestCountry());
-			this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
-		} else {
-
-			int num = getPlayer().getBonusAndChangeCard();
-			for (int i = 0; i < num; i++) {
+		if (getPlayer().getInitTroop() > 0) {
+			if (getGameState().getFirstRound() == 1) {
 				this.getPlayer().addInfantry(this.getWeakestCountry());
 				this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+			} else {
+
+				int num = getPlayer().getBonusAndChangeCard();
+				for (int i = 0; i < num; i++) {
+					this.getPlayer().addInfantry(this.getWeakestCountry());
+					this.getPlayer().setInitTroop(getPlayer().getInitTroop() - 1);
+				}
 			}
 		}
 	}
